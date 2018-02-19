@@ -126,6 +126,7 @@ class MainActivity : SimpleActivity(), Calculator {
         when (item.itemId) {
             R.id.settings -> launchSettings()
             R.id.about -> launchAbout()
+            R.id.unit_conversion -> launchUnitConversion()
             else -> return super.onOptionsItemSelected(item)
         }
         return true
@@ -142,6 +143,10 @@ class MainActivity : SimpleActivity(), Calculator {
         if (vibrateOnButtonPress) {
             view.performHapticFeedback()
         }
+    }
+
+    private fun launchUnitConversion(){
+        startActivity(Intent(applicationContext, UnitConversionActivity::class.java))
     }
 
     private fun launchSettings() {
