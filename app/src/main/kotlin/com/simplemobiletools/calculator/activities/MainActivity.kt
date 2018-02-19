@@ -34,7 +34,6 @@ import com.simplemobiletools.calculator.helpers.CONSTANT.POWER
 import com.simplemobiletools.calculator.helpers.CONSTANT.RIGHT_BRACKET
 import com.simplemobiletools.calculator.helpers.CONSTANT.ROOT
 
-
 class MainActivity : SimpleActivity(), Calculator {
     private var storedTextColor = 0
     private var vibrateOnButtonPress = true
