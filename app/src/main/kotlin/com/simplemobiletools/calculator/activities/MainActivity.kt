@@ -1,7 +1,6 @@
 package com.simplemobiletools.calculator.activities
 
 import android.annotation.SuppressLint
-import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
@@ -10,19 +9,11 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import com.simplemobiletools.calculator.BuildConfig
 import com.simplemobiletools.calculator.R
 import com.simplemobiletools.calculator.extensions.config
 import com.simplemobiletools.calculator.extensions.updateViewColors
-import com.simplemobiletools.calculator.helpers.*
-import com.simplemobiletools.commons.extensions.*
-import com.simplemobiletools.commons.helpers.LICENSE_AUTOFITTEXTVIEW
-import com.simplemobiletools.commons.helpers.LICENSE_ESPRESSO
-import com.simplemobiletools.commons.helpers.LICENSE_KOTLIN
-import com.simplemobiletools.commons.helpers.LICENSE_ROBOLECTRIC
-import kotlinx.android.synthetic.main.activity_main.*
-import me.grantland.widget.AutofitHelper
-import android.widget.Toast
 import com.simplemobiletools.calculator.helpers.CONSTANT.COSINE
 import com.simplemobiletools.calculator.helpers.CONSTANT.DIGIT
 import com.simplemobiletools.calculator.helpers.CONSTANT.DIVIDE
@@ -42,6 +33,16 @@ import com.simplemobiletools.calculator.helpers.CONSTANT.RIGHT_BRACKET
 import com.simplemobiletools.calculator.helpers.CONSTANT.ROOT
 import com.simplemobiletools.calculator.helpers.CONSTANT.SINE
 import com.simplemobiletools.calculator.helpers.CONSTANT.TANGENT
+import com.simplemobiletools.calculator.helpers.Calculator
+import com.simplemobiletools.calculator.helpers.CalculatorImpl
+import com.simplemobiletools.calculator.helpers.Formatter
+import com.simplemobiletools.commons.extensions.*
+import com.simplemobiletools.commons.helpers.LICENSE_AUTOFITTEXTVIEW
+import com.simplemobiletools.commons.helpers.LICENSE_ESPRESSO
+import com.simplemobiletools.commons.helpers.LICENSE_KOTLIN
+import com.simplemobiletools.commons.helpers.LICENSE_ROBOLECTRIC
+import kotlinx.android.synthetic.main.activity_main.*
+import me.grantland.widget.AutofitHelper
 
 class MainActivity : SimpleActivity(), Calculator {
     private var storedTextColor = 0
@@ -110,7 +111,7 @@ class MainActivity : SimpleActivity(), Calculator {
         updateViewColors(calculator_holder, config.textColor)
 
         btn_shift.setOnClickListener {
-            if(btn_shift.getCurrentTextColor()==resources.getColor(R.color.noah_5)){
+            if(btn_shift.currentTextColor ==resources.getColor(R.color.noah_5)){
 
                 btn_shift.setTextColor(resources.getColor(R.color.noah_4))
                 btn_shift.setBackgroundColor(resources.getColor(R.color.noah_5))
@@ -149,12 +150,6 @@ class MainActivity : SimpleActivity(), Calculator {
                 btn_shift.setTextColor(resources.getColor(R.color.noah_5))
                 btn_shift.setBackgroundColor(resources.getColor(R.color.noah_4))
 
-                btn_memory_1.setBackgroundColor(resources.getColor(R.color.noah_5))
-                btn_memory_1.setTextColor(resources.getColor(R.color.noah_4))
-                btn_memory_2.setBackgroundColor(resources.getColor(R.color.noah_5))
-                btn_memory_2.setTextColor(resources.getColor(R.color.noah_4))
-                btn_memory_3.setBackgroundColor(resources.getColor(R.color.noah_5))
-                btn_memory_3.setTextColor(resources.getColor(R.color.noah_4))
                 btn_pi.setBackgroundColor(resources.getColor(R.color.noah_5))
                 btn_pi.setTextColor(resources.getColor(R.color.noah_4))
                 btn_sin.setBackgroundColor(resources.getColor(R.color.noah_5))
@@ -260,20 +255,17 @@ class MainActivity : SimpleActivity(), Calculator {
 
     private fun pasteFromClipBoard(): Boolean {
         //check clipboard
-        var clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-        if (clipboard.primaryClip.getItemAt(0).coerceToText(this).toString().isNum()){
+        val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        //do nothing
+        return if (clipboard.primaryClip.getItemAt(0).coerceToText(this).toString().isNum()){
             setFormula(clipboard.primaryClip.getItemAt(0).coerceToText(this).toString(), this)
             Toast.makeText(applicationContext,"Pasted from clipboard", Toast.LENGTH_LONG).show()
-            return true
+            true
         }
-        else {
-            //do nothing
-
-            return false
-        }
+        else false
     }
 
-    fun String.isNum() = matches(Regex("\\d{1}|\\d{2}|\\d{3}(\\d{3},)+(.|)(\\d{1})+"))
+    private fun String.isNum() = matches(Regex("\\d|\\d{2}|\\d{3}(\\d{3},)+(.|)(\\d)+"))
 
     override fun setValue(value: String, context: Context) {
         result.text = value
