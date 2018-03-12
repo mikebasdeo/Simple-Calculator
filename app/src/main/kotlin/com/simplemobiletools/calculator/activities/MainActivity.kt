@@ -278,11 +278,10 @@ class MainActivity : SimpleActivity(), Calculator {
     }
 
     override fun setFormula(value: String, context: Context) {
-        if(value == ""){
+        val input = formula.text.toString() + value
+        formula.text = input
+
+        if (value == "")
             formula.text = ""
-        }
-        else{
-            formula.text = formula.text.toString() + value
-        }
     }
 }
