@@ -86,7 +86,7 @@ class CalculatorImpl(calculator: Calculator, private val context: Context) {
     }
 
     private fun calculateResult(str: String) {
-        val evaluator = DoubleEvaluator()
+        val evaluator = ExtendedDoubleEvaluator()
         try {
             val result = evaluator.evaluate(str)
             updateResult(result)

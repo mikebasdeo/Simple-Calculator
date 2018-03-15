@@ -16,6 +16,7 @@ import com.simplemobiletools.calculator.helpers.CONSTANT.FILE
 import com.simplemobiletools.calculator.helpers.CONSTANT.MEMORY_ONE
 import com.simplemobiletools.calculator.helpers.Calculator
 import com.simplemobiletools.calculator.helpers.CalculatorImpl
+import com.simplemobiletools.calculator.javaluator.ExtendedDoubleEvaluator
 
 //TODO: Add tests for clear character, clear string, more complex calculations
 @RunWith(RobolectricTestRunner::class)
@@ -23,7 +24,7 @@ import com.simplemobiletools.calculator.helpers.CalculatorImpl
 class MainActivityTest {
     private lateinit var activity: MainActivity
 
-    private val evaluator = DoubleEvaluator()
+    private val evaluator = ExtendedDoubleEvaluator()
 
     //var context = mock(Context::class.java)
     var mockCalc = mock(Calculator::class.java)
