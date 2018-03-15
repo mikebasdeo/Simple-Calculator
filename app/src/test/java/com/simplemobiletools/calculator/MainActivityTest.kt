@@ -18,9 +18,8 @@ import com.simplemobiletools.calculator.helpers.Calculator
 import com.simplemobiletools.calculator.helpers.CalculatorImpl
 import com.simplemobiletools.calculator.javaluator.ExtendedDoubleEvaluator
 
-//TODO: Add tests for clear character, clear string, more complex calculations
 @RunWith(RobolectricTestRunner::class)
-@Config(constants = BuildConfig::class, sdk = intArrayOf(21))
+@Config(constants = BuildConfig::class, sdk = [21])
 class MainActivityTest {
     private lateinit var activity: MainActivity
 
@@ -85,7 +84,7 @@ class MainActivityTest {
 
     @Test
     fun squareRootTest() {
-        val result = evaluator.evaluate("9^(1/2)")
+        val result = evaluator.evaluate("sqrt(9)")
         assertEquals(3.0, result)
     }
 
@@ -132,6 +131,7 @@ class MainActivityTest {
         assertEquals("5.0", calc.displayedFormula) //currently loads null
     }
 
+    //TODO: Failing test needs fixing
     @Test
     fun historyTest() {
         val calc = CalculatorImpl(mockCalc, mockContext)

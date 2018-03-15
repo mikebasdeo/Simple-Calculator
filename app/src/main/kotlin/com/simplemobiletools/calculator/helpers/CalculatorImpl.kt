@@ -46,7 +46,7 @@ class CalculatorImpl(calculator: Calculator, private val context: Context) {
     //See implementation in fun handleOperation(operation: String)
     private val listOfSpecialLastEntries = listOf(DIGIT, PI, RIGHT_BRACKET)
     private val listOfSpecialOperations = listOf(LEFT_BRACKET, PI, SINE, COSINE,  TANGENT,
-                                                    LOGARITHM, NATURAL_LOGARITHM)
+                                                    LOGARITHM, NATURAL_LOGARITHM, ROOT)
 
     //Every time a digit or operation is entered, we keep track of the length. In this way, when we
     //delete digits or operations, our program will automatically delete the appropriate amount of
@@ -239,7 +239,7 @@ class CalculatorImpl(calculator: Calculator, private val context: Context) {
         DIVIDE -> "/"
         MODULO -> "%"
         POWER -> "^"
-        ROOT -> "^.5"
+        ROOT -> "sqrt("
         LEFT_BRACKET -> "("
         RIGHT_BRACKET -> ")"
         PI -> "pi"
