@@ -23,7 +23,7 @@ class UnitConversionActivity : Activity()  {
 
 
         //Main List for conversion choices.
-        val ConversionChoiceList = arrayOf("Speed", "Distance", "Time")
+        val ConversionChoiceList = arrayOf("Speed", "Distance", "Time", "Weight")
 
         //Empty list that will be populated with the relevant conversion units.
         val unitList = ArrayList<String>()
@@ -64,6 +64,12 @@ class UnitConversionActivity : Activity()  {
                     unitList.add("Velocity")
                     unitList.add("Acceleration")
                     unitList.add("Displacement")
+                }
+                if (s == "Weight"){
+                    unitList.clear()
+                    unitList.add("Kg")
+                    unitList.add("Pounds")
+                    unitList.add("Newtons")
                 }
                 beforeAdapter.notifyDataSetChanged()
                 afterAdapter.notifyDataSetChanged()
