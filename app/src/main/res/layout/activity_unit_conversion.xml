@@ -48,7 +48,8 @@
         android:layout_marginStart="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/units_before_spinner" />
+        app:layout_constraintStart_toEndOf="@+id/units_before_spinner"
+        android:layout_marginLeft="4dp" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline"
