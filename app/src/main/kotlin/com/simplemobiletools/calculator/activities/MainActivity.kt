@@ -212,6 +212,7 @@ class MainActivity : SimpleActivity(), Calculator {
             R.id.settings -> launchSettings()
             R.id.about -> launchAbout()
             R.id.History -> launchHistory()
+            R.id.unit_conversion -> launchUnitConversion()
             else -> return super.onOptionsItemSelected(item)
         }
         return true
@@ -232,6 +233,10 @@ class MainActivity : SimpleActivity(), Calculator {
 
     private fun launchHistory() {
         startActivity(Intent(applicationContext, HistoryActivity::class.java))
+    }
+
+    private fun launchUnitConversion(){
+        startActivity(Intent(applicationContext, UnitConversionActivity::class.java))
     }
 
     private fun launchSettings() {
@@ -260,7 +265,7 @@ class MainActivity : SimpleActivity(), Calculator {
 
     private fun pasteFromClipBoard(): Boolean {
         //check clipboard
-        var clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
         if (clipboard.primaryClip.getItemAt(0).coerceToText(this).toString().isNum()){
             setFormula(clipboard.primaryClip.getItemAt(0).coerceToText(this).toString(), this)
             Toast.makeText(applicationContext,"Pasted from clipboard", Toast.LENGTH_LONG).show()
