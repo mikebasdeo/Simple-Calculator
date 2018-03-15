@@ -29,6 +29,7 @@ import com.simplemobiletools.calculator.helpers.CONSTANT.NATURAL_LOGARITHM
 import com.simplemobiletools.calculator.helpers.CONSTANT.PI
 import com.simplemobiletools.calculator.helpers.CONSTANT.PLUS
 import com.simplemobiletools.calculator.helpers.CONSTANT.POWER
+import com.simplemobiletools.calculator.helpers.CONSTANT.RECIPROCAL
 import com.simplemobiletools.calculator.helpers.CONSTANT.RIGHT_BRACKET
 import com.simplemobiletools.calculator.helpers.CONSTANT.ROOT
 import com.simplemobiletools.calculator.helpers.CONSTANT.SINE
@@ -74,6 +75,7 @@ class MainActivity : SimpleActivity(), Calculator {
         btn_tan.setOnClickListener { calc.handleOperation(TANGENT); checkHaptic(it) }
         btn_log.setOnClickListener { calc.handleOperation(LOGARITHM); checkHaptic(it) }
         btn_ln.setOnClickListener { calc.handleOperation(NATURAL_LOGARITHM); checkHaptic(it) }
+        btn_reciprocal.setOnClickListener { calc.reciprocalOfResult(); checkHaptic(it) }
 
         btn_del.setOnClickListener {calc.handleClear(formula.text.toString()); checkHaptic(it) }
         btn_all_clear.setOnClickListener { calc.handleReset()}
