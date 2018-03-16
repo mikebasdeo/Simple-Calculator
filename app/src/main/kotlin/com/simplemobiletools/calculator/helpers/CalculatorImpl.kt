@@ -62,8 +62,8 @@ class CalculatorImpl(calculator: Calculator, private val context: Context) {
         mSavedValue1 = fileManager.chooseFileType(TEMP_FILE, "one")
         mSavedValue2 = fileManager.chooseFileType(TEMP_FILE, "two")
         mSavedValue3 = fileManager.chooseFileType(TEMP_FILE, "three")
-        mEquationHistory = fileManager.chooseFileType(FILE, "History")
-        mResultHistory = fileManager.chooseFileType(FILE, "Results")
+        mEquationHistory = fileManager.chooseFileType(FILE, "History.txt")
+        mResultHistory = fileManager.chooseFileType(FILE, "Results.txt")
     }
 
     fun setValue(value: String) {
@@ -206,22 +206,34 @@ class CalculatorImpl(calculator: Calculator, private val context: Context) {
     }
 
     fun getHistoryEntries(): ArrayList<String> {
-        val reader: Reader = BufferedReader(FileReader(mEquationHistory))
         val list: ArrayList<String> = ArrayList()
-        reader.forEachLine {
-            list.add(it)
+        if (getHistoryFile().canRead()) {
+            val reader: Reader = BufferedReader(FileReader(getHistoryFile().absolutePath))
+            reader.forEachLine {
+                list.add(it)
+            }
+            reader.close()
         }
-        reader.close()
+        else {
+            list.add("")
+        }
+
         return list
     }
 
     fun getResults(): ArrayList<String> {
-        val reader: Reader = BufferedReader(FileReader(mResultHistory))
         val list: ArrayList<String> = ArrayList()
-        reader.forEachLine {
-            list.add(it)
+        if (getResultFile().canRead()) {
+            val reader: Reader = BufferedReader(FileReader(getResultFile().absolutePath))
+            reader.forEachLine {
+                list.add(it)
+            }
+            reader.close()
         }
-        reader.close()
+        else {
+            list.add("")
+        }
+
         return list
     }
 
