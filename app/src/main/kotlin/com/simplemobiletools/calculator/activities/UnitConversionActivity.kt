@@ -8,9 +8,14 @@ import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.AdapterView
 import android.widget.AdapterView.OnItemSelectedListener
-import com.simplemobiletools.calculator.helpers.Calculator
-import com.simplemobiletools.calculator.helpers.Unitconversion
-import com.simplemobiletools.calculator.helpers.CalculatorImpl
+import com.simplemobiletools.calculator.helpers.CONSTANT.CENTIMETERS
+import com.simplemobiletools.calculator.helpers.CONSTANT.FEET
+import com.simplemobiletools.calculator.helpers.CONSTANT.INCHES
+import com.simplemobiletools.calculator.helpers.CONSTANT.KILOMETERS
+import com.simplemobiletools.calculator.helpers.CONSTANT.METERS
+import com.simplemobiletools.calculator.helpers.CONSTANT.MILES
+import com.simplemobiletools.calculator.helpers.CONSTANT.MILLIMETERS
+import com.simplemobiletools.calculator.helpers.CONSTANT.YARDS
 
 class UnitConversionActivity : Activity()  {
 
@@ -18,8 +23,6 @@ class UnitConversionActivity : Activity()  {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_unit_conversion)
-
-        val unitconversion: Unitconversion
 
         //Three drop down menus. The conversionChoiceSpiner changes the other two automatically.
         val conversionChoiceSpinner: Spinner
@@ -35,10 +38,13 @@ class UnitConversionActivity : Activity()  {
         val beforeAdapter: ArrayAdapter<String>
         val afterAdapter: ArrayAdapter<String>
 
+        val listOfConversionChoices = listOf<String>()
+        val listOfDistanceConstants  = listOf<String>(CENTIMETERS, MILLIMETERS, METERS, KILOMETERS, FEET, INCHES, MILES, YARDS)
+
         //Create adapters for each of the three spinners.
         //TODO: Make custom layouts for the drop down menus.
-        choiceAdapter = ArrayAdapter(this, R.layout.spinner_item, ConversionChoiceList)
-        beforeAdapter = ArrayAdapter(this, R.layout.spinner_item, unitList)
+        choiceAdapter = ArrayAdapter(this, R.layout.spinner_item, listOfConversionChoices)
+        beforeAdapter = ArrayAdapter(this, R.layout.spinner_item, listOfDistanceConstants)
         afterAdapter = ArrayAdapter(this, R.layout.spinner_item, unitList)
 
         //Connect to layout.
