@@ -188,7 +188,7 @@ public class MainActivityTest {
 
     @Test
     public void squareRootTest(){
-        press(R.id.btn_root_aquare);
+        press(R.id.btn_root_square);
         press(R.id.btn_9);
         press(R.id.btn_plus);
         press(R.id.btn_1);
@@ -247,7 +247,7 @@ public class MainActivityTest {
     @Test
     public void eTest(){
         press(R.id.btn_ln_floor);
-        press(R.id.btn_e_plusminus);
+        press(R.id.btn_e_neg);
         press(R.id.btn_right_bracket);
         press(R.id.btn_equals);
         checkResult("1");

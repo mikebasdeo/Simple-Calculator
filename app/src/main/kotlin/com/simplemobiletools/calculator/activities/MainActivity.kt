@@ -14,10 +14,17 @@ import com.simplemobiletools.calculator.BuildConfig
 import com.simplemobiletools.calculator.R
 import com.simplemobiletools.calculator.extensions.config
 import com.simplemobiletools.calculator.extensions.updateViewColors
+import com.simplemobiletools.calculator.helpers.CONSTANT.ABSOLUTE_VALUE
+import com.simplemobiletools.calculator.helpers.CONSTANT.ARCCOS
+import com.simplemobiletools.calculator.helpers.CONSTANT.ARCSINE
+import com.simplemobiletools.calculator.helpers.CONSTANT.ARCTANGENT
+import com.simplemobiletools.calculator.helpers.CONSTANT.CEILING
 import com.simplemobiletools.calculator.helpers.CONSTANT.COSINE
+import com.simplemobiletools.calculator.helpers.CONSTANT.CUBE
 import com.simplemobiletools.calculator.helpers.CONSTANT.DIGIT
 import com.simplemobiletools.calculator.helpers.CONSTANT.DIVIDE
 import com.simplemobiletools.calculator.helpers.CONSTANT.E
+import com.simplemobiletools.calculator.helpers.CONSTANT.FLOOR
 import com.simplemobiletools.calculator.helpers.CONSTANT.LEFT_BRACKET
 import com.simplemobiletools.calculator.helpers.CONSTANT.LOGARITHM
 import com.simplemobiletools.calculator.helpers.CONSTANT.MEMORY_ONE
@@ -32,7 +39,9 @@ import com.simplemobiletools.calculator.helpers.CONSTANT.PLUS
 import com.simplemobiletools.calculator.helpers.CONSTANT.POWER
 import com.simplemobiletools.calculator.helpers.CONSTANT.RIGHT_BRACKET
 import com.simplemobiletools.calculator.helpers.CONSTANT.ROOT
+import com.simplemobiletools.calculator.helpers.CONSTANT.ROUNDING
 import com.simplemobiletools.calculator.helpers.CONSTANT.SINE
+import com.simplemobiletools.calculator.helpers.CONSTANT.SQUARE
 import com.simplemobiletools.calculator.helpers.CONSTANT.TANGENT
 import com.simplemobiletools.calculator.helpers.Calculator
 import com.simplemobiletools.calculator.helpers.CalculatorImpl
@@ -60,33 +69,51 @@ class MainActivity : SimpleActivity(), Calculator {
 
         calc = CalculatorImpl(this, applicationContext)
 
+        var shiftClicked: Boolean = false
+        btn_shift.setOnClickListener { shiftClicked = !shiftClicked }
+
+        //Never changes
         btn_plus.setOnClickListener { calc.handleOperation(PLUS); checkHaptic(it) }
         btn_minus.setOnClickListener { calc.handleOperation(MINUS); checkHaptic(it) }
         btn_multiply.setOnClickListener { calc.handleOperation(MULTIPLY); checkHaptic(it) }
         btn_divide.setOnClickListener { calc.handleOperation(DIVIDE); checkHaptic(it) }
-        btn_mod_cube.setOnClickListener { calc.handleOperation(MODULO); checkHaptic(it) }
-        btn_power_abs.setOnClickListener { calc.handleOperation(POWER); checkHaptic(it) }
-        btn_root_aquare.setOnClickListener { calc.handleOperation(ROOT); checkHaptic(it) }
-        btn_left_bracket.setOnClickListener { calc.handleOperation(LEFT_BRACKET); checkHaptic(it) }
-        btn_right_bracket.setOnClickListener { calc.handleOperation(RIGHT_BRACKET); checkHaptic(it) }
-        btn_pi_rand.setOnClickListener { calc.handleOperation(PI); checkHaptic(it) }
-        btn_e_plusminus.setOnClickListener { calc.handleOperation(E); checkHaptic(it) }
-        btn_sin_asin.setOnClickListener { calc.handleOperation(SINE); checkHaptic(it) }
-        btn_cos_acos.setOnClickListener { calc.handleOperation(COSINE); checkHaptic(it) }
-        btn_tan_atan.setOnClickListener { calc.handleOperation(TANGENT); checkHaptic(it) }
-        btn_log_ceil.setOnClickListener { calc.handleOperation(LOGARITHM); checkHaptic(it) }
-        btn_ln_floor.setOnClickListener { calc.handleOperation(NATURAL_LOGARITHM); checkHaptic(it) }
-        btn_reciprocal_round.setOnClickListener { calc.reciprocalOfResult(); checkHaptic(it) }
-
-        btn_del.setOnClickListener {calc.handleClear(formula.text.toString()); checkHaptic(it) }
-        btn_all_clear.setOnClickListener { calc.handleReset()}
-
         btn_memory_1.setOnClickListener { calc.handleViewValue(MEMORY_ONE)}
         btn_memory_1.setOnLongClickListener{ calc.handleStore(result.text.toString(), MEMORY_ONE); true }
         btn_memory_2.setOnClickListener { calc.handleViewValue(MEMORY_TWO)}
         btn_memory_2.setOnLongClickListener{ calc.handleStore(result.text.toString(), MEMORY_TWO); true }
         btn_memory_3.setOnClickListener { calc.handleViewValue(MEMORY_THREE) }
         btn_memory_3.setOnLongClickListener{calc.handleStore(result.text.toString(), MEMORY_THREE); true }
+        btn_del.setOnClickListener {calc.handleClear(formula.text.toString()); checkHaptic(it) }
+        btn_all_clear.setOnClickListener { calc.handleReset()}
+        btn_left_bracket.setOnClickListener { calc.handleOperation(LEFT_BRACKET); checkHaptic(it) }
+        btn_right_bracket.setOnClickListener { calc.handleOperation(RIGHT_BRACKET); checkHaptic(it) }
+
+        if(shiftClicked) {
+            btn_mod_cube.setOnClickListener { calc.handleOperation(MODULO); checkHaptic(it) }
+            btn_power_abs.setOnClickListener { calc.handleOperation(POWER); checkHaptic(it) }
+            btn_root_square.setOnClickListener { calc.handleOperation(ROOT); checkHaptic(it) }
+            btn_pi_rand.setOnClickListener { calc.handleOperation(PI); checkHaptic(it) }
+            btn_sin_asin.setOnClickListener { calc.handleOperation(SINE); checkHaptic(it) }
+            btn_cos_acos.setOnClickListener { calc.handleOperation(COSINE); checkHaptic(it) }
+            btn_tan_atan.setOnClickListener { calc.handleOperation(TANGENT); checkHaptic(it) }
+            btn_log_ceil.setOnClickListener { calc.handleOperation(LOGARITHM); checkHaptic(it) }
+            btn_ln_floor.setOnClickListener { calc.handleOperation(NATURAL_LOGARITHM); checkHaptic(it) }
+            btn_e_neg.setOnClickListener { calc.handleOperation(E); checkHaptic(it) }
+            btn_reciprocal_round.setOnClickListener { calc.reciprocalOfResult(); checkHaptic(it) }
+        }
+        else {
+            btn_mod_cube.setOnClickListener { calc.handleOperation(CUBE); checkHaptic(it) }
+            btn_power_abs.setOnClickListener { calc.handleOperation(ABSOLUTE_VALUE); checkHaptic(it) }
+            btn_root_square.setOnClickListener { calc.handleOperation(SQUARE); checkHaptic(it) }
+            btn_pi_rand.setOnClickListener { calc.randomNumberBetweenZeroAndOne(); checkHaptic(it) }
+            btn_sin_asin.setOnClickListener { calc.handleOperation(ARCSINE); checkHaptic(it) }
+            btn_cos_acos.setOnClickListener { calc.handleOperation(ARCCOS); checkHaptic(it) }
+            btn_tan_atan.setOnClickListener { calc.handleOperation(ARCTANGENT); checkHaptic(it) }
+            btn_log_ceil.setOnClickListener { calc.handleOperation(CEILING); checkHaptic(it) }
+            btn_ln_floor.setOnClickListener { calc.handleOperation(FLOOR); checkHaptic(it) }
+            btn_e_neg.setOnClickListener { calc.negationOfResult(); checkHaptic(it) }
+            btn_reciprocal_round.setOnClickListener { calc.handleOperation(ROUNDING); checkHaptic(it) }
+        }
 
         getButtonIds().forEach {
             it.setOnClickListener { calc.numpadClicked(it.id); checkHaptic(it) }
@@ -135,14 +162,14 @@ class MainActivity : SimpleActivity(), Calculator {
                 btn_reciprocal_round.setTextColor(Color.WHITE)
                 btn_log_ceil.setBackgroundColor(resources.getColor(R.color.noah_4))
                 btn_log_ceil.setTextColor(Color.WHITE)
-                btn_root_aquare.setBackgroundColor(resources.getColor(R.color.noah_4))
-                btn_root_aquare.setTextColor(Color.WHITE)
+                btn_root_square.setBackgroundColor(resources.getColor(R.color.noah_4))
+                btn_root_square.setTextColor(Color.WHITE)
                 btn_mod_cube.setBackgroundColor(resources.getColor(R.color.noah_4))
                 btn_mod_cube.setTextColor(Color.WHITE)
                 btn_power_abs.setBackgroundColor(resources.getColor(R.color.noah_4))
                 btn_power_abs.setTextColor(Color.WHITE)
-                btn_e_plusminus.setBackgroundColor(resources.getColor(R.color.noah_4))
-                btn_e_plusminus.setTextColor(Color.WHITE)
+                btn_e_neg.setBackgroundColor(resources.getColor(R.color.noah_4))
+                btn_e_neg.setTextColor(Color.WHITE)
                 btn_ln_floor.setBackgroundColor(resources.getColor(R.color.noah_4))
                 btn_ln_floor.setTextColor(Color.WHITE)
 
@@ -163,14 +190,14 @@ class MainActivity : SimpleActivity(), Calculator {
                 btn_reciprocal_round.setTextColor(resources.getColor(R.color.noah_4))
                 btn_log_ceil.setBackgroundColor(resources.getColor(R.color.noah_5))
                 btn_log_ceil.setTextColor(resources.getColor(R.color.noah_4))
-                btn_root_aquare.setBackgroundColor(resources.getColor(R.color.noah_5))
-                btn_root_aquare.setTextColor(resources.getColor(R.color.noah_4))
+                btn_root_square.setBackgroundColor(resources.getColor(R.color.noah_5))
+                btn_root_square.setTextColor(resources.getColor(R.color.noah_4))
                 btn_mod_cube.setBackgroundColor(resources.getColor(R.color.noah_5))
                 btn_mod_cube.setTextColor(resources.getColor(R.color.noah_4))
                 btn_power_abs.setBackgroundColor(resources.getColor(R.color.noah_5))
                 btn_power_abs.setTextColor(resources.getColor(R.color.noah_4))
-                btn_e_plusminus.setBackgroundColor(resources.getColor(R.color.noah_5))
-                btn_e_plusminus.setTextColor(resources.getColor(R.color.noah_4))
+                btn_e_neg.setBackgroundColor(resources.getColor(R.color.noah_5))
+                btn_e_neg.setTextColor(resources.getColor(R.color.noah_4))
                 btn_ln_floor.setBackgroundColor(resources.getColor(R.color.noah_5))
                 btn_ln_floor.setTextColor(resources.getColor(R.color.noah_4))
             }

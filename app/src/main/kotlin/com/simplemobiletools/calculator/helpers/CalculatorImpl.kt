@@ -319,7 +319,7 @@ class CalculatorImpl(calculator: Calculator, private val context: Context) {
     fun negationOfResult(){
         if(displayedNumber.isNotEmpty()) {
             val resultWithoutCommas = displayedNumber.replace(",", "")
-            calculateResult("1/$resultWithoutCommas")
+            calculateResult("-$resultWithoutCommas")
         }
     }
 

@@ -30,7 +30,7 @@ object CONSTANT {
     const val SQUARE = "square"
     const val CUBE =  "cube"
     const val ABSOLUTE_VALUE = "absolute_value"
-    const val PLUS_MINUS = "plus_minus"
+    const val NEGATION = "negation"
     const val FLOOR = "floor"
 
     // memory constants
