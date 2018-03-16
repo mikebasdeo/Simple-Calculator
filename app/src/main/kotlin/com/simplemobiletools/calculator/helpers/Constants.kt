@@ -23,6 +23,16 @@ object CONSTANT {
     const val PLUS_MINUS = "plus_minus"
     const val NATURAL_LOGARITHM = "natural_logarithm"
 
+    //length conversion
+    const val CENTIMETERS = "centimeters"
+    const val MILIMETERS = "milimeters"
+    const val METERS = "meters"
+    const val KILOMETERS = "kilometers"
+    const val FEET = "feet"
+    const val INCHES = "inches"
+    const val MILES = "miles"
+    const val YARDS = "yards"
+
     // memory constants
     const val MEMORY_ONE = "one"
     const val MEMORY_TWO = "two"

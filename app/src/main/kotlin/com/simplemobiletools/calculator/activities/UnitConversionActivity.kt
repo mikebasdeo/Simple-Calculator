@@ -8,6 +8,9 @@ import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.AdapterView
 import android.widget.AdapterView.OnItemSelectedListener
+import com.simplemobiletools.calculator.helpers.Calculator
+import com.simplemobiletools.calculator.helpers.Unitconversion
+import com.simplemobiletools.calculator.helpers.CalculatorImpl
 
 class UnitConversionActivity : Activity()  {
 
@@ -16,15 +19,15 @@ class UnitConversionActivity : Activity()  {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_unit_conversion)
 
+        val unitconversion: Unitconversion
+
         //Three drop down menus. The conversionChoiceSpiner changes the other two automatically.
         val conversionChoiceSpinner: Spinner
         val unitsBeforeSpinner: Spinner
         val unitsAfterSpinner: Spinner
 
-
         //Main List for conversion choices.
-        val ConversionChoiceList = arrayOf("Speed", "Distance", "Time", "Weight")
-
+        //val ConversionChoiceList = arrayOf("Speed", "Distance", "Time", "Weight")
         //Empty list that will be populated with the relevant conversion units.
         val unitList = ArrayList<String>()
 
@@ -42,6 +45,8 @@ class UnitConversionActivity : Activity()  {
         conversionChoiceSpinner = findViewById(R.id.conversion_type_spinner) as Spinner
         unitsBeforeSpinner = findViewById(R.id.units_before_spinner) as Spinner
         unitsAfterSpinner = findViewById(R.id.units_after_spinner) as Spinner
+
+
 
         //Connect each spinner to its respective adapter.
         conversionChoiceSpinner.setAdapter(choiceAdapter)
