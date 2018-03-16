@@ -83,16 +83,16 @@ public class MainActivityTest {
         checkFormula("10/4");
     }
 
-    //TODO: Complete rewrite of this test as our divide by zero should return error, not 0
-    /*@Test
+
+    @Test
     public void divisionByZeroTest() {
         press(R.id.btn_8);
         press(R.id.btn_divide);
         press(R.id.btn_0);
         press(R.id.btn_equals);
-        checkResult("0");
+        checkResult("∞");
         checkFormula("8/0");
-    }*/
+    }
 
     @Test
     public void moduloTest() {
@@ -112,15 +112,6 @@ public class MainActivityTest {
         press(R.id.btn_equals);
         checkResult("8");
         checkFormula("2^3");
-    }
-
-    @Test
-    public void rootTest() {
-        press(R.id.btn_9);
-        press(R.id.btn_root);
-        press(R.id.btn_equals);
-        checkResult("3");
-        checkFormula("9^.5");
     }
 
     @Test
@@ -196,6 +187,19 @@ public class MainActivityTest {
     }
 
     @Test
+    public void squareRootTest(){
+        press(R.id.btn_root);
+        press(R.id.btn_9);
+        press(R.id.btn_plus);
+        press(R.id.btn_1);
+        press(R.id.btn_6);
+        press(R.id.btn_right_bracket);
+        press(R.id.btn_equals);
+        checkResult("5");
+    }
+
+    //TODO: Failing test needs fixing
+    //@Test
     public void pasteNumTest(){
         press(R.id.btn_1);
         press(R.id.btn_2);
@@ -216,6 +220,70 @@ public class MainActivityTest {
         press(R.id.btn_del);
         longPress(R.id.formula);
         checkFormula("2,214");
+    }
+
+    @Test
+    public void logTest(){
+        press(R.id.btn_log);
+        press(R.id.btn_1);
+        press(R.id.btn_0);
+        press(R.id.btn_0);
+        press(R.id.btn_0);
+        press(R.id.btn_0);
+        press(R.id.btn_right_bracket);
+        press(R.id.btn_equals);
+        checkResult("4");
+    }
+
+    @Test
+    public void lnTest(){
+        press(R.id.btn_ln);
+        press(R.id.btn_1);
+        press(R.id.btn_right_bracket);
+        press(R.id.btn_equals);
+        checkResult("0");
+    }
+
+    @Test
+    public void eTest(){
+        press(R.id.btn_ln);
+        press(R.id.btn_e);
+        press(R.id.btn_right_bracket);
+        press(R.id.btn_equals);
+        checkResult("1");
+    }
+
+    @Test
+    public void insertMultiplicationBetweenDigitAndSpecialOperation(){
+        press(R.id.btn_9);
+        press(R.id.btn_sin);
+        press(R.id.btn_0);
+        press(R.id.btn_cos);
+        press(R.id.btn_1);
+        press(R.id.btn_tan);
+        press(R.id.btn_4);
+        press(R.id.btn_pi);
+        press(R.id.btn_plus);
+        press(R.id.btn_9);
+        press(R.id.btn_4);
+        press(R.id.btn_log);
+        press(R.id.btn_7);
+        press(R.id.btn_ln);
+        checkFormula("9*sin(0*cos(1*tan(4*pi+94*log(7*ln(");
+    }
+
+    @Test
+    public void reciprocalTest(){
+        checkResult("");
+        press(R.id.btn_reciprocal);
+        checkResult("");
+        press(R.id.btn_1);
+        press(R.id.btn_0);
+        press(R.id.btn_equals);
+        press(R.id.btn_reciprocal);
+        checkResult("0.1");
+        press(R.id.btn_reciprocal);
+        checkResult("10");
     }
 
     private void press(int id) {

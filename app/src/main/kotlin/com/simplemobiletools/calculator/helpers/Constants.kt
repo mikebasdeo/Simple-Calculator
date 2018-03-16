@@ -15,12 +15,11 @@ object CONSTANT {
     const val RIGHT_BRACKET = "right_bracket"
     const val SHIFT = "shift"
     const val PI = "pi"
+    const val E = "e"
     const val SINE = "sine"
     const val COSINE = "cosine"
     const val TANGENT = "tangent"
-    const val RECIPROCAL = "reciprocal"
     const val LOGARITHM = "logarithm"
-    const val PLUS_MINUS = "plus_minus"
     const val NATURAL_LOGARITHM = "natural_logarithm"
 
     // memory constants

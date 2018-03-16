@@ -1,7 +1,6 @@
 package com.simplemobiletools.calculator.activities
 
 import android.annotation.SuppressLint
-import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
@@ -10,22 +9,15 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import com.simplemobiletools.calculator.BuildConfig
 import com.simplemobiletools.calculator.R
 import com.simplemobiletools.calculator.extensions.config
 import com.simplemobiletools.calculator.extensions.updateViewColors
-import com.simplemobiletools.calculator.helpers.*
-import com.simplemobiletools.commons.extensions.*
-import com.simplemobiletools.commons.helpers.LICENSE_AUTOFITTEXTVIEW
-import com.simplemobiletools.commons.helpers.LICENSE_ESPRESSO
-import com.simplemobiletools.commons.helpers.LICENSE_KOTLIN
-import com.simplemobiletools.commons.helpers.LICENSE_ROBOLECTRIC
-import kotlinx.android.synthetic.main.activity_main.*
-import me.grantland.widget.AutofitHelper
-import android.widget.Toast
 import com.simplemobiletools.calculator.helpers.CONSTANT.COSINE
 import com.simplemobiletools.calculator.helpers.CONSTANT.DIGIT
 import com.simplemobiletools.calculator.helpers.CONSTANT.DIVIDE
+import com.simplemobiletools.calculator.helpers.CONSTANT.E
 import com.simplemobiletools.calculator.helpers.CONSTANT.LEFT_BRACKET
 import com.simplemobiletools.calculator.helpers.CONSTANT.LOGARITHM
 import com.simplemobiletools.calculator.helpers.CONSTANT.MEMORY_ONE
@@ -42,6 +34,16 @@ import com.simplemobiletools.calculator.helpers.CONSTANT.RIGHT_BRACKET
 import com.simplemobiletools.calculator.helpers.CONSTANT.ROOT
 import com.simplemobiletools.calculator.helpers.CONSTANT.SINE
 import com.simplemobiletools.calculator.helpers.CONSTANT.TANGENT
+import com.simplemobiletools.calculator.helpers.Calculator
+import com.simplemobiletools.calculator.helpers.CalculatorImpl
+import com.simplemobiletools.calculator.helpers.Formatter
+import com.simplemobiletools.commons.extensions.*
+import com.simplemobiletools.commons.helpers.LICENSE_AUTOFITTEXTVIEW
+import com.simplemobiletools.commons.helpers.LICENSE_ESPRESSO
+import com.simplemobiletools.commons.helpers.LICENSE_KOTLIN
+import com.simplemobiletools.commons.helpers.LICENSE_ROBOLECTRIC
+import kotlinx.android.synthetic.main.activity_main.*
+import me.grantland.widget.AutofitHelper
 
 class MainActivity : SimpleActivity(), Calculator {
     private var storedTextColor = 0
@@ -68,21 +70,21 @@ class MainActivity : SimpleActivity(), Calculator {
         btn_left_bracket.setOnClickListener { calc.handleOperation(LEFT_BRACKET); checkHaptic(it) }
         btn_right_bracket.setOnClickListener { calc.handleOperation(RIGHT_BRACKET); checkHaptic(it) }
         btn_pi.setOnClickListener { calc.handleOperation(PI); checkHaptic(it) }
+        btn_e.setOnClickListener { calc.handleOperation(E); checkHaptic(it) }
         btn_sin.setOnClickListener { calc.handleOperation(SINE); checkHaptic(it) }
         btn_cos.setOnClickListener { calc.handleOperation(COSINE); checkHaptic(it) }
         btn_tan.setOnClickListener { calc.handleOperation(TANGENT); checkHaptic(it) }
         btn_log.setOnClickListener { calc.handleOperation(LOGARITHM); checkHaptic(it) }
         btn_ln.setOnClickListener { calc.handleOperation(NATURAL_LOGARITHM); checkHaptic(it) }
+        btn_reciprocal.setOnClickListener { calc.reciprocalOfResult(); checkHaptic(it) }
 
         btn_del.setOnClickListener {calc.handleClear(formula.text.toString()); checkHaptic(it) }
         btn_all_clear.setOnClickListener { calc.handleReset()}
 
         btn_memory_1.setOnClickListener { calc.handleViewValue(MEMORY_ONE)}
         btn_memory_1.setOnLongClickListener{ calc.handleStore(result.text.toString(), MEMORY_ONE); true }
-
         btn_memory_2.setOnClickListener { calc.handleViewValue(MEMORY_TWO)}
         btn_memory_2.setOnLongClickListener{ calc.handleStore(result.text.toString(), MEMORY_TWO); true }
-
         btn_memory_3.setOnClickListener { calc.handleViewValue(MEMORY_THREE) }
         btn_memory_3.setOnLongClickListener{calc.handleStore(result.text.toString(), MEMORY_THREE); true }
 
@@ -110,7 +112,7 @@ class MainActivity : SimpleActivity(), Calculator {
         updateViewColors(calculator_holder, config.textColor)
 
         btn_shift.setOnClickListener {
-            if(btn_shift.getCurrentTextColor()==resources.getColor(R.color.noah_5)){
+            if(btn_shift.currentTextColor ==resources.getColor(R.color.noah_5)){
 
                 btn_shift.setTextColor(resources.getColor(R.color.noah_4))
                 btn_shift.setBackgroundColor(resources.getColor(R.color.noah_5))
@@ -139,8 +141,8 @@ class MainActivity : SimpleActivity(), Calculator {
                 btn_modulo.setTextColor(Color.WHITE)
                 btn_power.setBackgroundColor(resources.getColor(R.color.noah_4))
                 btn_power.setTextColor(Color.WHITE)
-                btn_plus_minus.setBackgroundColor(resources.getColor(R.color.noah_4))
-                btn_plus_minus.setTextColor(Color.WHITE)
+                btn_e.setBackgroundColor(resources.getColor(R.color.noah_4))
+                btn_e.setTextColor(Color.WHITE)
                 btn_ln.setBackgroundColor(resources.getColor(R.color.noah_4))
                 btn_ln.setTextColor(Color.WHITE)
 
@@ -149,12 +151,6 @@ class MainActivity : SimpleActivity(), Calculator {
                 btn_shift.setTextColor(resources.getColor(R.color.noah_5))
                 btn_shift.setBackgroundColor(resources.getColor(R.color.noah_4))
 
-                btn_memory_1.setBackgroundColor(resources.getColor(R.color.noah_5))
-                btn_memory_1.setTextColor(resources.getColor(R.color.noah_4))
-                btn_memory_2.setBackgroundColor(resources.getColor(R.color.noah_5))
-                btn_memory_2.setTextColor(resources.getColor(R.color.noah_4))
-                btn_memory_3.setBackgroundColor(resources.getColor(R.color.noah_5))
-                btn_memory_3.setTextColor(resources.getColor(R.color.noah_4))
                 btn_pi.setBackgroundColor(resources.getColor(R.color.noah_5))
                 btn_pi.setTextColor(resources.getColor(R.color.noah_4))
                 btn_sin.setBackgroundColor(resources.getColor(R.color.noah_5))
@@ -173,8 +169,8 @@ class MainActivity : SimpleActivity(), Calculator {
                 btn_modulo.setTextColor(resources.getColor(R.color.noah_4))
                 btn_power.setBackgroundColor(resources.getColor(R.color.noah_5))
                 btn_power.setTextColor(resources.getColor(R.color.noah_4))
-                btn_plus_minus.setBackgroundColor(resources.getColor(R.color.noah_5))
-                btn_plus_minus.setTextColor(resources.getColor(R.color.noah_4))
+                btn_e.setBackgroundColor(resources.getColor(R.color.noah_5))
+                btn_e.setTextColor(resources.getColor(R.color.noah_4))
                 btn_ln.setBackgroundColor(resources.getColor(R.color.noah_5))
                 btn_ln.setTextColor(resources.getColor(R.color.noah_4))
             }
@@ -260,20 +256,17 @@ class MainActivity : SimpleActivity(), Calculator {
 
     private fun pasteFromClipBoard(): Boolean {
         //check clipboard
-        var clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-        if (clipboard.primaryClip.getItemAt(0).coerceToText(this).toString().isNum()){
+        val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        //do nothing
+        return if (clipboard.primaryClip.getItemAt(0).coerceToText(this).toString().isNum()){
             setFormula(clipboard.primaryClip.getItemAt(0).coerceToText(this).toString(), this)
             Toast.makeText(applicationContext,"Pasted from clipboard", Toast.LENGTH_LONG).show()
-            return true
+            true
         }
-        else {
-            //do nothing
-
-            return false
-        }
+        else false
     }
 
-    fun String.isNum() = matches(Regex("\\d{1}|\\d{2}|\\d{3}(\\d{3},)+(.|)(\\d{1})+"))
+    private fun String.isNum() = matches(Regex("\\d|\\d{2}|\\d{3}(\\d{3},)+(.|)(\\d)+"))
 
     override fun setValue(value: String, context: Context) {
         result.text = value
@@ -286,11 +279,10 @@ class MainActivity : SimpleActivity(), Calculator {
     }
 
     override fun setFormula(value: String, context: Context) {
-        if(value == ""){
+        val input = formula.text.toString() + value
+        formula.text = input
+
+        if (value == "")
             formula.text = ""
-        }
-        else{
-            formula.text = formula.text.toString() + value
-        }
     }
 }

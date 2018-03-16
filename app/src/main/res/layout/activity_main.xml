@@ -170,7 +170,7 @@
         app:layout_constraintBottom_toTopOf="@+id/btn_all_clear"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/btn_plus_minus"
+        app:layout_constraintStart_toEndOf="@+id/btn_e"
         tools:textAllCaps="false" />
 
 
@@ -444,16 +444,17 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/btn_plus_minus"
+        android:id="@+id/btn_e"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@color/noah_4"
         android:fontFamily="sans-serif"
         android:minHeight="55sp"
         android:minWidth="77dp"
-        android:text="&#177;"
-        android:textSize="20sp"
+        android:text="e"
+        android:textSize="24sp"
         android:textStyle="bold"
+        android:textAllCaps="false"
         app:layout_constraintBaseline_toBaselineOf="@+id/btn_ln"
         app:layout_constraintEnd_toStartOf="@+id/btn_ln"
         app:layout_constraintHorizontal_bias="0.5"
@@ -486,8 +487,8 @@
         android:text="^"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBaseline_toBaselineOf="@+id/btn_plus_minus"
-        app:layout_constraintEnd_toStartOf="@+id/btn_plus_minus"
+        app:layout_constraintBaseline_toBaselineOf="@+id/btn_e"
+        app:layout_constraintEnd_toStartOf="@+id/btn_e"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/btn_modulo" />
 
