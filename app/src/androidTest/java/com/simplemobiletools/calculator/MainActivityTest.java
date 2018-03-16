@@ -263,6 +263,20 @@ public class MainActivityTest {
         checkFormula("9*sin(0*cos(1*tan(4*pi+94*log(7*ln(");
     }
 
+    @Test
+    public void reciprocalTest(){
+        checkResult("");
+        press(R.id.btn_reciprocal);
+        checkResult("");
+        press(R.id.btn_1);
+        press(R.id.btn_0);
+        press(R.id.btn_equals);
+        press(R.id.btn_reciprocal);
+        checkResult("0.1");
+        press(R.id.btn_reciprocal);
+        checkResult("10");
+    }
+
     private void press(int id) {
         onView(withId(id)).perform(click());
     }

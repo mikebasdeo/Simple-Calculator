@@ -289,9 +289,11 @@ class CalculatorImpl(calculator: Calculator, private val context: Context) {
         return fileManager
     }
 
-    //TODO: Implement reciprocal on final answer
-    /*
-    fun resultModifier(){
+    fun reciprocalOfResult(){
+        if(displayedNumber.isNotEmpty()) {
+            val resultWithoutCommas = displayedNumber.replace(",", "")
+            calculateResult("1/$resultWithoutCommas")
+        }
     }
-    */
+
 }
