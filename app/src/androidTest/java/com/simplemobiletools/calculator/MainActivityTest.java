@@ -97,7 +97,7 @@ public class MainActivityTest {
     @Test
     public void moduloTest() {
         press(R.id.btn_7);
-        press(R.id.btn_modulo);
+        press(R.id.btn_mod_cube);
         press(R.id.btn_2);
         press(R.id.btn_equals);
         checkResult("1");
@@ -107,7 +107,7 @@ public class MainActivityTest {
     @Test
     public void powerTest() {
         press(R.id.btn_2);
-        press(R.id.btn_power);
+        press(R.id.btn_power_abs);
         press(R.id.btn_3);
         press(R.id.btn_equals);
         checkResult("8");
@@ -156,7 +156,7 @@ public class MainActivityTest {
 
         //Verify if button store works (Have to press equals first)
         press(R.id.btn_3);
-        press(R.id.btn_power);
+        press(R.id.btn_power_abs);
         press(R.id.btn_2);
         press(R.id.btn_equals);
         longPress(R.id.btn_memory_2);
@@ -166,7 +166,7 @@ public class MainActivityTest {
         //Verify if button store works (Have to press equals first)
         press(R.id.btn_1);
         press(R.id.btn_0);
-        press(R.id.btn_modulo);
+        press(R.id.btn_mod_cube);
         press(R.id.btn_3);
         press(R.id.btn_equals);
         longPress(R.id.btn_memory_2);
@@ -188,7 +188,7 @@ public class MainActivityTest {
 
     @Test
     public void squareRootTest(){
-        press(R.id.btn_root);
+        press(R.id.btn_root_aquare);
         press(R.id.btn_9);
         press(R.id.btn_plus);
         press(R.id.btn_1);
@@ -224,7 +224,7 @@ public class MainActivityTest {
 
     @Test
     public void logTest(){
-        press(R.id.btn_log);
+        press(R.id.btn_log_ceil);
         press(R.id.btn_1);
         press(R.id.btn_0);
         press(R.id.btn_0);
@@ -237,7 +237,7 @@ public class MainActivityTest {
 
     @Test
     public void lnTest(){
-        press(R.id.btn_ln);
+        press(R.id.btn_ln_floor);
         press(R.id.btn_1);
         press(R.id.btn_right_bracket);
         press(R.id.btn_equals);
@@ -246,8 +246,8 @@ public class MainActivityTest {
 
     @Test
     public void eTest(){
-        press(R.id.btn_ln);
-        press(R.id.btn_e);
+        press(R.id.btn_ln_floor);
+        press(R.id.btn_e_plusminus);
         press(R.id.btn_right_bracket);
         press(R.id.btn_equals);
         checkResult("1");
@@ -256,33 +256,33 @@ public class MainActivityTest {
     @Test
     public void insertMultiplicationBetweenDigitAndSpecialOperation(){
         press(R.id.btn_9);
-        press(R.id.btn_sin);
+        press(R.id.btn_sin_asin);
         press(R.id.btn_0);
-        press(R.id.btn_cos);
+        press(R.id.btn_cos_acos);
         press(R.id.btn_1);
-        press(R.id.btn_tan);
+        press(R.id.btn_tan_atan);
         press(R.id.btn_4);
-        press(R.id.btn_pi);
+        press(R.id.btn_pi_rand);
         press(R.id.btn_plus);
         press(R.id.btn_9);
         press(R.id.btn_4);
-        press(R.id.btn_log);
+        press(R.id.btn_log_ceil);
         press(R.id.btn_7);
-        press(R.id.btn_ln);
+        press(R.id.btn_ln_floor);
         checkFormula("9*sin(0*cos(1*tan(4*pi+94*log(7*ln(");
     }
 
     @Test
     public void reciprocalTest(){
         checkResult("");
-        press(R.id.btn_reciprocal);
+        press(R.id.btn_reciprocal_round);
         checkResult("");
         press(R.id.btn_1);
         press(R.id.btn_0);
         press(R.id.btn_equals);
-        press(R.id.btn_reciprocal);
+        press(R.id.btn_reciprocal_round);
         checkResult("0.1");
-        press(R.id.btn_reciprocal);
+        press(R.id.btn_reciprocal_round);
         checkResult("10");
     }
 

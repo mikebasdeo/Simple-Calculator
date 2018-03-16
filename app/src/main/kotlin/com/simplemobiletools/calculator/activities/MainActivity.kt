@@ -64,19 +64,19 @@ class MainActivity : SimpleActivity(), Calculator {
         btn_minus.setOnClickListener { calc.handleOperation(MINUS); checkHaptic(it) }
         btn_multiply.setOnClickListener { calc.handleOperation(MULTIPLY); checkHaptic(it) }
         btn_divide.setOnClickListener { calc.handleOperation(DIVIDE); checkHaptic(it) }
-        btn_modulo.setOnClickListener { calc.handleOperation(MODULO); checkHaptic(it) }
-        btn_power.setOnClickListener { calc.handleOperation(POWER); checkHaptic(it) }
-        btn_root.setOnClickListener { calc.handleOperation(ROOT); checkHaptic(it) }
+        btn_mod_cube.setOnClickListener { calc.handleOperation(MODULO); checkHaptic(it) }
+        btn_power_abs.setOnClickListener { calc.handleOperation(POWER); checkHaptic(it) }
+        btn_root_aquare.setOnClickListener { calc.handleOperation(ROOT); checkHaptic(it) }
         btn_left_bracket.setOnClickListener { calc.handleOperation(LEFT_BRACKET); checkHaptic(it) }
         btn_right_bracket.setOnClickListener { calc.handleOperation(RIGHT_BRACKET); checkHaptic(it) }
-        btn_pi.setOnClickListener { calc.handleOperation(PI); checkHaptic(it) }
-        btn_e.setOnClickListener { calc.handleOperation(E); checkHaptic(it) }
-        btn_sin.setOnClickListener { calc.handleOperation(SINE); checkHaptic(it) }
-        btn_cos.setOnClickListener { calc.handleOperation(COSINE); checkHaptic(it) }
-        btn_tan.setOnClickListener { calc.handleOperation(TANGENT); checkHaptic(it) }
-        btn_log.setOnClickListener { calc.handleOperation(LOGARITHM); checkHaptic(it) }
-        btn_ln.setOnClickListener { calc.handleOperation(NATURAL_LOGARITHM); checkHaptic(it) }
-        btn_reciprocal.setOnClickListener { calc.reciprocalOfResult(); checkHaptic(it) }
+        btn_pi_rand.setOnClickListener { calc.handleOperation(PI); checkHaptic(it) }
+        btn_e_plusminus.setOnClickListener { calc.handleOperation(E); checkHaptic(it) }
+        btn_sin_asin.setOnClickListener { calc.handleOperation(SINE); checkHaptic(it) }
+        btn_cos_acos.setOnClickListener { calc.handleOperation(COSINE); checkHaptic(it) }
+        btn_tan_atan.setOnClickListener { calc.handleOperation(TANGENT); checkHaptic(it) }
+        btn_log_ceil.setOnClickListener { calc.handleOperation(LOGARITHM); checkHaptic(it) }
+        btn_ln_floor.setOnClickListener { calc.handleOperation(NATURAL_LOGARITHM); checkHaptic(it) }
+        btn_reciprocal_round.setOnClickListener { calc.reciprocalOfResult(); checkHaptic(it) }
 
         btn_del.setOnClickListener {calc.handleClear(formula.text.toString()); checkHaptic(it) }
         btn_all_clear.setOnClickListener { calc.handleReset()}
@@ -123,56 +123,56 @@ class MainActivity : SimpleActivity(), Calculator {
                 btn_memory_2.setTextColor(Color.WHITE)
                 btn_memory_3.setBackgroundColor(resources.getColor(R.color.noah_4))
                 btn_memory_3.setTextColor(Color.WHITE)
-                btn_pi.setBackgroundColor(resources.getColor(R.color.noah_4))
-                btn_pi.setTextColor(Color.WHITE)
-                btn_sin.setBackgroundColor(resources.getColor(R.color.noah_4))
-                btn_sin.setTextColor(Color.WHITE)
-                btn_cos.setBackgroundColor(resources.getColor(R.color.noah_4))
-                btn_cos.setTextColor(Color.WHITE)
-                btn_tan.setBackgroundColor(resources.getColor(R.color.noah_4))
-                btn_tan.setTextColor(Color.WHITE)
-                btn_reciprocal.setBackgroundColor(resources.getColor(R.color.noah_4))
-                btn_reciprocal.setTextColor(Color.WHITE)
-                btn_log.setBackgroundColor(resources.getColor(R.color.noah_4))
-                btn_log.setTextColor(Color.WHITE)
-                btn_root.setBackgroundColor(resources.getColor(R.color.noah_4))
-                btn_root.setTextColor(Color.WHITE)
-                btn_modulo.setBackgroundColor(resources.getColor(R.color.noah_4))
-                btn_modulo.setTextColor(Color.WHITE)
-                btn_power.setBackgroundColor(resources.getColor(R.color.noah_4))
-                btn_power.setTextColor(Color.WHITE)
-                btn_e.setBackgroundColor(resources.getColor(R.color.noah_4))
-                btn_e.setTextColor(Color.WHITE)
-                btn_ln.setBackgroundColor(resources.getColor(R.color.noah_4))
-                btn_ln.setTextColor(Color.WHITE)
+                btn_pi_rand.setBackgroundColor(resources.getColor(R.color.noah_4))
+                btn_pi_rand.setTextColor(Color.WHITE)
+                btn_sin_asin.setBackgroundColor(resources.getColor(R.color.noah_4))
+                btn_sin_asin.setTextColor(Color.WHITE)
+                btn_cos_acos.setBackgroundColor(resources.getColor(R.color.noah_4))
+                btn_cos_acos.setTextColor(Color.WHITE)
+                btn_tan_atan.setBackgroundColor(resources.getColor(R.color.noah_4))
+                btn_tan_atan.setTextColor(Color.WHITE)
+                btn_reciprocal_round.setBackgroundColor(resources.getColor(R.color.noah_4))
+                btn_reciprocal_round.setTextColor(Color.WHITE)
+                btn_log_ceil.setBackgroundColor(resources.getColor(R.color.noah_4))
+                btn_log_ceil.setTextColor(Color.WHITE)
+                btn_root_aquare.setBackgroundColor(resources.getColor(R.color.noah_4))
+                btn_root_aquare.setTextColor(Color.WHITE)
+                btn_mod_cube.setBackgroundColor(resources.getColor(R.color.noah_4))
+                btn_mod_cube.setTextColor(Color.WHITE)
+                btn_power_abs.setBackgroundColor(resources.getColor(R.color.noah_4))
+                btn_power_abs.setTextColor(Color.WHITE)
+                btn_e_plusminus.setBackgroundColor(resources.getColor(R.color.noah_4))
+                btn_e_plusminus.setTextColor(Color.WHITE)
+                btn_ln_floor.setBackgroundColor(resources.getColor(R.color.noah_4))
+                btn_ln_floor.setTextColor(Color.WHITE)
 
             }
             else {
                 btn_shift.setTextColor(resources.getColor(R.color.noah_5))
                 btn_shift.setBackgroundColor(resources.getColor(R.color.noah_4))
 
-                btn_pi.setBackgroundColor(resources.getColor(R.color.noah_5))
-                btn_pi.setTextColor(resources.getColor(R.color.noah_4))
-                btn_sin.setBackgroundColor(resources.getColor(R.color.noah_5))
-                btn_sin.setTextColor(resources.getColor(R.color.noah_4))
-                btn_cos.setBackgroundColor(resources.getColor(R.color.noah_5))
-                btn_cos.setTextColor(resources.getColor(R.color.noah_4))
-                btn_tan.setBackgroundColor(resources.getColor(R.color.noah_5))
-                btn_tan.setTextColor(resources.getColor(R.color.noah_4))
-                btn_reciprocal.setBackgroundColor(resources.getColor(R.color.noah_5))
-                btn_reciprocal.setTextColor(resources.getColor(R.color.noah_4))
-                btn_log.setBackgroundColor(resources.getColor(R.color.noah_5))
-                btn_log.setTextColor(resources.getColor(R.color.noah_4))
-                btn_root.setBackgroundColor(resources.getColor(R.color.noah_5))
-                btn_root.setTextColor(resources.getColor(R.color.noah_4))
-                btn_modulo.setBackgroundColor(resources.getColor(R.color.noah_5))
-                btn_modulo.setTextColor(resources.getColor(R.color.noah_4))
-                btn_power.setBackgroundColor(resources.getColor(R.color.noah_5))
-                btn_power.setTextColor(resources.getColor(R.color.noah_4))
-                btn_e.setBackgroundColor(resources.getColor(R.color.noah_5))
-                btn_e.setTextColor(resources.getColor(R.color.noah_4))
-                btn_ln.setBackgroundColor(resources.getColor(R.color.noah_5))
-                btn_ln.setTextColor(resources.getColor(R.color.noah_4))
+                btn_pi_rand.setBackgroundColor(resources.getColor(R.color.noah_5))
+                btn_pi_rand.setTextColor(resources.getColor(R.color.noah_4))
+                btn_sin_asin.setBackgroundColor(resources.getColor(R.color.noah_5))
+                btn_sin_asin.setTextColor(resources.getColor(R.color.noah_4))
+                btn_cos_acos.setBackgroundColor(resources.getColor(R.color.noah_5))
+                btn_cos_acos.setTextColor(resources.getColor(R.color.noah_4))
+                btn_tan_atan.setBackgroundColor(resources.getColor(R.color.noah_5))
+                btn_tan_atan.setTextColor(resources.getColor(R.color.noah_4))
+                btn_reciprocal_round.setBackgroundColor(resources.getColor(R.color.noah_5))
+                btn_reciprocal_round.setTextColor(resources.getColor(R.color.noah_4))
+                btn_log_ceil.setBackgroundColor(resources.getColor(R.color.noah_5))
+                btn_log_ceil.setTextColor(resources.getColor(R.color.noah_4))
+                btn_root_aquare.setBackgroundColor(resources.getColor(R.color.noah_5))
+                btn_root_aquare.setTextColor(resources.getColor(R.color.noah_4))
+                btn_mod_cube.setBackgroundColor(resources.getColor(R.color.noah_5))
+                btn_mod_cube.setTextColor(resources.getColor(R.color.noah_4))
+                btn_power_abs.setBackgroundColor(resources.getColor(R.color.noah_5))
+                btn_power_abs.setTextColor(resources.getColor(R.color.noah_4))
+                btn_e_plusminus.setBackgroundColor(resources.getColor(R.color.noah_5))
+                btn_e_plusminus.setTextColor(resources.getColor(R.color.noah_4))
+                btn_ln_floor.setBackgroundColor(resources.getColor(R.color.noah_5))
+                btn_ln_floor.setTextColor(resources.getColor(R.color.noah_4))
             }
 
         }
