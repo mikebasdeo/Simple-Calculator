@@ -25,7 +25,7 @@ object CONSTANT {
 
     //length conversion
     const val CENTIMETERS = "centimeters"
-    const val MILIMETERS = "milimeters"
+    const val MILLIMETERS = "millimeters"
     const val METERS = "meters"
     const val KILOMETERS = "kilometers"
     const val FEET = "feet"
