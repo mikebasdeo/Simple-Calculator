@@ -1,5 +1,5 @@
 package com.simplemobiletools.calculator.helpers;
-
+import com.simplemobiletools.calculator.helpers.CONSTANT;
 import java.text.NumberFormat;
 
 /**
@@ -17,11 +17,25 @@ public class lenghtConversion {
     final double miles = 0.0006214;
     final double yards = 1.093613;
 
+    //Gets values from constants
+    String FEET = CONSTANT.FEET;
+    String INCHES = CONSTANT.INCHES;
+    String MILES = CONSTANT.MILES;
+    String MILIMETERS = CONSTANT.MILIMETERS;
+    String CENTIMETERS = CONSTANT.CENTIMETERS;
+    String METERS = CONSTANT.METERS;
+    String KILOMETERS = CONSTANT.KILOMETERS;
+    String YARDS = CONSTANT.YARDS;
+
+
+
     //inputs and outputs
     private double beginning_qty;
     private double ending_qty;
     private String beginning_unit_type;
     private String ending_unit_type;
+
+
 
     //constructor
     public lenghtConversion(){
@@ -97,13 +111,13 @@ public class lenghtConversion {
     }
 
     public double getUnitTypeConstant(String unit_type){
-        if(unit_type =="meters"){return meters;}
-        if(unit_type =="centimeters"){return centimeters;}
-        if(unit_type =="milimeters"){return milimeters;}
-        if(unit_type =="kilometers"){return kilometers;}
-        if(unit_type =="inches"){return inches;}
-        if(unit_type =="feet"){return feet;}
-        if(unit_type =="yards"){return yards;}
+        if(unit_type ==METERS){return meters;}
+        if(unit_type ==CENTIMETERS){return centimeters;}
+        if(unit_type ==MILIMETERS){return milimeters;}
+        if(unit_type ==KILOMETERS){return kilometers;}
+        if(unit_type ==INCHES){return inches;}
+        if(unit_type ==FEET){return feet;}
+        if(unit_type ==YARDS){return yards;}
         return 0;
     }
 
