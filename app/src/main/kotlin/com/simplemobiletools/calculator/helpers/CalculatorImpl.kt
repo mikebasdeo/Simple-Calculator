@@ -3,9 +3,9 @@ import android.content.Context
 import android.widget.Toast
 import com.simplemobiletools.calculator.R
 import com.simplemobiletools.calculator.helpers.CONSTANT.COSINE
-import com.simplemobiletools.calculator.javaluator.*
 import com.simplemobiletools.calculator.helpers.CONSTANT.DIGIT
 import com.simplemobiletools.calculator.helpers.CONSTANT.DIVIDE
+import com.simplemobiletools.calculator.helpers.CONSTANT.E
 import com.simplemobiletools.calculator.helpers.CONSTANT.EQUALS
 import com.simplemobiletools.calculator.helpers.CONSTANT.ERROR_READ_VALUE
 import com.simplemobiletools.calculator.helpers.CONSTANT.ERROR_SAVE_VALUE
@@ -27,6 +27,7 @@ import com.simplemobiletools.calculator.helpers.CONSTANT.ROOT
 import com.simplemobiletools.calculator.helpers.CONSTANT.SINE
 import com.simplemobiletools.calculator.helpers.CONSTANT.TANGENT
 import com.simplemobiletools.calculator.helpers.CONSTANT.TEMP_FILE
+import com.simplemobiletools.calculator.javaluator.ExtendedDoubleEvaluator
 import java.io.*
 
 class CalculatorImpl(calculator: Calculator, private val context: Context) {
@@ -44,8 +45,8 @@ class CalculatorImpl(calculator: Calculator, private val context: Context) {
 
     //If any listOfSpecialLastEntries precedes listOfSpecialOperations, automatically add a * in between them. 4pi = 4*pi.
     //See implementation in fun handleOperation(operation: String)
-    private val listOfSpecialLastEntries = listOf(DIGIT, PI, RIGHT_BRACKET)
-    private val listOfSpecialOperations = listOf(LEFT_BRACKET, PI, SINE, COSINE,  TANGENT,
+    private val listOfSpecialLastEntries = listOf(DIGIT, PI, E, RIGHT_BRACKET)
+    private val listOfSpecialOperations = listOf(LEFT_BRACKET, PI, E, SINE, COSINE,  TANGENT,
                                                     LOGARITHM, NATURAL_LOGARITHM, ROOT)
 
     //Every time a digit or operation is entered, we keep track of the length. In this way, when we
@@ -231,7 +232,7 @@ class CalculatorImpl(calculator: Calculator, private val context: Context) {
             canUseDecimal = false
     }
 
-    //TODO: implement PLUS_MINUS
+
     private fun getSign(lastOperation: String?) = when (lastOperation) {
         PLUS -> "+"
         MINUS -> "-"
@@ -243,6 +244,7 @@ class CalculatorImpl(calculator: Calculator, private val context: Context) {
         LEFT_BRACKET -> "("
         RIGHT_BRACKET -> ")"
         PI -> "pi"
+        E -> "e"
         SINE -> "sin("
         COSINE -> "cos("
         TANGENT -> "tan("
@@ -267,14 +269,6 @@ class CalculatorImpl(calculator: Calculator, private val context: Context) {
             R.id.btn_8 -> addDigit(8)
             R.id.btn_9 -> addDigit(9)
         }
-    }
-
-    fun getHistoryFile() : File {
-        return mEquationHistory
-    }
-
-    fun getResultFile() : File {
-        return mResultHistory
     }
 
     fun setHistoryFile(file : File) {

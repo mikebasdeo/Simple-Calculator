@@ -17,6 +17,7 @@ import com.simplemobiletools.calculator.extensions.updateViewColors
 import com.simplemobiletools.calculator.helpers.CONSTANT.COSINE
 import com.simplemobiletools.calculator.helpers.CONSTANT.DIGIT
 import com.simplemobiletools.calculator.helpers.CONSTANT.DIVIDE
+import com.simplemobiletools.calculator.helpers.CONSTANT.E
 import com.simplemobiletools.calculator.helpers.CONSTANT.LEFT_BRACKET
 import com.simplemobiletools.calculator.helpers.CONSTANT.LOGARITHM
 import com.simplemobiletools.calculator.helpers.CONSTANT.MEMORY_ONE
@@ -29,7 +30,6 @@ import com.simplemobiletools.calculator.helpers.CONSTANT.NATURAL_LOGARITHM
 import com.simplemobiletools.calculator.helpers.CONSTANT.PI
 import com.simplemobiletools.calculator.helpers.CONSTANT.PLUS
 import com.simplemobiletools.calculator.helpers.CONSTANT.POWER
-import com.simplemobiletools.calculator.helpers.CONSTANT.RECIPROCAL
 import com.simplemobiletools.calculator.helpers.CONSTANT.RIGHT_BRACKET
 import com.simplemobiletools.calculator.helpers.CONSTANT.ROOT
 import com.simplemobiletools.calculator.helpers.CONSTANT.SINE
@@ -70,6 +70,7 @@ class MainActivity : SimpleActivity(), Calculator {
         btn_left_bracket.setOnClickListener { calc.handleOperation(LEFT_BRACKET); checkHaptic(it) }
         btn_right_bracket.setOnClickListener { calc.handleOperation(RIGHT_BRACKET); checkHaptic(it) }
         btn_pi.setOnClickListener { calc.handleOperation(PI); checkHaptic(it) }
+        btn_e.setOnClickListener { calc.handleOperation(E); checkHaptic(it) }
         btn_sin.setOnClickListener { calc.handleOperation(SINE); checkHaptic(it) }
         btn_cos.setOnClickListener { calc.handleOperation(COSINE); checkHaptic(it) }
         btn_tan.setOnClickListener { calc.handleOperation(TANGENT); checkHaptic(it) }
@@ -82,10 +83,8 @@ class MainActivity : SimpleActivity(), Calculator {
 
         btn_memory_1.setOnClickListener { calc.handleViewValue(MEMORY_ONE)}
         btn_memory_1.setOnLongClickListener{ calc.handleStore(result.text.toString(), MEMORY_ONE); true }
-
         btn_memory_2.setOnClickListener { calc.handleViewValue(MEMORY_TWO)}
         btn_memory_2.setOnLongClickListener{ calc.handleStore(result.text.toString(), MEMORY_TWO); true }
-
         btn_memory_3.setOnClickListener { calc.handleViewValue(MEMORY_THREE) }
         btn_memory_3.setOnLongClickListener{calc.handleStore(result.text.toString(), MEMORY_THREE); true }
 
@@ -142,8 +141,8 @@ class MainActivity : SimpleActivity(), Calculator {
                 btn_modulo.setTextColor(Color.WHITE)
                 btn_power.setBackgroundColor(resources.getColor(R.color.noah_4))
                 btn_power.setTextColor(Color.WHITE)
-                btn_plus_minus.setBackgroundColor(resources.getColor(R.color.noah_4))
-                btn_plus_minus.setTextColor(Color.WHITE)
+                btn_e.setBackgroundColor(resources.getColor(R.color.noah_4))
+                btn_e.setTextColor(Color.WHITE)
                 btn_ln.setBackgroundColor(resources.getColor(R.color.noah_4))
                 btn_ln.setTextColor(Color.WHITE)
 
@@ -170,8 +169,8 @@ class MainActivity : SimpleActivity(), Calculator {
                 btn_modulo.setTextColor(resources.getColor(R.color.noah_4))
                 btn_power.setBackgroundColor(resources.getColor(R.color.noah_5))
                 btn_power.setTextColor(resources.getColor(R.color.noah_4))
-                btn_plus_minus.setBackgroundColor(resources.getColor(R.color.noah_5))
-                btn_plus_minus.setTextColor(resources.getColor(R.color.noah_4))
+                btn_e.setBackgroundColor(resources.getColor(R.color.noah_5))
+                btn_e.setTextColor(resources.getColor(R.color.noah_4))
                 btn_ln.setBackgroundColor(resources.getColor(R.color.noah_5))
                 btn_ln.setTextColor(resources.getColor(R.color.noah_4))
             }

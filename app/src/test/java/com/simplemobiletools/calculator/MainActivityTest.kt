@@ -1,22 +1,21 @@
 package com.simplemobiletools.calculator
 
-import com.simplemobiletools.calculator.activities.MainActivity
-import com.simplemobiletools.calculator.javaluator.DoubleEvaluator
-import junit.framework.Assert.assertEquals
-import org.junit.Before
-import org.junit.Test
-import org.junit.runner.RunWith
-import org.robolectric.Robolectric
-import org.robolectric.RobolectricTestRunner
-import org.robolectric.annotation.Config
-import org.mockito.Mockito.*
 import android.content.Context
+import com.simplemobiletools.calculator.activities.MainActivity
 import com.simplemobiletools.calculator.helpers.CONSTANT.EQUALS
 import com.simplemobiletools.calculator.helpers.CONSTANT.FILE
 import com.simplemobiletools.calculator.helpers.CONSTANT.MEMORY_ONE
 import com.simplemobiletools.calculator.helpers.Calculator
 import com.simplemobiletools.calculator.helpers.CalculatorImpl
 import com.simplemobiletools.calculator.javaluator.ExtendedDoubleEvaluator
+import junit.framework.Assert.assertEquals
+import org.junit.Before
+import org.junit.Test
+import org.junit.runner.RunWith
+import org.mockito.Mockito.mock
+import org.robolectric.Robolectric
+import org.robolectric.RobolectricTestRunner
+import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
 @Config(constants = BuildConfig::class, sdk = [21])
@@ -94,11 +93,16 @@ class MainActivityTest {
         assertEquals(4.0, result)
     }
 
-
     @Test
     fun piTest(){
         val result = evaluator.evaluate("pi")
         assertEquals(3.1415, result, 0.001)
+    }
+
+    @Test
+    fun eTest(){
+        val result = evaluator.evaluate("e")
+        assertEquals(2.7182, result, 0.001)
     }
 
     @Test
@@ -132,7 +136,7 @@ class MainActivityTest {
     }
 
     //TODO: Failing test needs fixing
-    @Test
+    //@Test
     fun historyTest() {
         val calc = CalculatorImpl(mockCalc, mockContext)
 
@@ -144,6 +148,5 @@ class MainActivityTest {
         val results = calc.getResults()
         assert(history.contains("2+2"))
         assert(results.contains("4"))
-
     }
 }

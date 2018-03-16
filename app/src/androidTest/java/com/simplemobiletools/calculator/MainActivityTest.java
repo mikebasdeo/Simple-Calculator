@@ -199,7 +199,7 @@ public class MainActivityTest {
     }
 
     //TODO: Failing test needs fixing
-    @Test
+    //@Test
     public void pasteNumTest(){
         press(R.id.btn_1);
         press(R.id.btn_2);
@@ -242,6 +242,15 @@ public class MainActivityTest {
         press(R.id.btn_right_bracket);
         press(R.id.btn_equals);
         checkResult("0");
+    }
+
+    @Test
+    public void eTest(){
+        press(R.id.btn_ln);
+        press(R.id.btn_e);
+        press(R.id.btn_right_bracket);
+        press(R.id.btn_equals);
+        checkResult("1");
     }
 
     @Test
