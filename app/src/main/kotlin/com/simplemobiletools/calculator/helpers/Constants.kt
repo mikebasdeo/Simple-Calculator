@@ -21,6 +21,17 @@ object CONSTANT {
     const val TANGENT = "tangent"
     const val LOGARITHM = "logarithm"
     const val NATURAL_LOGARITHM = "natural_logarithm"
+    const val RANDOM = "random"
+    const val ARCSINE = "arcsine"
+    const val ARCCOS = "arccoss"
+    const val ARCTANGENT = "arctangent"
+    const val ROUNDING = "rounding"
+    const val CEILING = "ceiling"
+    const val SQUARE = "square"
+    const val CUBE =  "cube"
+    const val ABSOLUTE_VALUE = "absolute_value"
+    const val PLUS_MINUS = "plus_minus"
+    const val FLOOR = "floor"
 
     // memory constants
     const val MEMORY_ONE = "one"
