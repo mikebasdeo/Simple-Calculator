@@ -2,7 +2,13 @@ package com.simplemobiletools.calculator.helpers
 import android.content.Context
 import android.widget.Toast
 import com.simplemobiletools.calculator.R
+import com.simplemobiletools.calculator.helpers.CONSTANT.ABSOLUTE_VALUE
+import com.simplemobiletools.calculator.helpers.CONSTANT.ARCCOS
+import com.simplemobiletools.calculator.helpers.CONSTANT.ARCSINE
+import com.simplemobiletools.calculator.helpers.CONSTANT.ARCTANGENT
+import com.simplemobiletools.calculator.helpers.CONSTANT.CEILING
 import com.simplemobiletools.calculator.helpers.CONSTANT.COSINE
+import com.simplemobiletools.calculator.helpers.CONSTANT.CUBE
 import com.simplemobiletools.calculator.helpers.CONSTANT.DIGIT
 import com.simplemobiletools.calculator.helpers.CONSTANT.DIVIDE
 import com.simplemobiletools.calculator.helpers.CONSTANT.E
@@ -10,6 +16,7 @@ import com.simplemobiletools.calculator.helpers.CONSTANT.EQUALS
 import com.simplemobiletools.calculator.helpers.CONSTANT.ERROR_READ_VALUE
 import com.simplemobiletools.calculator.helpers.CONSTANT.ERROR_SAVE_VALUE
 import com.simplemobiletools.calculator.helpers.CONSTANT.FILE
+import com.simplemobiletools.calculator.helpers.CONSTANT.FLOOR
 import com.simplemobiletools.calculator.helpers.CONSTANT.LEFT_BRACKET
 import com.simplemobiletools.calculator.helpers.CONSTANT.LOGARITHM
 import com.simplemobiletools.calculator.helpers.CONSTANT.MEMORY_ONE
@@ -22,9 +29,12 @@ import com.simplemobiletools.calculator.helpers.CONSTANT.NATURAL_LOGARITHM
 import com.simplemobiletools.calculator.helpers.CONSTANT.PI
 import com.simplemobiletools.calculator.helpers.CONSTANT.PLUS
 import com.simplemobiletools.calculator.helpers.CONSTANT.POWER
+import com.simplemobiletools.calculator.helpers.CONSTANT.RANDOM
 import com.simplemobiletools.calculator.helpers.CONSTANT.RIGHT_BRACKET
 import com.simplemobiletools.calculator.helpers.CONSTANT.ROOT
+import com.simplemobiletools.calculator.helpers.CONSTANT.ROUNDING
 import com.simplemobiletools.calculator.helpers.CONSTANT.SINE
+import com.simplemobiletools.calculator.helpers.CONSTANT.SQUARE
 import com.simplemobiletools.calculator.helpers.CONSTANT.TANGENT
 import com.simplemobiletools.calculator.helpers.CONSTANT.TEMP_FILE
 import com.simplemobiletools.calculator.javaluator.ExtendedDoubleEvaluator
@@ -250,6 +260,17 @@ class CalculatorImpl(calculator: Calculator, private val context: Context) {
         TANGENT -> "tan("
         LOGARITHM -> "log("
         NATURAL_LOGARITHM -> "ln("
+        ARCSINE -> "asin("
+        ARCCOS -> "acos("
+        ARCTANGENT -> "atan("
+        ROUNDING -> "round("
+        CEILING -> "ceil("
+        SQUARE -> "^(2)"
+        CUBE -> "^(3)"
+        ABSOLUTE_VALUE -> "abs("
+        FLOOR -> "floor("
+
+
         else -> ""
     }
 
@@ -284,6 +305,18 @@ class CalculatorImpl(calculator: Calculator, private val context: Context) {
     }
 
     fun reciprocalOfResult(){
+        if(displayedNumber.isNotEmpty()) {
+            val resultWithoutCommas = displayedNumber.replace(",", "")
+            calculateResult("1/$resultWithoutCommas")
+        }
+    }
+
+    fun randomNumberBetweenZeroAndOne(){
+        handleReset()
+        calculateResult("random")
+    }
+
+    fun negationOfResult(){
         if(displayedNumber.isNotEmpty()) {
             val resultWithoutCommas = displayedNumber.replace(",", "")
             calculateResult("1/$resultWithoutCommas")
