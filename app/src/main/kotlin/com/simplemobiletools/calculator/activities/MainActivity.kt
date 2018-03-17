@@ -273,7 +273,7 @@ class MainActivity : SimpleActivity(), Calculator {
             btn_log_ceil.setOnClickListener { calc.handleOperationOnFormula(CEILING); checkHaptic(it) }
             btn_ln_floor.setOnClickListener { calc.handleOperationOnFormula(FLOOR); checkHaptic(it) }
             btn_e_neg.setOnClickListener { calc.handleOperationsOnResult(NEGATION); checkHaptic(it) }
-            btn_reciprocal_round.setOnClickListener { calc.handleOperationOnFormula(RECIPROCAL); checkHaptic(it) }
+            btn_reciprocal_round.setOnClickListener { calc.handleOperationOnFormula(ROUNDING); checkHaptic(it) }
         }
         else {
             btn_shift.setTextColor(ContextCompat.getColor(this, R.color.noah_4))
@@ -294,7 +294,7 @@ class MainActivity : SimpleActivity(), Calculator {
             btn_log_ceil.setOnClickListener { calc.handleOperationOnFormula(LOGARITHM); checkHaptic(it) }
             btn_ln_floor.setOnClickListener { calc.handleOperationOnFormula(NATURAL_LOGARITHM); checkHaptic(it) }
             btn_e_neg.setOnClickListener { calc.handleOperationOnFormula(E); checkHaptic(it) }
-            btn_reciprocal_round.setOnClickListener { calc.handleOperationsOnResult(ROUNDING); checkHaptic(it) }
+            btn_reciprocal_round.setOnClickListener { calc.handleOperationsOnResult(RECIPROCAL); checkHaptic(it) }
         }
     }
 }
