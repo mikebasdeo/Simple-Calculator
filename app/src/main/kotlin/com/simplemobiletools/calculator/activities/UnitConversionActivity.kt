@@ -1,36 +1,48 @@
 package com.simplemobiletools.calculator.activities
 
-import android.os.Bundle
+import android.annotation.SuppressLint
 import android.app.Activity
-import com.simplemobiletools.calculator.R
+import android.content.Context
+import android.os.Bundle
 import android.view.View
-import android.widget.ArrayAdapter
-import android.widget.Spinner
 import android.widget.AdapterView
 import android.widget.AdapterView.OnItemSelectedListener
-import com.simplemobiletools.calculator.helpers.CONSTANT.CENTIMETERS
-import com.simplemobiletools.calculator.helpers.CONSTANT.FEET
-import com.simplemobiletools.calculator.helpers.CONSTANT.INCHES
-import com.simplemobiletools.calculator.helpers.CONSTANT.KILOMETERS
-import com.simplemobiletools.calculator.helpers.CONSTANT.METERS
-import com.simplemobiletools.calculator.helpers.CONSTANT.MILES
-import com.simplemobiletools.calculator.helpers.CONSTANT.MILLIMETERS
-import com.simplemobiletools.calculator.helpers.CONSTANT.YARDS
+import android.widget.ArrayAdapter
+import android.widget.Spinner
+import com.simplemobiletools.calculator.R
+import com.simplemobiletools.calculator.helpers.*
+import com.simplemobiletools.commons.extensions.performHapticFeedback
+import kotlinx.android.synthetic.main.activity_main.*
 
-class UnitConversionActivity : Activity()  {
 
+class UnitConversionActivity : SimpleActivity(), Calculator {
+
+    private lateinit var calc: CalculatorImpl
+    private var vibrateOnButtonPress = true
+    private fun getButtonIds() = arrayOf(btn_decimal, btn_0, btn_1, btn_2, btn_3, btn_4, btn_5, btn_6, btn_7, btn_8, btn_9)
+
+
+    @SuppressLint("MissingSuperCall")
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_unit_conversion)
+        calc = CalculatorImpl(this, applicationContext)
+
+        btn_del.setOnClickListener {calc.handleClear(formula.text.toString()); checkHaptic(it) }
+        btn_all_clear.setOnClickListener { calc.handleReset()}
+
+        //create lengthConversion helper object.
+        var lengthConversion : lengthConversion = lengthConversion()
 
         //Three drop down menus. The conversionChoiceSpiner changes the other two automatically.
         val conversionChoiceSpinner: Spinner
         val unitsBeforeSpinner: Spinner
         val unitsAfterSpinner: Spinner
 
-        //Main List for conversion choices.
-        //val ConversionChoiceList = arrayOf("Speed", "Distance", "Time", "Weight")
+        //Main List for conversion choices from helper.
+        val conversionChoiceList = lengthConversion.conversionChoiceList
+
         //Empty list that will be populated with the relevant conversion units.
         val unitList = ArrayList<String>()
 
@@ -38,20 +50,21 @@ class UnitConversionActivity : Activity()  {
         val beforeAdapter: ArrayAdapter<String>
         val afterAdapter: ArrayAdapter<String>
 
-        val listOfConversionChoices = listOf<String>()
-        val listOfDistanceConstants  = listOf<String>(CENTIMETERS, MILLIMETERS, METERS, KILOMETERS, FEET, INCHES, MILES, YARDS)
+        //hookup for keypad
+        getButtonIds().forEach {
+            it.setOnClickListener { calc.numpadClicked(it.id); checkHaptic(it) }
+        }
 
         //Create adapters for each of the three spinners.
         //TODO: Make custom layouts for the drop down menus.
-        choiceAdapter = ArrayAdapter(this, R.layout.spinner_item, listOfConversionChoices)
-        beforeAdapter = ArrayAdapter(this, R.layout.spinner_item, listOfDistanceConstants)
+        choiceAdapter = ArrayAdapter(this, R.layout.spinner_item, conversionChoiceList)
+        beforeAdapter = ArrayAdapter(this, R.layout.spinner_item, unitList)
         afterAdapter = ArrayAdapter(this, R.layout.spinner_item, unitList)
 
         //Connect to layout.
         conversionChoiceSpinner = findViewById(R.id.conversion_type_spinner) as Spinner
         unitsBeforeSpinner = findViewById(R.id.units_before_spinner) as Spinner
         unitsAfterSpinner = findViewById(R.id.units_after_spinner) as Spinner
-
 
 
         //Connect each spinner to its respective adapter.
@@ -61,7 +74,7 @@ class UnitConversionActivity : Activity()  {
 
         conversionChoiceSpinner.onItemSelectedListener = object : OnItemSelectedListener {
 
-            //TODO: Add all the Unit choices here. Probably in a switch statement. Or maybe in strings.xml if you can.
+            //TODO: Put all this inside lengthConversion.java helper.
             override fun onItemSelected(arg0: AdapterView<*>, arg1: View, arg2: Int, arg3: Long) {
                 val s = conversionChoiceSpinner.getItemAtPosition(arg2).toString()
                 if(s == "Distance"){
@@ -88,6 +101,30 @@ class UnitConversionActivity : Activity()  {
             override fun onNothingSelected(arg0: AdapterView<*>) {
                 // TODO Auto-generated method stub
             }
+        }
+    }
+
+    override fun setValue(value: String, context: Context) {
+        formula.text = value
+    }
+
+    // used only by Robolectric
+    override fun setValueDouble(d: Double) {
+        calc.setValue(Formatter.doubleToString(d))
+        calc.lastKey = CONSTANT.DIGIT
+    }
+
+    override fun setFormula(value: String, context: Context) {
+        if(value == ""){
+            formula.text = ""
+        }
+        else{
+            formula.text = formula.text.toString() + value
+        }
+    }
+    private fun checkHaptic(view: View) {
+        if (vibrateOnButtonPress) {
+            view.performHapticFeedback()
         }
     }
 

@@ -1,4 +1,5 @@
 package com.simplemobiletools.calculator.helpers;
+import java.lang.reflect.Array;
 import java.text.NumberFormat;
 
 import static com.simplemobiletools.calculator.helpers.CONSTANT.CENTIMETERS;
@@ -13,7 +14,8 @@ import static com.simplemobiletools.calculator.helpers.CONSTANT.YARDS;
  * Created by leban on 2018-03-15.
  */
 
-public class lenghtConversion {
+public class lengthConversion {
+
     //Constant values for comparisions
     final double meters =1;
     final double centimeters = 100;
@@ -29,11 +31,12 @@ public class lenghtConversion {
     private double ending_qty;
     private String beginning_unit_type;
     private String ending_unit_type;
+    private String[] conversionChoiceList = {"Speed", "Distance", "Time", "Weight"};
 
 
 
     //constructor
-    public lenghtConversion(){
+    public lengthConversion(){
         beginning_qty = 0;
         ending_qty = 0;
         beginning_unit_type = "";
@@ -41,6 +44,11 @@ public class lenghtConversion {
     }
 
     //GETTERS AND SETTERS
+    public String[] getConversionChoiceList(){
+        return conversionChoiceList;
+    }
+
+
     public double getMeters() {
         return meters;
     }
