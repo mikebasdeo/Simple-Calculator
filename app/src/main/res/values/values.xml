@@ -691,6 +691,8 @@
     <string name="confirm_storage_access_text">Please choose the root folder of the SD card on the next screen, to grant write access</string>
     <string name="confirm_storage_access_text_sd">If you don\'t see the SD card, try this</string>
     <string name="confirm_storage_access_title">Confirm external storage access</string>
+    <string name="convert">Convert</string>
+    <string name="converted">Conversion</string>
     <string name="copy">Copy</string>
     <string name="copy_failed">Could not copy the files</string>
     <string name="copy_move">Copy / Move</string>
@@ -939,6 +941,7 @@
     <string name="wrong_pin">Wrong PIN</string>
     <string name="wrong_root_selected">Wrong folder selected, please select the root folder of your SD card</string>
     <string name="yes">Yes</string>
+    <string name="val1.0">1.0</string>
     <style name="AppTheme.ActionBar.TitleTextStyle" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Title">
         <item name="android:fontFamily">sans-serif</item>
         <item name="android:textSize">@dimen/actionbar_text_size</item>

@@ -92,11 +92,11 @@ class UnitConversionActivity : SimpleActivity(), Calculator {
                 val s = conversionChoiceSpinner.getItemAtPosition(arg2).toString()
 
                 //Gets relevant unit list from helper.
-                when{
-                    s == "Speed" -> {unitList.clear(); for(item in lengthConversion.speedUnitsList){ unitList.add(item)}; unitsBeforeSpinner.setSelection(0)}
-                    s == "Distance" -> {unitList.clear(); for(item in lengthConversion.distanceUnitsList){ unitList.add(item)};unitsBeforeSpinner.setSelection(0)}
-                    s == "Weight" -> {unitList.clear(); for(item in lengthConversion.weightUnitsList){ unitList.add(item)}; unitsBeforeSpinner.setSelection(0)}
-                    s == "Time" -> {unitList.clear(); for(item in lengthConversion.timeUnitsList){ unitList.add(item)}; unitsBeforeSpinner.setSelection(0)}
+                when (s){
+                    "Speed" -> {unitList.clear(); for(item in lengthConversion.speedUnitsList){ unitList.add(item)}; unitsBeforeSpinner.setSelection(0)}
+                    "Distance" -> {unitList.clear(); for(item in lengthConversion.distanceUnitsList){ unitList.add(item)};unitsBeforeSpinner.setSelection(0)}
+                    "Weight" -> {unitList.clear(); for(item in lengthConversion.weightUnitsList){ unitList.add(item)}; unitsBeforeSpinner.setSelection(0)}
+                    "Time" -> {unitList.clear(); for(item in lengthConversion.timeUnitsList){ unitList.add(item)}; unitsBeforeSpinner.setSelection(0)}
                 }
                 beforeAdapter.notifyDataSetChanged()
                 afterAdapter.notifyDataSetChanged()
