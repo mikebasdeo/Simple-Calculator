@@ -144,8 +144,6 @@ public class MainActivityTest {
         checkFormula("");
     }
 
-    //TODO: Failing test, results aren't being stored
-    //@Test
     public void storeValueAndUseInFormula() {
         //Verify if button store works (Have to press equals first)
         press(R.id.btn_7);

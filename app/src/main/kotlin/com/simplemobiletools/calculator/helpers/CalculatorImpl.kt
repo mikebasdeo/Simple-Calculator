@@ -12,7 +12,6 @@ import com.simplemobiletools.calculator.helpers.CONSTANT.CUBE
 import com.simplemobiletools.calculator.helpers.CONSTANT.DIGIT
 import com.simplemobiletools.calculator.helpers.CONSTANT.DIVIDE
 import com.simplemobiletools.calculator.helpers.CONSTANT.E
-import com.simplemobiletools.calculator.helpers.CONSTANT.EQUALS
 import com.simplemobiletools.calculator.helpers.CONSTANT.ERROR_EMPTY_RESULT
 import com.simplemobiletools.calculator.helpers.CONSTANT.ERROR_READ_VALUE
 import com.simplemobiletools.calculator.helpers.CONSTANT.ERROR_SAVE_VALUE
@@ -129,7 +128,7 @@ class CalculatorImpl(calculator: Calculator, private val context: Context) {
     }
 
     fun handleStore(value : String, id: String) {
-        if (getLastKey() == EQUALS && displayedNumber != "") {
+        if (displayedNumber != "") {
             when (id) {
                 //SetFormula: small text, SetValue BIG TEXT
                 MEMORY_ONE -> { mSavedValue1.writeText(value); setFormula(""); setValue(value) }
