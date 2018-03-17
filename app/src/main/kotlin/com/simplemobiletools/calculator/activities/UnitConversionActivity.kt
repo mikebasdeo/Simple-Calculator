@@ -66,7 +66,6 @@ class UnitConversionActivity : SimpleActivity(), Calculator {
         unitsBeforeSpinner = findViewById(R.id.units_before_spinner) as Spinner
         unitsAfterSpinner = findViewById(R.id.units_after_spinner) as Spinner
 
-
         //Connect each spinner to its respective adapter.
         conversionChoiceSpinner.setAdapter(choiceAdapter)
         unitsBeforeSpinner.setAdapter(beforeAdapter)
@@ -74,26 +73,16 @@ class UnitConversionActivity : SimpleActivity(), Calculator {
 
         conversionChoiceSpinner.onItemSelectedListener = object : OnItemSelectedListener {
 
-            //TODO: Put all this inside lengthConversion.java helper.
             override fun onItemSelected(arg0: AdapterView<*>, arg1: View, arg2: Int, arg3: Long) {
+
                 val s = conversionChoiceSpinner.getItemAtPosition(arg2).toString()
-                if(s == "Distance"){
-                    unitList.clear()
-                    unitList.add("Km")
-                    unitList.add("m")
-                    unitList.add("cm")
-                }
-                if(s == "Speed"){
-                    unitList.clear()
-                    unitList.add("Velocity")
-                    unitList.add("Acceleration")
-                    unitList.add("Displacement")
-                }
-                if (s == "Weight"){
-                    unitList.clear()
-                    unitList.add("Kg")
-                    unitList.add("Pounds")
-                    unitList.add("Newtons")
+
+                //Gets relevant unit list from helper.
+                when{
+                    s == "Speed" -> {unitList.clear(); for(item in lengthConversion.speedUnitsList){ unitList.add(item)}; unitsBeforeSpinner.setSelection(0)}
+                    s == "Distance" -> {unitList.clear(); for(item in lengthConversion.distanceUnitsList){ unitList.add(item)};unitsBeforeSpinner.setSelection(0)}
+                    s == "Weight" -> {unitList.clear(); for(item in lengthConversion.weightUnitsList){ unitList.add(item)}; unitsBeforeSpinner.setSelection(0)}
+                    s == "Time" -> {unitList.clear(); for(item in lengthConversion.timeUnitsList){ unitList.add(item)}; unitsBeforeSpinner.setSelection(0)}
                 }
                 beforeAdapter.notifyDataSetChanged()
                 afterAdapter.notifyDataSetChanged()

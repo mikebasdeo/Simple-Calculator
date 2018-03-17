@@ -33,8 +33,6 @@ public class lengthConversion {
     private String ending_unit_type;
     private String[] conversionChoiceList = {"Speed", "Distance", "Time", "Weight"};
 
-
-
     //constructor
     public lengthConversion(){
         beginning_qty = 0;
@@ -47,7 +45,23 @@ public class lengthConversion {
     public String[] getConversionChoiceList(){
         return conversionChoiceList;
     }
+    public String[] getSpeedUnitsList(){
+         String[] unitsList = {"Velocity", "Acceleration", "Displacement"};
+         return unitsList;
+    }
+    public String[] getDistanceUnitsList(){
+        String[] unitsList = {"Km", "M", "Cm"};
+        return unitsList;
+    }
 
+    public String[] getWeightUnitsList(){
+        String[] unitsList = {"Lbs", "oz"};
+        return unitsList;
+    }
+    public String[] getTimeUnitsList(){
+        String[] unitsList = {"Hours", "Minutes", "Seconds"};
+        return unitsList;
+    }
 
     public double getMeters() {
         return meters;
