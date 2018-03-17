@@ -9,6 +9,7 @@ import android.support.v4.content.ContextCompat
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.Button
 import android.widget.Toast
 import com.simplemobiletools.calculator.BuildConfig
 import com.simplemobiletools.calculator.R
@@ -225,16 +226,39 @@ class MainActivity : SimpleActivity(), Calculator {
     }
 
     private fun changeButtonFunctionality(shiftClicked: Boolean){
-        val buttonsThatChange = listOf(btn_pi_rand, btn_sin_asin, btn_cos_acos, btn_tan_atan,
-                btn_reciprocal_round, btn_log_ceil, btn_root_square,
-                btn_mod_cube, btn_power_abs, btn_e_neg, btn_ln_floor)
+        val mapOfButtonsOnFirstScreen = mapOf<Button, String>(
+                btn_pi_rand to "π",
+                btn_sin_asin to "SIN",
+                btn_cos_acos to "COS",
+                btn_tan_atan to "TAN",
+                btn_reciprocal_round to "x⁻¹",
+                btn_log_ceil to "LOG",
+                btn_root_square to "√",
+                btn_mod_cube to "MOD",
+                btn_power_abs to "^",
+                btn_e_neg to "e",
+                btn_ln_floor to "LN")
+        val mapOfButtonsOnSecondScreen = mapOf<Button, String>(
+                btn_pi_rand to "RANDOM",
+                btn_sin_asin to "ARCSIN",
+                btn_cos_acos to "ARCCOS",
+                btn_tan_atan to "ARCTAN",
+                btn_reciprocal_round to "ROUND",
+                btn_log_ceil to "CEIL",
+                btn_root_square to "x²",
+                btn_mod_cube to "x³",
+                btn_power_abs to "ABS",
+                btn_e_neg to "±",
+                btn_ln_floor to "FLOOR")
 
         if(shiftClicked){
             btn_shift.setTextColor(ContextCompat.getColor(this, R.color.noah_5))
             btn_shift.setBackgroundColor(ContextCompat.getColor(this, R.color.noah_4))
-            for(b in buttonsThatChange){
-                b.setTextColor(ContextCompat.getColor(this, R.color.noah_4))
-                b.setBackgroundColor(ContextCompat.getColor(this, R.color.noah_5))
+            btn_pi_rand.textSize = 18f
+            for(m in mapOfButtonsOnSecondScreen){
+                m.key.text = m.value
+                m.key.setTextColor(ContextCompat.getColor(this, R.color.noah_4))
+                m.key.setBackgroundColor(ContextCompat.getColor(this, R.color.noah_5))
             }
             btn_mod_cube.setOnClickListener { calc.handleOperation(CUBE); checkHaptic(it) }
             btn_power_abs.setOnClickListener { calc.handleOperation(ABSOLUTE_VALUE); checkHaptic(it) }
@@ -251,9 +275,11 @@ class MainActivity : SimpleActivity(), Calculator {
         else {
             btn_shift.setTextColor(ContextCompat.getColor(this, R.color.noah_4))
             btn_shift.setBackgroundColor(ContextCompat.getColor(this, R.color.noah_5))
-            for (b in buttonsThatChange) {
-                b.setTextColor(ContextCompat.getColor(this, R.color.noah_5))
-                b.setBackgroundColor(ContextCompat.getColor(this, R.color.noah_4))
+            btn_pi_rand.textSize = 20f
+            for (m in mapOfButtonsOnFirstScreen) {
+                m.key.text = m.value
+                m.key.setTextColor(ContextCompat.getColor(this, R.color.noah_5))
+                m.key.setBackgroundColor(ContextCompat.getColor(this, R.color.noah_4))
             }
             btn_mod_cube.setOnClickListener { calc.handleOperation(MODULO); checkHaptic(it) }
             btn_power_abs.setOnClickListener { calc.handleOperation(POWER); checkHaptic(it) }
