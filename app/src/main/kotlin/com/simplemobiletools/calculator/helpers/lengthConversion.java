@@ -7,6 +7,7 @@ import static com.simplemobiletools.calculator.helpers.CONSTANT.FEET;
 import static com.simplemobiletools.calculator.helpers.CONSTANT.INCHES;
 import static com.simplemobiletools.calculator.helpers.CONSTANT.KILOMETERS;
 import static com.simplemobiletools.calculator.helpers.CONSTANT.METERS;
+import static com.simplemobiletools.calculator.helpers.CONSTANT.MILES;
 import static com.simplemobiletools.calculator.helpers.CONSTANT.MILLIMETERS;
 import static com.simplemobiletools.calculator.helpers.CONSTANT.YARDS;
 
@@ -50,7 +51,7 @@ public class lengthConversion {
          return unitsList;
     }
     public String[] getDistanceUnitsList(){
-        String[] unitsList = {"Km", "M", "Cm"};
+        String[] unitsList = {CENTIMETERS, MILLIMETERS, METERS, KILOMETERS, FEET, INCHES, MILES, YARDS};
         return unitsList;
     }
 

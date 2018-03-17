@@ -8,6 +8,7 @@ import android.widget.AdapterView
 import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+
 import com.simplemobiletools.calculator.R
 import com.simplemobiletools.calculator.helpers.*
 import com.simplemobiletools.commons.extensions.performHapticFeedback
@@ -47,11 +48,10 @@ class UnitConversionActivity : SimpleActivity(), Calculator {
             lengthConversion.beginning_qty = before.text.toString().toDouble()
             lengthConversion.beginning_unit_type = units_before_spinner.selectedItem.toString()
             lengthConversion.ending_unit_type = units_after_spinner.selectedItem.toString()
-            after.text = lengthConversion.beginning_qty.toString()
+            after.text = lengthConversion.calculateEnding_qty().toString()
             // after.text = lengthConversion.beginning_unit_type.toString()
 
         }
-
 
 
         //Three drop down menus. The conversionChoiceSpiner changes the other two automatically.
