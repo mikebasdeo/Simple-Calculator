@@ -1,6 +1,7 @@
 package com.simplemobiletools.calculator.helpers;
 import java.lang.reflect.Array;
 import java.text.NumberFormat;
+import java.util.ArrayList;
 
 import static com.simplemobiletools.calculator.helpers.CONSTANT.CENTIMETERS;
 import static com.simplemobiletools.calculator.helpers.CONSTANT.FEET;
@@ -49,8 +50,16 @@ public class lengthConversion {
          String[] unitsList = {"Velocity", "Acceleration", "Displacement"};
          return unitsList;
     }
-    public String[] getDistanceUnitsList(){
-        String[] unitsList = {"Km", "M", "Cm"};
+    public ArrayList<String> getDistanceUnitsList(){
+        ArrayList<String> unitsList = new ArrayList<>();
+        unitsList.add("KM");
+        unitsList.add("M");
+        unitsList.add("CM");
+        unitsList.add("MM");
+        unitsList.add("F");
+        unitsList.add("IN");
+        unitsList.add("YD");
+        unitsList.add("MI");
         return unitsList;
     }
 
