@@ -11,6 +11,28 @@
     tools:layout_editor_absoluteY="81dp">
     <!--android:background="@color/dark_grey_pressed_mask" -->
 
+    <TextView
+        android:id="@+id/after"
+        android:layout_width="169dp"
+        android:layout_height="65dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="136dp"
+        android:fontFamily="sans-serif-light"
+        android:gravity="center"
+        android:maxLines="1"
+        android:paddingLeft="@dimen/activity_margin"
+        android:paddingRight="@dimen/activity_margin"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="36sp"
+        app:layout_constraintBottom_toTopOf="@+id/units_before_spinner"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/formula"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.538" />
+
     <Spinner
         android:id="@+id/conversion_type_spinner"
         android:layout_width="279dp"
@@ -44,7 +66,7 @@
 
 
     <TextView
-        android:id="@+id/formula"
+        android:id="@+id/before"
         android:layout_width="169dp"
         android:layout_height="65dp"
         android:layout_marginBottom="8dp"

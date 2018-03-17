@@ -1,7 +1,6 @@
 package com.simplemobiletools.calculator.activities
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.Context
 import android.os.Bundle
 import android.view.View
@@ -12,7 +11,7 @@ import android.widget.Spinner
 import com.simplemobiletools.calculator.R
 import com.simplemobiletools.calculator.helpers.*
 import com.simplemobiletools.commons.extensions.performHapticFeedback
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_unit_conversion.*
 
 
 class UnitConversionActivity : SimpleActivity(), Calculator {
@@ -29,11 +28,31 @@ class UnitConversionActivity : SimpleActivity(), Calculator {
         setContentView(R.layout.activity_unit_conversion)
         calc = CalculatorImpl(this, applicationContext)
 
-        btn_del.setOnClickListener {calc.handleClear(formula.text.toString()); checkHaptic(it) }
-        btn_all_clear.setOnClickListener { calc.handleReset()}
-
         //create lengthConversion helper object.
         var lengthConversion : lengthConversion = lengthConversion()
+
+        //hookup for keypad
+        getButtonIds().forEach {
+            it.setOnClickListener { calc.numpadClicked(it.id); checkHaptic(it) }
+        }
+
+        //other buttons
+        btn_equals.setOnClickListener {calc.handleClear(before.text.toString()); checkHaptic(it) }
+        btn_all_clear.setOnClickListener { calc.handleReset()}
+
+
+        btn_equals.setOnClickListener{
+            //Todo: pass all relevant info to something for calculation.
+            //works
+            lengthConversion.beginning_qty = before.text.toString().toDouble()
+            lengthConversion.beginning_unit_type = units_before_spinner.selectedItem.toString()
+            lengthConversion.ending_unit_type = units_after_spinner.selectedItem.toString()
+            after.text = lengthConversion.beginning_qty.toString()
+            // after.text = lengthConversion.beginning_unit_type.toString()
+
+        }
+
+
 
         //Three drop down menus. The conversionChoiceSpiner changes the other two automatically.
         val conversionChoiceSpinner: Spinner
@@ -49,11 +68,6 @@ class UnitConversionActivity : SimpleActivity(), Calculator {
         val choiceAdapter: ArrayAdapter<String>
         val beforeAdapter: ArrayAdapter<String>
         val afterAdapter: ArrayAdapter<String>
-
-        //hookup for keypad
-        getButtonIds().forEach {
-            it.setOnClickListener { calc.numpadClicked(it.id); checkHaptic(it) }
-        }
 
         //Create adapters for each of the three spinners.
         //TODO: Make custom layouts for the drop down menus.
@@ -94,7 +108,7 @@ class UnitConversionActivity : SimpleActivity(), Calculator {
     }
 
     override fun setValue(value: String, context: Context) {
-        formula.text = value
+        before.text = value
     }
 
     // used only by Robolectric
@@ -105,10 +119,10 @@ class UnitConversionActivity : SimpleActivity(), Calculator {
 
     override fun setFormula(value: String, context: Context) {
         if(value == ""){
-            formula.text = ""
+            before.text = ""
         }
         else{
-            formula.text = formula.text.toString() + value
+            before.text = before.text.toString() + value
         }
     }
     private fun checkHaptic(view: View) {
