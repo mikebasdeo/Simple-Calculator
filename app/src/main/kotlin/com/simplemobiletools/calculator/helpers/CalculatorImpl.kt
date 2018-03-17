@@ -27,9 +27,12 @@ import com.simplemobiletools.calculator.helpers.CONSTANT.MINUS
 import com.simplemobiletools.calculator.helpers.CONSTANT.MODULO
 import com.simplemobiletools.calculator.helpers.CONSTANT.MULTIPLY
 import com.simplemobiletools.calculator.helpers.CONSTANT.NATURAL_LOGARITHM
+import com.simplemobiletools.calculator.helpers.CONSTANT.NEGATION
 import com.simplemobiletools.calculator.helpers.CONSTANT.PI
 import com.simplemobiletools.calculator.helpers.CONSTANT.PLUS
 import com.simplemobiletools.calculator.helpers.CONSTANT.POWER
+import com.simplemobiletools.calculator.helpers.CONSTANT.RANDOM
+import com.simplemobiletools.calculator.helpers.CONSTANT.RECIPROCAL
 import com.simplemobiletools.calculator.helpers.CONSTANT.RIGHT_BRACKET
 import com.simplemobiletools.calculator.helpers.CONSTANT.ROOT
 import com.simplemobiletools.calculator.helpers.CONSTANT.ROUNDING
@@ -39,6 +42,7 @@ import com.simplemobiletools.calculator.helpers.CONSTANT.TANGENT
 import com.simplemobiletools.calculator.helpers.CONSTANT.TEMP_FILE
 import com.simplemobiletools.calculator.javaluator.ExtendedDoubleEvaluator
 import java.io.*
+import java.util.*
 
 class CalculatorImpl(calculator: Calculator, private val context: Context) {
     var displayedFormula: String
@@ -54,7 +58,7 @@ class CalculatorImpl(calculator: Calculator, private val context: Context) {
     private var fileManager: FileHandler = FileHandler(context)
 
     //If any listOfSpecialLastEntries precedes listOfSpecialOperations, automatically add a * in between them. 4pi = 4*pi.
-    //See implementation in fun handleOperation(operation: String)
+    //See implementation in fun handleOperationOnFormula(operation: String)
     private val listOfSpecialLastEntries = listOf(DIGIT, PI, E, RIGHT_BRACKET, SQUARE, CUBE)
     private val listOfSpecialOperations = listOf(LEFT_BRACKET, PI, E, SINE, COSINE,  TANGENT,
                                                     LOGARITHM, NATURAL_LOGARITHM, ROOT, ARCSINE,
@@ -108,7 +112,7 @@ class CalculatorImpl(calculator: Calculator, private val context: Context) {
         }
     }
 
-    fun handleOperation(operation : String) {
+    fun handleOperationOnFormula(operation : String) {
         //if the last character of our formula is a digit and an operation is called from the list,
         //then add a multiplication before the operation
         if(displayedFormula.isNotEmpty()){
@@ -307,30 +311,30 @@ class CalculatorImpl(calculator: Calculator, private val context: Context) {
         return fileManager
     }
 
-    fun reciprocalOfResult(){
-        if(displayedNumber.isNotEmpty()) {
-            val resultWithoutCommas = displayedNumber.replace(",", "")
-            calculateResult("1/$resultWithoutCommas")
+    private fun reciprocalOfResult(){
+        val resultWithoutCommas = displayedNumber.replace(",", "")
+        calculateResult("1/$resultWithoutCommas")
+    }
+
+    private fun randomNumberBetweenZeroAndResult(){
+        val random = Random().nextDouble()
+        setValue((random * displayedNumber.toDouble()).toString())
+    }
+
+    private fun negationOfResult(){
+        val resultWithoutCommas = displayedNumber.replace(",", "")
+        calculateResult("-$resultWithoutCommas")
+    }
+
+    fun handleOperationsOnResult(operation: String){
+        if(displayedNumber.isNotEmpty()){
+            when(operation){
+                RECIPROCAL -> reciprocalOfResult()
+                RANDOM -> randomNumberBetweenZeroAndResult()
+                NEGATION -> negationOfResult()
+            }
         }
-        else{
+        else
             Toast.makeText(context, ERROR_EMPTY_RESULT, Toast.LENGTH_SHORT).show()
-        }
     }
-
-    //TODO: Broken, crashes app when called
-    fun randomNumberBetweenZeroAndOne(){
-        handleReset()
-        calculateResult("random")
-    }
-
-    fun negationOfResult(){
-        if(displayedNumber.isNotEmpty()) {
-            val resultWithoutCommas = displayedNumber.replace(",", "")
-            calculateResult("-$resultWithoutCommas")
-        }
-        else{
-            Toast.makeText(context, ERROR_EMPTY_RESULT, Toast.LENGTH_SHORT).show()
-        }
-    }
-
 }
