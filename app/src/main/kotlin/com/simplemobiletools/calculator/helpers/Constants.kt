@@ -19,6 +19,7 @@ object CONSTANT {
     const val SINE = "sine"
     const val COSINE = "cosine"
     const val TANGENT = "tangent"
+    const val RECIPROCAL = "reciprocal"
     const val LOGARITHM = "logarithm"
     const val NATURAL_LOGARITHM = "natural_logarithm"
     const val RANDOM = "random"

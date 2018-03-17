@@ -29,7 +29,6 @@ import com.simplemobiletools.calculator.helpers.CONSTANT.NATURAL_LOGARITHM
 import com.simplemobiletools.calculator.helpers.CONSTANT.PI
 import com.simplemobiletools.calculator.helpers.CONSTANT.PLUS
 import com.simplemobiletools.calculator.helpers.CONSTANT.POWER
-import com.simplemobiletools.calculator.helpers.CONSTANT.RANDOM
 import com.simplemobiletools.calculator.helpers.CONSTANT.RIGHT_BRACKET
 import com.simplemobiletools.calculator.helpers.CONSTANT.ROOT
 import com.simplemobiletools.calculator.helpers.CONSTANT.ROUNDING
@@ -55,9 +54,10 @@ class CalculatorImpl(calculator: Calculator, private val context: Context) {
 
     //If any listOfSpecialLastEntries precedes listOfSpecialOperations, automatically add a * in between them. 4pi = 4*pi.
     //See implementation in fun handleOperation(operation: String)
-    private val listOfSpecialLastEntries = listOf(DIGIT, PI, E, RIGHT_BRACKET)
+    private val listOfSpecialLastEntries = listOf(DIGIT, PI, E, RIGHT_BRACKET, SQUARE, CUBE)
     private val listOfSpecialOperations = listOf(LEFT_BRACKET, PI, E, SINE, COSINE,  TANGENT,
-                                                    LOGARITHM, NATURAL_LOGARITHM, ROOT)
+                                                    LOGARITHM, NATURAL_LOGARITHM, ROOT, ARCSINE,
+                                                    ARCCOS, ARCTANGENT, ROUNDING, CEILING, FLOOR)
 
     //Every time a digit or operation is entered, we keep track of the length. In this way, when we
     //delete digits or operations, our program will automatically delete the appropriate amount of
@@ -237,9 +237,10 @@ class CalculatorImpl(calculator: Calculator, private val context: Context) {
     }
 
     private fun decimalClicked() {
-        if(canUseDecimal)
+        if(canUseDecimal) {
             setFormula(".")
             canUseDecimal = false
+        }
     }
 
 
@@ -269,13 +270,15 @@ class CalculatorImpl(calculator: Calculator, private val context: Context) {
         CUBE -> "^(3)"
         ABSOLUTE_VALUE -> "abs("
         FLOOR -> "floor("
-
-
         else -> ""
     }
 
     fun numpadClicked(id: Int) {
         listOfInputLengths.add(1)
+        if(listOfSpecialLastEntries.contains(lastKey) && lastKey != DIGIT){
+            setFormula("*")
+            listOfInputLengths.add(1)
+        }
         lastKey = DIGIT
         when (id) {
             R.id.btn_decimal -> decimalClicked()
@@ -311,6 +314,7 @@ class CalculatorImpl(calculator: Calculator, private val context: Context) {
         }
     }
 
+    //TODO: Broken, crashes app when called
     fun randomNumberBetweenZeroAndOne(){
         handleReset()
         calculateResult("random")
