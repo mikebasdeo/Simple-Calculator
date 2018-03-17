@@ -22,7 +22,6 @@ import com.simplemobiletools.calculator.helpers.CONSTANT.ARCTANGENT
 import com.simplemobiletools.calculator.helpers.CONSTANT.CEILING
 import com.simplemobiletools.calculator.helpers.CONSTANT.COSINE
 import com.simplemobiletools.calculator.helpers.CONSTANT.CUBE
-import com.simplemobiletools.calculator.helpers.CONSTANT.DIGIT
 import com.simplemobiletools.calculator.helpers.CONSTANT.DIVIDE
 import com.simplemobiletools.calculator.helpers.CONSTANT.E
 import com.simplemobiletools.calculator.helpers.CONSTANT.FLOOR
@@ -217,7 +216,6 @@ class MainActivity : SimpleActivity(), Calculator {
     // used only by Robolectric
     override fun setValueDouble(d: Double) {
         calc.setValue(Formatter.doubleToString(d))
-        calc.lastKey = DIGIT
     }
 
     override fun setFormula(value: String, context: Context) {

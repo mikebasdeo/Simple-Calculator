@@ -47,7 +47,7 @@ import java.util.*
 class CalculatorImpl(calculator: Calculator, private val context: Context) {
     var displayedFormula: String
     var displayedNumber: String
-    var lastKey: String
+    //var lastKey: String
     private var canUseDecimal: Boolean
     private var mCallback: Calculator? = calculator
     private var mSavedValue1: File
@@ -70,10 +70,11 @@ class CalculatorImpl(calculator: Calculator, private val context: Context) {
     //0 -> 9 -> sin( ... This prevents user's from deleting an operation one letter at a time.
     private val listOfInputLengths = mutableListOf<Int>()
 
+    private val listOfLastKeys = mutableListOf<String>()
+
     init {
         displayedFormula = ""
         displayedNumber = ""
-        lastKey = ""
         canUseDecimal = true
         mSavedValue1 = fileManager.chooseFileType(TEMP_FILE, "one")
         mSavedValue2 = fileManager.chooseFileType(TEMP_FILE, "two")
@@ -116,7 +117,7 @@ class CalculatorImpl(calculator: Calculator, private val context: Context) {
         //if the last character of our formula is a digit and an operation is called from the list,
         //then add a multiplication before the operation
         if(displayedFormula.isNotEmpty()){
-            if(listOfSpecialOperations.contains(operation) && listOfSpecialLastEntries.contains(lastKey)) {
+            if(listOfSpecialOperations.contains(operation) && listOfSpecialLastEntries.contains(getLastKey())) {
                 setFormula("*")
                 listOfInputLengths.add(1)
             }
@@ -124,11 +125,11 @@ class CalculatorImpl(calculator: Calculator, private val context: Context) {
         listOfInputLengths.add(getSign(operation).length)
         setFormula(getSign(operation))
         canUseDecimal = true
-        lastKey = operation
+        listOfLastKeys.add(operation)
     }
 
     fun handleStore(value : String, id: String) {
-        if (lastKey == EQUALS && displayedNumber != "") {
+        if (getLastKey() == EQUALS && displayedNumber != "") {
             when (id) {
                 //SetFormula: small text, SetValue BIG TEXT
                 MEMORY_ONE -> { mSavedValue1.writeText(value); setFormula(""); setValue(value) }
@@ -187,11 +188,13 @@ class CalculatorImpl(calculator: Calculator, private val context: Context) {
             setFormula("")
             setFormula(newValue)
             setValue("")
+            listOfLastKeys.remove(getLastKey())
         }
     }
 
     fun handleReset() {
-        lastKey = ""
+        listOfInputLengths.clear()
+        listOfLastKeys.clear()
         canUseDecimal = true
         setValue("")
         setFormula("")
@@ -279,11 +282,11 @@ class CalculatorImpl(calculator: Calculator, private val context: Context) {
 
     fun numpadClicked(id: Int) {
         listOfInputLengths.add(1)
-        if(listOfSpecialLastEntries.contains(lastKey) && lastKey != DIGIT){
+        if(listOfSpecialLastEntries.contains(getLastKey()) && getLastKey() != DIGIT){
             setFormula("*")
             listOfInputLengths.add(1)
         }
-        lastKey = DIGIT
+        listOfLastKeys.add(DIGIT)
         when (id) {
             R.id.btn_decimal -> decimalClicked()
             R.id.btn_0 -> addDigit(0)
@@ -336,5 +339,11 @@ class CalculatorImpl(calculator: Calculator, private val context: Context) {
         }
         else
             Toast.makeText(context, ERROR_EMPTY_RESULT, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun getLastKey() : String {
+        if(listOfLastKeys.isEmpty())
+            return ""
+        return listOfLastKeys[listOfLastKeys.size - 1]
     }
 }
