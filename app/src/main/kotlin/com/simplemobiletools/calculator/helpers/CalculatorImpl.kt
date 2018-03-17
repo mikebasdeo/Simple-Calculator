@@ -13,6 +13,7 @@ import com.simplemobiletools.calculator.helpers.CONSTANT.DIGIT
 import com.simplemobiletools.calculator.helpers.CONSTANT.DIVIDE
 import com.simplemobiletools.calculator.helpers.CONSTANT.E
 import com.simplemobiletools.calculator.helpers.CONSTANT.EQUALS
+import com.simplemobiletools.calculator.helpers.CONSTANT.ERROR_EMPTY_RESULT
 import com.simplemobiletools.calculator.helpers.CONSTANT.ERROR_READ_VALUE
 import com.simplemobiletools.calculator.helpers.CONSTANT.ERROR_SAVE_VALUE
 import com.simplemobiletools.calculator.helpers.CONSTANT.FILE
@@ -195,7 +196,6 @@ class CalculatorImpl(calculator: Calculator, private val context: Context) {
     fun handleEquals(str: String) {
         calculateResult(str)
         storeHistory(str)
-        lastKey = EQUALS
     }
 
     //TODO: Finish history method that stores the information with the fie explorer
@@ -312,6 +312,9 @@ class CalculatorImpl(calculator: Calculator, private val context: Context) {
             val resultWithoutCommas = displayedNumber.replace(",", "")
             calculateResult("1/$resultWithoutCommas")
         }
+        else{
+            Toast.makeText(context, ERROR_EMPTY_RESULT, Toast.LENGTH_SHORT).show()
+        }
     }
 
     //TODO: Broken, crashes app when called
@@ -324,6 +327,9 @@ class CalculatorImpl(calculator: Calculator, private val context: Context) {
         if(displayedNumber.isNotEmpty()) {
             val resultWithoutCommas = displayedNumber.replace(",", "")
             calculateResult("-$resultWithoutCommas")
+        }
+        else{
+            Toast.makeText(context, ERROR_EMPTY_RESULT, Toast.LENGTH_SHORT).show()
         }
     }
 

@@ -50,4 +50,5 @@ object CONSTANT {
     // error messages
     const val ERROR_SAVE_VALUE = "Error: No value saved"
     const val ERROR_READ_VALUE = "Error: No value to read"
+    const val ERROR_EMPTY_RESULT = "This operation only works when the result field is not empty."
 }
