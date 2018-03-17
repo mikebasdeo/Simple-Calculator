@@ -286,6 +286,59 @@ public class MainActivityTest {
         checkResult("10");
     }
 
+    @Test
+    public void squareTest(){
+        press(R.id.btn_2);
+        press(R.id.btn_shift);
+        press(R.id.btn_root_square);
+        press(R.id.btn_equals);
+        checkResult("4");
+    }
+
+    @Test
+    public void cubeTest(){
+        press(R.id.btn_2);
+        press(R.id.btn_shift);
+        press(R.id.btn_mod_cube);
+        press(R.id.btn_equals);
+        checkResult("8");
+    }
+
+    @Test
+    public void absTest(){
+        press(R.id.btn_shift);
+        press(R.id.btn_power_abs);
+        press(R.id.btn_2);
+        press(R.id.btn_minus);
+        press(R.id.btn_5);
+        press(R.id.btn_right_bracket);
+        press(R.id.btn_equals);
+        checkResult("3");
+    }
+
+    @Test
+    public void signTest(){
+        press(R.id.btn_2);
+        press(R.id.btn_minus);
+        press(R.id.btn_3);
+        press(R.id.btn_equals);
+        press(R.id.btn_shift);
+        press(R.id.btn_e_neg);
+        checkResult("1");
+    }
+
+    @Test
+    public void floorTest(){
+        press(R.id.btn_shift);
+        press(R.id.btn_ln_floor);
+        press(R.id.btn_9);
+        press(R.id.btn_divide);
+        press(R.id.btn_5);
+        press(R.id.btn_right_bracket);
+        press(R.id.btn_equals);
+        checkResult("1");
+    }
+
     private void press(int id) {
         onView(withId(id)).perform(click());
     }
