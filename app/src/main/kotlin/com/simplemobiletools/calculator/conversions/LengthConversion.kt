@@ -4,7 +4,6 @@ package com.simplemobiletools.calculator.conversions
 * Created by Modestos Glykis-Vergados on 2018-03-17.
 */
 class LengthConversion:Converter {
-
     val mapOfLengths = mapOf(
             "Meters" to 1.0,
             "Centimeters" to 100.0,
@@ -17,12 +16,16 @@ class LengthConversion:Converter {
     )
 
     override fun calculate(beginningQty: Double?, beginningUnitType: String, endingUnitType: String): Double {
-        var endingQty: Double = (1.0 / mapOfLengths.getValue(beginningUnitType) as Double)
-        endingQty *= mapOfLengths.getValue(endingUnitType) as Double
+        var endingQty: Double = (1.0 / mapOfLengths.getValue(beginningUnitType))
+        endingQty *= mapOfLengths.getValue(endingUnitType)
         if (beginningQty != null)
             endingQty *= beginningQty
         else
             return Double.NaN
         return endingQty
+    }
+
+    override fun getMap(): Map<String, Double> {
+        return mapOfLengths
     }
 }

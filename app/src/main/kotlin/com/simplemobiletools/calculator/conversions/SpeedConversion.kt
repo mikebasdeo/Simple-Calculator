@@ -5,14 +5,14 @@ package com.simplemobiletools.calculator.conversions
  */
 class SpeedConversion: Converter{
     val mapOfSpeeds = mapOf(
-            "Km/h" to 1,
+            "Km/h" to 1.0,
             "Mph" to 0.621371,
             "M/s" to 0.2777776918389111
     )
 
     override fun calculate(beginningQty: Double?, beginningUnitType: String, endingUnitType: String): Double {
-        var endingQty: Double = (1.0 / mapOfSpeeds.getValue(beginningUnitType)as Double)
-        endingQty *= mapOfSpeeds.getValue(endingUnitType) as Double
+        var endingQty: Double = (1.0 / mapOfSpeeds.getValue(beginningUnitType))
+        endingQty *= mapOfSpeeds.getValue(endingUnitType)
         if (beginningQty != null)
             endingQty *= beginningQty
         else
@@ -20,4 +20,7 @@ class SpeedConversion: Converter{
         return endingQty
     }
 
+    override fun getMap(): Map<String, Double> {
+        return mapOfSpeeds
+    }
 }
