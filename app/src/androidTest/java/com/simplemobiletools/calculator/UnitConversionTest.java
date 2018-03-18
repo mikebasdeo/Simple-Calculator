@@ -54,13 +54,43 @@ public class UnitConversionTest {
     public void testWeightConvert() {
         press(R.id.conversion_type_spinner);
         onData(allOf(is(instanceOf(String.class)), is("Weight"))).perform(click());
+        press(R.id.units_before_spinner);
+        onData(allOf(is(instanceOf(String.class)),is("Pounds"))).perform(click());
         press(R.id.units_after_spinner);
         onData(allOf(is(instanceOf(String.class)), is("Ounces"))).perform(click());
         press(R.id.btn_1);
         press(R.id.btn_equals);
-        checkResult("16.0");
+        checkResult("16.000036287432756");
     }
 
+    @Test
+    public void testSpeedConvert(){
+        press(R.id.conversion_type_spinner);
+        onData(allOf(is(instanceOf(String.class)), is("Speed"))).perform(click());
+        press(R.id.units_before_spinner);
+        onData(allOf(is(instanceOf(String.class)), is("Mph"))).perform(click());
+        press(R.id.units_after_spinner);
+        onData(allOf(is(instanceOf(String.class)), is("Km/h"))).perform(click());
+        press(R.id.btn_8);
+        press(R.id.btn_0);
+        press(R.id.btn_equals);
+        checkResult("128.74755983140506");
+    }
+
+    @Test
+    public void testVolumeConvert(){
+        press(R.id.conversion_type_spinner);
+        onData(allOf(is(instanceOf(String.class)), is("Volume"))).perform(click());
+        press(R.id.units_before_spinner);
+        onData(allOf(is(instanceOf(String.class)), is("Cubic inches"))).perform(click());
+        press(R.id.units_after_spinner);
+        onData(allOf(is(instanceOf(String.class)), is("Litres"))).perform(click());
+        press(R.id.btn_1);
+        press(R.id.btn_0);
+        press(R.id.btn_0);
+        press(R.id.btn_equals);
+        checkResult("1.6387075841025702");
+    }
     private void press(int id) {
         onView(withId(id)).perform(click());
     }
