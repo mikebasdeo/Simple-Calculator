@@ -36,6 +36,31 @@ public class UnitConversionTest {
         checkResult("1000.0");
     }
 
+    @Test
+    public void testTimeConvert() {
+        press(R.id.conversion_type_spinner);
+        onData(allOf(is(instanceOf(String.class)), is("Time"))).perform(click());
+        press(R.id.units_before_spinner);
+        onData(allOf(is(instanceOf(String.class)), is("Minutes"))).perform(click());
+        press(R.id.units_after_spinner);
+        onData(allOf(is(instanceOf(String.class)), is("Seconds"))).perform(click());
+        press(R.id.btn_1);
+        press(R.id.btn_2);
+        press(R.id.btn_equals);
+        checkResult("720.0");
+    }
+
+    @Test
+    public void testWeightConvert() {
+        press(R.id.conversion_type_spinner);
+        onData(allOf(is(instanceOf(String.class)), is("Weight"))).perform(click());
+        press(R.id.units_after_spinner);
+        onData(allOf(is(instanceOf(String.class)), is("Ounces"))).perform(click());
+        press(R.id.btn_1);
+        press(R.id.btn_equals);
+        checkResult("16.0");
+    }
+
     private void press(int id) {
         onView(withId(id)).perform(click());
     }

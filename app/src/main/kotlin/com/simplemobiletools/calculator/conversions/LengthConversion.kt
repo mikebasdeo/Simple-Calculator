@@ -12,7 +12,12 @@ val mapOfLengths = mapOf(
         "Feet" to 3.281,
         "Inches" to 39.37,
         "Miles" to 0.0006214,
-        "Yards" to 1.093613
+        "Yards" to 1.093613,
+        "Hours" to 1.0,
+        "Minutes" to 60.0,
+        "Seconds" to 3600.0,
+        "Pounds" to 1.0,
+        "Ounces" to 16.0
 )
 
 fun calculate(beginningQty: Double?, beginningUnitType: String, endingUnitType: String): Double {
