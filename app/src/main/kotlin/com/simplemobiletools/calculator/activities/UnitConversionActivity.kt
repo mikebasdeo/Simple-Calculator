@@ -10,6 +10,8 @@ import android.widget.ArrayAdapter
 import android.widget.Spinner
 
 import com.simplemobiletools.calculator.R
+import com.simplemobiletools.calculator.conversions.calculate
+import com.simplemobiletools.calculator.conversions.mapOfLengths
 import com.simplemobiletools.calculator.helpers.*
 import com.simplemobiletools.commons.extensions.performHapticFeedback
 import kotlinx.android.synthetic.main.activity_unit_conversion.*
@@ -43,14 +45,10 @@ class UnitConversionActivity : SimpleActivity(), Calculator {
 
 
         btn_equals.setOnClickListener{
-            //Todo: pass all relevant info to something for calculation.
-            //works
-            lengthConversion.beginning_qty = before.text.toString().toDouble()
-            lengthConversion.beginning_unit_type = units_before_spinner.selectedItem.toString()
-            lengthConversion.ending_unit_type = units_after_spinner.selectedItem.toString()
-            after.text = lengthConversion.calculateEnding_qty().toString()
-            // after.text = lengthConversion.beginning_unit_type.toString()
-
+            after.text = calculate(
+                        before.text.toString().toDoubleOrNull(),
+                        units_before_spinner.selectedItem.toString(),
+                        units_after_spinner.selectedItem.toString()).toString()
         }
 
 
@@ -63,7 +61,7 @@ class UnitConversionActivity : SimpleActivity(), Calculator {
         val conversionChoiceList = lengthConversion.conversionChoiceList
 
         //Empty list that will be populated with the relevant conversion units.
-        val unitList = ArrayList<String>()
+        var unitList = ArrayList<String>()
 
         val choiceAdapter: ArrayAdapter<String>
         val beforeAdapter: ArrayAdapter<String>
@@ -76,14 +74,14 @@ class UnitConversionActivity : SimpleActivity(), Calculator {
         afterAdapter = ArrayAdapter(this, R.layout.spinner_item, unitList)
 
         //Connect to layout.
-        conversionChoiceSpinner = findViewById(R.id.conversion_type_spinner) as Spinner
-        unitsBeforeSpinner = findViewById(R.id.units_before_spinner) as Spinner
-        unitsAfterSpinner = findViewById(R.id.units_after_spinner) as Spinner
+        conversionChoiceSpinner = findViewById<Spinner>(R.id.conversion_type_spinner)
+        unitsBeforeSpinner = findViewById<Spinner>(R.id.units_before_spinner)
+        unitsAfterSpinner = findViewById<Spinner>(R.id.units_after_spinner)
 
         //Connect each spinner to its respective adapter.
-        conversionChoiceSpinner.setAdapter(choiceAdapter)
-        unitsBeforeSpinner.setAdapter(beforeAdapter)
-        unitsAfterSpinner.setAdapter(afterAdapter)
+        conversionChoiceSpinner.adapter = choiceAdapter
+        unitsBeforeSpinner.adapter = beforeAdapter
+        unitsAfterSpinner.adapter = afterAdapter
 
         conversionChoiceSpinner.onItemSelectedListener = object : OnItemSelectedListener {
 
@@ -94,7 +92,7 @@ class UnitConversionActivity : SimpleActivity(), Calculator {
                 //Gets relevant unit list from helper.
                 when (s){
                     "Speed" -> {unitList.clear(); for(item in lengthConversion.speedUnitsList){ unitList.add(item)}; unitsBeforeSpinner.setSelection(0)}
-                    "Distance" -> {unitList.clear(); for(item in lengthConversion.distanceUnitsList){ unitList.add(item)};unitsBeforeSpinner.setSelection(0)}
+                    "Distance" -> {unitList.clear(); for(m in mapOfLengths) { unitList.add(m.key)}; unitsBeforeSpinner.setSelection(0)}
                     "Weight" -> {unitList.clear(); for(item in lengthConversion.weightUnitsList){ unitList.add(item)}; unitsBeforeSpinner.setSelection(0)}
                     "Time" -> {unitList.clear(); for(item in lengthConversion.timeUnitsList){ unitList.add(item)}; unitsBeforeSpinner.setSelection(0)}
                 }
