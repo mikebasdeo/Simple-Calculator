@@ -8,7 +8,6 @@ import android.widget.AdapterView
 import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.ArrayAdapter
 import android.widget.Spinner
-
 import com.simplemobiletools.calculator.R
 import com.simplemobiletools.calculator.conversions.*
 import com.simplemobiletools.calculator.helpers.*
@@ -20,11 +19,6 @@ class UnitConversionActivity : SimpleActivity(), Calculator {
 
     private lateinit var calc: CalculatorImpl
     private lateinit var converter: Converter
-    private lateinit var lengthConversion: LengthConversion
-    private lateinit var speedConversion: SpeedConversion
-    private lateinit var timeConversion: TimeConversion
-    private lateinit var volumeConversion: VolumeConversion
-    private lateinit var weightConversion: WeightConversion
 
     private var vibrateOnButtonPress = true
     private fun getButtonIds() = arrayOf(btn_decimal, btn_0, btn_1, btn_2, btn_3, btn_4, btn_5, btn_6, btn_7, btn_8, btn_9)
@@ -93,24 +87,32 @@ class UnitConversionActivity : SimpleActivity(), Calculator {
         conversionChoiceSpinner.onItemSelectedListener = object : OnItemSelectedListener {
 
             override fun onItemSelected(arg0: AdapterView<*>, arg1: View, arg2: Int, arg3: Long) {
-
                 val s = conversionChoiceSpinner.getItemAtPosition(arg2).toString()
-
-                when(s){
-                    "Length" -> converter = LengthConversion()
-                    "Speed" -> converter = SpeedConversion()
-                    "Time" -> converter = TimeConversion()
-                    "Volume" -> converter = VolumeConversion()
-                    "Weight" -> converter = WeightConversion()
-
-                }
-
-                //Gets relevant unit list from helper.
                 when (s){
-                    "Speed" -> {unitList.clear(); for(item in lengthConversion.speedUnitsList){ unitList.add(item)}; unitsBeforeSpinner.setSelection(0)}
-                    "Distance" -> {converter = LengthConversion(); unitList.clear(); for(m in converter.getMap()) { unitList.add(m.key)}; unitsBeforeSpinner.setSelection(0)}
-                    "Weight" -> {unitList.clear(); for(item in lengthConversion.weightUnitsList){ unitList.add(item)}; unitsBeforeSpinner.setSelection(0)}
-                    "Time" -> {unitList.clear(); for(item in lengthConversion.timeUnitsList){ unitList.add(item)}; unitsBeforeSpinner.setSelection(0)}
+                    "Speed" -> {
+                        converter = SpeedConversion()
+                        unitList.clear()
+                        for(m in converter.getMap())
+                            unitList.add(m.key)
+                        unitsBeforeSpinner.setSelection(0)}
+                    "Distance" -> {
+                        converter = LengthConversion()
+                        unitList.clear()
+                        for(m in converter.getMap())
+                            unitList.add(m.key)
+                        unitsBeforeSpinner.setSelection(0)}
+                    "Weight" -> {
+                        converter = WeightConversion()
+                        unitList.clear()
+                        for(m in converter.getMap())
+                            unitList.add(m.key)
+                        unitsBeforeSpinner.setSelection(0)}
+                    "Time" -> {
+                        converter = TimeConversion()
+                        unitList.clear()
+                        for(m in converter.getMap())
+                            unitList.add(m.key)
+                        unitsBeforeSpinner.setSelection(0)}
                 }
                 beforeAdapter.notifyDataSetChanged()
                 afterAdapter.notifyDataSetChanged()
