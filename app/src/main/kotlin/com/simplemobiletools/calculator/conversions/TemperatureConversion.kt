@@ -1,4 +1,4 @@
-package com.simplemobiletools.calculator.conversions
+/**package com.simplemobiletools.calculator.conversions
 
 /**
  * Created by George on 3/17/2018.
@@ -51,3 +51,4 @@ class TemperatureConversion:Converter {
         return 0.0
     }
 }
+ **/
