@@ -12,7 +12,7 @@
     <!--android:background="@color/dark_grey_pressed_mask" -->
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/dark_blue"
         android:layout_width="match_parent"
         android:layout_height="129dp"
         android:background="@color/noah_4"
@@ -114,10 +114,9 @@
         android:text="0"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBaseline_toBaselineOf="@+id/btn_right_bracket"
-        app:layout_constraintEnd_toStartOf="@+id/btn_right_bracket"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/btn_left_bracket" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/btn_decimal"
+        app:layout_constraintEnd_toStartOf="@+id/btn_decimal"
+        app:layout_constraintStart_toStartOf="@+id/btn_1" />
 
     <Button
         android:id="@+id/btn_1"
@@ -274,9 +273,9 @@
 
     <Button
         android:id="@+id/btn_decimal"
-        android:layout_width="0dp"
+        android:layout_width="77dp"
         android:layout_height="wrap_content"
-        android:background="@color/noah_3"
+        android:background="@color/noah_2"
         android:fontFamily="sans-serif"
         android:minHeight="55sp"
         android:minWidth="77dp"
@@ -284,9 +283,7 @@
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBaseline_toBaselineOf="@+id/btn_equals"
-        app:layout_constraintEnd_toStartOf="@+id/btn_equals"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/btn_right_bracket" />
+        app:layout_constraintEnd_toStartOf="@+id/btn_equals" />
 
     <Button
         android:id="@+id/btn_all_clear"
@@ -327,50 +324,16 @@
         android:id="@+id/btn_equals"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@color/noah_3"
+        android:background="@color/noah_5"
         android:fontFamily="sans-serif"
         android:minHeight="55sp"
         android:minWidth="77dp"
-        android:text="="
+        android:text="Convert"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/btn_decimal" />
-
-    <Button
-        android:id="@+id/btn_right_bracket"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="@color/noah_3"
-        android:fontFamily="sans-serif"
-        android:minHeight="55sp"
-        android:minWidth="77dp"
-        android:text=")"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBaseline_toBaselineOf="@+id/btn_decimal"
-        app:layout_constraintEnd_toStartOf="@+id/btn_decimal"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/btn_0" />
-
-    <Button
-        android:id="@+id/btn_left_bracket"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="@color/noah_3"
-        android:fontFamily="sans-serif"
-        android:minHeight="55sp"
-        android:minWidth="77dp"
-        android:text="("
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBaseline_toBaselineOf="@+id/btn_0"
-        app:layout_constraintEnd_toStartOf="@+id/btn_0"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_chainStyle="spread_inside"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="@+id/btn_plus" />
 
     <Button
         android:id="@+id/btn_divide"
@@ -380,7 +343,6 @@
         android:fontFamily="sans-serif"
         android:minHeight="55sp"
         android:minWidth="77dp"
-        android:text="÷"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/btn_minus"
@@ -396,7 +358,6 @@
         android:fontFamily="sans-serif"
         android:minHeight="55sp"
         android:minWidth="77dp"
-        android:text="×"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBaseline_toBaselineOf="@+id/btn_divide"
@@ -412,7 +373,6 @@
         android:fontFamily="sans-serif"
         android:minHeight="55sp"
         android:minWidth="77dp"
-        android:text="-"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/btn_equals"
@@ -428,7 +388,6 @@
         android:fontFamily="sans-serif"
         android:minHeight="55sp"
         android:minWidth="77dp"
-        android:text="+"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBaseline_toBaselineOf="@+id/btn_minus"
