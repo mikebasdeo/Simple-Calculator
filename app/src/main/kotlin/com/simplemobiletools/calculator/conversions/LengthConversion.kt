@@ -17,8 +17,8 @@ class LengthConversion:Converter {
     )
 
     override fun calculate(beginningQty: Double?, beginningUnitType: String, endingUnitType: String): Double {
-        var endingQty: Double = (1.0 / mapOfLengths.getValue(beginningUnitType))
-        endingQty *= mapOfLengths.getValue(endingUnitType)
+        var endingQty: Double = (1.0 / mapOfLengths.getValue(beginningUnitType) as Double)
+        endingQty *= mapOfLengths.getValue(endingUnitType) as Double
         if (beginningQty != null)
             endingQty *= beginningQty
         else

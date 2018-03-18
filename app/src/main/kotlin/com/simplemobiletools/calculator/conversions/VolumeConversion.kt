@@ -3,17 +3,16 @@ package com.simplemobiletools.calculator.conversions
 /**
  * Created by George on 3/17/2018.
  */
-class TimeConversion: Converter {
-    val mapOfTimes = mapOf(
-            "Days" to 1,
-            "Hours" to 24,
-            "Minutes" to 1440,
-            "Seconds" to 86400
+class VolumeConversion:Converter {
+
+    val mapOfVolumes = mapOf(
+            "Litres" to 1,
+            "Millilitres" to 1000
     )
 
     override fun calculate(beginningQty: Double?, beginningUnitType: String, endingUnitType: String): Double {
-        var endingQty: Double = (1.0 / mapOfTimes.getValue(beginningUnitType) as Double)
-        endingQty *= mapOfTimes.getValue(endingUnitType) as Double
+        var endingQty: Double = (1.0 / mapOfVolumes.getValue(beginningUnitType) as Double)
+        endingQty *= mapOfVolumes.getValue(endingUnitType) as Double
         if (beginningQty != null)
             endingQty *= beginningQty
         else
