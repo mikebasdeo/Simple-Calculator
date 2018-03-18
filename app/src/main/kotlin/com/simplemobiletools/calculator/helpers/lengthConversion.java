@@ -17,7 +17,7 @@ import static com.simplemobiletools.calculator.helpers.CONSTANT.YARDS;
 
 public class lengthConversion {
 
-    //Constant values for comparisions
+    //Constant values for comparisons
     final double meters =1;
     final double centimeters = 100;
     final double milimeters = 1000;

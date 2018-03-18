@@ -249,19 +249,6 @@ class MainActivity : SimpleActivity(), Calculator {
 
     private fun getButtonIds() = arrayOf(btn_decimal, btn_0, btn_1, btn_2, btn_3, btn_4, btn_5, btn_6, btn_7, btn_8, btn_9)
 
-    private fun copyToClipboard(copyResult: Boolean): Boolean {
-        var value = formula.value
-        if (copyResult) {
-            value = result.value
-        }
-
-        return if (value.isEmpty()) {
-            false
-        } else {
-            copyToClipboard(value)
-            true
-        }
-    }
 
     private fun pasteFromClipBoard(): Boolean {
         //check clipboard
@@ -279,6 +266,20 @@ class MainActivity : SimpleActivity(), Calculator {
     }
 
     fun String.isNum() = matches(Regex("\\d{1}|\\d{2}|\\d{3}(\\d{3},)+(.|)(\\d{1})+"))
+
+    private fun copyToClipboard(copyResult: Boolean): Boolean {
+        var value = formula.value
+        if (copyResult) {
+            value = result.value
+        }
+
+        return if (value.isEmpty()) {
+            false
+        } else {
+            copyToClipboard(value)
+            true
+        }
+    }
 
     override fun setValue(value: String, context: Context) {
         result.text = value
