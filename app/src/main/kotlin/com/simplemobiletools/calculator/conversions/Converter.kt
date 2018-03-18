@@ -6,4 +6,5 @@ package com.simplemobiletools.calculator.conversions
 interface Converter {
     fun calculate(beginningQty: Double?, beginningUnitType: String, endingUnitType: String): Double
 
+    fun getMap(): Map<String, Double>
 }
