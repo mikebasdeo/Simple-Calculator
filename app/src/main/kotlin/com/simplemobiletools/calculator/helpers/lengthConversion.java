@@ -56,7 +56,7 @@ public class lengthConversion {
     }
 
     public String[] getWeightUnitsList(){
-        String[] unitsList = {"Lbs", "oz"};
+        String[] unitsList = {"Pounds", "Ounces"};
         return unitsList;
     }
     public String[] getTimeUnitsList(){
