@@ -49,7 +49,8 @@ class UnitConversionActivity : SimpleActivity(), Calculator {
             after.text = converter.calculate(
                         before.text.toString().toDoubleOrNull(),
                         units_before_spinner.selectedItem.toString(),
-                        units_after_spinner.selectedItem.toString()).toString()
+                        units_after_spinner.selectedItem.toString()
+                        ).toString()
         }
 
 
@@ -83,37 +84,16 @@ class UnitConversionActivity : SimpleActivity(), Calculator {
             override fun onItemSelected(arg0: AdapterView<*>, arg1: View, arg2: Int, arg3: Long) {
                 val s = conversionChoiceSpinner.getItemAtPosition(arg2).toString()
                 when (s){
-                    "Speed" -> {
-                        converter = SpeedConversion()
-                        unitList.clear()
-                        for(m in converter.getMap())
-                            unitList.add(m.key)
-                        unitsBeforeSpinner.setSelection(0)}
-                    "Distance" -> {
-                        converter = LengthConversion()
-                        unitList.clear()
-                        for(m in converter.getMap())
-                            unitList.add(m.key)
-                        unitsBeforeSpinner.setSelection(0)}
-                    "Weight" -> {
-                        converter = WeightConversion()
-                        unitList.clear()
-                        for(m in converter.getMap())
-                            unitList.add(m.key)
-                        unitsBeforeSpinner.setSelection(0)}
-                    "Time" -> {
-                        converter = TimeConversion()
-                        unitList.clear()
-                        for(m in converter.getMap())
-                            unitList.add(m.key)
-                        unitsBeforeSpinner.setSelection(0)}
-                    "Volume" -> {
-                        converter = VolumeConversion()
-                        unitList.clear()
-                        for(m in converter.getMap())
-                            unitList.add(m.key)
-                        unitsBeforeSpinner.setSelection(0)}
+                    "Speed" -> converter = SpeedConversion()
+                    "Distance" -> converter = LengthConversion()
+                    "Weight" -> converter = WeightConversion()
+                    "Time" -> converter = TimeConversion()
+                    "Volume" -> converter = VolumeConversion()
                 }
+                unitList.clear()
+                for(m in converter.getMap())
+                    unitList.add(m.key)
+                unitsBeforeSpinner.setSelection(0)
                 beforeAdapter.notifyDataSetChanged()
                 afterAdapter.notifyDataSetChanged()
             }
