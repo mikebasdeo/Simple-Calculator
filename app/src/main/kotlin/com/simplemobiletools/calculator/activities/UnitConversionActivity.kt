@@ -72,8 +72,8 @@ class UnitConversionActivity : SimpleActivity(), Calculator {
         //Create adapters for each of the three spinners.
         //TODO: Make custom layouts for the drop down menus.
         choiceAdapter = ArrayAdapter(this, R.layout.spinner_item, conversionChoiceList)
-        beforeAdapter = ArrayAdapter(this, R.layout.spinner_item, unitList)
-        afterAdapter = ArrayAdapter(this, R.layout.spinner_item, unitList)
+        beforeAdapter = ArrayAdapter(this, R.layout.spinner_item_units, unitList)
+        afterAdapter = ArrayAdapter(this, R.layout.spinner_item_units, unitList)
 
         //Connect each spinner to its respective adapter.
         conversionChoiceSpinner.adapter = choiceAdapter

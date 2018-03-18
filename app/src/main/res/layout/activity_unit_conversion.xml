@@ -12,6 +12,18 @@
     <!--android:background="@color/dark_grey_pressed_mask" -->
 
     <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="129dp"
+        android:background="@color/noah_4"
+        app:layout_constraintBottom_toTopOf="@+id/btn_9"
+        app:layout_constraintEnd_toEndOf="@+id/units_after_spinner"
+        app:layout_constraintHorizontal_bias="0.516"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/units_before_spinner" />
+
+    <TextView
         android:id="@+id/after"
         android:layout_width="169dp"
         android:layout_height="65dp"
@@ -52,7 +64,7 @@
         android:id="@+id/units_before_spinner"
         android:layout_width="169dp"
         android:layout_height="69dp"
-        android:layout_marginBottom="284dp"
+        android:layout_marginBottom="252dp"
         android:layout_marginLeft="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent" />
@@ -61,13 +73,12 @@
         android:id="@+id/units_after_spinner"
         android:layout_width="169dp"
         android:layout_height="69dp"
-        android:layout_marginBottom="284dp"
+        android:layout_marginBottom="252dp"
         android:layout_marginRight="16dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/units_before_spinner"
-        android:layout_marginLeft="16dp" />
+        app:layout_constraintStart_toEndOf="@+id/units_before_spinner" />
 
 
     <TextView
