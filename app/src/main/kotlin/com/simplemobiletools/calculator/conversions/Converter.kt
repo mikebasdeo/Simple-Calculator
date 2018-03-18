@@ -1,10 +1,16 @@
 package com.simplemobiletools.calculator.conversions
 
-/**
- * Created by George on 3/17/2018.
- */
-interface Converter {
-    fun calculate(beginningQty: Double?, beginningUnitType: String, endingUnitType: String): Double
+abstract class Converter {
 
-    fun getMap(): Map<String, Double>
+    open fun calculate(beginningQty: Double?, beginningUnitType: String, endingUnitType: String): Double{
+        var endingQty: Double = (1.0 / getMap().getValue(beginningUnitType))
+        endingQty *= getMap().getValue(endingUnitType)
+        if (beginningQty != null)
+            endingQty *= beginningQty
+        else
+            return Double.NaN
+        return endingQty
+    }
+
+    abstract fun getMap(): Map<String, Double>
 }
