@@ -207,34 +207,45 @@ class CalculatorImpl(calculator: Calculator, private val context: Context) {
 
     fun getHistoryEntries(): ArrayList<String> {
         val list: ArrayList<String> = ArrayList()
-        if (getHistoryFile().canRead()) {
-            val reader: Reader = BufferedReader(FileReader(getHistoryFile().absolutePath))
-            reader.forEachLine {
-                list.add(it)
-            }
-            reader.close()
+        if (getResultFile().canRead()) {
+            getText(list, getHistoryFile())
         }
         else {
             list.add("")
         }
-
         return list
     }
 
     fun getResults(): ArrayList<String> {
         val list: ArrayList<String> = ArrayList()
         if (getResultFile().canRead()) {
-            val reader: Reader = BufferedReader(FileReader(getResultFile().absolutePath))
-            reader.forEachLine {
-                list.add(it)
-            }
-            reader.close()
+            getText(list, getResultFile())
         }
         else {
             list.add("")
         }
-
         return list
+    }
+
+    private fun getText(list: ArrayList<String>, file: File) {
+        val reader: Reader = BufferedReader(FileReader(file.absolutePath))
+        val temp = reader.readLines()
+        if (temp.size <= 10) {
+            var x = temp.size - 1
+            while (x >= 0) {
+                list.add(temp[x])
+                x--
+            }
+        } else {
+            var x = temp.size - 1
+            var stop = 10
+            while (stop >= 0) {
+                list.add(temp[x])
+                stop--
+                x--
+            }
+        }
+        reader.close()
     }
 
     private fun decimalClicked() {
