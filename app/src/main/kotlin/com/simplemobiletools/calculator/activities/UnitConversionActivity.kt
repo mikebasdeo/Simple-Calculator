@@ -15,7 +15,9 @@ import com.simplemobiletools.calculator.helpers.Calculator
 import com.simplemobiletools.calculator.helpers.CalculatorImpl
 import com.simplemobiletools.calculator.helpers.Formatter
 import com.simplemobiletools.commons.extensions.performHapticFeedback
+import com.simplemobiletools.commons.extensions.toast
 import kotlinx.android.synthetic.main.activity_unit_conversion.*
+import java.math.BigDecimal
 
 
 class UnitConversionActivity : SimpleActivity(), Calculator {
@@ -46,11 +48,13 @@ class UnitConversionActivity : SimpleActivity(), Calculator {
 
 
         btn_equals.setOnClickListener{
-            after.text = converter.calculate(
+            var res =   converter.calculate(
                         before.text.toString().toDoubleOrNull(),
                         units_before_spinner.selectedItem.toString(),
                         units_after_spinner.selectedItem.toString()
-                        ).toString()
+                        ).toBigDecimal().toPlainString()
+
+            after.text = shortenResult(res)
         }
 
 
@@ -125,6 +129,31 @@ class UnitConversionActivity : SimpleActivity(), Calculator {
         if (vibrateOnButtonPress) {
             view.performHapticFeedback()
         }
+    }
+
+    private fun shortenResult(inStr: String) : String{
+        var res = inStr
+        if (res.count() > 7){
+            var exp = 1
+            while (res.count() > 5){
+                if (exp > 1){
+                    exp++
+                }
+                if (res.endsWith('.')){
+                    exp++
+                }
+                res = res.dropLast(1)
+            }
+
+            if (exp > 1){
+                res = res.plus('E')
+                res = res.plus(exp)
+            }
+            else if (res.endsWith('.')){
+                res = res.dropLast(1)
+            }
+        }
+        return res
     }
 
 }
