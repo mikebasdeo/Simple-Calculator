@@ -34,6 +34,16 @@ object CONSTANT {
     const val NEGATION = "negation"
     const val FLOOR = "floor"
 
+    //length conversion
+    const val CENTIMETERS = "centimeters"
+    const val MILLIMETERS = "millimeters"
+    const val METERS = "meters"
+    const val KILOMETERS = "kilometers"
+    const val FEET = "feet"
+    const val INCHES = "inches"
+    const val MILES = "miles"
+    const val YARDS = "yards"
+
     // memory constants
     const val MEMORY_ONE = "one"
     const val MEMORY_TWO = "two"

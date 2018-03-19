@@ -149,6 +149,7 @@ class MainActivity : SimpleActivity(), Calculator {
             R.id.settings -> launchSettings()
             R.id.about -> launchAbout()
             R.id.History -> launchHistory()
+            R.id.unit_conversion -> launchUnitConversion()
             else -> return super.onOptionsItemSelected(item)
         }
         return true
@@ -171,6 +172,10 @@ class MainActivity : SimpleActivity(), Calculator {
         startActivity(Intent(applicationContext, HistoryActivity::class.java))
     }
 
+    private fun launchUnitConversion(){
+        startActivity(Intent(applicationContext, UnitConversionActivity::class.java))
+    }
+
     private fun launchSettings() {
         startActivity(Intent(applicationContext, SettingsActivity::class.java))
     }
@@ -180,6 +185,24 @@ class MainActivity : SimpleActivity(), Calculator {
     }
 
     private fun getButtonIds() = arrayOf(btn_decimal, btn_0, btn_1, btn_2, btn_3, btn_4, btn_5, btn_6, btn_7, btn_8, btn_9)
+
+
+    private fun pasteFromClipBoard(): Boolean {
+        //check clipboard
+        val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        if (clipboard.primaryClip.getItemAt(0).coerceToText(this).toString().isNum()){
+            setFormula(clipboard.primaryClip.getItemAt(0).coerceToText(this).toString(), this)
+            Toast.makeText(applicationContext,"Pasted from clipboard", Toast.LENGTH_LONG).show()
+            return true
+        }
+        else {
+            //do nothing
+
+            return false
+        }
+    }
+
+    private fun String.isNum() = matches(Regex("\\d|\\d{2}|\\d{3}(\\d{3},)+(.|)(\\d)+"))
 
     private fun copyToClipboard(copyResult: Boolean): Boolean {
         var value = formula.value
@@ -194,20 +217,6 @@ class MainActivity : SimpleActivity(), Calculator {
             true
         }
     }
-
-    private fun pasteFromClipBoard(): Boolean {
-        //check clipboard
-        val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-        //do nothing
-        return if (clipboard.primaryClip.getItemAt(0).coerceToText(this).toString().isNum()){
-            setFormula(clipboard.primaryClip.getItemAt(0).coerceToText(this).toString(), this)
-            Toast.makeText(applicationContext,"Pasted from clipboard", Toast.LENGTH_LONG).show()
-            true
-        }
-        else false
-    }
-
-    private fun String.isNum() = matches(Regex("\\d|\\d{2}|\\d{3}(\\d{3},)+(.|)(\\d)+"))
 
     override fun setValue(value: String, context: Context) {
         result.text = value

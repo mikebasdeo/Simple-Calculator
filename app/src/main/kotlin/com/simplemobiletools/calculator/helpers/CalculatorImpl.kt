@@ -78,8 +78,8 @@ class CalculatorImpl(calculator: Calculator, private val context: Context) {
         mSavedValue1 = fileManager.chooseFileType(TEMP_FILE, "one")
         mSavedValue2 = fileManager.chooseFileType(TEMP_FILE, "two")
         mSavedValue3 = fileManager.chooseFileType(TEMP_FILE, "three")
-        mEquationHistory = fileManager.chooseFileType(FILE, "History")
-        mResultHistory = fileManager.chooseFileType(FILE, "Results")
+        mEquationHistory = fileManager.chooseFileType(FILE, "History.txt")
+        mResultHistory = fileManager.chooseFileType(FILE, "Results.txt")
     }
 
     fun setValue(value: String) {
@@ -223,23 +223,46 @@ class CalculatorImpl(calculator: Calculator, private val context: Context) {
     }
 
     fun getHistoryEntries(): ArrayList<String> {
-        val reader: Reader = BufferedReader(FileReader(mEquationHistory))
         val list: ArrayList<String> = ArrayList()
-        reader.forEachLine {
-            list.add(it)
+        if (getResultFile().canRead()) {
+            getText(list, getHistoryFile())
         }
-        reader.close()
+        else {
+            list.add("")
+        }
         return list
     }
 
     fun getResults(): ArrayList<String> {
-        val reader: Reader = BufferedReader(FileReader(mResultHistory))
         val list: ArrayList<String> = ArrayList()
-        reader.forEachLine {
-            list.add(it)
+        if (getResultFile().canRead()) {
+            getText(list, getResultFile())
+        }
+        else {
+            list.add("")
+        }
+        return list
+    }
+
+    private fun getText(list: ArrayList<String>, file: File) {
+        val reader: Reader = BufferedReader(FileReader(file.absolutePath))
+        val temp = reader.readLines()
+        if (temp.size <= 10) {
+            var x = temp.size - 1
+            while (x >= 0) {
+                list.add(temp[x])
+                x--
+            }
+        } else {
+            var x = temp.size - 1
+            var stop = 10
+            while (stop >= 0) {
+                list.add(temp[x])
+                stop--
+                x--
+            }
         }
         reader.close()
-        return list
     }
 
     private fun decimalClicked() {
@@ -299,6 +322,14 @@ class CalculatorImpl(calculator: Calculator, private val context: Context) {
             R.id.btn_8 -> addDigit(8)
             R.id.btn_9 -> addDigit(9)
         }
+    }
+
+    private fun getHistoryFile() : File {
+        return mEquationHistory
+    }
+
+    private fun getResultFile() : File {
+        return mResultHistory
     }
 
     fun setHistoryFile(file : File) {

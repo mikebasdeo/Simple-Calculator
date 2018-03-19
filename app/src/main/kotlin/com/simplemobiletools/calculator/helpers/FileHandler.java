@@ -56,8 +56,7 @@ public class FileHandler {
     //Private create file, not just the history file
     private File createFile(String path, boolean data) {
         File file;
-        if (data)
-        {
+        if (data) {
             file = new File(con.getFilesDir()+"/"+path);
         }
         else {
