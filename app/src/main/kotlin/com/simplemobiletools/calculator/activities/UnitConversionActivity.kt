@@ -42,7 +42,7 @@ class UnitConversionActivity : SimpleActivity(), Calculator {
         }
 
         //other buttons
-        btn_equals.setOnClickListener {calc.handleClear(before.text.toString()); checkHaptic(it) }
+        btn_del.setOnClickListener { before.text = before.text.dropLast(1); checkHaptic(it) }
         btn_all_clear.setOnClickListener { calc.handleReset()}
 
 
@@ -52,10 +52,12 @@ class UnitConversionActivity : SimpleActivity(), Calculator {
                         units_before_spinner.selectedItem.toString(),
                         units_after_spinner.selectedItem.toString()
                         )
-						
-			if (abs(res) > 10) after.text = shortenBig(res.toBigDecimal().toPlainString())
-			else if (abs(res) < 0.001) after.text = shortenSmall(res.toBigDecimal().toPlainString())
-			else after.text = res.toString()
+
+            when {
+                abs(res) > 10 -> after.text = shortenBig(res.toBigDecimal().toPlainString())
+                abs(res) < 0.001 -> after.text = shortenSmall(res.toBigDecimal().toPlainString())
+                else -> after.text = res.toString()
+            }
         }
 
 
