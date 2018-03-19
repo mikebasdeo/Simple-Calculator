@@ -59,7 +59,7 @@ public class UnitConversionTest {
         onData(allOf(is(instanceOf(String.class)), is("Ounces"))).perform(click());
         press(R.id.btn_1);
         press(R.id.btn_equals);
-        checkResult("16.00");
+        checkResult("16.000036287432756");
     }
 
     @Test
@@ -73,7 +73,7 @@ public class UnitConversionTest {
         press(R.id.btn_8);
         press(R.id.btn_0);
         press(R.id.btn_equals);
-        checkResult("128.7");
+        checkResult("128.74755983140506");
     }
 
     @Test
@@ -81,14 +81,14 @@ public class UnitConversionTest {
         press(R.id.conversion_type_spinner);
         onData(allOf(is(instanceOf(String.class)), is("Volume"))).perform(click());
         press(R.id.units_before_spinner);
-        onData(allOf(is(instanceOf(String.class)), is("Cubic inches"))).perform(click());
+        onData(allOf(is(instanceOf(String.class)), is("Cubic Inches"))).perform(click());
         press(R.id.units_after_spinner);
         onData(allOf(is(instanceOf(String.class)), is("Litres"))).perform(click());
         press(R.id.btn_1);
         press(R.id.btn_0);
         press(R.id.btn_0);
         press(R.id.btn_equals);
-        checkResult("1.638");
+        checkResult("1.6387075841025702");
     }
     private void press(int id) {
         onView(withId(id)).perform(click());
