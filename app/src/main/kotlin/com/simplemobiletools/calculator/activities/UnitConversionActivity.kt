@@ -15,6 +15,7 @@ import com.simplemobiletools.calculator.helpers.CalculatorImpl
 import com.simplemobiletools.calculator.helpers.Formatter
 import com.simplemobiletools.commons.extensions.performHapticFeedback
 import kotlinx.android.synthetic.main.activity_unit_conversion.*
+import java.lang.Math.abs
 
 
 class UnitConversionActivity : SimpleActivity(), Calculator {
@@ -49,9 +50,11 @@ class UnitConversionActivity : SimpleActivity(), Calculator {
                         before.text.toString().toDoubleOrNull(),
                         units_before_spinner.selectedItem.toString(),
                         units_after_spinner.selectedItem.toString()
-                        ).toBigDecimal().toPlainString()
-
-            after.text = shortenResult(res)
+                        )
+						
+			if (abs(res) > 10) after.text = shortenBig(res.toBigDecimal().toPlainString())
+			else if (abs(res) < 0.001) after.text = shortenSmall(res.toBigDecimal().toPlainString())
+			else after.text = res.toString()
         }
 
 
@@ -127,12 +130,12 @@ class UnitConversionActivity : SimpleActivity(), Calculator {
         }
     }
 
-    private fun shortenResult(inStr: String) : String{
+    private fun shortenBig(inStr: String) : String{
         var res = inStr
         if (res.count() > 7){
-            var exp = 1
+            var exp = -1
             while (res.count() > 5){
-                if (exp > 1){
+                if (exp > 0){
                     exp++
                 }
                 if (res.endsWith('.')){
@@ -141,7 +144,7 @@ class UnitConversionActivity : SimpleActivity(), Calculator {
                 res = res.dropLast(1)
             }
 
-            if (exp > 1){
+            if (exp > 0){
                 res = res.plus('E')
                 res = res.plus(exp)
             }
@@ -151,5 +154,25 @@ class UnitConversionActivity : SimpleActivity(), Calculator {
         }
         return res
     }
-
+	
+	private fun shortenSmall(inStr: String) : String{
+	var res = inStr
+	if (res.count() > 7) {
+		var exp = 1
+		while (res.count() > 4) {
+			if (exp < 0){
+			exp--
+			}
+			if (res.startsWith('.')){
+			exp--
+			}
+			res.drop(1)
+		}
+		
+		if (exp < 0){
+			res.plus('E')
+			res = res.plus(exp)
+		}
+	}
+	return res
 }
