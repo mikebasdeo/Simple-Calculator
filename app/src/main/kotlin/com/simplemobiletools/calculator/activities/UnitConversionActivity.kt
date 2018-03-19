@@ -14,6 +14,7 @@ import com.simplemobiletools.calculator.helpers.Calculator
 import com.simplemobiletools.calculator.helpers.CalculatorImpl
 import com.simplemobiletools.calculator.helpers.Formatter
 import com.simplemobiletools.commons.extensions.performHapticFeedback
+import com.simplemobiletools.commons.extensions.toast
 import kotlinx.android.synthetic.main.activity_unit_conversion.*
 import java.lang.Math.abs
 
@@ -135,7 +136,7 @@ class UnitConversionActivity : SimpleActivity(), Calculator {
         if (res.count() > 7){
             var exp = -1
             while (res.count() > 5){
-                if (exp > 0){
+                if (exp >= 0){
                     exp++
                 }
                 if (res.endsWith('.')){
@@ -149,30 +150,39 @@ class UnitConversionActivity : SimpleActivity(), Calculator {
                 res = res.plus(exp)
             }
             else if (res.endsWith('.')){
+                toast(res, 5)
                 res = res.dropLast(1)
             }
         }
         return res
     }
 	
-	private fun shortenSmall(inStr: String) : String{
-	var res = inStr
-	if (res.count() > 7) {
-		var exp = 1
-		while (res.count() > 4) {
-			if (exp < 0){
-			exp--
-			}
-			if (res.startsWith('.')){
-			exp--
-			}
-			res.drop(1)
-		}
-		
-		if (exp < 0){
-			res.plus('E')
-			res = res.plus(exp)
-		}
-	}
-	return res
+	private fun shortenSmall(inStr: String) : String {
+        var res = inStr
+        if (res.count() > 7){
+            var exp = 1
+            while (res.count() > 4){
+                if (!res.startsWith('0') && exp < 1){
+                    var oldFirst = res.get(0)
+                    res = oldFirst + "." + res.substring(1, res.count() - 1)
+                    break
+                }
+                if (exp < 1){
+                    exp--
+                }
+                if (res.startsWith('.')){
+                    exp--
+                }
+                res = res.drop(1)
+            }
+
+            res = res.dropLast(res.count() - 4)
+            if (exp < 0){
+                res = res.plus('E')
+                res = res.plus(exp)
+            }
+        }
+        toast(res, 2)
+        return res
+    }
 }
