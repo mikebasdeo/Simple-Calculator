@@ -10,14 +10,11 @@ import android.widget.ArrayAdapter
 import android.widget.Spinner
 import com.simplemobiletools.calculator.R
 import com.simplemobiletools.calculator.conversions.*
-import com.simplemobiletools.calculator.helpers.CONSTANT
 import com.simplemobiletools.calculator.helpers.Calculator
 import com.simplemobiletools.calculator.helpers.CalculatorImpl
 import com.simplemobiletools.calculator.helpers.Formatter
 import com.simplemobiletools.commons.extensions.performHapticFeedback
-import com.simplemobiletools.commons.extensions.toast
 import kotlinx.android.synthetic.main.activity_unit_conversion.*
-import java.math.BigDecimal
 
 
 class UnitConversionActivity : SimpleActivity(), Calculator {
@@ -114,7 +111,6 @@ class UnitConversionActivity : SimpleActivity(), Calculator {
     // used only by Robolectric
     override fun setValueDouble(d: Double) {
         calc.setValue(Formatter.doubleToString(d))
-        calc.lastKey = CONSTANT.DIGIT
     }
 
     override fun setFormula(value: String, context: Context) {

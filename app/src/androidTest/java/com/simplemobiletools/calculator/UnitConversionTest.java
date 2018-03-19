@@ -3,20 +3,19 @@ package com.simplemobiletools.calculator;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
-import com.simplemobiletools.calculator.activities.MainActivity;
 import com.simplemobiletools.calculator.activities.UnitConversionActivity;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import static android.support.test.espresso.Espresso.onData;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.longClick;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
-import static android.support.test.espresso.Espresso.onData;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.instanceOf;
@@ -60,7 +59,7 @@ public class UnitConversionTest {
         onData(allOf(is(instanceOf(String.class)), is("Ounces"))).perform(click());
         press(R.id.btn_1);
         press(R.id.btn_equals);
-        checkResult("16.000036287432756");
+        checkResult("16.00");
     }
 
     @Test
@@ -74,7 +73,7 @@ public class UnitConversionTest {
         press(R.id.btn_8);
         press(R.id.btn_0);
         press(R.id.btn_equals);
-        checkResult("128.74755983140506");
+        checkResult("128.7");
     }
 
     @Test
@@ -89,7 +88,7 @@ public class UnitConversionTest {
         press(R.id.btn_0);
         press(R.id.btn_0);
         press(R.id.btn_equals);
-        checkResult("1.6387075841025702");
+        checkResult("1.638");
     }
     private void press(int id) {
         onView(withId(id)).perform(click());

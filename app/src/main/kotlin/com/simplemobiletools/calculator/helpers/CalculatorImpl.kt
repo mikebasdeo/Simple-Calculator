@@ -324,6 +324,14 @@ class CalculatorImpl(calculator: Calculator, private val context: Context) {
         }
     }
 
+    private fun getHistoryFile() : File {
+        return mEquationHistory
+    }
+
+    private fun getResultFile() : File {
+        return mResultHistory
+    }
+
     fun setHistoryFile(file : File) {
         mEquationHistory = file
     }
