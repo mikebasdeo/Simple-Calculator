@@ -52,12 +52,7 @@ class UnitConversionActivity : SimpleActivity(), Calculator {
                         units_before_spinner.selectedItem.toString(),
                         units_after_spinner.selectedItem.toString()
                         )
-
-            when {
-                abs(res) > 10 -> after.text = shortenBig(res.toBigDecimal().toPlainString())
-                abs(res) < 0.001 -> after.text = shortenSmall(res.toBigDecimal().toPlainString())
-                else -> after.text = res.toString()
-            }
+            after.text=res.toString()
         }
 
 
@@ -131,60 +126,5 @@ class UnitConversionActivity : SimpleActivity(), Calculator {
         if (vibrateOnButtonPress) {
             view.performHapticFeedback()
         }
-    }
-
-    private fun shortenBig(inStr: String) : String{
-        var res = inStr
-        if (res.count() > 7){
-            var exp = -1
-            while (res.count() > 5){
-                if (exp >= 0){
-                    exp++
-                }
-                if (res.endsWith('.')){
-                    exp++
-                }
-                res = res.dropLast(1)
-            }
-
-            if (exp > 0){
-                res = res.plus('E')
-                res = res.plus(exp)
-            }
-            else if (res.endsWith('.')){
-                toast(res, 5)
-                res = res.dropLast(1)
-            }
-        }
-        return res
-    }
-	
-	private fun shortenSmall(inStr: String) : String {
-        var res = inStr
-        if (res.count() > 7){
-            var exp = 1
-            while (res.count() > 4){
-                if (!res.startsWith('0') && exp < 1){
-                    var oldFirst = res.get(0)
-                    res = oldFirst + "." + res.substring(1, res.count() - 1)
-                    break
-                }
-                if (exp < 1){
-                    exp--
-                }
-                if (res.startsWith('.')){
-                    exp--
-                }
-                res = res.drop(1)
-            }
-
-            res = res.dropLast(res.count() - 4)
-            if (exp < 0){
-                res = res.plus('E')
-                res = res.plus(exp)
-            }
-        }
-        toast(res, 2)
-        return res
     }
 }
