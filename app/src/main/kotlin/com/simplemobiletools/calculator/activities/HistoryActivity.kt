@@ -30,15 +30,15 @@ class HistoryActivity : SimpleActivity(), Calculator {
         val equationsText = findViewById<TextView>(R.id.EquationsText)
         val resultsText = findViewById<TextView>(R.id.ResultsText)
         var temp1 = "" ; var temp2 = ""
-        var value1 = 1; var value2 = 1
+        //var value1 = 1; var value2 = 1
         results.forEach {
-            temp1 = value1.toString() + ". " +  temp1 + it + "\n"
-            value1++
+            temp1 = temp1 +  /*value1.toString()*/ ". " + it + "\n"
+            //value1++
         }
         resultsText.text = temp1
         equations.forEach {
-            temp2 = value2.toString() + ". " + temp2 + it + "\n"
-            value2++
+            temp2 = temp2 + /*value2.toString()*/ ". " + it + "\n"
+            //value2++
         }
         equationsText.text = temp2
     }
