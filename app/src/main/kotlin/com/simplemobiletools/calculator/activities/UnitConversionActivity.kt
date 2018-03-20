@@ -37,8 +37,8 @@ class UnitConversionActivity : SimpleActivity(), Calculator {
         getButtonIds().forEach {
             it.setOnClickListener { calc.numpadClicked(it.id); checkHaptic(it) }
         }
-        btn_del.setOnClickListener { before.text = before.text.dropLast(1); checkHaptic(it) }
-        btn_all_clear.setOnClickListener { calc.handleReset()}
+        btn_del.setOnClickListener { before.text = before.text.dropLast(1); after.text = ""; checkHaptic(it) }
+        btn_all_clear.setOnClickListener { calc.handleReset(); after.text = ""}
         btn_equals.setOnClickListener{
             var res =   converter.calculate(
                         before.text.toString().toDoubleOrNull(),

@@ -3,8 +3,8 @@ package com.simplemobiletools.calculator.conversions
 abstract class Converter {
 
     open fun calculate(beginningQty: Double?, beginningUnitType: String, endingUnitType: String): Double{
-        var endingQty: Double = (1.0 / getMap().getValue(beginningUnitType))
-        endingQty *= getMap().getValue(endingUnitType)
+        var endingQty: Double = (1.0 / getMap().getValue(beginningUnitType).first)
+        endingQty *= getMap().getValue(endingUnitType).first
         if (beginningQty != null)
             endingQty *= beginningQty
         else
@@ -12,5 +12,5 @@ abstract class Converter {
         return endingQty
     }
 
-    abstract fun getMap(): Map<String, Double>
+    abstract fun getMap(): Map<String, Pair<Double, String>>
 }

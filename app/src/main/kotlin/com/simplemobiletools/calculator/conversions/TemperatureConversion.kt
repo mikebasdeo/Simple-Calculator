@@ -3,12 +3,12 @@ package com.simplemobiletools.calculator.conversions
 class TemperatureConversion: Converter() {
 
     private val mapOfTemperatures = mapOf(
-            "Celsius" to 0.0,
-            "Fahrenheit" to 32.0,
-            "Kelvin" to 273.15
+            "Celsius" to Pair(0.0, "°C"),
+            "Fahrenheit" to Pair(32.0, "°D"),
+            "Kelvin" to Pair(273.15, "K")
     )
 
-    override fun getMap(): Map<String, Double> {
+    override fun getMap(): Map<String, Pair<Double, String>> {
         return mapOfTemperatures
     }
 
@@ -42,26 +42,26 @@ class TemperatureConversion: Converter() {
     }
 
     private fun fahrenheitToCelsius(beginningQty: Double): Double {
-        return (beginningQty - mapOfTemperatures.getValue("Fahrenheit")) * 5/9
+        return (beginningQty - mapOfTemperatures.getValue("Fahrenheit").first) * 5/9
     }
 
     private fun fahrenheitToKelvin(beginningQty: Double): Double {
-        return fahrenheitToCelsius(beginningQty) + mapOfTemperatures.getValue("Kelvin")
+        return fahrenheitToCelsius(beginningQty) + mapOfTemperatures.getValue("Kelvin").first
     }
 
     private fun celsiusToFahrenheit(beginningQty: Double): Double {
-        return (beginningQty * 9/5) + mapOfTemperatures.getValue("Fahrenheit")
+        return (beginningQty * 9/5) + mapOfTemperatures.getValue("Fahrenheit").first
     }
 
     private fun celsiusToKelvin(beginningQty: Double): Double {
-        return beginningQty + mapOfTemperatures.getValue("Kelvin")
+        return beginningQty + mapOfTemperatures.getValue("Kelvin").first
     }
 
     private fun kelvinToCelsius(beginningQty: Double): Double {
-        return beginningQty - mapOfTemperatures.getValue("Kelvin")
+        return beginningQty - mapOfTemperatures.getValue("Kelvin").first
     }
 
     private fun kelvinToFahrenheit(beginningQty: Double): Double {
-        return kelvinToCelsius(beginningQty) * 9/5 + mapOfTemperatures.getValue("Fahrenheit")
+        return kelvinToCelsius(beginningQty) * 9/5 + mapOfTemperatures.getValue("Fahrenheit").first
     }
 }
