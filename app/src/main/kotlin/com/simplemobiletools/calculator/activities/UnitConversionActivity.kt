@@ -14,9 +14,7 @@ import com.simplemobiletools.calculator.helpers.Calculator
 import com.simplemobiletools.calculator.helpers.CalculatorImpl
 import com.simplemobiletools.calculator.helpers.Formatter
 import com.simplemobiletools.commons.extensions.performHapticFeedback
-import com.simplemobiletools.commons.extensions.toast
 import kotlinx.android.synthetic.main.activity_unit_conversion.*
-import java.lang.Math.abs
 
 
 class UnitConversionActivity : SimpleActivity(), Calculator {
@@ -36,16 +34,11 @@ class UnitConversionActivity : SimpleActivity(), Calculator {
         setContentView(R.layout.activity_unit_conversion)
         calc = CalculatorImpl(this, applicationContext)
 
-        //hookup for keypad
         getButtonIds().forEach {
             it.setOnClickListener { calc.numpadClicked(it.id); checkHaptic(it) }
         }
-
-        //other buttons
         btn_del.setOnClickListener { before.text = before.text.dropLast(1); checkHaptic(it) }
         btn_all_clear.setOnClickListener { calc.handleReset()}
-
-
         btn_equals.setOnClickListener{
             var res =   converter.calculate(
                         before.text.toString().toDoubleOrNull(),
@@ -55,14 +48,13 @@ class UnitConversionActivity : SimpleActivity(), Calculator {
             after.text=res.toString()
         }
 
-
         //Three drop down menus. The conversionChoiceSpinner changes the other two automatically.
         val conversionChoiceSpinner: Spinner = findViewById(R.id.conversion_type_spinner)
         val unitsBeforeSpinner: Spinner = findViewById(R.id.units_before_spinner)
         val unitsAfterSpinner: Spinner = findViewById(R.id.units_after_spinner)
 
         //Main List for conversion choices from helper.
-        val conversionChoiceList = listOf("Distance", "Speed", "Time", "Volume", "Weight")
+        val conversionChoiceList = listOf("Distance", "Speed", "Time", "Volume", "Weight", "Temperature")
 
         //Empty list that will be populated with the relevant conversion units.
         val unitList = ArrayList<String>()
@@ -91,6 +83,7 @@ class UnitConversionActivity : SimpleActivity(), Calculator {
                     "Weight" -> converter = WeightConversion()
                     "Time" -> converter = TimeConversion()
                     "Volume" -> converter = VolumeConversion()
+                    "Temperature" -> converter = TemperatureConversion()
                 }
                 unitList.clear()
                 for(m in converter.getMap())
