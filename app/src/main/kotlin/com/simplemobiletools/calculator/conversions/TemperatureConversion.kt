@@ -4,7 +4,7 @@ class TemperatureConversion: Converter() {
 
     private val mapOfTemperatures = mapOf(
             "Celsius" to Pair(0.0, "°C"),
-            "Fahrenheit" to Pair(32.0, "°D"),
+            "Fahrenheit" to Pair(32.0, "°F"),
             "Kelvin" to Pair(273.15, "K")
     )
 

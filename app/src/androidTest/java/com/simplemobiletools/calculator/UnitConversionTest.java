@@ -90,6 +90,29 @@ public class UnitConversionTest {
         press(R.id.btn_equals);
         checkResult("1.6387075841025702");
     }
+
+    @Test
+    public void testTemperatureConvert(){
+        press(R.id.conversion_type_spinner);
+        onData(allOf(is(instanceOf(String.class)), is("Temperature"))).perform(click());
+        press(R.id.units_before_spinner);
+        onData(allOf(is(instanceOf(String.class)), is("Celsius"))).perform(click());
+        press(R.id.units_after_spinner);
+        onData(allOf(is(instanceOf(String.class)), is("Kelvin"))).perform(click());
+        press(R.id.btn_9);
+        press(R.id.btn_8);
+        press(R.id.btn_equals);
+        checkResult("371.15");
+        press(R.id.units_after_spinner);
+        onData(allOf(is(instanceOf(String.class)), is("Fahrenheit"))).perform(click());
+        press(R.id.btn_equals);
+        checkResult("208.4");
+        press(R.id.units_before_spinner);
+        onData(allOf(is(instanceOf(String.class)), is("Kelvin"))).perform(click());
+        press(R.id.btn_equals);
+        checkResult("-283.27");
+    }
+
     private void press(int id) {
         onView(withId(id)).perform(click());
     }
