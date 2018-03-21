@@ -46,6 +46,8 @@ class UnitConversionActivity : SimpleActivity(), Calculator {
                         units_after_spinner.selectedItem.toString()
                         )
             after.text=res.toString()
+            before_abbr.text = converter.getMap().getValue(units_before_spinner.selectedItem.toString()).second
+            after_abbr.text = converter.getMap().getValue(units_after_spinner.selectedItem.toString()).second
         }
 
         //Three drop down menus. The conversionChoiceSpinner changes the other two automatically.

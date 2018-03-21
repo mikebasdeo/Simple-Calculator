@@ -20,7 +20,7 @@ android {
 
     defaultConfig {
         applicationId "com.simplemobiletools.calculator"
-        minSdkVersion 16
+        minSdkVersion 17
         targetSdkVersion 27
         versionCode 15
         versionName "3.0.1"
