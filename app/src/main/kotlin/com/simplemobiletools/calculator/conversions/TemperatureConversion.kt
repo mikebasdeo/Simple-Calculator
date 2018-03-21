@@ -41,27 +41,27 @@ class TemperatureConversion: Converter() {
          }
     }
 
-    private fun fahrenheitToCelsius(beginningQty: Double): Double {
+    fun fahrenheitToCelsius(beginningQty: Double): Double {
         return (beginningQty - mapOfTemperatures.getValue("Fahrenheit").first) * 5/9
     }
 
-    private fun fahrenheitToKelvin(beginningQty: Double): Double {
+    fun fahrenheitToKelvin(beginningQty: Double): Double {
         return fahrenheitToCelsius(beginningQty) + mapOfTemperatures.getValue("Kelvin").first
     }
 
-    private fun celsiusToFahrenheit(beginningQty: Double): Double {
+    fun celsiusToFahrenheit(beginningQty: Double): Double {
         return (beginningQty * 9/5) + mapOfTemperatures.getValue("Fahrenheit").first
     }
 
-    private fun celsiusToKelvin(beginningQty: Double): Double {
+    fun celsiusToKelvin(beginningQty: Double): Double {
         return beginningQty + mapOfTemperatures.getValue("Kelvin").first
     }
 
-    private fun kelvinToCelsius(beginningQty: Double): Double {
+    fun kelvinToCelsius(beginningQty: Double): Double {
         return beginningQty - mapOfTemperatures.getValue("Kelvin").first
     }
 
-    private fun kelvinToFahrenheit(beginningQty: Double): Double {
+    fun kelvinToFahrenheit(beginningQty: Double): Double {
         return kelvinToCelsius(beginningQty) * 9/5 + mapOfTemperatures.getValue("Fahrenheit").first
     }
 }
