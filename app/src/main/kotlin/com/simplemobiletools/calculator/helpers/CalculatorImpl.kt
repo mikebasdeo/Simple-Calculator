@@ -119,6 +119,7 @@ class CalculatorImpl(calculator: Calculator, private val context: Context) {
             if(listOfSpecialOperations.contains(operation) && listOfSpecialLastEntries.contains(getLastKey())) {
                 setFormula("*")
                 listOfInputLengths.add(1)
+                listOfLastKeys.add("*")
             }
         }
         listOfInputLengths.add(getSign(operation).length)
