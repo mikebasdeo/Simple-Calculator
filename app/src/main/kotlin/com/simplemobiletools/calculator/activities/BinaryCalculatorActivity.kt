@@ -14,12 +14,15 @@ import com.simplemobiletools.commons.extensions.performHapticFeedback
 import kotlinx.android.synthetic.main.activity_binary_calculator.*
 import android.text.InputType
 import android.view.View.OnTouchListener
+import com.simplemobiletools.calculator.helpers.BinaryCalculator
 
 
 class BinaryCalculatorActivity : SimpleActivity(), Calculator {
 
 
     private lateinit var calc: CalculatorImpl
+
+    private lateinit var binaryCalculator: BinaryCalculator
     private var vibrateOnButtonPress = true
     private lateinit var lastTouched: TextView
     private fun getButtonIds() = arrayOf(btn_0, btn_1)
@@ -30,6 +33,8 @@ class BinaryCalculatorActivity : SimpleActivity(), Calculator {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_binary_calculator)
         calc = CalculatorImpl(this, applicationContext)
+        binaryCalculator = BinaryCalculator()
+
 
         binary_number_1.setPaintFlags(binary_number_1.getPaintFlags() or Paint.UNDERLINE_TEXT_FLAG)
         binary_number_2.setPaintFlags(binary_number_2.getPaintFlags() or Paint.UNDERLINE_TEXT_FLAG)
@@ -63,6 +68,11 @@ class BinaryCalculatorActivity : SimpleActivity(), Calculator {
             lastTouched.text = lastTouched.text.dropLast(1)
         }
         btn_all_clear.setOnClickListener { calc.handleReset()}
+
+        btn_plus.setOnClickListener{
+            //TODO:Add null check for EditText fields. Throws error at the moment.
+            binary_result.text = binaryCalculator.addBinary(binary_number_1.text.toString(), binary_number_2.text.toString())
+        }
     }
 
     override fun setValue(value: String, context: Context) {
