@@ -67,7 +67,13 @@ class BinaryCalculatorActivity : SimpleActivity(), Calculator {
         btn_del.setOnClickListener {
             lastTouched.text = lastTouched.text.dropLast(1)
         }
-        btn_all_clear.setOnClickListener { calc.handleReset()}
+        btn_all_clear.setOnClickListener {
+            calc.handleReset()
+            binary_number_1.setText("")
+            binary_number_2.setText("")
+            binary_result.text = ""
+            binary_number_1.requestFocus()
+        }
 
         btn_plus.setOnClickListener{
             //TODO:Add null check for EditText fields. Throws error at the moment.
