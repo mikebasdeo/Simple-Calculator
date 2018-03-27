@@ -1,4 +1,5 @@
 package com.simplemobiletools.calculator.conversions
+import java.math.BigDecimal
 
 abstract class Converter {
 
@@ -9,7 +10,7 @@ abstract class Converter {
             endingQty *= beginningQty
         else
             return Double.NaN
-        return endingQty
+        return BigDecimal(endingQty).setScale(4, BigDecimal.ROUND_HALF_UP).toDouble()
     }
 
     abstract fun getMap(): Map<String, Pair<Double, String>>

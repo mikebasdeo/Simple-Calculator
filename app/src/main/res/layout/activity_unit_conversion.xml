@@ -31,7 +31,8 @@
         android:layout_width="303dp"
         android:layout_height="46dp"
         android:layout_marginBottom="8dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:autoSizeTextType="uniform"
         android:fontFamily="sans-serif-light"
@@ -45,8 +46,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/conversion_type_spinner"
         app:layout_constraintVertical_bias="0.97"
-        tools:targetApi="o"
-        android:layout_marginLeft="8dp" />
+        tools:targetApi="o" />
 
     <Spinner
         android:id="@+id/conversion_type_spinner"
@@ -89,8 +89,9 @@
         android:id="@+id/before"
         android:layout_width="303dp"
         android:layout_height="46dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginBottom="21dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:autoSizeTextType="uniform"
         android:fontFamily="sans-serif-light"
@@ -103,7 +104,7 @@
         app:layout_constraintBottom_toTopOf="@+id/after"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/conversion_type_spinner"
-        app:layout_constraintVertical_bias="0.909"
+        app:layout_constraintVertical_bias="0.0"
         tools:targetApi="o" />
 
 
@@ -414,9 +415,10 @@
         android:textSize="32sp"
         app:layout_constraintBottom_toTopOf="@+id/after_abbr"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.555"
         app:layout_constraintStart_toEndOf="@+id/before"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.75" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/after_abbr"
