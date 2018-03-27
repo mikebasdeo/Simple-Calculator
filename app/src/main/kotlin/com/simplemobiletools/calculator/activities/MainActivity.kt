@@ -150,6 +150,7 @@ class MainActivity : SimpleActivity(), Calculator {
             R.id.about -> launchAbout()
             R.id.History -> launchHistory()
             R.id.unit_conversion -> launchUnitConversion()
+            R.id.binary_calculator -> launchBinaryCalculator()
             else -> return super.onOptionsItemSelected(item)
         }
         return true
@@ -174,6 +175,9 @@ class MainActivity : SimpleActivity(), Calculator {
 
     private fun launchUnitConversion(){
         startActivity(Intent(applicationContext, UnitConversionActivity::class.java))
+    }
+    private fun launchBinaryCalculator(){
+        startActivity(Intent(applicationContext, BinaryCalculatorActivity::class.java))
     }
 
     private fun launchSettings() {
