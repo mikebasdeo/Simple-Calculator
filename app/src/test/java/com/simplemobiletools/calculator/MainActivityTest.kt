@@ -2,8 +2,10 @@ package com.simplemobiletools.calculator
 
 import android.content.Context
 import com.simplemobiletools.calculator.activities.MainActivity
+import com.simplemobiletools.calculator.helpers.CONSTANT.CEILING
 import com.simplemobiletools.calculator.helpers.CONSTANT.FILE
 import com.simplemobiletools.calculator.helpers.CONSTANT.MEMORY_ONE
+import com.simplemobiletools.calculator.helpers.CONSTANT.ROUNDING
 import com.simplemobiletools.calculator.helpers.Calculator
 import com.simplemobiletools.calculator.helpers.CalculatorImpl
 import com.simplemobiletools.calculator.javaluator.ExtendedDoubleEvaluator
@@ -160,6 +162,24 @@ class MainActivityTest {
     @Test
     fun absTest() {
         val result = evaluator.evaluate("abs(-1)")
+        assertEquals(1.0, result)
+    }
+
+    @Test
+    fun roundTest() {
+        val result = evaluator.evaluate("round(3/2)")
+        assertEquals(2.0, result)
+    }
+
+    @Test
+    fun ceilTest() {
+        val result = evaluator.evaluate("ceil(3/2)")
+        assertEquals(2.0, result)
+    }
+
+    @Test
+    fun floorTest() {
+        val result = evaluator.evaluate("floor(3/2)")
         assertEquals(1.0, result)
     }
 }
