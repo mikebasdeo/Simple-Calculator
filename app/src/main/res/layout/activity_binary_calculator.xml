@@ -32,7 +32,7 @@
         android:minWidth="77dp"
         android:text="0"
         android:textColor="@color/white"
-        android:textSize="20sp"
+        android:textSize="120sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btn_del"
@@ -43,13 +43,14 @@
         android:id="@+id/btn_1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="1dp"
         android:background="@color/noah_2"
         android:fontFamily="sans-serif"
         android:minHeight="163sp"
         android:minWidth="77dp"
         android:text="1"
         android:textColor="@color/white"
-        android:textSize="20sp"
+        android:textSize="120sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btn_0"
@@ -69,7 +70,7 @@
         android:text="DEL"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBaseline_toBaselineOf="@+id/btn_all_clear"
+        app:layout_constraintBottom_toTopOf="@+id/btn_plus"
         app:layout_constraintEnd_toStartOf="@+id/btn_all_clear" />
 
     <Button
