@@ -106,9 +106,8 @@ class CalculatorImpl(calculator: Calculator, private val context: Context) {
         try {
             val result = evaluator.evaluate(str)
             updateResult(result)
-            storeResult(result.toString())
         } catch (e: IllegalArgumentException) {
-            throw e
+            setValue("NaN")
         }
     }
 
@@ -126,6 +125,7 @@ class CalculatorImpl(calculator: Calculator, private val context: Context) {
         setFormula(getSign(operation))
         canUseDecimal = true
         listOfLastKeys.add(operation)
+        liveUpdate()
     }
 
     fun handleStore(value : String, id: String) {
@@ -190,6 +190,12 @@ class CalculatorImpl(calculator: Calculator, private val context: Context) {
             setValue("")
             listOfLastKeys.remove(getLastKey())
         }
+        if(mCallback!!.getFormula().isEmpty()){
+            setValue("")
+        }
+        else{
+            liveUpdate()
+        }
     }
 
     fun handleReset() {
@@ -202,11 +208,10 @@ class CalculatorImpl(calculator: Calculator, private val context: Context) {
 
     fun handleEquals(str: String) {
         calculateResult(str)
-        storeHistory(str)
     }
 
     //TODO: Finish history method that stores the information with the fie explorer
-    private fun storeHistory(equation: String) {
+    fun storeHistory(equation: String) {
         val write: Writer = BufferedWriter(FileWriter(mEquationHistory, true))
         write.write(equation)
         write.appendln()
@@ -215,7 +220,7 @@ class CalculatorImpl(calculator: Calculator, private val context: Context) {
     }
 
     //TODO: Finish the results history section
-    private fun storeResult(result: String) {
+    fun storeResult(result: String) {
         val writer: Writer = BufferedWriter(FileWriter(mResultHistory, true))
         writer.write(result)
         writer.appendln()
@@ -323,6 +328,7 @@ class CalculatorImpl(calculator: Calculator, private val context: Context) {
             R.id.btn_8 -> addDigit(8)
             R.id.btn_9 -> addDigit(9)
         }
+        liveUpdate()
     }
 
     private fun getHistoryFile() : File {
@@ -361,12 +367,13 @@ class CalculatorImpl(calculator: Calculator, private val context: Context) {
     }
 
     fun handleOperationsOnResult(operation: String){
-        if(displayedNumber.isNotEmpty()){
-            when(operation){
-                RECIPROCAL -> reciprocalOfResult()
-                RANDOM -> randomNumberBetweenZeroAndResult()
-                NEGATION -> negationOfResult()
-            }
+        if(displayedNumber.isNotEmpty() )
+            if(!displayedNumber.toDouble().isNaN()){
+                when(operation){
+                    RECIPROCAL -> reciprocalOfResult()
+                    RANDOM -> randomNumberBetweenZeroAndResult()
+                    NEGATION -> negationOfResult()
+                }
         }
         else
             Toast.makeText(context, ERROR_EMPTY_RESULT, Toast.LENGTH_SHORT).show()
@@ -376,5 +383,14 @@ class CalculatorImpl(calculator: Calculator, private val context: Context) {
         if(listOfLastKeys.isEmpty())
             return ""
         return listOfLastKeys[listOfLastKeys.size - 1]
+    }
+
+    private fun liveUpdate() {
+        try{
+            handleEquals(mCallback!!.getFormula())
+        }
+        catch (e: IllegalAccessException){
+            setValue("NaN")
+        }
     }
 }

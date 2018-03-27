@@ -39,7 +39,7 @@ class UnitConversionActivity : SimpleActivity(), Calculator {
         }
         btn_del.setOnClickListener { before.text = before.text.dropLast(1); after.text = ""; checkHaptic(it) }
         btn_all_clear.setOnClickListener { calc.handleReset(); after.text = ""}
-        btn_equals.setOnClickListener{
+        btn_save.setOnClickListener{
             var res =   converter.calculate(
                         before.text.toString().toDoubleOrNull(),
                         units_before_spinner.selectedItem.toString(),
@@ -121,5 +121,9 @@ class UnitConversionActivity : SimpleActivity(), Calculator {
         if (vibrateOnButtonPress) {
             view.performHapticFeedback()
         }
+    }
+
+    override fun getFormula(): String {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }

@@ -31,7 +31,7 @@ public class UnitConversionTest {
         press(R.id.units_before_spinner);
         onData(allOf(is(instanceOf(String.class)), is("Kilometers"))).perform(click());
         press(R.id.btn_1);
-        press(R.id.btn_equals);
+        press(R.id.btn_save);
         checkResult("1000.0");
     }
 
@@ -45,7 +45,7 @@ public class UnitConversionTest {
         onData(allOf(is(instanceOf(String.class)), is("Seconds"))).perform(click());
         press(R.id.btn_1);
         press(R.id.btn_2);
-        press(R.id.btn_equals);
+        press(R.id.btn_save);
         checkResult("720.0");
     }
 
@@ -58,7 +58,7 @@ public class UnitConversionTest {
         press(R.id.units_after_spinner);
         onData(allOf(is(instanceOf(String.class)), is("Ounces"))).perform(click());
         press(R.id.btn_1);
-        press(R.id.btn_equals);
+        press(R.id.btn_save);
         checkResult("16.000036287432756");
     }
 
@@ -72,7 +72,7 @@ public class UnitConversionTest {
         onData(allOf(is(instanceOf(String.class)), is("Km/h"))).perform(click());
         press(R.id.btn_8);
         press(R.id.btn_0);
-        press(R.id.btn_equals);
+        press(R.id.btn_save);
         checkResult("128.74755983140506");
     }
 
@@ -87,7 +87,7 @@ public class UnitConversionTest {
         press(R.id.btn_1);
         press(R.id.btn_0);
         press(R.id.btn_0);
-        press(R.id.btn_equals);
+        press(R.id.btn_save);
         checkResult("1.6387075841025702");
     }
 
@@ -101,15 +101,15 @@ public class UnitConversionTest {
         onData(allOf(is(instanceOf(String.class)), is("Kelvin"))).perform(click());
         press(R.id.btn_9);
         press(R.id.btn_8);
-        press(R.id.btn_equals);
+        press(R.id.btn_save);
         checkResult("371.15");
         press(R.id.units_after_spinner);
         onData(allOf(is(instanceOf(String.class)), is("Fahrenheit"))).perform(click());
-        press(R.id.btn_equals);
+        press(R.id.btn_save);
         checkResult("208.4");
         press(R.id.units_before_spinner);
         onData(allOf(is(instanceOf(String.class)), is("Kelvin"))).perform(click());
-        press(R.id.btn_equals);
+        press(R.id.btn_save);
         checkResult("-283.27");
     }
 
