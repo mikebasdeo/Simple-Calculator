@@ -17,4 +17,11 @@ public class BinaryCalculator {
         int answer = firstToDecimal + secondToDecimal;
         return Integer.toBinaryString(answer);
     }
+
+    public String subtractBinary(String first, String second){
+        int firstToDecimal = Integer.parseInt(first, 2);
+        int secondToDecimal = Integer.parseInt(second, 2);
+        int answer = firstToDecimal - secondToDecimal;
+        return Integer.toBinaryString(answer);
+    }
 }

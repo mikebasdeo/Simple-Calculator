@@ -26,7 +26,6 @@ class BinaryCalculatorActivity : SimpleActivity() {
         binaryCalculator = BinaryCalculator()
         lastTouched = binary_number_1
 
-        binary_number_1.paintFlags = binary_number_1.paintFlags or Paint.UNDERLINE_TEXT_FLAG
         binary_number_2.paintFlags = binary_number_2.paintFlags or Paint.UNDERLINE_TEXT_FLAG
 
         btn_0.setOnClickListener { lastTouched.text.insert(0, "0")}
@@ -70,6 +69,7 @@ class BinaryCalculatorActivity : SimpleActivity() {
                 lastTouched = binary_number_2
                 binary_number_2.requestFocus()
             }else{
+                //TODO: Add symbol?
                 binary_result.text = binaryCalculator.addBinary(binary_number_1.text.toString(), binary_number_2.text.toString())
             }
         }
@@ -88,8 +88,6 @@ class BinaryCalculatorActivity : SimpleActivity() {
                 binary_result.text = binaryCalculator.subtractBinary(binary_number_1.text.toString(), binary_number_2.text.toString())
             }
         }
-
-
     }
 
     fun Any.toast(context: Context) {

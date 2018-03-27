@@ -12,16 +12,6 @@
     <!--android:background="@color/dark_grey_pressed_mask" -->
 
 
-
-    <TextView
-        android:id="@+id/label_result"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Result"
-        android:textColor="@color/white"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/binary_number_2" />
-
     <Button
         android:id="@+id/btn_0"
         android:layout_width="0dp"
@@ -150,75 +140,83 @@
     <EditText
         android:id="@+id/binary_number_1"
         android:layout_width="0dp"
-        android:layout_height="65dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="60dp"
         android:background="@color/noah_4"
         android:fontFamily="sans-serif-light"
-        android:gravity="center"
+        android:gravity="bottom|right"
         android:maxLines="1"
         android:paddingLeft="@dimen/activity_margin"
         android:paddingRight="@dimen/activity_margin"
-        android:textAlignment="center"
+        android:textAlignment="textEnd"
         android:textColor="@color/white"
         android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/label_number_1" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/binary_number_2"
         android:layout_width="0dp"
-        android:layout_height="65dp"
+        android:layout_height="80dp"
         android:background="@color/noah_4"
         android:fontFamily="sans-serif-light"
-        android:gravity="center"
+        android:gravity="top|right"
         android:maxLines="1"
         android:paddingLeft="@dimen/activity_margin"
         android:paddingRight="@dimen/activity_margin"
-        android:textAlignment="center"
+        android:textAlignment="textEnd"
         android:textColor="@color/white"
         android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/label_number_2" />
+        app:layout_constraintTop_toBottomOf="@+id/binary_number_1" />
 
     <TextView
         android:id="@+id/binary_result"
         android:layout_width="0dp"
-        android:layout_height="65dp"
+        android:layout_height="80dp"
         android:background="@color/noah_4"
         android:fontFamily="sans-serif-light"
-        android:gravity="center"
+        android:gravity="top|right"
         android:maxLines="1"
         android:paddingLeft="@dimen/activity_margin"
         android:paddingRight="@dimen/activity_margin"
-        android:textAlignment="center"
+        android:textAlignment="textEnd"
         android:textColor="@color/white"
-        android:textSize="36sp"
+        android:textSize="50sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/label_result" />
+        app:layout_constraintTop_toBottomOf="@+id/binary_number_2" />
 
     <TextView
         android:id="@+id/label_number_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
-        android:text="1. Number"
+        android:text="(1)"
         android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/binary_number_1" />
 
     <TextView
         android:id="@+id/label_number_2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="2. Number"
+        android:text="(2)"
         android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/binary_number_1" />
+
+    <TextView
+        android:id="@+id/label_result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Result"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/binary_number_2" />
 
 
 </android.support.constraint.ConstraintLayout>
