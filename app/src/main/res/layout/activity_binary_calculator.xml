@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:theme="@style/ColoredHandleTheme"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/calculator_holder"
     android:layout_width="match_parent"
@@ -143,6 +144,7 @@
         android:layout_height="80dp"
         android:layout_marginTop="60dp"
         android:background="@color/noah_4"
+        android:textCursorDrawable="@drawable/yellow_cursor"
         android:fontFamily="sans-serif-light"
         android:gravity="bottom|right"
         android:maxLines="1"
@@ -161,6 +163,7 @@
         android:layout_width="0dp"
         android:layout_height="80dp"
         android:background="@color/noah_4"
+        android:textCursorDrawable="@drawable/yellow_cursor"
         android:fontFamily="sans-serif-light"
         android:gravity="top|right"
         android:maxLines="1"
