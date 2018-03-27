@@ -14,6 +14,7 @@ import com.simplemobiletools.commons.extensions.performHapticFeedback
 import kotlinx.android.synthetic.main.activity_binary_calculator.*
 import android.text.InputType
 import android.view.View.OnTouchListener
+import android.widget.Toast
 import com.simplemobiletools.calculator.helpers.BinaryCalculator
 
 
@@ -46,7 +47,7 @@ class BinaryCalculatorActivity : SimpleActivity(), Calculator {
             it.setOnClickListener { calc.numpadClicked(it.id); checkHaptic(it) }
         }
 
-        binary_number_1.setOnTouchListener(OnTouchListener { v, event ->
+        binary_number_1.setOnTouchListener({ v, event ->
             lastTouched = binary_number_1
             val inType = binary_number_1.getInputType()
             binary_number_1.setInputType(InputType.TYPE_NULL)
@@ -55,7 +56,7 @@ class BinaryCalculatorActivity : SimpleActivity(), Calculator {
             true // consume touch event
         })
 
-        binary_number_2.setOnTouchListener(OnTouchListener { v, event ->
+        binary_number_2.setOnTouchListener({ v, event ->
             lastTouched = binary_number_2
             val inType = binary_number_2.getInputType()
             binary_number_2.setInputType(InputType.TYPE_NULL)
@@ -68,16 +69,28 @@ class BinaryCalculatorActivity : SimpleActivity(), Calculator {
             lastTouched.text = lastTouched.text.dropLast(1)
         }
         btn_all_clear.setOnClickListener {
-            calc.handleReset()
-            binary_number_1.setText("")
-            binary_number_2.setText("")
             binary_result.text = ""
+            binary_number_2.setText("")
+            binary_number_1.setText("")
+            lastTouched = binary_number_1
             binary_number_1.requestFocus()
         }
 
         btn_plus.setOnClickListener{
-            //TODO:Add null check for EditText fields. Throws error at the moment.
-            binary_result.text = binaryCalculator.addBinary(binary_number_1.text.toString(), binary_number_2.text.toString())
+
+            if(binary_number_1.text.isNullOrBlank()){
+                "Please enter a valid binary number".toast(this)
+                lastTouched = binary_number_1
+                binary_number_1.requestFocus()
+
+            }else if (binary_number_2.text.isNullOrBlank()){
+                "Please enter a valid binary number".toast(this)
+                lastTouched = binary_number_2
+                binary_number_2.requestFocus()
+
+            }else{
+                binary_result.text = binaryCalculator.addBinary(binary_number_1.text.toString(), binary_number_2.text.toString())
+            }
         }
     }
 
@@ -103,5 +116,8 @@ class BinaryCalculatorActivity : SimpleActivity(), Calculator {
         if (vibrateOnButtonPress) {
             view.performHapticFeedback()
         }
+    }
+    fun Any.toast(context: Context) {
+        Toast.makeText(context, this.toString(), Toast.LENGTH_LONG).show()
     }
 }
