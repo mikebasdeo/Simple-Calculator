@@ -124,6 +124,6 @@ class UnitConversionActivity : SimpleActivity(), Calculator {
     }
 
     override fun getFormula(): String {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return before.text.toString()
     }
 }
