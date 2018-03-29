@@ -15,6 +15,8 @@ import com.simplemobiletools.calculator.helpers.CalculatorImpl
 import com.simplemobiletools.calculator.helpers.Formatter
 import com.simplemobiletools.commons.extensions.performHapticFeedback
 import kotlinx.android.synthetic.main.activity_unit_conversion.*
+import java.math.BigDecimal
+import java.text.DecimalFormat
 
 
 class UnitConversionActivity : SimpleActivity(), Calculator {
@@ -126,13 +128,14 @@ class UnitConversionActivity : SimpleActivity(), Calculator {
         if(input == null)
             input = 0.0
 
-        after.text = converter.calculate(
+        val result = converter.calculate(
                     input,
                     units_before_spinner.selectedItem.toString(),
                     units_after_spinner.selectedItem.toString()
                     )
         before_abbr.text = converter.getMap().getValue(units_before_spinner.selectedItem.toString()).second
         after_abbr.text = converter.getMap().getValue(units_after_spinner.selectedItem.toString()).second
+        after.text = trimResult(result)
     }
 
     private fun decimalClicked() {
@@ -141,5 +144,13 @@ class UnitConversionActivity : SimpleActivity(), Calculator {
         else
             if(!before.text.contains("."))
                 setFormula(".", this)
+    }
+
+    private fun trimResult(input: Double): String{
+        val outForm = DecimalFormat("#,###.00")
+        return if (input > 999)
+            outForm.format(BigDecimal(input).setScale(4, BigDecimal.ROUND_HALF_UP).toDouble())
+        else
+            BigDecimal(input).setScale(4, BigDecimal.ROUND_HALF_UP).toDouble().toString()
     }
 }
