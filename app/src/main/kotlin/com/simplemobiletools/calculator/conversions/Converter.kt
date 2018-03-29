@@ -4,7 +4,7 @@ import java.text.DecimalFormat
 
 abstract class Converter {
 
-    var outForm = DecimalFormat("#,###.00")
+    private var outForm = DecimalFormat("#,###.00")
 
     open fun calculate(beginningQty: Double?, beginningUnitType: String, endingUnitType: String): String{
         var endingQty: Double = (1.0 / getMap().getValue(beginningUnitType).first)
@@ -14,9 +14,10 @@ abstract class Converter {
         else
             return ""
 
-        if (endingQty > 999)
-            return outForm.format(BigDecimal(endingQty).setScale(4, BigDecimal.ROUND_HALF_UP).toDouble())
-        else return BigDecimal(endingQty).setScale(4, BigDecimal.ROUND_HALF_UP).toDouble().toString()
+        return if (endingQty > 999)
+            outForm.format(BigDecimal(endingQty).setScale(4, BigDecimal.ROUND_HALF_UP).toDouble())
+        else
+            BigDecimal(endingQty).setScale(4, BigDecimal.ROUND_HALF_UP).toDouble().toString()
     }
 
     abstract fun getMap(): Map<String, Pair<Double, String>>

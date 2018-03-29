@@ -126,13 +126,11 @@ class UnitConversionActivity : SimpleActivity(), Calculator {
         if(input == null)
             input = 0.0
 
-        val res = converter.calculate(
+        after.text = converter.calculate(
                     input,
                     units_before_spinner.selectedItem.toString(),
                     units_after_spinner.selectedItem.toString()
                     )
-
-        after.text = res.toString()
         before_abbr.text = converter.getMap().getValue(units_before_spinner.selectedItem.toString()).second
         after_abbr.text = converter.getMap().getValue(units_after_spinner.selectedItem.toString()).second
     }
