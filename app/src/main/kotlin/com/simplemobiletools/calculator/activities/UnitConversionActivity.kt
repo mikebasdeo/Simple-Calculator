@@ -17,6 +17,7 @@ import com.simplemobiletools.calculator.helpers.Formatter
 import com.simplemobiletools.commons.extensions.performHapticFeedback
 import com.simplemobiletools.commons.extensions.toast
 import kotlinx.android.synthetic.main.activity_unit_conversion.*
+import java.text.DecimalFormat
 
 
 class UnitConversionActivity : SimpleActivity(), Calculator {
@@ -125,11 +126,10 @@ class UnitConversionActivity : SimpleActivity(), Calculator {
                 units_before_spinner.selectedItem.toString(),
                 units_after_spinner.selectedItem.toString()
         )
-        val toast = Toast.makeText(this, "" + before.text.toString().replace(",","").toDouble(), Toast.LENGTH_LONG)
-        toast.show()
+        //val toast = Toast.makeText(this, "" + before.text.toString().replace(",","").toDouble(), Toast.LENGTH_LONG)
+        //toast.show()
 
-
-        after.text=res.toString()
+        after.text = res
         before_abbr.text = converter.getMap().getValue(units_before_spinner.selectedItem.toString()).second
         after_abbr.text = converter.getMap().getValue(units_after_spinner.selectedItem.toString()).second
     }
