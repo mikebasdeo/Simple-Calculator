@@ -139,7 +139,7 @@ class UnitConversionActivity : SimpleActivity(), Calculator {
     private fun liveUpdate() {
 
         if(before.text.isNullOrBlank())
-            before.text = "0.0"
+            before.text = ""
 
         var input = before.text.toString().replace(",","").toDoubleOrNull()
 
