@@ -138,10 +138,13 @@ class UnitConversionActivity : SimpleActivity(), Calculator {
 
     private fun liveUpdate() {
 
-        if(before.text.isNullOrBlank())
-            before.text = ""
+        before.text = before.text.toString().replace(",", "")
 
-        var input = before.text.toString().replace(",","").toDoubleOrNull()
+        if(before.text.isNullOrBlank()) {
+            before.text = ""
+        }
+
+        var input = before.text.toString().toDoubleOrNull()
 
         if(input == null)
             input = 0.0
@@ -154,6 +157,8 @@ class UnitConversionActivity : SimpleActivity(), Calculator {
         before_abbr.text = converter.getMap().getValue(units_before_spinner.selectedItem.toString()).second
         after_abbr.text = converter.getMap().getValue(units_after_spinner.selectedItem.toString()).second
         after.text = trimResult(result)
+        if(input == 0.0)
+            after.text = ""
     }
 
     private fun decimalClicked() {
