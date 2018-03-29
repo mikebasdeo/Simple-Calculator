@@ -28,8 +28,14 @@ class BinaryCalculatorActivity : SimpleActivity() {
 
         binary_number_2.paintFlags = binary_number_2.paintFlags or Paint.UNDERLINE_TEXT_FLAG
 
-        btn_0.setOnClickListener { lastTouched.text.insert(0, "0")}
-        btn_1.setOnClickListener { lastTouched.text.insert(0, "1") }
+        btn_0.setOnClickListener {
+            var curPosition = lastTouched.selectionStart
+            lastTouched.text.insert(curPosition, "0")
+        }
+        btn_1.setOnClickListener {
+            var curPosition = lastTouched.selectionStart
+            lastTouched.text.insert(curPosition, "1")
+        }
 
         binary_number_1.setOnTouchListener { input, event ->
             input.onTouchEvent(event)
@@ -69,7 +75,7 @@ class BinaryCalculatorActivity : SimpleActivity() {
                 lastTouched = binary_number_2
                 binary_number_2.requestFocus()
             }else{
-                //TODO: Add symbol?
+                //TODO: Add operation symbol?
                 binary_result.text = binaryCalculator.addBinary(binary_number_1.text.toString(), binary_number_2.text.toString())
             }
         }
