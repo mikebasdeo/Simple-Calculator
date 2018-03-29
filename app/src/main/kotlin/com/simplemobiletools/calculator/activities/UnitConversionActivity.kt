@@ -43,6 +43,7 @@ class UnitConversionActivity : SimpleActivity(), Calculator {
         }
         btn_del.setOnClickListener { before.text = before.text.dropLast(1); after.text = ""; checkHaptic(it) }
         btn_all_clear.setOnClickListener { calc.handleReset(); after.text = ""}
+        btn_divide.setOnClickListener { swap() }
         btn_equals.setOnClickListener{
             var res =   converter.calculate(
                         before.text.toString().toDoubleOrNull(),
@@ -159,5 +160,14 @@ class UnitConversionActivity : SimpleActivity(), Calculator {
             copyToClipboard(value)
             true
         }
+    }
+
+    private fun swap() {
+        var oldBefore = units_before_spinner.getSelectedItemPosition()
+        var oldAfter = units_after_spinner.getSelectedItemPosition()
+
+        units_before_spinner.setSelection(oldAfter)
+        units_after_spinner.setSelection(oldBefore)
+
     }
 }
