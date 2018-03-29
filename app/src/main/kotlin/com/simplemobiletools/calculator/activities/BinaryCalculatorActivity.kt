@@ -66,15 +66,17 @@ class BinaryCalculatorActivity : SimpleActivity() {
 
         btn_plus.setOnClickListener{
 
-            if(binary_number_1.text.isNullOrBlank()){
+            if(binary_number_1.text.isNullOrBlank()) {
                 "Please enter a valid binary number".toast(this)
                 lastTouched = binary_number_1
                 binary_number_1.requestFocus()
-            }else if (binary_number_2.text.isNullOrBlank()){
+            }
+            else if (binary_number_2.text.isNullOrBlank()) {
                 "Please enter a valid binary number".toast(this)
                 lastTouched = binary_number_2
                 binary_number_2.requestFocus()
-            }else{
+            }
+            else {
                 //TODO: Add operation symbol?
                 binary_result.text = binaryCalculator.addBinary(binary_number_1.text.toString(), binary_number_2.text.toString())
             }
@@ -82,16 +84,52 @@ class BinaryCalculatorActivity : SimpleActivity() {
 
         btn_minus.setOnClickListener{
 
-            if(binary_number_1.text.isNullOrBlank()){
+            if(binary_number_1.text.isNullOrBlank()) {
                 "Please enter a valid binary number".toast(this)
                 lastTouched = binary_number_1
                 binary_number_1.requestFocus()
-            }else if (binary_number_2.text.isNullOrBlank()){
+            }
+            else if (binary_number_2.text.isNullOrBlank()) {
                 "Please enter a valid binary number".toast(this)
                 lastTouched = binary_number_2
                 binary_number_2.requestFocus()
-            }else{
+            }
+            else {
                 binary_result.text = binaryCalculator.subtractBinary(binary_number_1.text.toString(), binary_number_2.text.toString())
+            }
+        }
+
+        btn_multiply.setOnClickListener{
+
+            if(binary_number_1.text.isNullOrBlank()) {
+                "Please enter a valid binary number".toast(this)
+                lastTouched = binary_number_1
+                binary_number_1.requestFocus()
+            }
+            else if (binary_number_2.text.isNullOrBlank()) {
+                "Please enter a valid binary number".toast(this)
+                lastTouched = binary_number_2
+                binary_number_2.requestFocus()
+            }
+            else {
+                binary_result.text = binaryCalculator.multiplyBinary(binary_number_1.text.toString(), binary_number_2.text.toString())
+            }
+        }
+
+        btn_divide.setOnClickListener{
+
+            if(binary_number_1.text.isNullOrBlank()) {
+                "Please enter a valid binary number".toast(this)
+                lastTouched = binary_number_1
+                binary_number_1.requestFocus()
+            }
+            else if (binary_number_2.text.isNullOrBlank()) {
+                "Please enter a valid binary number".toast(this)
+                lastTouched = binary_number_2
+                binary_number_2.requestFocus()
+            }
+            else {
+                binary_result.text = binaryCalculator.divideBinary(binary_number_1.text.toString(), binary_number_2.text.toString())
             }
         }
     }
