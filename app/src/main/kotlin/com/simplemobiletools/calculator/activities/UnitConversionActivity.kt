@@ -8,16 +8,13 @@ import android.widget.AdapterView
 import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.ArrayAdapter
 import android.widget.Spinner
-import android.widget.Toast
 import com.simplemobiletools.calculator.R
 import com.simplemobiletools.calculator.conversions.*
 import com.simplemobiletools.calculator.helpers.Calculator
 import com.simplemobiletools.calculator.helpers.CalculatorImpl
 import com.simplemobiletools.calculator.helpers.Formatter
 import com.simplemobiletools.commons.extensions.performHapticFeedback
-import com.simplemobiletools.commons.extensions.toast
 import kotlinx.android.synthetic.main.activity_unit_conversion.*
-import java.text.DecimalFormat
 
 
 class UnitConversionActivity : SimpleActivity(), Calculator {
@@ -26,9 +23,7 @@ class UnitConversionActivity : SimpleActivity(), Calculator {
     private lateinit var converter: Converter
 
     private var vibrateOnButtonPress = true
-    private fun getButtonIds() = arrayOf(btn_decimal, btn_0, btn_1, btn_2, btn_3, btn_4, btn_5, btn_6, btn_7, btn_8, btn_9)
-
-
+    private fun getButtonIds() = listOf(btn_decimal, btn_0, btn_1, btn_2, btn_3, btn_4, btn_5, btn_6, btn_7, btn_8, btn_9)
 
     @SuppressLint("MissingSuperCall")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,7 +35,7 @@ class UnitConversionActivity : SimpleActivity(), Calculator {
         getButtonIds().forEach {
             it.setOnClickListener { calc.numpadClicked(it.id); liveUpdate(); checkHaptic(it) }
         }
-        btn_del.setOnClickListener { before.text = before.text.dropLast(1); after.text = ""; checkHaptic(it) }
+        btn_del.setOnClickListener { before.text = before.text.dropLast(1); liveUpdate(); checkHaptic(it) }
         btn_all_clear.setOnClickListener { calc.handleReset(); after.text = ""}
         btn_save.setOnClickListener {
             var res =   converter.calculate(
@@ -67,7 +62,6 @@ class UnitConversionActivity : SimpleActivity(), Calculator {
         val afterAdapter: ArrayAdapter<String>
 
         //Create adapters for each of the three spinners.
-        //TODO: Make custom layouts for the drop down menus.
         choiceAdapter = ArrayAdapter(this, R.layout.spinner_item, conversionChoiceList)
         beforeAdapter = ArrayAdapter(this, R.layout.spinner_item_units, unitList)
         afterAdapter = ArrayAdapter(this, R.layout.spinner_item_units, unitList)
@@ -96,7 +90,7 @@ class UnitConversionActivity : SimpleActivity(), Calculator {
                 afterAdapter.notifyDataSetChanged()
             }
             override fun onNothingSelected(arg0: AdapterView<*>) {
-                // TODO Auto-generated method stub
+                //Auto-generated method stub
             }
         }
     }
@@ -110,6 +104,7 @@ class UnitConversionActivity : SimpleActivity(), Calculator {
         calc.setValue(Formatter.doubleToString(d))
     }
 
+    @SuppressLint("SetTextI18n")
     override fun setFormula(value: String, context: Context) {
         if(value == ""){
             before.text = ""
@@ -129,15 +124,22 @@ class UnitConversionActivity : SimpleActivity(), Calculator {
     }
 
     private fun liveUpdate() {
-        var res =   converter.calculate(
-                before.text.toString().replace(",","").toDouble(),
-                units_before_spinner.selectedItem.toString(),
-                units_after_spinner.selectedItem.toString()
-        )
-        //val toast = Toast.makeText(this, "" + before.text.toString().replace(",","").toDouble(), Toast.LENGTH_LONG)
-        //toast.show()
 
-        after.text = res
+        if(before.text.isNullOrBlank())
+            before.text = ""
+
+        var input = before.text.toString().replace(",","").toDoubleOrNull()
+
+        if(input == null)
+            input = 0.0
+
+        val res = converter.calculate(
+                    input,
+                    units_before_spinner.selectedItem.toString(),
+                    units_after_spinner.selectedItem.toString()
+                    )
+
+        after.text = res.toString()
         before_abbr.text = converter.getMap().getValue(units_before_spinner.selectedItem.toString()).second
         after_abbr.text = converter.getMap().getValue(units_after_spinner.selectedItem.toString()).second
     }
