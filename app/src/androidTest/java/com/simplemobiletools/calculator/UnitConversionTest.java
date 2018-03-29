@@ -31,7 +31,7 @@ public class UnitConversionTest {
         press(R.id.units_before_spinner);
         onData(allOf(is(instanceOf(String.class)), is("Kilometers"))).perform(click());
         press(R.id.btn_1);
-        checkResult("1,000.00");
+        checkResult("1,000");
     }
 
     @Test
@@ -44,7 +44,7 @@ public class UnitConversionTest {
         onData(allOf(is(instanceOf(String.class)), is("Seconds"))).perform(click());
         press(R.id.btn_1);
         press(R.id.btn_2);
-        checkResult("720.0");
+        checkResult("720");
     }
 
     @Test
@@ -56,7 +56,7 @@ public class UnitConversionTest {
         press(R.id.units_after_spinner);
         onData(allOf(is(instanceOf(String.class)), is("Ounces"))).perform(click());
         press(R.id.btn_1);
-        checkResult("16.0");
+        checkResult("16");
     }
 
     @Test
@@ -83,7 +83,7 @@ public class UnitConversionTest {
         press(R.id.btn_1);
         press(R.id.btn_0);
         press(R.id.btn_0);
-        checkResult("1.6387");
+        checkResult("1.638");
     }
 
     @Test
@@ -96,15 +96,15 @@ public class UnitConversionTest {
         onData(allOf(is(instanceOf(String.class)), is("Kelvin"))).perform(click());
         press(R.id.btn_9);
         press(R.id.btn_8);
-        checkResult("371.15");
+        checkResult("371.1");
         press(R.id.units_after_spinner);
         onData(allOf(is(instanceOf(String.class)), is("Fahrenheit"))).perform(click());
         press(R.id.btn_save);
-        checkResult("208.4");
+        checkResult("208");
         press(R.id.units_before_spinner);
         onData(allOf(is(instanceOf(String.class)), is("Kelvin"))).perform(click());
         press(R.id.btn_save);
-        checkResult("-283.27");
+        checkResult("-283.2");
     }
 
     private void press(int id) {

@@ -15,11 +15,6 @@ import org.robolectric.annotation.Config
 class UnitConversionActivityTest {
     private lateinit var activity: UnitConversionActivity
 
-    @Before
-    fun setUp() {
-        activity = Robolectric.setupActivity(UnitConversionActivity::class.java)
-    }
-
     @Test
     fun temperatureTest(){
         val tc = TemperatureConversion()

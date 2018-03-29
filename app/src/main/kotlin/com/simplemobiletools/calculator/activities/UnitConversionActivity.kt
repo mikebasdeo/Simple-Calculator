@@ -139,7 +139,7 @@ class UnitConversionActivity : SimpleActivity(), Calculator {
     private fun liveUpdate() {
 
         if(before.text.isNullOrBlank())
-            before.text = "0.0"
+            before.text = ""
 
         var input = before.text.toString().replace(",","").toDoubleOrNull()
 
@@ -165,10 +165,24 @@ class UnitConversionActivity : SimpleActivity(), Calculator {
     }
 
     private fun trimResult(input: Double): String{
-        val outForm = DecimalFormat("#,###.00")
-        return if (input > 999)
-            outForm.format(BigDecimal(input).setScale(4, BigDecimal.ROUND_HALF_UP).toDouble())
-        else
-            BigDecimal(input).setScale(4, BigDecimal.ROUND_HALF_UP).toDouble().toString()
+        val outForm = DecimalFormat("#,###.0000")
+        var rawOut = outForm.format(BigDecimal(input).setScale(4, BigDecimal.ROUND_HALF_UP).toDouble())
+
+        if (rawOut[0] == '.')
+            rawOut = '0' + rawOut
+
+        for (i in rawOut.length-1 downTo 0) {
+            if (rawOut[i] == '.') {
+                rawOut = rawOut.dropLast(1)
+                break
+            }
+            if (rawOut[i] == '0') {
+                rawOut = rawOut.dropLast(1)
+            }
+        }
+
+        if (rawOut.endsWith('.')) rawOut = rawOut.dropLast(1)
+
+        return rawOut
     }
 }
