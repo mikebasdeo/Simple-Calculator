@@ -88,6 +88,24 @@ class UnitConversionActivity : SimpleActivity(), Calculator {
                 //Auto-generated method stub
             }
         }
+
+        unitsBeforeSpinner.onItemSelectedListener  = object : OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                liveUpdate()
+            }
+            override fun onNothingSelected(arg0: AdapterView<*>) {
+                //Auto-generated method stub
+            }
+        }
+
+        unitsAfterSpinner.onItemSelectedListener  = object : OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                liveUpdate()
+            }
+            override fun onNothingSelected(arg0: AdapterView<*>) {
+                //Auto-generated method stub
+            }
+        }
     }
 
     override fun setValue(value: String, context: Context) {
@@ -121,7 +139,7 @@ class UnitConversionActivity : SimpleActivity(), Calculator {
     private fun liveUpdate() {
 
         if(before.text.isNullOrBlank())
-            before.text = ""
+            before.text = "0.0"
 
         var input = before.text.toString().replace(",","").toDoubleOrNull()
 
