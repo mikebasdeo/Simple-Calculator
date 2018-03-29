@@ -12,32 +12,32 @@ class TemperatureConversion: Converter() {
         return mapOfTemperatures
     }
 
-    override fun calculate(beginningQty: Double?, beginningUnitType: String, endingUnitType: String): Double {
+    override fun calculate(beginningQty: Double?, beginningUnitType: String, endingUnitType: String): String {
         if(beginningQty == null)
-            return Double.NaN
+            return ""
         when (beginningUnitType) {
              "Fahrenheit" -> {
                  return when (endingUnitType) {
-                     "Celsius" ->  fahrenheitToCelsius(beginningQty)
-                     "Kelvin" -> fahrenheitToKelvin(beginningQty)
-                     else -> beginningQty
+                     "Celsius" ->  fahrenheitToCelsius(beginningQty).toString()
+                     "Kelvin" -> fahrenheitToKelvin(beginningQty).toString()
+                     else -> beginningQty.toString()
                  }
              }
             "Celsius" -> {
                 return when (endingUnitType) {
-                    "Fahrenheit" -> celsiusToFahrenheit(beginningQty)
-                    "Kelvin" -> celsiusToKelvin(beginningQty)
-                    else -> beginningQty
+                    "Fahrenheit" -> celsiusToFahrenheit(beginningQty).toString()
+                    "Kelvin" -> celsiusToKelvin(beginningQty).toString()
+                    else -> beginningQty.toString()
                 }
             }
             "Kelvin" -> {
                 return when (endingUnitType) {
-                    "Fahrenheit" -> kelvinToFahrenheit(beginningQty)
-                    "Celsius" -> kelvinToCelsius(beginningQty)
-                    else -> beginningQty
+                    "Fahrenheit" -> kelvinToFahrenheit(beginningQty).toString()
+                    "Celsius" -> kelvinToCelsius(beginningQty).toString()
+                    else -> beginningQty.toString()
                 }
             }
-            else -> return Double.NaN
+            else -> return ""
          }
     }
 
