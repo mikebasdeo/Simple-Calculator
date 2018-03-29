@@ -13,7 +13,6 @@ import org.robolectric.annotation.Config
 @RunWith(RobolectricTestRunner::class)
 @Config(constants = BuildConfig::class, sdk = [21])
 class UnitConversionActivityTest {
-    private lateinit var activity: UnitConversionActivity
 
     @Test
     fun temperatureTest(){
