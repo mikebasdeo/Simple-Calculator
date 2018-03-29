@@ -8,12 +8,14 @@ import android.widget.AdapterView
 import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import android.widget.Toast
 import com.simplemobiletools.calculator.R
 import com.simplemobiletools.calculator.conversions.*
 import com.simplemobiletools.calculator.helpers.Calculator
 import com.simplemobiletools.calculator.helpers.CalculatorImpl
 import com.simplemobiletools.calculator.helpers.Formatter
 import com.simplemobiletools.commons.extensions.performHapticFeedback
+import com.simplemobiletools.commons.extensions.toast
 import kotlinx.android.synthetic.main.activity_unit_conversion.*
 
 
@@ -35,20 +37,10 @@ class UnitConversionActivity : SimpleActivity(), Calculator {
         calc = CalculatorImpl(this, applicationContext)
 
         getButtonIds().forEach {
-            it.setOnClickListener { calc.numpadClicked(it.id); checkHaptic(it) }
+            it.setOnClickListener { calc.numpadClicked(it.id); liveUpdate(); checkHaptic(it) }
         }
         btn_del.setOnClickListener { before.text = before.text.dropLast(1); after.text = ""; checkHaptic(it) }
         btn_all_clear.setOnClickListener { calc.handleReset(); after.text = ""}
-        btn_save.setOnClickListener{
-            var res =   converter.calculate(
-                        before.text.toString().toDoubleOrNull(),
-                        units_before_spinner.selectedItem.toString(),
-                        units_after_spinner.selectedItem.toString()
-                        )
-            after.text=res.toString()
-            before_abbr.text = converter.getMap().getValue(units_before_spinner.selectedItem.toString()).second
-            after_abbr.text = converter.getMap().getValue(units_after_spinner.selectedItem.toString()).second
-        }
 
         //Three drop down menus. The conversionChoiceSpinner changes the other two automatically.
         val conversionChoiceSpinner: Spinner = findViewById(R.id.conversion_type_spinner)
@@ -114,7 +106,7 @@ class UnitConversionActivity : SimpleActivity(), Calculator {
             before.text = ""
         }
         else{
-            before.text = before.text.toString() + value
+            before.text = before.text.toString().replace(",","") + value
         }
     }
     private fun checkHaptic(view: View) {
@@ -125,5 +117,20 @@ class UnitConversionActivity : SimpleActivity(), Calculator {
 
     override fun getFormula(): String {
         return before.text.toString()
+    }
+
+    private fun liveUpdate() {
+        var res =   converter.calculate(
+                before.text.toString().replace(",","").toDouble(),
+                units_before_spinner.selectedItem.toString(),
+                units_after_spinner.selectedItem.toString()
+        )
+        val toast = Toast.makeText(this, "" + before.text.toString().replace(",","").toDouble(), Toast.LENGTH_LONG)
+        toast.show()
+
+
+        after.text=res.toString()
+        before_abbr.text = converter.getMap().getValue(units_before_spinner.selectedItem.toString()).second
+        after_abbr.text = converter.getMap().getValue(units_after_spinner.selectedItem.toString()).second
     }
 }
