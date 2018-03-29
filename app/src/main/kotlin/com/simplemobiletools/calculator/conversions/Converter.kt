@@ -16,7 +16,7 @@ abstract class Converter {
 
         if (endingQty > 999)
             return outForm.format(BigDecimal(endingQty).setScale(4, BigDecimal.ROUND_HALF_UP).toDouble())
-        else return BigDecimal(endingQty).setScale(3, BigDecimal.ROUND_HALF_UP).toDouble().toString()
+        else return BigDecimal(endingQty).setScale(4, BigDecimal.ROUND_HALF_UP).toDouble().toString()
     }
 
     abstract fun getMap(): Map<String, Pair<Double, String>>

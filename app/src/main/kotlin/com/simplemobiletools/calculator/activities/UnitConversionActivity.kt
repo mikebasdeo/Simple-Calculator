@@ -42,6 +42,14 @@ class UnitConversionActivity : SimpleActivity(), Calculator {
         }
         btn_del.setOnClickListener { before.text = before.text.dropLast(1); after.text = ""; checkHaptic(it) }
         btn_all_clear.setOnClickListener { calc.handleReset(); after.text = ""}
+        btn_save.setOnClickListener {
+            var res =   converter.calculate(
+                before.text.toString().replace(",","").toDouble(),
+                units_before_spinner.selectedItem.toString(),
+                units_after_spinner.selectedItem.toString())
+
+            after.text = res
+        }
 
         //Three drop down menus. The conversionChoiceSpinner changes the other two automatically.
         val conversionChoiceSpinner: Spinner = findViewById(R.id.conversion_type_spinner)
