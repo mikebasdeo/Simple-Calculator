@@ -83,7 +83,7 @@ public class UnitConversionTest {
         press(R.id.btn_1);
         press(R.id.btn_0);
         press(R.id.btn_0);
-        checkResult("1.638");
+        checkResult("1.6387");
     }
 
     @Test
@@ -96,15 +96,15 @@ public class UnitConversionTest {
         onData(allOf(is(instanceOf(String.class)), is("Kelvin"))).perform(click());
         press(R.id.btn_9);
         press(R.id.btn_8);
-        checkResult("371.1");
+        checkResult("371.15");
         press(R.id.units_after_spinner);
         onData(allOf(is(instanceOf(String.class)), is("Fahrenheit"))).perform(click());
         press(R.id.btn_save);
-        checkResult("208");
+        checkResult("208.4");
         press(R.id.units_before_spinner);
         onData(allOf(is(instanceOf(String.class)), is("Kelvin"))).perform(click());
         press(R.id.btn_save);
-        checkResult("-283.2");
+        checkResult("-283.27");
     }
 
     private void press(int id) {

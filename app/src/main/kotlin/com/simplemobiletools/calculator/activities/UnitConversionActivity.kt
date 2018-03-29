@@ -172,11 +172,11 @@ class UnitConversionActivity : SimpleActivity(), Calculator {
             rawOut = '0' + rawOut
 
         for (i in rawOut.length-1 downTo 0) {
-            if (rawOut[i] == '.') {
+            if (rawOut.endsWith('.')) {
                 rawOut = rawOut.dropLast(1)
                 break
             }
-            if (rawOut[i] == '0') {
+            else if (rawOut.endsWith('0')) {
                 rawOut = rawOut.dropLast(1)
             }
         }
