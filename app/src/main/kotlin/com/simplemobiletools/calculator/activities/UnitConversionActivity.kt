@@ -23,7 +23,7 @@ class UnitConversionActivity : SimpleActivity(), Calculator {
     private lateinit var converter: Converter
 
     private var vibrateOnButtonPress = true
-    private fun getButtonIds() = listOf(btn_decimal, btn_0, btn_1, btn_2, btn_3, btn_4, btn_5, btn_6, btn_7, btn_8, btn_9)
+    private fun getDigitIds() = listOf(btn_0, btn_1, btn_2, btn_3, btn_4, btn_5, btn_6, btn_7, btn_8, btn_9)
 
     @SuppressLint("MissingSuperCall")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,11 +32,12 @@ class UnitConversionActivity : SimpleActivity(), Calculator {
         setContentView(R.layout.activity_unit_conversion)
         calc = CalculatorImpl(this, applicationContext)
 
-        getButtonIds().forEach {
+        getDigitIds().forEach {
             it.setOnClickListener { calc.numpadClicked(it.id); liveUpdate(); checkHaptic(it) }
         }
+        btn_decimal.setOnClickListener { decimalClicked(); checkHaptic(it);}
         btn_del.setOnClickListener { before.text = before.text.dropLast(1); liveUpdate(); checkHaptic(it) }
-        btn_all_clear.setOnClickListener { calc.handleReset(); after.text = ""}
+        btn_all_clear.setOnClickListener { calc.handleReset(); after.text = ""; checkHaptic(it);}
 
         //Three drop down menus. The conversionChoiceSpinner changes the other two automatically.
         val conversionChoiceSpinner: Spinner = findViewById(R.id.conversion_type_spinner)
@@ -134,5 +135,13 @@ class UnitConversionActivity : SimpleActivity(), Calculator {
         after.text = res.toString()
         before_abbr.text = converter.getMap().getValue(units_before_spinner.selectedItem.toString()).second
         after_abbr.text = converter.getMap().getValue(units_after_spinner.selectedItem.toString()).second
+    }
+
+    private fun decimalClicked() {
+        if(before.text.isNullOrEmpty())
+            before.text = "0."
+        else
+            if(!before.text.contains("."))
+                setFormula(".", this)
     }
 }
