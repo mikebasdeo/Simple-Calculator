@@ -37,6 +37,21 @@ class BinaryCalculatorActivity : SimpleActivity() {
             lastTouched.text.insert(curPosition, "1")
         }
 
+        btn_convert.setOnClickListener{
+            if(binary_number_1.text.isNullOrBlank()) {
+                "Please enter a valid binary number".toast(this)
+                lastTouched = binary_number_1
+                binary_number_1.requestFocus()
+            }
+                else if(!binary_number_2.text.isNullOrBlank()){
+                "Please leave this section empty for conversion".toast(this)
+            }
+                else {
+                    //TODO: Add operation symbol?
+                    binary_result.text = binaryCalculator.convertBinary(binary_number_1.text.toString())
+                }
+        }
+
         binary_number_1.setOnTouchListener { input, event ->
             input.onTouchEvent(event)
             lastTouched = binary_number_1
