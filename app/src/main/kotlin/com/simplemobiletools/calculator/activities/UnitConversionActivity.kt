@@ -41,9 +41,10 @@ class UnitConversionActivity : SimpleActivity(), Calculator {
         getDigitIds().forEach {
             it.setOnClickListener { calc.numpadClicked(it.id); liveUpdate(); checkHaptic(it) }
         }
-        btn_decimal.setOnClickListener { decimalClicked(); checkHaptic(it);}
+        btn_decimal.setOnClickListener { decimalClicked(); checkHaptic(it) }
         btn_del.setOnClickListener { before.text = before.text.dropLast(1); liveUpdate(); checkHaptic(it) }
-        btn_all_clear.setOnClickListener { calc.handleReset(); after.text = ""; checkHaptic(it);}
+        btn_all_clear.setOnClickListener { calc.handleReset(); after.text = ""; checkHaptic(it) }
+        btn_swap.setOnClickListener { swap(); checkHaptic(it) }
 
         after.setOnLongClickListener { copyToClipboard(true) }
         before.setOnLongClickListener { pasteFromClipBoard() }
@@ -202,7 +203,7 @@ class UnitConversionActivity : SimpleActivity(), Calculator {
         //check clipboard
         val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
         if (!clipboard.primaryClip.getItemAt(0).coerceToText(this).toString().isEmpty()) {
-            before.text = clipboard.primaryClip.getItemAt(0).getText().toString()
+            before.text = clipboard.primaryClip.getItemAt(0).text.toString()
             Toast.makeText(applicationContext,"Pasted from clipboard", Toast.LENGTH_LONG).show()
             return true
         }
@@ -230,8 +231,8 @@ class UnitConversionActivity : SimpleActivity(), Calculator {
     }
 
     private fun swap() {
-        var oldBefore = units_before_spinner.getSelectedItemPosition()
-        var oldAfter = units_after_spinner.getSelectedItemPosition()
+        val oldBefore = units_before_spinner.selectedItemPosition
+        val oldAfter = units_after_spinner.selectedItemPosition
 
         units_before_spinner.setSelection(oldAfter)
         units_after_spinner.setSelection(oldBefore)

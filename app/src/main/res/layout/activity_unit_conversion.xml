@@ -304,7 +304,7 @@
         android:textSize="20sp"
         android:textStyle="bold"
         android:theme="@style/MyButton"
-        app:layout_constraintBottom_toTopOf="@+id/btn_divide"
+        app:layout_constraintBottom_toTopOf="@+id/btn_swap"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/btn_del" />
@@ -341,16 +341,16 @@
         app:layout_constraintStart_toStartOf="@+id/btn_plus" />
 
     <Button
-        android:id="@+id/btn_divide"
+        android:id="@+id/btn_swap"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@color/noah_5"
         android:fontFamily="sans-serif"
         android:minHeight="55sp"
         android:minWidth="77dp"
+        android:text="swap"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:text="swap"
         app:layout_constraintBottom_toTopOf="@+id/btn_minus"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -366,8 +366,8 @@
         android:minWidth="154dp"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBaseline_toBaselineOf="@+id/btn_divide"
-        app:layout_constraintEnd_toStartOf="@+id/btn_divide"
+        app:layout_constraintBaseline_toBaselineOf="@+id/btn_swap"
+        app:layout_constraintEnd_toStartOf="@+id/btn_swap"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/btn_6" />
 
