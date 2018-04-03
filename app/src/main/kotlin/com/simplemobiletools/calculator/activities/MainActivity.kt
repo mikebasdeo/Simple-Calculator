@@ -236,7 +236,7 @@ class MainActivity : SimpleActivity(), Calculator {
     }
 
     private fun changeButtonFunctionality(shiftClicked: Boolean){
-        val mapOfButtonsOnFirstScreen = mapOf<Button, String>(
+       val mapOfButtonsOnFirstScreen = mapOf<Button, String>(
                 btn_pi_rand to "π",
                 btn_sin_asin to "SIN",
                 btn_cos_acos to "COS",
@@ -248,7 +248,7 @@ class MainActivity : SimpleActivity(), Calculator {
                 btn_power_abs to "^",
                 btn_e_neg to "e",
                 btn_ln_floor to "LN")
-        val mapOfButtonsOnSecondScreen = mapOf<Button, String>(
+       val mapOfButtonsOnSecondScreen = mapOf<Button, String>(
                 btn_pi_rand to "RANDOM",
                 btn_sin_asin to "ARCSIN",
                 btn_cos_acos to "ARCCOS",
