@@ -107,6 +107,17 @@ public class UnitConversionTest {
         checkResult("-283.27");
     }
 
+    @Test
+    public void testSwap() {
+        press(R.id.conversion_type_spinner);
+        onData(allOf(is(instanceOf(String.class)), is("Distance"))).perform(click());
+        press(R.id.units_before_spinner);
+        onData(allOf(is(instanceOf(String.class)), is("Kilometers"))).perform(click());
+        press(R.id.btn_1);
+        press(R.id.btn_swap);
+        checkResult("0.001");
+    }
+
     private void press(int id) {
         onView(withId(id)).perform(click());
     }
