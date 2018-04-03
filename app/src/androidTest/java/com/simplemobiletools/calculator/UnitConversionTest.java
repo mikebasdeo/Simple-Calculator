@@ -31,8 +31,7 @@ public class UnitConversionTest {
         press(R.id.units_before_spinner);
         onData(allOf(is(instanceOf(String.class)), is("Kilometers"))).perform(click());
         press(R.id.btn_1);
-        press(R.id.btn_equals);
-        checkResult("1000.0");
+        checkResult("1,000");
     }
 
     @Test
@@ -45,8 +44,7 @@ public class UnitConversionTest {
         onData(allOf(is(instanceOf(String.class)), is("Seconds"))).perform(click());
         press(R.id.btn_1);
         press(R.id.btn_2);
-        press(R.id.btn_equals);
-        checkResult("720.0");
+        checkResult("720");
     }
 
     @Test
@@ -58,8 +56,7 @@ public class UnitConversionTest {
         press(R.id.units_after_spinner);
         onData(allOf(is(instanceOf(String.class)), is("Ounces"))).perform(click());
         press(R.id.btn_1);
-        press(R.id.btn_equals);
-        checkResult("16.000036287432756");
+        checkResult("16");
     }
 
     @Test
@@ -67,13 +64,12 @@ public class UnitConversionTest {
         press(R.id.conversion_type_spinner);
         onData(allOf(is(instanceOf(String.class)), is("Speed"))).perform(click());
         press(R.id.units_before_spinner);
-        onData(allOf(is(instanceOf(String.class)), is("Mph"))).perform(click());
+        onData(allOf(is(instanceOf(String.class)), is("Miles per hour"))).perform(click());
         press(R.id.units_after_spinner);
-        onData(allOf(is(instanceOf(String.class)), is("Km/h"))).perform(click());
+        onData(allOf(is(instanceOf(String.class)), is("Kilometers per hour"))).perform(click());
         press(R.id.btn_8);
         press(R.id.btn_0);
-        press(R.id.btn_equals);
-        checkResult("128.74755983140506");
+        checkResult("128.7476");
     }
 
     @Test
@@ -87,9 +83,30 @@ public class UnitConversionTest {
         press(R.id.btn_1);
         press(R.id.btn_0);
         press(R.id.btn_0);
-        press(R.id.btn_equals);
-        checkResult("1.6387075841025702");
+        checkResult("1.6387");
     }
+
+    @Test
+    public void testTemperatureConvert(){
+        press(R.id.conversion_type_spinner);
+        onData(allOf(is(instanceOf(String.class)), is("Temperature"))).perform(click());
+        press(R.id.units_before_spinner);
+        onData(allOf(is(instanceOf(String.class)), is("Celsius"))).perform(click());
+        press(R.id.units_after_spinner);
+        onData(allOf(is(instanceOf(String.class)), is("Kelvin"))).perform(click());
+        press(R.id.btn_9);
+        press(R.id.btn_8);
+        checkResult("371.15");
+        press(R.id.units_after_spinner);
+        onData(allOf(is(instanceOf(String.class)), is("Fahrenheit"))).perform(click());
+        press(R.id.btn_save);
+        checkResult("208.4");
+        press(R.id.units_before_spinner);
+        onData(allOf(is(instanceOf(String.class)), is("Kelvin"))).perform(click());
+        press(R.id.btn_save);
+        checkResult("-283.27");
+    }
+
     private void press(int id) {
         onView(withId(id)).perform(click());
     }
