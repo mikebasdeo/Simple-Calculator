@@ -16,8 +16,6 @@ android {
     }
 
 
-
-
     defaultConfig {
         applicationId "com.simplemobiletools.calculator"
         minSdkVersion 16
