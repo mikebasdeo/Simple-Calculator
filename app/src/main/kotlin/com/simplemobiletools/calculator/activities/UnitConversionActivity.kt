@@ -45,6 +45,7 @@ class UnitConversionActivity : SimpleActivity(), Calculator {
         btn_del.setOnClickListener { before.text = before.text.dropLast(1); liveUpdate(); checkHaptic(it) }
         btn_all_clear.setOnClickListener { calc.handleReset(); after.text = ""; checkHaptic(it) }
         btn_swap.setOnClickListener { swap(); checkHaptic(it) }
+        btn_save.setOnClickListener { calc.storeHistory(getFormula()); calc.storeResult(after.text.toString())}
 
         after.setOnLongClickListener { copyToClipboard(true) }
         before.setOnLongClickListener { pasteFromClipBoard() }
@@ -182,7 +183,7 @@ class UnitConversionActivity : SimpleActivity(), Calculator {
         var rawOut = outForm.format(BigDecimal(input).setScale(4, BigDecimal.ROUND_HALF_UP).toDouble())
 
         if (rawOut[0] == '.')
-            rawOut = '0' + rawOut
+            rawOut = "0$rawOut"
 
         for (i in rawOut.length-1 downTo 0) {
             if (rawOut.endsWith('.')) {
@@ -236,6 +237,5 @@ class UnitConversionActivity : SimpleActivity(), Calculator {
 
         units_before_spinner.setSelection(oldAfter)
         units_after_spinner.setSelection(oldBefore)
-
     }
 }
