@@ -9,13 +9,14 @@ import android.widget.Toast
 import com.simplemobiletools.calculator.helpers.BinaryCalculator
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import android.widget.TextView
 
 
 class BinaryCalculatorActivity : SimpleActivity() {
 
     private lateinit var binaryCalculator: BinaryCalculator
     private var vibrateOnButtonPress = true
-    private lateinit var lastTouched: EditText
+    private lateinit var lastTouched: TextView
     private fun getButtonIds() = arrayOf(btn_0, btn_1)
 
     @SuppressLint("MissingSuperCall")
@@ -30,17 +31,18 @@ class BinaryCalculatorActivity : SimpleActivity() {
 
         btn_0.setOnClickListener {
             var curPosition = lastTouched.selectionStart
-            lastTouched.text.insert(curPosition, "0")
+            //lastTouched.text.insert(curPosition, "0")
+            lastTouched.text = lastTouched.text.toString() + 0
         }
         btn_1.setOnClickListener {
             var curPosition = lastTouched.selectionStart
-            lastTouched.text.insert(curPosition, "1")
+            //lastTouched.text.insert(curPosition, "1")
+            lastTouched.text = lastTouched.text.toString() + 1
         }
 
         btn_convert.setOnClickListener{
             if(binary_number_1.text.isNullOrBlank()) {
                 "Please enter a valid binary number".toast(this)
-                lastTouched = binary_number_1
                 binary_number_1.requestFocus()
             }
                 else if(!binary_number_2.text.isNullOrBlank()){
