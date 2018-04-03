@@ -153,6 +153,15 @@ public void MultiplicationTest(){
         onView(withId(R.id.binary_number_2)).check(matches(withText("10")));
     }
 
+    @Test
+    public void ConvertTest(){
+        press(R.id.btn_1);
+        press(R.id.btn_1);
+        press(R.id.btn_1);
+        press(R.id.btn_convert);
+        checkResult("7");
+    }
+
     private void press(int id) {
         onView(withId(id)).perform(click());
     }
