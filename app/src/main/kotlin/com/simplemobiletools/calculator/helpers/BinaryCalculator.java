@@ -33,4 +33,9 @@ public class BinaryCalculator {
         int answer = firstToDecimal / secondToDecimal;
         return Integer.toBinaryString(answer);
     }
+
+    public String convertBinary(String binaryNumber){
+        int numberToDecimal = Integer.parseInt(binaryNumber, 2);
+        return Integer.toString(numberToDecimal);
+    }
 }
