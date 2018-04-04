@@ -1,6 +1,7 @@
 package com.simplemobiletools.calculator.activities
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
@@ -194,15 +195,14 @@ class MainActivity : SimpleActivity(), Calculator {
     private fun pasteFromClipBoard(): Boolean {
         //check clipboard
         val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-        if (clipboard.primaryClip.getItemAt(0).coerceToText(this).toString().isNum()){
+        return if (clipboard.primaryClip.getItemAt(0).coerceToText(this).toString().isNum()){
             setFormula(clipboard.primaryClip.getItemAt(0).coerceToText(this).toString(), this)
             Toast.makeText(applicationContext,"Pasted from clipboard", Toast.LENGTH_LONG).show()
-            return true
+            true
         }
         else {
             //do nothing
-
-            return false
+            false
         }
     }
 
@@ -307,5 +307,16 @@ class MainActivity : SimpleActivity(), Calculator {
             btn_e_neg.setOnClickListener { calc.handleOperationOnFormula(E); checkHaptic(it) }
             btn_reciprocal_round.setOnClickListener { calc.handleOperationsOnResult(RECIPROCAL); checkHaptic(it) }
         }
+    }
+
+    @Override
+    private fun Activity.appLaunched() {
+        baseConfig.internalStoragePath = getInternalStoragePath()
+        updateSDCardPath()
+        baseConfig.appRunCount++
+        //Uncomment and replace values.xml strings if we ever want to put our own donation info
+//        if (!isThankYouInstalled() && (baseConfig.appRunCount % 50 == 0)) {
+//            DonateDialog(this)
+//        }
     }
 }
