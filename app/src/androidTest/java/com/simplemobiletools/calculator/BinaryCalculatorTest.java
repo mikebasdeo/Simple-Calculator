@@ -9,16 +9,12 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static android.support.test.espresso.Espresso.onData;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.longClick;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.Matchers.allOf;
-import static org.hamcrest.Matchers.instanceOf;
 
 @RunWith(AndroidJUnit4.class)
 public class BinaryCalculatorTest {
@@ -125,9 +121,8 @@ public void MultiplicationTest(){
         press(R.id.btn_divide);
         longPress(R.id.btn_all_clear);
         checkResult("");
-        onView(withId(R.id.binary_number_1)).check(matches(withText("")));
-        onView(withId(R.id.binary_number_2)).check(matches(withText("")));
-
+        checkBinary1("");
+        checkBinary2("");
     }
 
     @Test
@@ -144,13 +139,13 @@ public void MultiplicationTest(){
         press(R.id.btn_1);
         press(R.id.btn_1);
         press(R.id.btn_del);
-        onView(withId(R.id.binary_number_1)).check(matches(withText("1000011111")));
+        checkBinary1("1000011111");
         press(R.id.binary_number_2);
         press(R.id.btn_1);
         press(R.id.btn_0);
         press(R.id.btn_0);
         press(R.id.btn_del);
-        onView(withId(R.id.binary_number_2)).check(matches(withText("10")));
+        checkBinary2("10");
     }
 
     @Test
@@ -174,7 +169,11 @@ public void MultiplicationTest(){
         onView(withId(R.id.binary_result)).check(matches(withText(desired)));
     }
 
-    private void checkFormula(String desired) {
-        onView(withId(R.id.formula)).check(matches(withText(desired)));
+    private void checkBinary1(String desired) {
+        onView(withId(R.id.binary_number_1)).check(matches(withText(desired)));
+    }
+
+    private void checkBinary2(String desired) {
+        onView(withId(R.id.binary_number_2)).check(matches(withText(desired)));
     }
 }
