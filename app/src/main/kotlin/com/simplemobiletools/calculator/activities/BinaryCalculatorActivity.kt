@@ -15,6 +15,7 @@ class BinaryCalculatorActivity : SimpleActivity() {
 
     private lateinit var binaryCalculator: BinaryCalculator
     private lateinit var lastTouched: TextView
+    private  var isTextOne : Boolean = true
 
     @SuppressLint("MissingSuperCall", "SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,13 +25,24 @@ class BinaryCalculatorActivity : SimpleActivity() {
         binaryCalculator = BinaryCalculator()
         lastTouched = binary_number_1
 
+
         binary_number_2.paintFlags = binary_number_2.paintFlags or Paint.UNDERLINE_TEXT_FLAG
 
         btn_0.setOnClickListener {
             lastTouched.text = lastTouched.text.toString() + 0
+
+            if(binary_number_2.text.toString() == "") {
+                binary_result.text = ""
+                binary_result.text = binaryCalculator.convertBinary(lastTouched.text.toString())
+            }
+
         }
         btn_1.setOnClickListener {
             lastTouched.text = lastTouched.text.toString() + 1
+            if(binary_number_2.text.toString() == "") {
+                binary_result.text = ""
+                binary_result.text = binaryCalculator.convertBinary(lastTouched.text.toString())
+            }
         }
 
         btn_convert.setOnClickListener{
@@ -49,14 +61,18 @@ class BinaryCalculatorActivity : SimpleActivity() {
 
         binary_number_1.setOnTouchListener { input, event ->
             input.onTouchEvent(event)
+            isTextOne = true
             lastTouched = binary_number_1
+            binary_result.text = ""
             val noKeyboard = input.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             noKeyboard.hideSoftInputFromWindow(input.windowToken, 0)
         }
 
         binary_number_2.setOnTouchListener { input, event ->
             input.onTouchEvent(event)
+
             lastTouched = binary_number_2
+            binary_result.text = ""
             val noKeyboard = input.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             noKeyboard.hideSoftInputFromWindow(input.windowToken, 0)
         }
