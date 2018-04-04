@@ -75,75 +75,45 @@ class BinaryCalculatorActivity : SimpleActivity() {
         }
 
         btn_plus.setOnClickListener{
-
-            when {
-                binary_number_1.text.isNullOrBlank() -> {
-                    "Please enter a valid binary number".toast(this)
-                    lastTouched = binary_number_1
-                    binary_number_1.requestFocus()
-                }
-                binary_number_2.text.isNullOrBlank() -> {
-                    "Please enter a valid binary number".toast(this)
-                    lastTouched = binary_number_2
-                    binary_number_2.requestFocus()
-                }
-                else -> //TODO: Add operation symbol?
-                    binary_result.text = binaryCalculator.addBinary(binary_number_1.text.toString(), binary_number_2.text.toString())
-            }
+            if(!missingNumber())
+                binary_result.text = binaryCalculator.addBinary(binary_number_1.text.toString(), binary_number_2.text.toString())
         }
 
         btn_minus.setOnClickListener{
-
-            when {
-                binary_number_1.text.isNullOrBlank() -> {
-                    "Please enter a valid binary number".toast(this)
-                    lastTouched = binary_number_1
-                    binary_number_1.requestFocus()
-                }
-                binary_number_2.text.isNullOrBlank() -> {
-                    "Please enter a valid binary number".toast(this)
-                    lastTouched = binary_number_2
-                    binary_number_2.requestFocus()
-                }
-                else -> binary_result.text = binaryCalculator.subtractBinary(binary_number_1.text.toString(), binary_number_2.text.toString())
-            }
+            if(!missingNumber())
+                binary_result.text = binaryCalculator.subtractBinary(binary_number_1.text.toString(), binary_number_2.text.toString())
         }
 
         btn_multiply.setOnClickListener{
-
-            when {
-                binary_number_1.text.isNullOrBlank() -> {
-                    "Please enter a valid binary number".toast(this)
-                    lastTouched = binary_number_1
-                    binary_number_1.requestFocus()
-                }
-                binary_number_2.text.isNullOrBlank() -> {
-                    "Please enter a valid binary number".toast(this)
-                    lastTouched = binary_number_2
-                    binary_number_2.requestFocus()
-                }
-                else -> binary_result.text = binaryCalculator.multiplyBinary(binary_number_1.text.toString(), binary_number_2.text.toString())
-            }
+            if(!missingNumber())
+                binary_result.text = binaryCalculator.multiplyBinary(binary_number_1.text.toString(), binary_number_2.text.toString())
         }
 
         btn_divide.setOnClickListener{
-            when {
-                binary_number_1.text.isNullOrBlank() -> {
-                    "Please enter a valid binary number".toast(this)
-                    lastTouched = binary_number_1
-                    binary_number_1.requestFocus()
-                }
-                binary_number_2.text.isNullOrBlank() -> {
-                    "Please enter a valid binary number".toast(this)
-                    lastTouched = binary_number_2
-                    binary_number_2.requestFocus()
-                }
-                else -> binary_result.text = binaryCalculator.divideBinary(binary_number_1.text.toString(), binary_number_2.text.toString())
-            }
+            if(!missingNumber())
+                binary_result.text = binaryCalculator.divideBinary(binary_number_1.text.toString(), binary_number_2.text.toString())
         }
     }
 
     private fun Any.toast(context: Context) {
         Toast.makeText(context, this.toString(), Toast.LENGTH_LONG).show()
+    }
+
+    private fun missingNumber(): Boolean {
+        return when {
+            binary_number_1.text.isNullOrBlank() -> {
+                "Please enter a valid binary number".toast(this)
+                lastTouched = binary_number_1
+                binary_number_1.requestFocus()
+                true
+            }
+            binary_number_2.text.isNullOrBlank() -> {
+                "Please enter a valid binary number".toast(this)
+                lastTouched = binary_number_2
+                binary_number_2.requestFocus()
+                true
+            }
+            else -> false
+        }
     }
 }
