@@ -17,4 +17,9 @@
         android:id="@+id/History"
         android:title="@string/history"
         app:showAsAction="never"/>
+    <item
+        android:id="@+id/binary_calculator"
+        android:title="@string/binary_calculator"
+        app:showAsAction="never"/>
+
 </menu>
