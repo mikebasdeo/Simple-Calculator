@@ -79,8 +79,16 @@ class BinaryCalculatorActivity : SimpleActivity() {
 
         btn_del.setOnClickListener {
             val text = lastTouched.text.toString()
-            if(!lastTouched.text.isNullOrEmpty())
+            if(!lastTouched.text.isNullOrEmpty()){
                 lastTouched.text = text.substring(0, text.length - 1)
+                if(binary_number_2.text.toString() == "") {
+                    binary_result.text = ""
+                    if(!lastTouched.text.isNullOrEmpty())
+                        binary_result.text = binaryCalculator.convertBinary(lastTouched.text.toString())
+                    else
+                        binary_result.text = ""
+                }
+            }
         }
 
         btn_all_clear.setOnClickListener {
