@@ -168,7 +168,7 @@
 
     <Button
         android:id="@+id/btn_1"
-        android:layout_width="95dp"
+        android:layout_width="0dp"
         android:layout_height="54dp"
         android:background="@drawable/btn1"
         android:fontFamily="sans-serif"
@@ -178,7 +178,12 @@
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBaseline_toBaselineOf="@+id/btn_2"
-        tools:layout_editor_absoluteY="442dp" />
+        app:layout_constraintEnd_toStartOf="@+id/btn_2"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+
+
+        />
 
     <Button
         android:id="@+id/btn_2"
@@ -499,7 +504,6 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@drawable/minusbtn"
-        android:fontFamily="sans-serif"
         android:minHeight="55sp"
         android:minWidth="77dp"
         android:textSize="20sp"
@@ -511,10 +515,9 @@
 
     <Button
         android:id="@+id/btn_plus"
-        android:layout_width="95dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@drawable/plusbtn"
-        android:fontFamily="sans-serif"
         android:minHeight="55sp"
         android:minWidth="77dp"
         android:textSize="20sp"
