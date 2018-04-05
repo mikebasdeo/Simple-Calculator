@@ -39,44 +39,44 @@ public void AddTest(){
     checkResult("101010");
 }
 
-@Test
-public void SubtractionTest(){
-    press(R.id.btn_1);
-    press(R.id.btn_1);
-    press(R.id.btn_0);
-    press(R.id.btn_1);
-    press(R.id.btn_1);
-    press(R.id.btn_1);
-    press(R.id.btn_1);
-    press(R.id.binary_number_2);
-    press(R.id.btn_1);
-    press(R.id.btn_1);
-    press(R.id.btn_1);
-    press(R.id.btn_0);
-    press(R.id.btn_0);
-    press(R.id.btn_minus);
-    checkResult("1010011");
+    @Test
+    public void SubtractionTest(){
+        press(R.id.btn_1);
+        press(R.id.btn_1);
+        press(R.id.btn_0);
+        press(R.id.btn_1);
+        press(R.id.btn_1);
+        press(R.id.btn_1);
+        press(R.id.btn_1);
+        press(R.id.binary_number_2);
+        press(R.id.btn_1);
+        press(R.id.btn_1);
+        press(R.id.btn_1);
+        press(R.id.btn_0);
+        press(R.id.btn_0);
+        press(R.id.btn_minus);
+        checkResult("1010011");
 
-}
+    }
 
-@Test
-public void MultiplicationTest(){
-    press(R.id.btn_1);
-    press(R.id.btn_1);
-    press(R.id.btn_0);
-    press(R.id.btn_1);
-    press(R.id.btn_1);
-    press(R.id.btn_1);
-    press(R.id.btn_1);
-    press(R.id.binary_number_2);
-    press(R.id.btn_1);
-    press(R.id.btn_1);
-    press(R.id.btn_1);
-    press(R.id.btn_0);
-    press(R.id.btn_0);
-    press(R.id.btn_multiply);
-    checkResult("110000100100");
-}
+    @Test
+    public void MultiplicationTest(){
+        press(R.id.btn_1);
+        press(R.id.btn_1);
+        press(R.id.btn_0);
+        press(R.id.btn_1);
+        press(R.id.btn_1);
+        press(R.id.btn_1);
+        press(R.id.btn_1);
+        press(R.id.binary_number_2);
+        press(R.id.btn_1);
+        press(R.id.btn_1);
+        press(R.id.btn_1);
+        press(R.id.btn_0);
+        press(R.id.btn_0);
+        press(R.id.btn_multiply);
+        checkResult("110000100100");
+    }
 
     @Test
     public void DivisionTest(){

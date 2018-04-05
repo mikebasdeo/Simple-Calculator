@@ -79,7 +79,8 @@ class BinaryCalculatorActivity : SimpleActivity() {
 
         btn_del.setOnClickListener {
             val text = lastTouched.text.toString()
-            lastTouched.text = text.substring(0, text.length - 1)
+            if(!lastTouched.text.isNullOrEmpty())
+                lastTouched.text = text.substring(0, text.length - 1)
         }
 
         btn_all_clear.setOnClickListener {
