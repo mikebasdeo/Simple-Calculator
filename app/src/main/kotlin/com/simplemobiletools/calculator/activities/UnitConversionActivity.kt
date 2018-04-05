@@ -1,6 +1,7 @@
 package com.simplemobiletools.calculator.activities
 
 import android.annotation.SuppressLint
+import android.content.ClipboardManager
 import android.content.Context
 import android.os.Bundle
 import android.view.View
@@ -8,12 +9,15 @@ import android.widget.AdapterView
 import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import android.widget.Toast
 import com.simplemobiletools.calculator.R
 import com.simplemobiletools.calculator.conversions.*
 import com.simplemobiletools.calculator.helpers.Calculator
 import com.simplemobiletools.calculator.helpers.CalculatorImpl
 import com.simplemobiletools.calculator.helpers.Formatter
+import com.simplemobiletools.commons.extensions.copyToClipboard
 import com.simplemobiletools.commons.extensions.performHapticFeedback
+import com.simplemobiletools.commons.extensions.value
 import kotlinx.android.synthetic.main.activity_unit_conversion.*
 import java.math.BigDecimal
 import java.text.DecimalFormat
@@ -37,9 +41,14 @@ class UnitConversionActivity : SimpleActivity(), Calculator {
         getDigitIds().forEach {
             it.setOnClickListener { calc.numpadClicked(it.id); liveUpdate(); checkHaptic(it) }
         }
-        btn_decimal.setOnClickListener { decimalClicked(); checkHaptic(it);}
+        btn_decimal.setOnClickListener { decimalClicked(); checkHaptic(it) }
         btn_del.setOnClickListener { before.text = before.text.dropLast(1); liveUpdate(); checkHaptic(it) }
-        btn_all_clear.setOnClickListener { calc.handleReset(); after.text = ""; checkHaptic(it);}
+        btn_all_clear.setOnClickListener { calc.handleReset(); after.text = ""; checkHaptic(it) }
+        btn_swap.setOnClickListener { swap(); checkHaptic(it) }
+        btn_save.setOnClickListener { calc.storeHistory(getFormula()); calc.storeResult(after.text.toString())}
+
+        after.setOnLongClickListener { copyToClipboard(true) }
+        before.setOnLongClickListener { pasteFromClipBoard() }
 
         //Three drop down menus. The conversionChoiceSpinner changes the other two automatically.
         val conversionChoiceSpinner: Spinner = findViewById(R.id.conversion_type_spinner)
@@ -174,7 +183,7 @@ class UnitConversionActivity : SimpleActivity(), Calculator {
         var rawOut = outForm.format(BigDecimal(input).setScale(4, BigDecimal.ROUND_HALF_UP).toDouble())
 
         if (rawOut[0] == '.')
-            rawOut = '0' + rawOut
+            rawOut = "0$rawOut"
 
         for (i in rawOut.length-1 downTo 0) {
             if (rawOut.endsWith('.')) {
@@ -189,5 +198,44 @@ class UnitConversionActivity : SimpleActivity(), Calculator {
         if (rawOut.endsWith('.')) rawOut = rawOut.dropLast(1)
 
         return rawOut
+    }
+
+    private fun pasteFromClipBoard(): Boolean {
+        //check clipboard
+        val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        if (!clipboard.primaryClip.getItemAt(0).coerceToText(this).toString().isEmpty()) {
+            before.text = clipboard.primaryClip.getItemAt(0).text.toString()
+            Toast.makeText(applicationContext,"Pasted from clipboard", Toast.LENGTH_LONG).show()
+            return true
+        }
+        else {
+            // do nothing
+
+            return false
+        }
+    }
+
+    //private fun String.isNum() = matches(Regex("\\d|\\d{2}|\\d{3}(\\d{3},)+(.|)(\\d)+"))
+
+    private fun copyToClipboard(copyResult: Boolean): Boolean {
+        var value = after.value
+        if (copyResult) {
+            value = after.value
+        }
+
+        return if (value.isEmpty()) {
+            false
+        } else {
+            copyToClipboard(value)
+            true
+        }
+    }
+
+    private fun swap() {
+        val oldBefore = units_before_spinner.selectedItemPosition
+        val oldAfter = units_after_spinner.selectedItemPosition
+
+        units_before_spinner.setSelection(oldAfter)
+        units_after_spinner.setSelection(oldBefore)
     }
 }
