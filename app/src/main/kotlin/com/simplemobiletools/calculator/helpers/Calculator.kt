@@ -8,4 +8,6 @@ interface Calculator {
     fun setValueDouble(d: Double)
 
     fun setFormula(value: String, context: Context)
+
+    fun getFormula(): String
 }

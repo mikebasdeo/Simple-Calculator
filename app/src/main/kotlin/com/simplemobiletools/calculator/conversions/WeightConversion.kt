@@ -3,14 +3,14 @@ package com.simplemobiletools.calculator.conversions
 class WeightConversion: Converter() {
 
     private val mapOfWeights = mapOf(
-            "Kilograms" to 1.0,
-            "Grams" to 1000.0,
-            "Ounces" to 35.274,
-            "Pounds" to 2.20462,
-            "Stone" to 0.157473
+            "Kilograms" to Pair(1.0, "kg"),
+            "Grams" to Pair(1000.0, "g"),
+            "Ounces" to Pair(35.274, "oz"),
+            "Pounds" to Pair(2.20462, "lb"),
+            "Stones" to Pair(0.157473, "st")
     )
 
-    override fun getMap(): Map<String, Double> {
+    override fun getMap(): Map<String, Pair<Double, String>> {
         return mapOfWeights
     }
 }
