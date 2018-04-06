@@ -144,19 +144,16 @@ class BinaryCalculatorActivity : SimpleActivity() {
         btn_and.setOnClickListener{
             if(!missingNumber())
                 binary_result.text = binaryCalculator.andBinary(binary_number_1.text.toString(), binary_number_2.text.toString())
-                selectOperatorButton(btn_and)
         }
 
         btn_or.setOnClickListener{
             if(!missingNumber())
                 binary_result.text = binaryCalculator.orBinary(binary_number_1.text.toString(), binary_number_2.text.toString())
-                selectOperatorButton(btn_or)
         }
 
         btn_xor.setOnClickListener{
             if(!missingNumber())
                 binary_result.text = binaryCalculator.xorBinary(binary_number_1.text.toString(), binary_number_2.text.toString())
-                selectOperatorButton(btn_xor)
         }
     }
 
@@ -201,19 +198,6 @@ class BinaryCalculatorActivity : SimpleActivity() {
         btn_multiply.setBackgroundColor(ContextCompat.getColor(this, R.color.noah_3))
         btn_divide.setTextColor(ContextCompat.getColor(this, R.color.white))
         btn_divide.setBackgroundColor(ContextCompat.getColor(this, R.color.noah_3))
-
-        btn_and.setTextColor(ContextCompat.getColor(this, R.color.white))
-        btn_and.setBackgroundColor(ContextCompat.getColor(this, R.color.noah_4))
-
-        btn_or.setTextColor(ContextCompat.getColor(this, R.color.white))
-        btn_or.setBackgroundColor(ContextCompat.getColor(this, R.color.noah_4))
-
-        btn_xor.setTextColor(ContextCompat.getColor(this, R.color.white))
-        btn_xor.setBackgroundColor(ContextCompat.getColor(this, R.color.noah_4))
-
-        btn_nor.setTextColor(ContextCompat.getColor(this, R.color.white))
-        btn_nor.setBackgroundColor(ContextCompat.getColor(this, R.color.noah_4))
-
     }
 
     private fun selectOperatorButton(button: Button){
