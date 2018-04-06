@@ -114,6 +114,11 @@ class BinaryCalculatorActivity : SimpleActivity() {
             if(!missingNumber())
                 binary_result.text = binaryCalculator.andBinary(binary_number_1.text.toString(), binary_number_2.text.toString())
         }
+        btn_nor.setOnClickListener{
+            if(!missingNumber()){
+                binary_result.text = binaryCalculator.norBinary(binary_number_1.text.toString())
+            }
+        }
 
         btn_or.setOnClickListener{
             if(!missingNumber())
