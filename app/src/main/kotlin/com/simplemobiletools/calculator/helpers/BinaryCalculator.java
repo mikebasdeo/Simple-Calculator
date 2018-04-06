@@ -46,7 +46,12 @@ public class BinaryCalculator {
         int firstToDecimal = Integer.parseInt(first, 2);
         int secondToDecimal = Integer.parseInt(second, 2);
         int answer = firstToDecimal - secondToDecimal;
-        return Integer.toBinaryString(answer);
+        if(answer < 0){
+            return "";
+        }else{
+            return Integer.toBinaryString(answer);
+        }
+
     }
 
     public String multiplyBinary(String first, String second) {
