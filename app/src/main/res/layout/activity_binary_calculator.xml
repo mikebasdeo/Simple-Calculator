@@ -225,7 +225,7 @@
         android:id="@+id/label_result"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="bottom|left"
+        android:gravity="bottom"
         android:textColor="@color/noah_5"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
