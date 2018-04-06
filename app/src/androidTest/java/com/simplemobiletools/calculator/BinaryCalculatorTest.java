@@ -29,13 +29,13 @@ public void AddTest(){
     press(R.id.btn_1);
     press(R.id.btn_1);
     press(R.id.btn_0);
-    press(R.id.binary_number_2);
-    press(R.id.btn_1);
-    press(R.id.btn_1);
-    press(R.id.btn_1);
-    press(R.id.btn_0);
-    press(R.id.btn_0);
     press(R.id.btn_plus);
+    press(R.id.btn_1);
+    press(R.id.btn_1);
+    press(R.id.btn_1);
+    press(R.id.btn_0);
+    press(R.id.btn_0);
+
     checkResult("101010");
 }
 
@@ -48,13 +48,13 @@ public void AddTest(){
         press(R.id.btn_1);
         press(R.id.btn_1);
         press(R.id.btn_1);
-        press(R.id.binary_number_2);
-        press(R.id.btn_1);
-        press(R.id.btn_1);
-        press(R.id.btn_1);
-        press(R.id.btn_0);
-        press(R.id.btn_0);
         press(R.id.btn_minus);
+        press(R.id.btn_1);
+        press(R.id.btn_1);
+        press(R.id.btn_1);
+        press(R.id.btn_0);
+        press(R.id.btn_0);
+
         checkResult("1010011");
 
     }
@@ -68,13 +68,13 @@ public void AddTest(){
         press(R.id.btn_1);
         press(R.id.btn_1);
         press(R.id.btn_1);
-        press(R.id.binary_number_2);
-        press(R.id.btn_1);
-        press(R.id.btn_1);
-        press(R.id.btn_1);
-        press(R.id.btn_0);
-        press(R.id.btn_0);
         press(R.id.btn_multiply);
+        press(R.id.btn_1);
+        press(R.id.btn_1);
+        press(R.id.btn_1);
+        press(R.id.btn_0);
+        press(R.id.btn_0);
+
         checkResult("110000100100");
     }
 
@@ -91,13 +91,13 @@ public void AddTest(){
         press(R.id.btn_1);
         press(R.id.btn_1);
         press(R.id.btn_1);
-        press(R.id.binary_number_2);
+        press(R.id.btn_divide);
         press(R.id.btn_1);
         press(R.id.btn_0);
         press(R.id.btn_1);
         press(R.id.btn_1);
         press(R.id.btn_1);
-        press(R.id.btn_divide);
+
         checkResult("101111");
     }
 
@@ -122,7 +122,7 @@ public void AddTest(){
         press(R.id.btn_1);
         press(R.id.btn_1);
         press(R.id.btn_divide);
-        longPress(R.id.btn_all_clear);
+        press(R.id.btn_all_clear);
         checkResult("");
         checkBinary1("");
         checkBinary2("");
@@ -157,8 +157,51 @@ public void AddTest(){
         press(R.id.btn_1);
         press(R.id.btn_1);
         press(R.id.btn_1);
-        press(R.id.btn_convert);
-        checkResult("7");
+     checkResult("7");
+    }
+
+    @Test
+    public void andTest(){
+        press(R.id.btn_1);
+        press(R.id.btn_0);
+        press(R.id.btn_0);
+        press(R.id.btn_1);
+        press(R.id.binary_number_2);
+        press(R.id.btn_1);
+        press(R.id.btn_0);
+        press(R.id.btn_1);
+        press(R.id.btn_0);
+        press(R.id.btn_and);
+        checkResult("1000");
+    }
+    @Test
+    public void orTest(){
+        press(R.id.btn_1);
+        press(R.id.btn_0);
+        press(R.id.btn_0);
+        press(R.id.btn_1);
+        press(R.id.binary_number_2);
+        press(R.id.btn_1);
+        press(R.id.btn_0);
+        press(R.id.btn_1);
+        press(R.id.btn_0);
+        press(R.id.btn_or);
+        checkResult("1011");
+    }
+
+    @Test
+    public void xor_test(){
+        press(R.id.btn_1);
+        press(R.id.btn_0);
+        press(R.id.btn_0);
+        press(R.id.btn_1);
+        press(R.id.binary_number_2);
+        press(R.id.btn_1);
+        press(R.id.btn_0);
+        press(R.id.btn_1);
+        press(R.id.btn_0);
+        press(R.id.btn_or);
+        checkResult("11");
     }
 
     private void press(int id) {
