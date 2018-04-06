@@ -258,10 +258,25 @@
         android:text="OR"
         android:textSize="20sp"
         android:textStyle="bold"
+        app:layout_constraintBaseline_toBaselineOf="@+id/btn_nor"
+        app:layout_constraintEnd_toStartOf="@+id/btn_nor"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btn_and" />
+    <Button
+        android:id="@+id/btn_nor"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/noah_4"
+        android:fontFamily="sans-serif"
+        android:minHeight="55sp"
+        android:minWidth="77dp"
+        android:text="NOR"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintBaseline_toBaselineOf="@+id/btn_xor"
         app:layout_constraintEnd_toStartOf="@+id/btn_xor"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/btn_and" />
+        app:layout_constraintStart_toEndOf="@+id/btn_or" />
 
     <Button
         android:id="@+id/btn_xor"
@@ -271,13 +286,13 @@
         android:fontFamily="sans-serif"
         android:minHeight="55sp"
         android:minWidth="77dp"
-        android:text="XOR"
+        android:text="xOR"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/btn_all_clear"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/btn_or" />
+        app:layout_constraintStart_toEndOf="@+id/btn_nor" />
 
 
 </android.support.constraint.ConstraintLayout>
