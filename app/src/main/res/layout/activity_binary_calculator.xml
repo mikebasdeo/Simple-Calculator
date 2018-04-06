@@ -199,27 +199,11 @@
         app:layout_constraintTop_toBottomOf="@+id/binary_number_2"
         tools:ignore="RtlCompat" />
 
-    <Button
-        android:id="@+id/btn_convert"
-        android:layout_width="0dp"
-        android:layout_height="80dp"
-        android:background="@color/noah_1"
-        android:fontFamily="sans-serif"
-        android:text="CONVERT"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/binary_result"
-        />
-
     <TextView
         android:id="@+id/label_number_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="(1)"
-        android:textColor="@color/white"
+        android:textColor="@color/noah_5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/binary_number_1" />
 
@@ -227,8 +211,7 @@
         android:id="@+id/label_number_2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="(2)"
-        android:textColor="@color/white"
+        android:textColor="@color/noah_5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/binary_number_1" />
 
@@ -236,8 +219,7 @@
         android:id="@+id/label_result"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Result"
-        android:textColor="@color/white"
+        android:textColor="@color/noah_5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/binary_number_2" />
 
