@@ -21,7 +21,11 @@ class BinaryCalculatorActivity : SimpleActivity() {
     private lateinit var binaryCalculator: BinaryCalculator
     private lateinit var lastTouched: TextView
     private  var isTextOne : Boolean = true
-
+    private var textOne : String = ""
+    private var MinusPressed: Boolean = false
+    private var MultiplyPressed: Boolean = false
+    private var DividePressed: Boolean = false
+    private var AddPressed: Boolean = false
     @SuppressLint("MissingSuperCall", "SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -29,6 +33,7 @@ class BinaryCalculatorActivity : SimpleActivity() {
         setContentView(R.layout.activity_binary_calculator)
         binaryCalculator = BinaryCalculator()
         lastTouched = binary_number_1
+       
 
 
         binary_number_2.paintFlags = binary_number_2.paintFlags or Paint.UNDERLINE_TEXT_FLAG
@@ -36,11 +41,26 @@ class BinaryCalculatorActivity : SimpleActivity() {
         btn_0.setOnClickListener {
             lastTouched.text = lastTouched.text.toString() + 0
             binary_result.text = ""
+            if(MinusPressed) {
+                binary_result.text = binaryCalculator.subtractBinary(binary_number_1.text.toString(), binary_number_2.text.toString())
+            }
+            else if(AddPressed){
+                binary_result.text = binaryCalculator.addBinary(binary_number_1.text.toString(), binary_number_2.text.toString())
+            }
+            else if (MultiplyPressed){
+                binary_result.text = binaryCalculator.multiplyBinary(binary_number_1.text.toString(), binary_number_2.text.toString())
+            }
+            else if (DividePressed){
+                binary_result.text = binaryCalculator.divideBinary(binary_number_1.text.toString(), binary_number_2.text.toString())
+            }
         }
 
         btn_1.setOnClickListener {
             lastTouched.text = lastTouched.text.toString() + 1
             binary_result.text = ""
+            if(MinusPressed)
+                binary_result.text = binaryCalculator.subtractBinary(binary_number_1.text.toString(), binary_number_2.text.toString())
+
         }
 
         binary_number_1.setOnTouchListener { input, event ->
@@ -54,6 +74,7 @@ class BinaryCalculatorActivity : SimpleActivity() {
 
         binary_number_2.setOnTouchListener { input, event ->
             input.onTouchEvent(event)
+            textOne = lastTouched.text.toString() //Take the value from text 1
             lastTouched = binary_number_2
             binary_result.text = ""
             val noKeyboard = input.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
@@ -80,6 +101,7 @@ class BinaryCalculatorActivity : SimpleActivity() {
             lastTouched = binary_number_1
             binary_number_1.requestFocus()
             resetOperatorColours()
+            resetOperators()
 
         }
 
@@ -105,9 +127,11 @@ class BinaryCalculatorActivity : SimpleActivity() {
         }
 
         btn_plus.setOnClickListener{
-            if(!missingNumber())
-                binary_result.text = binaryCalculator.addBinary(binary_number_1.text.toString(), binary_number_2.text.toString())
-                changeOperatorButtonColors(btn_plus)
+            AddPressed = true
+            binary_number_1.clearFocus()
+            binary_number_2.requestFocus()
+            changeOperatorButtonColors(btn_plus)
+
         }
 
         btn_and.setOnClickListener{
@@ -131,23 +155,30 @@ class BinaryCalculatorActivity : SimpleActivity() {
         }
 
         btn_minus.setOnClickListener{
-            if(!missingNumber())
-                binary_result.text = binaryCalculator.subtractBinary(binary_number_1.text.toString(), binary_number_2.text.toString())
-                changeOperatorButtonColors(btn_minus)
+            MinusPressed = true
+            binary_number_1.clearFocus()
+            binary_number_2.requestFocus()
+            changeOperatorButtonColors(btn_minus)
+
         }
 
         btn_multiply.setOnClickListener{
-            if(!missingNumber())
-                binary_result.text = binaryCalculator.multiplyBinary(binary_number_1.text.toString(), binary_number_2.text.toString())
-                changeOperatorButtonColors(btn_multiply)
+            MultiplyPressed = true
+            binary_number_1.clearFocus()
+            binary_number_2.requestFocus()
+            changeOperatorButtonColors(btn_multiply)
+
         }
 
         btn_divide.setOnClickListener{
-            if(!missingNumber())
-                binary_result.text = binaryCalculator.divideBinary(binary_number_1.text.toString(), binary_number_2.text.toString())
-                changeOperatorButtonColors(btn_divide)
+            DividePressed = true
+            binary_number_2.requestFocus()
+            changeOperatorButtonColors(btn_divide)
+
         }
     }
+
+
 
     private fun Any.toast(context: Context) {
         Toast.makeText(context, this.toString(), Toast.LENGTH_LONG).show()
@@ -177,6 +208,12 @@ class BinaryCalculatorActivity : SimpleActivity() {
             }
             else -> false
         }
+    }
+    private fun resetOperators(){
+        AddPressed = false
+        MinusPressed = false
+        DividePressed = false
+        MultiplyPressed = false
     }
 
     private fun resetOperatorColours(){
