@@ -1,5 +1,7 @@
 package com.simplemobiletools.calculator.helpers;
 
+import java.math.BigInteger;
+
 public class BinaryCalculator {
 
     //constructors
@@ -57,8 +59,11 @@ public class BinaryCalculator {
     public String multiplyBinary(String first, String second) {
         int firstToDecimal = Integer.parseInt(first, 2);
         int secondToDecimal = Integer.parseInt(second, 2);
-        int answer = firstToDecimal * secondToDecimal;
-        return Integer.toBinaryString(answer);
+        BigInteger answer = BigInteger.valueOf(firstToDecimal * secondToDecimal);
+        if(answer.compareTo(BigInteger.ZERO) <= 0)
+            return "Overflow";
+        else
+            return answer.toString(2);
     }
 
     public String divideBinary(String first, String second) {
@@ -69,10 +74,13 @@ public class BinaryCalculator {
     }
 
     public String convertBinary(String binaryNumber){
-        if(binaryNumber != null){
+        if(binaryNumber != null && !binaryNumber.equals("Overflow")){
             int numberToDecimal = Integer.parseInt(binaryNumber, 2);
             return Integer.toString(numberToDecimal);
-        }else{
+        }
+        else if(binaryNumber.equals("Overflow"))
+            return "Overflow";
+        else{
             return "0";
         }
 

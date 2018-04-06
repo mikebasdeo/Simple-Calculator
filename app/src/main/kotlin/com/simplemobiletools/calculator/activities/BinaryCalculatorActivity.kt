@@ -35,17 +35,19 @@ class BinaryCalculatorActivity : SimpleActivity() {
         binary_number_2.paintFlags = binary_number_2.paintFlags or Paint.UNDERLINE_TEXT_FLAG
 
         btn_0.setOnClickListener {
-            lastTouched.text = lastTouched.text.toString() + 0
+            if(lastTouched.text.length < 25)
+                lastTouched.text = lastTouched.text.toString() + 0
 
-            if(hasPreviousOperator == true){
+            if(hasPreviousOperator){
                 lastOperatorTouched.performClick()
             }
         }
 
         btn_1.setOnClickListener {
-            lastTouched.text = lastTouched.text.toString() + 1
+            if(lastTouched.text.length < 25)
+                lastTouched.text = lastTouched.text.toString() + 1
 
-            if(hasPreviousOperator == true){
+            if(hasPreviousOperator){
                 lastOperatorTouched.performClick()
             }
 
@@ -74,7 +76,7 @@ class BinaryCalculatorActivity : SimpleActivity() {
             {
                 lastTouched.text = text.substring(0, text.length - 1)
                 resetOperatorColours()
-                if(hasPreviousOperator == true){
+                if(hasPreviousOperator){
                     lastOperatorTouched.performClick()
                 }
             }
