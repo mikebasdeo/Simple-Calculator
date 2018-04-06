@@ -137,11 +137,22 @@ class BinaryCalculatorActivity : SimpleActivity() {
         binary_result.onChange {
                 label_result.text = binary_result.text
                 if(label_result.text.length > 1){
-                label_result.text = binaryCalculator.convertBinary(label_result.text.toString())
+                    label_result.text = binaryCalculator.convertBinary(label_result.text.toString())
+                }
+        }
+        binary_number_1.onChange {
+            label_number_1.text = binary_number_1.text
+            if(label_number_1.text.length > 1){
+                label_number_1.text = binaryCalculator.convertBinary(label_number_1.text.toString())
             }
-
         }
 
+        binary_number_2.onChange {
+            label_number_2.text = binary_number_2.text
+            if(label_number_2.text.length > 1){
+                label_number_2.text = binaryCalculator.convertBinary(label_number_2.text.toString())
+            }
+        }
 
         btn_minus.setOnClickListener{
             if(!missingNumber())
