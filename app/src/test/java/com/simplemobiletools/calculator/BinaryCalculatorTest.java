@@ -17,7 +17,7 @@ public class BinaryCalculatorTest {
 
     @Test
     public void subtractBinaryTest() {
-        assertEquals("11111111111111111111111111111111", bc.subtractBinary("10", "11"));
+        assertEquals("0", bc.subtractBinary("1", "1"));
     }
 
     @Test
@@ -34,4 +34,15 @@ public class BinaryCalculatorTest {
     public void convertBinaryTest() {
         assertEquals("3927", bc.convertBinary("111101010111"));
     }
+
+    @Test
+    public void andBinaryTest(){assertEquals("1100", bc.andBinary("1100", "1100"));}
+
+    @Test
+    public void orBinaryTest(){assertEquals("1000", bc.andBinary("1011", "1000"));}
+
+    @Test
+    public void xorBinaryTest(){assertEquals("1000", bc.andBinary("1011", "1000"));}
+
+
 }
