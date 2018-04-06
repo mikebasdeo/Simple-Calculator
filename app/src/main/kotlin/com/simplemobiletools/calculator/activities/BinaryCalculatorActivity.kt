@@ -4,6 +4,8 @@ import android.content.Context
 import android.graphics.Paint
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.TextView
@@ -36,7 +38,7 @@ class BinaryCalculatorActivity : SimpleActivity() {
 
             if(lastTouched == binary_number_1){
                 label_number_1.text = binaryCalculator.convertBinary(lastTouched.text.toString())
-            }
+        }
 
             if(lastTouched == binary_number_2){
                 label_number_2.text = binaryCalculator.convertBinary(lastTouched.text.toString())
@@ -108,6 +110,73 @@ class BinaryCalculatorActivity : SimpleActivity() {
                 changeOperatorButtonColors(btn_plus)
 
         }
+
+        btn_and.setOnClickListener{
+            if(!missingNumber())
+                binary_result.text = binaryCalculator.andBinary(binary_number_1.text.toString(), binary_number_2.text.toString())
+
+
+        }
+        btn_or.setOnClickListener{
+            if(!missingNumber())
+                binary_result.text = binaryCalculator.orBinary(binary_number_1.text.toString(), binary_number_2.text.toString())
+
+        }
+
+        btn_xor.setOnClickListener{
+            if(!missingNumber())
+                binary_result.text = binaryCalculator.xorBinary(binary_number_1.text.toString(), binary_number_2.text.toString())
+
+        }
+
+//        binary_result.addTextChangedListener(object : TextWatcher {
+//            override fun afterTextChanged(s: Editable?) {
+//
+//            }
+//            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+//            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+//        })
+
+
+        fun TextView.onChange(cb: (String) -> Unit) {
+            this.addTextChangedListener(object: TextWatcher {
+                override fun afterTextChanged(s: Editable?) {
+                    cb(s.toString())
+                }
+                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
+
+                }
+            })
+        }
+
+        binary_result.onChange {
+                label_result.text = binary_result.text
+            if(label_result.text.length > 1){
+                label_result.text = binaryCalculator.convertBinary(label_result.text.toString())
+            }
+
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         btn_minus.setOnClickListener{
             if(!missingNumber())
