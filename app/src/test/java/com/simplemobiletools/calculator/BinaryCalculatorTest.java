@@ -17,7 +17,7 @@ public class BinaryCalculatorTest {
 
     @Test
     public void subtractBinaryTest() {
-        assertEquals("11111111111111111111111111111111", bc.subtractBinary("10", "11"));
+        assertEquals("0", bc.subtractBinary("1", "1"));
     }
 
     @Test
