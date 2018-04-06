@@ -35,31 +35,13 @@ class BinaryCalculatorActivity : SimpleActivity() {
 
         btn_0.setOnClickListener {
             lastTouched.text = lastTouched.text.toString() + 0
-
-            if(lastTouched == binary_number_1){
-                label_number_1.text = binaryCalculator.convertBinary(lastTouched.text.toString())
-            }
-
-            if(lastTouched == binary_number_2){
-                label_number_2.text = binaryCalculator.convertBinary(lastTouched.text.toString())
-            }
             binary_result.text = ""
-
-
         }
+
         btn_1.setOnClickListener {
             lastTouched.text = lastTouched.text.toString() + 1
-
-            if(lastTouched == binary_number_1){
-                label_number_1.text = binaryCalculator.convertBinary(lastTouched.text.toString())
-            }
-
-            if(lastTouched == binary_number_2){
-                label_number_2.text = binaryCalculator.convertBinary(lastTouched.text.toString())
-            }
             binary_result.text = ""
         }
-
 
         binary_number_1.setOnTouchListener { input, event ->
             input.onTouchEvent(event)
@@ -72,7 +54,6 @@ class BinaryCalculatorActivity : SimpleActivity() {
 
         binary_number_2.setOnTouchListener { input, event ->
             input.onTouchEvent(event)
-
             lastTouched = binary_number_2
             binary_result.text = ""
             val noKeyboard = input.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
@@ -84,7 +65,6 @@ class BinaryCalculatorActivity : SimpleActivity() {
             if(!lastTouched.text.isNullOrEmpty())
             {
                 lastTouched.text = text.substring(0, text.length - 1)
-
                 resetOperatorColours()
                 binary_result.text =""
             }
@@ -101,6 +81,27 @@ class BinaryCalculatorActivity : SimpleActivity() {
             binary_number_1.requestFocus()
             resetOperatorColours()
 
+        }
+
+        binary_result.onChange {
+            label_result.text = binary_result.text
+            if(label_result.text.length > 1){
+                label_result.text = binaryCalculator.convertBinary(label_result.text.toString())
+            }
+        }
+
+        binary_number_1.onChange {
+            label_number_1.text = binary_number_1.text
+            if(label_number_1.text.length > 1){
+                label_number_1.text = binaryCalculator.convertBinary(label_number_1.text.toString())
+            }
+        }
+
+        binary_number_2.onChange {
+            label_number_2.text = binary_number_2.text
+            if(label_number_2.text.length > 1){
+                label_number_2.text = binaryCalculator.convertBinary(label_number_2.text.toString())
+            }
         }
 
         btn_plus.setOnClickListener{
@@ -124,35 +125,6 @@ class BinaryCalculatorActivity : SimpleActivity() {
                 binary_result.text = binaryCalculator.xorBinary(binary_number_1.text.toString(), binary_number_2.text.toString())
         }
 
-
-        fun TextView.onChange(cb: (String) -> Unit) {
-            this.addTextChangedListener(object: TextWatcher {
-                override fun afterTextChanged(s: Editable?) { cb(s.toString()) }
-                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-            })
-        }
-
-        binary_result.onChange {
-                label_result.text = binary_result.text
-                if(label_result.text.length > 1){
-                    label_result.text = binaryCalculator.convertBinary(label_result.text.toString())
-                }
-        }
-        binary_number_1.onChange {
-            label_number_1.text = binary_number_1.text
-            if(label_number_1.text.length > 1){
-                label_number_1.text = binaryCalculator.convertBinary(label_number_1.text.toString())
-            }
-        }
-
-        binary_number_2.onChange {
-            label_number_2.text = binary_number_2.text
-            if(label_number_2.text.length > 1){
-                label_number_2.text = binaryCalculator.convertBinary(label_number_2.text.toString())
-            }
-        }
-
         btn_minus.setOnClickListener{
             if(!missingNumber())
                 binary_result.text = binaryCalculator.subtractBinary(binary_number_1.text.toString(), binary_number_2.text.toString())
@@ -172,34 +144,16 @@ class BinaryCalculatorActivity : SimpleActivity() {
         }
     }
 
-    private fun resetOperatorColours(){
-        btn_plus.setTextColor(ContextCompat.getColor(this, R.color.white))
-        btn_plus.setBackgroundColor(ContextCompat.getColor(this, R.color.noah_3))
-        btn_minus.setTextColor(ContextCompat.getColor(this, R.color.white))
-        btn_minus.setBackgroundColor(ContextCompat.getColor(this, R.color.noah_3))
-        btn_multiply.setTextColor(ContextCompat.getColor(this, R.color.white))
-        btn_multiply.setBackgroundColor(ContextCompat.getColor(this, R.color.noah_3))
-        btn_divide.setTextColor(ContextCompat.getColor(this, R.color.white))
-        btn_divide.setBackgroundColor(ContextCompat.getColor(this, R.color.noah_3))
-    }
-
-    private fun changeOperatorButtonColors(button: Button){
-        btn_plus.setTextColor(ContextCompat.getColor(this, R.color.white))
-        btn_plus.setBackgroundColor(ContextCompat.getColor(this, R.color.noah_3))
-        btn_minus.setTextColor(ContextCompat.getColor(this, R.color.white))
-        btn_minus.setBackgroundColor(ContextCompat.getColor(this, R.color.noah_3))
-        btn_multiply.setTextColor(ContextCompat.getColor(this, R.color.white))
-        btn_multiply.setBackgroundColor(ContextCompat.getColor(this, R.color.noah_3))
-        btn_divide.setTextColor(ContextCompat.getColor(this, R.color.white))
-        btn_divide.setBackgroundColor(ContextCompat.getColor(this, R.color.noah_3))
-
-        button.setTextColor(ContextCompat.getColor(this, R.color.noah_4))
-        button.setBackgroundColor(ContextCompat.getColor(this, R.color.noah_5))
-
-    }
-
     private fun Any.toast(context: Context) {
         Toast.makeText(context, this.toString(), Toast.LENGTH_LONG).show()
+    }
+
+    private fun TextView.onChange(cb: (String) -> Unit) {
+        this.addTextChangedListener(object: TextWatcher {
+            override fun afterTextChanged(s: Editable?) { cb(s.toString()) }
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+        })
     }
 
     private fun missingNumber(): Boolean {
@@ -218,5 +172,23 @@ class BinaryCalculatorActivity : SimpleActivity() {
             }
             else -> false
         }
+    }
+
+    private fun resetOperatorColours(){
+        btn_plus.setTextColor(ContextCompat.getColor(this, R.color.white))
+        btn_plus.setBackgroundColor(ContextCompat.getColor(this, R.color.noah_3))
+        btn_minus.setTextColor(ContextCompat.getColor(this, R.color.white))
+        btn_minus.setBackgroundColor(ContextCompat.getColor(this, R.color.noah_3))
+        btn_multiply.setTextColor(ContextCompat.getColor(this, R.color.white))
+        btn_multiply.setBackgroundColor(ContextCompat.getColor(this, R.color.noah_3))
+        btn_divide.setTextColor(ContextCompat.getColor(this, R.color.white))
+        btn_divide.setBackgroundColor(ContextCompat.getColor(this, R.color.noah_3))
+    }
+
+    private fun changeOperatorButtonColors(button: Button){
+        resetOperatorColours()
+        button.setTextColor(ContextCompat.getColor(this, R.color.noah_4))
+        button.setBackgroundColor(ContextCompat.getColor(this, R.color.noah_5))
+
     }
 }
