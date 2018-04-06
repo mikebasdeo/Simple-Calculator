@@ -35,8 +35,6 @@ public class BinaryCalculator {
     }
 
 
-
-
     public String addBinary(String first, String second) {
         int firstToDecimal = Integer.parseInt(first, 2);
         int secondToDecimal = Integer.parseInt(second, 2);
@@ -73,8 +71,6 @@ public class BinaryCalculator {
             return "0";
         }
 
-
     }
-
 
 }
