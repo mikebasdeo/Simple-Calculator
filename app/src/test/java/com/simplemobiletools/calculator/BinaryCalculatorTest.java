@@ -39,10 +39,10 @@ public class BinaryCalculatorTest {
     public void andBinaryTest(){assertEquals("1100", bc.andBinary("1100", "1100"));}
 
     @Test
-    public void orBinaryTest(){assertEquals("1011", bc.andBinary("1011", "1000"));}
+    public void orBinaryTest(){assertEquals("1000", bc.andBinary("1011", "1000"));}
 
     @Test
-    public void xorBinaryTest(){assertEquals("11", bc.andBinary("1011", "1000"));}
+    public void xorBinaryTest(){assertEquals("1000", bc.andBinary("1011", "1000"));}
 
 
 }

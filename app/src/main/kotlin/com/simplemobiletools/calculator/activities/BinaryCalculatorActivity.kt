@@ -123,11 +123,6 @@ class BinaryCalculatorActivity : SimpleActivity() {
                 binary_result.text = binaryCalculator.subtractBinary(binary_number_1.text.toString(), binary_number_2.text.toString())
                 selectOperatorButton(btn_minus)
         }
-        btn_nor.setOnClickListener{
-            if(!missingNumber()){
-                binary_result.text = binaryCalculator.norBinary(binary_number_1.text.toString())
-            }
-        }
 
         btn_multiply.setOnClickListener{
             if(!missingNumber())
