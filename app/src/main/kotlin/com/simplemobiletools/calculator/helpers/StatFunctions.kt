@@ -8,6 +8,9 @@ fun updateStats(results: ArrayList<String>){
 }
 
 fun getMean(results: ArrayList<String>): String{
+    if(results.isEmpty())
+        return ""
+
     var avg = 0.0
     for(r in results){
         avg += r.toDouble()
@@ -16,6 +19,9 @@ fun getMean(results: ArrayList<String>): String{
 }
 
 fun getMedian(results: ArrayList<String>): String{
+    if(results.isEmpty())
+        return ""
+    
     results.sort()
     return if(results.size % 2 == 0)
         ((results[results.size/2].toDouble() + results[results.size/2 - 1].toDouble())/2).toString()
@@ -56,6 +62,9 @@ fun getMode(results: ArrayList<String>): String{
 }
 
 fun getRange(results: ArrayList<String>): String {
+    if(results.isEmpty())
+        return ""
+
     results.sort()
-    return "${results.first()}, ${results.last()}"
+    return (results.last().toDouble() - results.first().toDouble()).toString()
 }
