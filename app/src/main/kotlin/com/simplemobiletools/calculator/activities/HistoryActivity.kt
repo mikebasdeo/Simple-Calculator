@@ -11,6 +11,7 @@ import android.widget.*
 import com.simplemobiletools.calculator.R
 import com.simplemobiletools.calculator.helpers.Calculator
 import com.simplemobiletools.calculator.helpers.CalculatorImpl
+import kotlinx.android.synthetic.main.activity_history.*
 
 /**
  * Created by Marc-Andre Dragon on 2018-03-01.
@@ -35,6 +36,9 @@ class HistoryActivity : SimpleActivity(), Calculator {
         val scrollEquations = ScrollView(this)
         val scrollResults = ScrollView(this)
 
+        resultsText.addView(scrollResults)
+        equationsText.addView(scrollEquations)
+
         //var value1 = 1; var value2 = 1
         results.forEach {
             val tbrow = TableRow(this)
@@ -56,22 +60,21 @@ class HistoryActivity : SimpleActivity(), Calculator {
             //Table row
             tbrow.addView(delbtn)
             tbrow.addView(textViewRes)
-            scrollResults.addView(tbrow)
+            resultsText.addView(tbrow)
             //temp1 = temp1 +  /*value1.toString()". " +*/ it + "\n"
             //value1++
         }
-        resultsText.addView(scrollResults)
+
         equations.forEach {
             val textViewEq = TextView(this)
             textViewEq.text = it
             textViewEq.gravity = R.id.center or R.id.top
             textViewEq.setTextColor(getColor(R.color.white))
             textViewEq.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18.toFloat())
-            scrollEquations.addView(textViewEq)
+            table_equations.addView(textViewEq)
             //temp2 = temp2 + /*value2.toString() ". " +*/ it + "\n"
             //value2++
         }
-        equationsText.addView(scrollEquations)
     }
 
     @SuppressLint("MissingSuperCall")

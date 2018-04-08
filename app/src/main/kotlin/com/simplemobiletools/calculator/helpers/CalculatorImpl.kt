@@ -230,9 +230,6 @@ class CalculatorImpl(calculator: Calculator, private val context: Context) {
     }
 
     fun deleteResult(value: String) {
-        //Writers
-        val writerRes: Writer = BufferedWriter(FileWriter(mResultHistory, false))
-        val writerEq: Writer = BufferedWriter(FileWriter(mEquationHistory, false))
         //Readers
         val readerEq: Reader = BufferedReader(FileReader(mEquationHistory.absolutePath))
         val readerRes: Reader = BufferedReader(FileReader(mResultHistory.absolutePath))
@@ -247,15 +244,19 @@ class CalculatorImpl(calculator: Calculator, private val context: Context) {
 
         //Double check equation returns the result
         val evaluator = ExtendedDoubleEvaluator()
-        val result = evaluator.evaluate(equa)
+        var result = evaluator.evaluate(equa)
+        result = result.toDouble()
 
-        if(result.equals(value))
+        if(result.equals(value.toDouble()))
         {
             arrayListRes.remove(value)
             arrayListEq.removeAt(index)
         } else {
             throw Exception("The Equation Array is not aligned to the results array.")
         }
+        //Writers
+        val writerRes: Writer = BufferedWriter(FileWriter(mResultHistory, false))
+        val writerEq: Writer = BufferedWriter(FileWriter(mEquationHistory, false))
 
         //Clears the file
         writerEq.write("")
