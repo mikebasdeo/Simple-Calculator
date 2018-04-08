@@ -42,6 +42,7 @@ import com.simplemobiletools.calculator.helpers.CONSTANT.TEMP_FILE
 import com.simplemobiletools.calculator.javaluator.ExtendedDoubleEvaluator
 import java.io.*
 import java.util.*
+import kotlin.collections.ArrayList
 
 class CalculatorImpl(calculator: Calculator, private val context: Context) {
     var displayedFormula: String
@@ -226,6 +227,53 @@ class CalculatorImpl(calculator: Calculator, private val context: Context) {
         writer.appendln()
         writer.flush()
         writer.close()
+    }
+
+    fun deleteResult(value: String) {
+        //Writers
+        val writerRes: Writer = BufferedWriter(FileWriter(mResultHistory, false))
+        val writerEq: Writer = BufferedWriter(FileWriter(mEquationHistory, false))
+        //Readers
+        val readerEq: Reader = BufferedReader(FileReader(mEquationHistory.absolutePath))
+        val readerRes: Reader = BufferedReader(FileReader(mResultHistory.absolutePath))
+        //ArrayLists of values
+        val arrayListRes = ArrayList<String>(readerRes.readLines())
+        val arrayListEq = ArrayList<String>(readerEq.readLines())
+
+
+        //Get index of value to determine the equation to be removed
+        val index = arrayListRes.indexOf(value)
+        val equa = arrayListEq[index]
+
+        //Double check equation returns the result
+        val evaluator = ExtendedDoubleEvaluator()
+        val result = evaluator.evaluate(equa)
+
+        if(result.equals(value))
+        {
+            arrayListRes.remove(value)
+            arrayListEq.removeAt(index)
+        } else {
+            throw Exception("The Equation Array is not aligned to the results array.")
+        }
+
+        //Clears the file
+        writerEq.write("")
+        writerRes.write("")
+        writerRes.append()
+        writerRes.flush()
+        writerRes.close()
+        writerEq.append()
+        writerEq.flush()
+        writerEq.close()
+
+        arrayListEq.forEach {
+            storeHistory(it)
+        }
+
+        arrayListRes.forEach {
+            storeResult(it)
+        }
     }
 
     fun getHistoryEntries(): ArrayList<String> {

@@ -2,8 +2,12 @@ package com.simplemobiletools.calculator.activities
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.os.Build
 import android.os.Bundle
-import android.widget.TextView
+import android.support.annotation.RequiresApi
+import android.support.annotation.Size
+import android.util.TypedValue
+import android.widget.*
 import com.simplemobiletools.calculator.R
 import com.simplemobiletools.calculator.helpers.Calculator
 import com.simplemobiletools.calculator.helpers.CalculatorImpl
@@ -25,20 +29,49 @@ class HistoryActivity : SimpleActivity(), Calculator {
         results = calc.getResults()
         equations = calc.getHistoryEntries()
 
-        val equationsText = findViewById<TextView>(R.id.EquationsText)
-        val resultsText = findViewById<TextView>(R.id.ResultsText)
-        var temp1 = "" ; var temp2 = ""
+        val equationsText = findViewById<TableLayout>(R.id.table_equations)
+        val resultsText = findViewById<TableLayout>(R.id.table_results)
+
+        val scrollEquations = ScrollView(this)
+        val scrollResults = ScrollView(this)
+
         //var value1 = 1; var value2 = 1
         results.forEach {
-            temp1 = temp1 +  /*value1.toString()". " +*/ it + "\n"
+            val tbrow = TableRow(this)
+            val textViewRes = TextView(this)
+            val delbtn = Button(this)
+
+            //Delete button
+            delbtn.text = getText(R.string.delete)
+            delbtn.setTextColor(getColor(R.color.white))
+            delbtn.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14.toFloat())
+            delbtn.setOnClickListener {
+                calc.deleteResult(textViewRes.text.toString())
+            }
+            //Text View
+            textViewRes.text = it
+            textViewRes.gravity = R.id.center or R.id.top
+            textViewRes.setTextColor(getColor(R.color.white))
+            textViewRes.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18.toFloat())
+
+            tbrow.addView(delbtn)
+            tbrow.addView(textViewRes)
+            scrollResults.addView(tbrow)
+            //temp1 = temp1 +  /*value1.toString()". " +*/ it + "\n"
             //value1++
         }
-        resultsText.text = temp1
+        resultsText.addView(scrollResults)
         equations.forEach {
-            temp2 = temp2 + /*value2.toString() ". " +*/ it + "\n"
+            val textViewEq = TextView(this)
+            textViewEq.text = it
+            textViewEq.gravity = R.id.center or R.id.top
+            textViewEq.setTextColor(getColor(R.color.white))
+            textViewEq.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18.toFloat())
+            scrollEquations.addView(textViewEq)
+            //temp2 = temp2 + /*value2.toString() ". " +*/ it + "\n"
             //value2++
         }
-        equationsText.text = temp2
+        equationsText.addView(scrollEquations)
     }
 
     @SuppressLint("MissingSuperCall")
