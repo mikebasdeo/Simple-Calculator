@@ -21,7 +21,7 @@ class HistoryActivity : SimpleActivity(), Calculator {
     private lateinit var equations: ArrayList<String>
     private lateinit var results: ArrayList<String>
 
-    @SuppressLint("MissingSuperCall")
+    @SuppressLint("MissingSuperCall", "NewApi")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_history)
@@ -53,7 +53,7 @@ class HistoryActivity : SimpleActivity(), Calculator {
             textViewRes.gravity = R.id.center or R.id.top
             textViewRes.setTextColor(getColor(R.color.white))
             textViewRes.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18.toFloat())
-
+            //Table row
             tbrow.addView(delbtn)
             tbrow.addView(textViewRes)
             scrollResults.addView(tbrow)
