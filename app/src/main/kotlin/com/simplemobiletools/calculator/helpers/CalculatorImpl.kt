@@ -1,5 +1,6 @@
 package com.simplemobiletools.calculator.helpers
 import android.content.Context
+import android.support.v4.content.ContextCompat.startActivity
 import android.widget.Toast
 import com.simplemobiletools.calculator.R
 import com.simplemobiletools.calculator.helpers.CONSTANT.ABSOLUTE_VALUE
@@ -244,14 +245,14 @@ class CalculatorImpl(calculator: Calculator, private val context: Context) {
 
         //Double check equation returns the result
         val evaluator = ExtendedDoubleEvaluator()
-        var result = evaluator.evaluate(equa)
-        result = result.toDouble()
+        val result = evaluator.evaluate(equa)
 
-        if(result.equals(value.toDouble()))
+        if(result.toDouble()==value.toDouble() || result.toString().contains(value) || result.compareTo(value.toDouble()) <= 0 )
         {
-            arrayListRes.remove(value)
+            arrayListRes.removeAt(index)
             arrayListEq.removeAt(index)
-        } else {
+        }
+        else {
             throw Exception("The Equation Array is not aligned to the results array.")
         }
         //Writers

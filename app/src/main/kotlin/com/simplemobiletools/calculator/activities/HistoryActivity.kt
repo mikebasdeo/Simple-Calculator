@@ -2,11 +2,9 @@ package com.simplemobiletools.calculator.activities
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.os.Build
 import android.os.Bundle
-import android.support.annotation.RequiresApi
-import android.support.annotation.Size
 import android.util.TypedValue
+import android.view.View
 import android.widget.*
 import com.simplemobiletools.calculator.R
 import com.simplemobiletools.calculator.helpers.Calculator
@@ -48,16 +46,20 @@ class HistoryActivity : SimpleActivity(), Calculator {
             //Delete button
             delbtn.text = getText(R.string.delete)
             delbtn.setTextColor(getColor(R.color.white))
-            delbtn.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14.toFloat())
+            //delbtn.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14.toFloat())
             delbtn.setOnClickListener {
                 calc.deleteResult(textViewRes.text.toString())
+                finish()
+                startActivity(intent)
             }
             //Text View
             textViewRes.text = it
             textViewRes.gravity = R.id.center or R.id.top
+            textViewRes.textAlignment = View.TEXT_ALIGNMENT_CENTER
             textViewRes.setTextColor(getColor(R.color.white))
-            textViewRes.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18.toFloat())
+            //textViewRes.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18.toFloat())
             //Table row
+
             tbrow.addView(delbtn)
             tbrow.addView(textViewRes)
             resultsText.addView(tbrow)
@@ -69,12 +71,14 @@ class HistoryActivity : SimpleActivity(), Calculator {
             val textViewEq = TextView(this)
             textViewEq.text = it
             textViewEq.gravity = R.id.center or R.id.top
+            textViewEq.textAlignment = View.TEXT_ALIGNMENT_CENTER
             textViewEq.setTextColor(getColor(R.color.white))
             textViewEq.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18.toFloat())
             table_equations.addView(textViewEq)
             //temp2 = temp2 + /*value2.toString() ". " +*/ it + "\n"
             //value2++
         }
+
     }
 
     @SuppressLint("MissingSuperCall")
