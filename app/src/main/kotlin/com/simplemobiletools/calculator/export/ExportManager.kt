@@ -26,7 +26,6 @@ class ExportManager {
 
             first = false
         }
-        sb.append("\n")
-        w.append(sb.toString())
+        w.appendln(sb.toString())
     }
 }

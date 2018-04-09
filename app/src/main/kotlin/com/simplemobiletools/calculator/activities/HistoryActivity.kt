@@ -4,12 +4,21 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.util.TypedValue
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.*
 import com.simplemobiletools.calculator.R
+import com.simplemobiletools.calculator.export.ExportManager
 import com.simplemobiletools.calculator.helpers.Calculator
 import com.simplemobiletools.calculator.helpers.CalculatorImpl
+import com.simplemobiletools.calculator.helpers.FileHandler
 import kotlinx.android.synthetic.main.activity_history.*
+import java.io.BufferedWriter
+import java.io.File
+import java.io.FileWriter
+import java.io.Writer
+import com.simplemobiletools.calculator.helpers.CONSTANT.FILE
 
 /**
  * Created by Marc-Andre Dragon on 2018-03-01.
@@ -19,6 +28,21 @@ class HistoryActivity : SimpleActivity(), Calculator {
     private lateinit var calc: CalculatorImpl
     private lateinit var equations: ArrayList<String>
     private lateinit var results: ArrayList<String>
+    private lateinit var export: ExportManager
+    private lateinit var  exportFile: File
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_history, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.export -> ExportData()
+            else -> return super.onOptionsItemSelected(item)
+        }
+        return true
+    }
 
     @SuppressLint("MissingSuperCall", "NewApi")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,6 +51,8 @@ class HistoryActivity : SimpleActivity(), Calculator {
         calc = CalculatorImpl(this, applicationContext)
         results = calc.getResults()
         equations = calc.getHistoryEntries()
+        val FileManager = FileHandler(this)
+        exportFile = FileManager.chooseFileType(FILE, "Export")
 
         val equationsText = findViewById<TableLayout>(R.id.table_equations)
         val resultsText = findViewById<TableLayout>(R.id.table_results)
@@ -79,6 +105,13 @@ class HistoryActivity : SimpleActivity(), Calculator {
             //value2++
         }
 
+    }
+
+    fun ExportData() {
+        export = ExportManager()
+        val writer: Writer = BufferedWriter(FileWriter(exportFile, true))
+        export.writeLine(writer, equations)
+        export.writeLine(writer, results)
     }
 
     @SuppressLint("MissingSuperCall")
