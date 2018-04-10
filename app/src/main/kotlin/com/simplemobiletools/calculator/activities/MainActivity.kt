@@ -108,8 +108,14 @@ class MainActivity : SimpleActivity(), Calculator {
         }
 
         btn_save.setOnClickListener {
-            calc.storeHistory(getFormula())
-            calc.storeResult(result.text.toString())
+            if (result.text.toString() != "NaN") {
+                calc.storeHistory(getFormula())
+                calc.storeResult(result.text.toString())
+                toast("State saved to history", Toast.LENGTH_SHORT)
+            }
+            else {
+                toast("Could not save equation: Result invalid", Toast.LENGTH_SHORT)
+            }
         }
 
         formula.setOnLongClickListener { copyToClipboard(false) }

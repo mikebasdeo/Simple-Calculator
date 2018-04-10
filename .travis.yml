@@ -30,3 +30,9 @@ before_install:
 script: 
   - ./gradlew test
   - ./gradlew connectedAndroidTest
+
+
+  compile
+  static analysis
+  unit test
+  ui test
