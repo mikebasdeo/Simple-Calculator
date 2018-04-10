@@ -54,10 +54,6 @@ import com.simplemobiletools.calculator.helpers.Calculator
 import com.simplemobiletools.calculator.helpers.CalculatorImpl
 import com.simplemobiletools.calculator.helpers.Formatter
 import com.simplemobiletools.commons.extensions.*
-import com.simplemobiletools.commons.helpers.LICENSE_AUTOFITTEXTVIEW
-import com.simplemobiletools.commons.helpers.LICENSE_ESPRESSO
-import com.simplemobiletools.commons.helpers.LICENSE_KOTLIN
-import com.simplemobiletools.commons.helpers.LICENSE_ROBOLECTRIC
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.toolbar_layout.*
 import me.grantland.widget.AutofitHelper
@@ -100,9 +96,9 @@ class MainActivity : AppCompatActivity(), Calculator {
         tablayout = tabLayout
         viewpager = viewPager
         viewpageradapter =  ViewPagerAdapter(supportFragmentManager)
-        viewpageradapter.addFragments( HomeFragment(), "Calculator")
-        viewpageradapter.addFragments( TopFreeFragment(), "Unit Converter")
-        viewpageradapter.addFragments( TopPaidFragment(), "Binary Converter")
+        viewpageradapter.addFragments( Fragment_1(), "Calculator")
+        viewpageradapter.addFragments( Fragment_2(), "Unit Converter")
+        viewpageradapter.addFragments( Fragment_3(), "Binary Converter")
         viewpager.adapter = viewpageradapter
         tablayout.setupWithViewPager(viewpager)
 

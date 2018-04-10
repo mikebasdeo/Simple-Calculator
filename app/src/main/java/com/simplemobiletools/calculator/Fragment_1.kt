@@ -11,13 +11,13 @@ import android.view.ViewGroup
 /**
  * A simple [Fragment] subclass.
  */
-class TopPaidFragment : Fragment() {
+class Fragment_1 : Fragment() {
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_top_paid, container, false)
+        return inflater.inflate(R.layout.fragment_1, container, false)
     }
 
 }// Required empty public constructor
