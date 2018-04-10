@@ -6,14 +6,17 @@ import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.support.design.widget.TabLayout
 import android.support.v4.content.ContextCompat
+import android.support.v4.view.ViewPager
+import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.Button
 import android.widget.Toast
-import com.simplemobiletools.calculator.BuildConfig
-import com.simplemobiletools.calculator.R
+import android.support.v7.widget.Toolbar
+import com.simplemobiletools.calculator.*
 import com.simplemobiletools.calculator.extensions.config
 import com.simplemobiletools.calculator.extensions.updateViewColors
 import com.simplemobiletools.calculator.helpers.CONSTANT.ABSOLUTE_VALUE
@@ -56,14 +59,20 @@ import com.simplemobiletools.commons.helpers.LICENSE_ESPRESSO
 import com.simplemobiletools.commons.helpers.LICENSE_KOTLIN
 import com.simplemobiletools.commons.helpers.LICENSE_ROBOLECTRIC
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.toolbar_layout.*
 import me.grantland.widget.AutofitHelper
 
-class MainActivity : SimpleActivity(), Calculator {
+class MainActivity : AppCompatActivity(), Calculator {
     private var storedTextColor = 0
     private var vibrateOnButtonPress = true
     private var storedUseEnglish = false
 
     private lateinit var calc: CalculatorImpl
+
+    lateinit var toolbar : Toolbar
+    lateinit var tablayout : TabLayout
+    lateinit var viewpager : ViewPager
+    lateinit var viewpageradapter : ViewPagerAdapter
 
 //    private val modifierIds: List<Button> = listOf(btn_pi_rand, btn_sin_asin, btn_cos_acos, btn_tan_atan,
 //            btn_reciprocal_round, btn_log_ceil, btn_root_square, btn_mod_cube,
@@ -81,6 +90,22 @@ class MainActivity : SimpleActivity(), Calculator {
 
         var shiftClicked = false
         changeButtonFunctionality(shiftClicked)
+
+
+
+
+        //toolbar crap
+        toolbar = toolBar
+        setSupportActionBar(toolbar)
+        tablayout = tabLayout
+        viewpager = viewPager
+        viewpageradapter =  ViewPagerAdapter(supportFragmentManager)
+        viewpageradapter.addFragments( HomeFragment(), "Calculator")
+        viewpageradapter.addFragments( TopFreeFragment(), "Unit Converter")
+        viewpageradapter.addFragments( TopPaidFragment(), "Binary Converter")
+        viewpager.adapter = viewpageradapter
+        tablayout.setupWithViewPager(viewpager)
+
 
         //Never changes
         btn_plus.setOnClickListener { calc.handleOperationOnFormula(PLUS); checkHaptic(it) }
@@ -126,7 +151,7 @@ class MainActivity : SimpleActivity(), Calculator {
     override fun onResume() {
         super.onResume()
         if (storedUseEnglish != config.useEnglish) {
-            restartActivity()
+            //restartActivity()
             return
         }
 
@@ -187,7 +212,7 @@ class MainActivity : SimpleActivity(), Calculator {
     }
 
     private fun launchAbout() {
-        startAboutActivity(R.string.app_name, LICENSE_KOTLIN or LICENSE_AUTOFITTEXTVIEW or LICENSE_ROBOLECTRIC or LICENSE_ESPRESSO, BuildConfig.VERSION_NAME)
+        //startAboutActivity(R.string.app_name, LICENSE_KOTLIN or LICENSE_AUTOFITTEXTVIEW or LICENSE_ROBOLECTRIC or LICENSE_ESPRESSO, BuildConfig.VERSION_NAME)
     }
 
     private fun getDigitIds() = listOf(btn_decimal, btn_0, btn_1, btn_2, btn_3, btn_4, btn_5,
