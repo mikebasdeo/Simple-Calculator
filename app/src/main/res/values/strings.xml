@@ -18,12 +18,14 @@
     </string>
 
 
-
     <string name="title_activity_unit_conversion">UnitConversionActivity</string>
     <string name="unit_conversion">Unit Conversion</string>
     <string name="custom_row_text">custom_row_text</string>
     <string name="conversion_type" />
     <string name="binary_calculator">Binary Calculator</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
     <!--
