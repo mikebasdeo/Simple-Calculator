@@ -25,7 +25,6 @@ import com.simplemobiletools.calculator.extensions.config
 import com.simplemobiletools.calculator.extensions.updateViewColors
 import com.simplemobiletools.calculator.helpers.*
 import kotlinx.android.synthetic.main.fragment_1.*
-import kotlinx.android.synthetic.main.fragment_2.*
 
 
 /**
@@ -60,8 +59,6 @@ class Fragment_1 : Fragment(), Calculator {
 
 
         calc = CalculatorImpl(this, activity!!.applicationContext)
-
-
 
 
 
