@@ -92,8 +92,8 @@ class MainActivity : AppCompatActivity() {
         viewpager = viewPager
         viewpageradapter =  ViewPagerAdapter(supportFragmentManager)
         viewpageradapter.addFragments( Fragment_1(), "Calculator")
-        viewpageradapter.addFragments( Fragment_2(), "Binary Conversion")
-        viewpageradapter.addFragments( Fragment_3(), "Unit Conversion")
+        viewpageradapter.addFragments( Fragment_2(), "Unit Conversion")
+        viewpageradapter.addFragments( Fragment_3(), "Binary Conversion")
         viewpager.adapter = viewpageradapter
         tablayout.setupWithViewPager(viewpager)
 
