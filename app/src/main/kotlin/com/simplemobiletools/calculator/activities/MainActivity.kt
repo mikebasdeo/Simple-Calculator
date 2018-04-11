@@ -58,12 +58,10 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.toolbar_layout.*
 import me.grantland.widget.AutofitHelper
 
-class MainActivity : AppCompatActivity(), Calculator {
-    private var storedTextColor = 0
-    private var vibrateOnButtonPress = true
-    private var storedUseEnglish = false
+class MainActivity : AppCompatActivity() {
 
-    private lateinit var calc: CalculatorImpl
+    var storedTextColor = 0
+    var storedUseEnglish = false
 
     lateinit var toolbar : Toolbar
     lateinit var tablayout : TabLayout
@@ -82,10 +80,7 @@ class MainActivity : AppCompatActivity(), Calculator {
         setContentView(R.layout.activity_main)
         appLaunched()
 
-        calc = CalculatorImpl(this, applicationContext)
 
-        var shiftClicked = false
-        changeButtonFunctionality(shiftClicked)
 
 
 
@@ -97,50 +92,17 @@ class MainActivity : AppCompatActivity(), Calculator {
         viewpager = viewPager
         viewpageradapter =  ViewPagerAdapter(supportFragmentManager)
         viewpageradapter.addFragments( Fragment_1(), "Calculator")
-        viewpageradapter.addFragments( Fragment_2(), "Unit Converter")
-        viewpageradapter.addFragments( Fragment_3(), "Binary Converter")
+        viewpageradapter.addFragments( Fragment_2(), "Binary Conversion")
+        viewpageradapter.addFragments( Fragment_3(), "Unit Conversion")
         viewpager.adapter = viewpageradapter
         tablayout.setupWithViewPager(viewpager)
 
 
-        //Never changes
-        btn_plus.setOnClickListener { calc.handleOperationOnFormula(PLUS); checkHaptic(it) }
-        btn_minus.setOnClickListener { calc.handleOperationOnFormula(MINUS); checkHaptic(it) }
-        btn_multiply.setOnClickListener { calc.handleOperationOnFormula(MULTIPLY); checkHaptic(it) }
-        btn_divide.setOnClickListener { calc.handleOperationOnFormula(DIVIDE); checkHaptic(it) }
-        btn_memory_1.setOnClickListener { calc.handleViewValue(MEMORY_ONE)}
-        btn_memory_1.setOnLongClickListener{ calc.handleStore(result.text.toString(), MEMORY_ONE); true }
-        btn_memory_2.setOnClickListener { calc.handleViewValue(MEMORY_TWO)}
-        btn_memory_2.setOnLongClickListener{ calc.handleStore(result.text.toString(), MEMORY_TWO); true }
-        btn_memory_3.setOnClickListener { calc.handleViewValue(MEMORY_THREE) }
-        btn_memory_3.setOnLongClickListener{calc.handleStore(result.text.toString(), MEMORY_THREE); true }
-        btn_del.setOnClickListener {calc.handleClear(formula.text.toString()); checkHaptic(it) }
-        btn_all_clear.setOnClickListener { calc.handleReset()}
-        btn_left_bracket.setOnClickListener { calc.handleOperationOnFormula(LEFT_BRACKET); checkHaptic(it) }
-        btn_right_bracket.setOnClickListener { calc.handleOperationOnFormula(RIGHT_BRACKET); checkHaptic(it) }
 
-        btn_shift.setOnClickListener {
-            shiftClicked = !shiftClicked
-            changeButtonFunctionality(shiftClicked)
-        }
 
-        getDigitIds().forEach {
-            it.setOnClickListener { calc.numpadClicked(it.id); checkHaptic(it) }
-        }
 
-        btn_save.setOnClickListener {
-            calc.storeHistory(getFormula())
-            calc.storeResult(result.text.toString())
-        }
 
-        formula.setOnLongClickListener { copyToClipboard(false) }
-        formula.setOnLongClickListener{ pasteFromClipBoard()}
-        result.setOnLongClickListener { copyToClipboard(true) }
 
-        AutofitHelper.create(result)
-        AutofitHelper.create(formula)
-        storeStateVariables()
-        updateViewColors(calculator_holder, config.textColor)
     }
 
     @SuppressLint("MissingSuperCall")
@@ -154,7 +116,7 @@ class MainActivity : AppCompatActivity(), Calculator {
         if (storedTextColor != config.textColor) {
             updateViewColors(calculator_holder, config.textColor)
         }
-        vibrateOnButtonPress = config.vibrateOnButtonPress
+       // vibrateOnButtonPress = config.vibrateOnButtonPress
     }
 
     override fun onPause() {
@@ -186,11 +148,7 @@ class MainActivity : AppCompatActivity(), Calculator {
         }
     }
 
-    private fun checkHaptic(view: View) {
-        if (vibrateOnButtonPress) {
-            view.performHapticFeedback()
-        }
-    }
+
 
     private fun launchHistory() {
         startActivity(Intent(applicationContext, HistoryActivity::class.java))
@@ -211,112 +169,7 @@ class MainActivity : AppCompatActivity(), Calculator {
         //startAboutActivity(R.string.app_name, LICENSE_KOTLIN or LICENSE_AUTOFITTEXTVIEW or LICENSE_ROBOLECTRIC or LICENSE_ESPRESSO, BuildConfig.VERSION_NAME)
     }
 
-    private fun getDigitIds() = listOf(btn_decimal, btn_0, btn_1, btn_2, btn_3, btn_4, btn_5,
-                                        btn_6, btn_7, btn_8, btn_9)
 
-    private fun pasteFromClipBoard(): Boolean {
-        //check clipboard
-        val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-        return if (clipboard.primaryClip.getItemAt(0).coerceToText(this).toString().isNum()){
-            setFormula(clipboard.primaryClip.getItemAt(0).coerceToText(this).toString(), this)
-            Toast.makeText(applicationContext,"Pasted from clipboard", Toast.LENGTH_LONG).show()
-            true
-        }
-        else {
-            //do nothing
-            false
-        }
-    }
-
-    private fun String.isNum() = matches(Regex("\\d|\\d{2}|\\d{3}(\\d{3},)+(.|)(\\d)+"))
-
-    private fun copyToClipboard(copyResult: Boolean): Boolean {
-        var value = formula.value
-        if (copyResult) {
-            value = result.value
-        }
-
-        return if (value.isEmpty()) {
-            false
-        } else {
-            copyToClipboard(value)
-            true
-        }
-    }
-
-    override fun setValue(value: String, context: Context) {
-        result.text = value
-    }
-
-    // used only by Robolectric
-    override fun setValueDouble(d: Double) {
-        calc.setValue(Formatter.doubleToString(d))
-    }
-
-    override fun setFormula(value: String, context: Context) {
-        val input = formula.text.toString() + value
-        formula.text = input
-
-        if (value == "")
-            formula.text = ""
-    }
-
-    override fun getFormula(): String {
-        return formula.text.toString()
-    }
-
-    private fun changeButtonFunctionality(shiftClicked: Boolean){
-        if(shiftClicked){
-            btn_shift.setBackgroundResource(R.drawable.shift2btn)
-            btn_pi_rand.setBackgroundResource(R.drawable.randbtn)
-            btn_sin_asin.setBackgroundResource(R.drawable.cosin)
-            btn_cos_acos.setBackgroundResource(R.drawable.cocos)
-            btn_tan_atan.setBackgroundResource(R.drawable.cotan)
-            btn_reciprocal_round.setBackgroundResource(R.drawable.round)
-            btn_log_ceil.setBackgroundResource(R.drawable.ceil)
-            btn_root_square.setBackgroundResource(R.drawable.xsquare)
-            btn_mod_cube.setBackgroundResource(R.drawable.xcubed)
-            btn_power_abs.setBackgroundResource(R.drawable.abs)
-            btn_e_neg.setBackgroundResource(R.drawable.plusminus)
-            btn_ln_floor.setBackgroundResource(R.drawable.floor)
-            btn_mod_cube.setOnClickListener { calc.handleOperationOnFormula(CUBE); checkHaptic(it) }
-            btn_power_abs.setOnClickListener { calc.handleOperationOnFormula(ABSOLUTE_VALUE); checkHaptic(it) }
-            btn_root_square.setOnClickListener { calc.handleOperationOnFormula(SQUARE); checkHaptic(it) }
-            btn_pi_rand.setOnClickListener { calc.handleOperationsOnResult(RANDOM); checkHaptic(it) }
-            btn_sin_asin.setOnClickListener { calc.handleOperationOnFormula(ARCSINE); checkHaptic(it) }
-            btn_cos_acos.setOnClickListener { calc.handleOperationOnFormula(ARCCOS); checkHaptic(it) }
-            btn_tan_atan.setOnClickListener { calc.handleOperationOnFormula(ARCTANGENT); checkHaptic(it) }
-            btn_log_ceil.setOnClickListener { calc.handleOperationOnFormula(CEILING); checkHaptic(it) }
-            btn_ln_floor.setOnClickListener { calc.handleOperationOnFormula(FLOOR); checkHaptic(it) }
-            btn_e_neg.setOnClickListener { calc.handleOperationsOnResult(NEGATION); checkHaptic(it) }
-            btn_reciprocal_round.setOnClickListener { calc.handleOperationOnFormula(ROUNDING); checkHaptic(it) }
-        }
-        else {
-            btn_shift.setBackgroundResource(R.drawable.shiftbtn)
-            btn_pi_rand.setBackgroundResource(R.drawable.pibtn)
-            btn_sin_asin.setBackgroundResource(R.drawable.sinbtn)
-            btn_cos_acos.setBackgroundResource(R.drawable.cosbtn)
-            btn_tan_atan.setBackgroundResource(R.drawable.tanbtn)
-            btn_reciprocal_round.setBackgroundResource(R.drawable.invbtn)
-            btn_log_ceil.setBackgroundResource(R.drawable.logbtn)
-            btn_root_square.setBackgroundResource(R.drawable.sqrbtn)
-            btn_mod_cube.setBackgroundResource(R.drawable.modbtn)
-            btn_power_abs.setBackgroundResource(R.drawable.powerbtn)
-            btn_e_neg.setBackgroundResource(R.drawable.ebtn)
-            btn_ln_floor.setBackgroundResource(R.drawable.lnbtn)
-            btn_mod_cube.setOnClickListener { calc.handleOperationOnFormula(MODULO); checkHaptic(it) }
-            btn_power_abs.setOnClickListener { calc.handleOperationOnFormula(POWER); checkHaptic(it) }
-            btn_root_square.setOnClickListener { calc.handleOperationOnFormula(ROOT); checkHaptic(it) }
-            btn_pi_rand.setOnClickListener { calc.handleOperationOnFormula(PI); checkHaptic(it) }
-            btn_sin_asin.setOnClickListener { calc.handleOperationOnFormula(SINE); checkHaptic(it) }
-            btn_cos_acos.setOnClickListener { calc.handleOperationOnFormula(COSINE); checkHaptic(it) }
-            btn_tan_atan.setOnClickListener { calc.handleOperationOnFormula(TANGENT); checkHaptic(it) }
-            btn_log_ceil.setOnClickListener { calc.handleOperationOnFormula(LOGARITHM); checkHaptic(it) }
-            btn_ln_floor.setOnClickListener { calc.handleOperationOnFormula(NATURAL_LOGARITHM); checkHaptic(it) }
-            btn_e_neg.setOnClickListener { calc.handleOperationOnFormula(E); checkHaptic(it) }
-            btn_reciprocal_round.setOnClickListener { calc.handleOperationsOnResult(RECIPROCAL); checkHaptic(it) }
-        }
-    }
 
     @Override
     private fun Activity.appLaunched() {
