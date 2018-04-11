@@ -245,40 +245,19 @@ class MainActivity : SimpleActivity(), Calculator {
     }
 
     private fun changeButtonFunctionality(shiftClicked: Boolean){
-        val mapOfButtonsOnFirstScreen = mapOf<Button, String>(
-                btn_pi_rand to "π",
-                btn_sin_asin to "SIN",
-                btn_cos_acos to "COS",
-                btn_tan_atan to "TAN",
-                btn_reciprocal_round to "x⁻¹",
-                btn_log_ceil to "LOG",
-                btn_root_square to "√",
-                btn_mod_cube to "MOD",
-                btn_power_abs to "^",
-                btn_e_neg to "e",
-                btn_ln_floor to "LN")
-        val mapOfButtonsOnSecondScreen = mapOf<Button, String>(
-                btn_pi_rand to "RANDOM",
-                btn_sin_asin to "ARCSIN",
-                btn_cos_acos to "ARCCOS",
-                btn_tan_atan to "ARCTAN",
-                btn_reciprocal_round to "ROUND",
-                btn_log_ceil to "CEIL",
-                btn_root_square to "x²",
-                btn_mod_cube to "x³",
-                btn_power_abs to "ABS",
-                btn_e_neg to "±",
-                btn_ln_floor to "FLOOR")
-
         if(shiftClicked){
-            btn_shift.setTextColor(ContextCompat.getColor(this, R.color.noah_5))
-            btn_shift.setBackgroundColor(ContextCompat.getColor(this, R.color.noah_4))
-            btn_pi_rand.textSize = 18f
-            for(m in mapOfButtonsOnSecondScreen){
-                m.key.text = m.value
-                m.key.setTextColor(ContextCompat.getColor(this, R.color.noah_4))
-                m.key.setBackgroundColor(ContextCompat.getColor(this, R.color.noah_5))
-            }
+            btn_shift.setBackgroundResource(R.drawable.shift2btn)
+            btn_pi_rand.setBackgroundResource(R.drawable.randbtn)
+            btn_sin_asin.setBackgroundResource(R.drawable.cosin)
+            btn_cos_acos.setBackgroundResource(R.drawable.cocos)
+            btn_tan_atan.setBackgroundResource(R.drawable.cotan)
+            btn_reciprocal_round.setBackgroundResource(R.drawable.round)
+            btn_log_ceil.setBackgroundResource(R.drawable.ceil)
+            btn_root_square.setBackgroundResource(R.drawable.xsquare)
+            btn_mod_cube.setBackgroundResource(R.drawable.xcubed)
+            btn_power_abs.setBackgroundResource(R.drawable.abs)
+            btn_e_neg.setBackgroundResource(R.drawable.plusminus)
+            btn_ln_floor.setBackgroundResource(R.drawable.floor)
             btn_mod_cube.setOnClickListener { calc.handleOperationOnFormula(CUBE); checkHaptic(it) }
             btn_power_abs.setOnClickListener { calc.handleOperationOnFormula(ABSOLUTE_VALUE); checkHaptic(it) }
             btn_root_square.setOnClickListener { calc.handleOperationOnFormula(SQUARE); checkHaptic(it) }
@@ -292,14 +271,18 @@ class MainActivity : SimpleActivity(), Calculator {
             btn_reciprocal_round.setOnClickListener { calc.handleOperationOnFormula(ROUNDING); checkHaptic(it) }
         }
         else {
-            btn_shift.setTextColor(ContextCompat.getColor(this, R.color.noah_4))
-            btn_shift.setBackgroundColor(ContextCompat.getColor(this, R.color.noah_5))
-            btn_pi_rand.textSize = 20f
-            for (m in mapOfButtonsOnFirstScreen) {
-                m.key.text = m.value
-                m.key.setTextColor(ContextCompat.getColor(this, R.color.noah_5))
-                m.key.setBackgroundColor(ContextCompat.getColor(this, R.color.noah_4))
-            }
+            btn_shift.setBackgroundResource(R.drawable.shiftbtn)
+            btn_pi_rand.setBackgroundResource(R.drawable.pibtn)
+            btn_sin_asin.setBackgroundResource(R.drawable.sinbtn)
+            btn_cos_acos.setBackgroundResource(R.drawable.cosbtn)
+            btn_tan_atan.setBackgroundResource(R.drawable.tanbtn)
+            btn_reciprocal_round.setBackgroundResource(R.drawable.invbtn)
+            btn_log_ceil.setBackgroundResource(R.drawable.logbtn)
+            btn_root_square.setBackgroundResource(R.drawable.sqrbtn)
+            btn_mod_cube.setBackgroundResource(R.drawable.modbtn)
+            btn_power_abs.setBackgroundResource(R.drawable.powerbtn)
+            btn_e_neg.setBackgroundResource(R.drawable.ebtn)
+            btn_ln_floor.setBackgroundResource(R.drawable.lnbtn)
             btn_mod_cube.setOnClickListener { calc.handleOperationOnFormula(MODULO); checkHaptic(it) }
             btn_power_abs.setOnClickListener { calc.handleOperationOnFormula(POWER); checkHaptic(it) }
             btn_root_square.setOnClickListener { calc.handleOperationOnFormula(ROOT); checkHaptic(it) }
