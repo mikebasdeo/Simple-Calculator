@@ -1,6 +1,7 @@
 package com.simplemobiletools.calculator.activities
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
@@ -64,6 +65,12 @@ class MainActivity : SimpleActivity(), Calculator {
 
     private lateinit var calc: CalculatorImpl
 
+//    private val modifierIds: List<Button> = listOf(btn_pi_rand, btn_sin_asin, btn_cos_acos, btn_tan_atan,
+//            btn_reciprocal_round, btn_log_ceil, btn_root_square, btn_mod_cube,
+//            btn_power_abs, btn_e_neg, btn_ln_floor, btn_decimal, btn_0, btn_1,
+//            btn_2, btn_3, btn_4, btn_5, btn_6, btn_7, btn_8, btn_9, btn_del, btn_all_clear, btn_multiply,
+//            btn_plus, btn_divide, btn_minus, btn_left_bracket)
+
     @SuppressLint("MissingSuperCall")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -96,18 +103,13 @@ class MainActivity : SimpleActivity(), Calculator {
             changeButtonFunctionality(shiftClicked)
         }
 
-        getButtonIds().forEach {
+        getDigitIds().forEach {
             it.setOnClickListener { calc.numpadClicked(it.id); checkHaptic(it) }
         }
 
-        btn_equals.setOnClickListener {
-
-            try {
-                calc.handleEquals(formula.text.toString()); checkHaptic(it)
-            } catch (e: IllegalArgumentException) {
-                Toast.makeText(this, e.localizedMessage, Toast.LENGTH_LONG).show()
-            }
-
+        btn_save.setOnClickListener {
+            calc.storeHistory(getFormula())
+            calc.storeResult(result.text.toString())
         }
 
         formula.setOnLongClickListener { copyToClipboard(false) }
@@ -150,6 +152,7 @@ class MainActivity : SimpleActivity(), Calculator {
             R.id.about -> launchAbout()
             R.id.History -> launchHistory()
             R.id.unit_conversion -> launchUnitConversion()
+            R.id.binary_calculator -> launchBinaryCalculator()
             else -> return super.onOptionsItemSelected(item)
         }
         return true
@@ -175,6 +178,9 @@ class MainActivity : SimpleActivity(), Calculator {
     private fun launchUnitConversion(){
         startActivity(Intent(applicationContext, UnitConversionActivity::class.java))
     }
+    private fun launchBinaryCalculator(){
+        startActivity(Intent(applicationContext, BinaryCalculatorActivity::class.java))
+    }
 
     private fun launchSettings() {
         startActivity(Intent(applicationContext, SettingsActivity::class.java))
@@ -184,21 +190,20 @@ class MainActivity : SimpleActivity(), Calculator {
         startAboutActivity(R.string.app_name, LICENSE_KOTLIN or LICENSE_AUTOFITTEXTVIEW or LICENSE_ROBOLECTRIC or LICENSE_ESPRESSO, BuildConfig.VERSION_NAME)
     }
 
-    private fun getButtonIds() = arrayOf(btn_decimal, btn_0, btn_1, btn_2, btn_3, btn_4, btn_5, btn_6, btn_7, btn_8, btn_9)
-
+    private fun getDigitIds() = listOf(btn_decimal, btn_0, btn_1, btn_2, btn_3, btn_4, btn_5,
+                                        btn_6, btn_7, btn_8, btn_9)
 
     private fun pasteFromClipBoard(): Boolean {
         //check clipboard
         val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-        if (clipboard.primaryClip.getItemAt(0).coerceToText(this).toString().isNum()){
+        return if (clipboard.primaryClip.getItemAt(0).coerceToText(this).toString().isNum()){
             setFormula(clipboard.primaryClip.getItemAt(0).coerceToText(this).toString(), this)
             Toast.makeText(applicationContext,"Pasted from clipboard", Toast.LENGTH_LONG).show()
-            return true
+            true
         }
         else {
             //do nothing
-
-            return false
+            false
         }
     }
 
@@ -233,6 +238,10 @@ class MainActivity : SimpleActivity(), Calculator {
 
         if (value == "")
             formula.text = ""
+    }
+
+    override fun getFormula(): String {
+        return formula.text.toString()
     }
 
     private fun changeButtonFunctionality(shiftClicked: Boolean){
@@ -286,5 +295,16 @@ class MainActivity : SimpleActivity(), Calculator {
             btn_e_neg.setOnClickListener { calc.handleOperationOnFormula(E); checkHaptic(it) }
             btn_reciprocal_round.setOnClickListener { calc.handleOperationsOnResult(RECIPROCAL); checkHaptic(it) }
         }
+    }
+
+    @Override
+    private fun Activity.appLaunched() {
+        baseConfig.internalStoragePath = getInternalStoragePath()
+        updateSDCardPath()
+        baseConfig.appRunCount++
+        //Uncomment and replace values.xml strings if we ever want to put our own donation info
+//        if (!isThankYouInstalled() && (baseConfig.appRunCount % 50 == 0)) {
+//            DonateDialog(this)
+//        }
     }
 }

@@ -33,7 +33,7 @@ public class MainActivityTest {
         press(R.id.btn_9);
         press(R.id.btn_0);
         checkFormula("1234567890");
-        press(R.id.btn_equals);
+        press(R.id.btn_save);
         checkResult("1,234,567,890");
     }
 
@@ -45,7 +45,7 @@ public class MainActivityTest {
         press(R.id.btn_5);
         press(R.id.btn_plus);
         press(R.id.btn_6);
-        press(R.id.btn_equals);
+        press(R.id.btn_save);
         checkResult("3.5");
         checkFormula("-2.5+6");
     }
@@ -57,7 +57,7 @@ public class MainActivityTest {
         press(R.id.btn_8);
         press(R.id.btn_minus);
         press(R.id.btn_3);
-        press(R.id.btn_equals);
+        press(R.id.btn_save);
         checkResult("4.8");
         checkFormula("7.8-3");
     }
@@ -67,7 +67,7 @@ public class MainActivityTest {
         press(R.id.btn_2);
         press(R.id.btn_multiply);
         press(R.id.btn_4);
-        press(R.id.btn_equals);
+        press(R.id.btn_save);
         checkResult("8");
         checkFormula("2*4");
     }
@@ -78,7 +78,7 @@ public class MainActivityTest {
         press(R.id.btn_0);
         press(R.id.btn_divide);
         press(R.id.btn_4);
-        press(R.id.btn_equals);
+        press(R.id.btn_save);
         checkResult("2.5");
         checkFormula("10/4");
     }
@@ -89,7 +89,7 @@ public class MainActivityTest {
         press(R.id.btn_8);
         press(R.id.btn_divide);
         press(R.id.btn_0);
-        press(R.id.btn_equals);
+        press(R.id.btn_save);
         checkResult("∞");
         checkFormula("8/0");
     }
@@ -99,7 +99,7 @@ public class MainActivityTest {
         press(R.id.btn_7);
         press(R.id.btn_mod_cube);
         press(R.id.btn_2);
-        press(R.id.btn_equals);
+        press(R.id.btn_save);
         checkResult("1");
         checkFormula("7%2");
     }
@@ -109,7 +109,7 @@ public class MainActivityTest {
         press(R.id.btn_2);
         press(R.id.btn_power_abs);
         press(R.id.btn_3);
-        press(R.id.btn_equals);
+        press(R.id.btn_save);
         checkResult("8");
         checkFormula("2^3");
     }
@@ -136,7 +136,7 @@ public class MainActivityTest {
         press(R.id.btn_2);
         press(R.id.btn_plus);
         press(R.id.btn_5);
-        press(R.id.btn_equals);
+        press(R.id.btn_save);
         checkResult("7");
         checkFormula("2+5");
         press((R.id.btn_all_clear));
@@ -149,7 +149,7 @@ public class MainActivityTest {
         press(R.id.btn_7);
         press(R.id.btn_divide);
         press(R.id.btn_2);
-        press(R.id.btn_equals);
+        press(R.id.btn_save);
         longPress(R.id.btn_memory_1);
         press(R.id.btn_all_clear);
         press(R.id.btn_memory_1);
@@ -164,7 +164,7 @@ public class MainActivityTest {
         press(R.id.btn_1);
         press(R.id.btn_6);
         press(R.id.btn_right_bracket);
-        press(R.id.btn_equals);
+        press(R.id.btn_save);
         checkResult("5");
     }
 
@@ -178,7 +178,7 @@ public class MainActivityTest {
         press(R.id.btn_3);
         press(R.id.btn_multiply);
         press(R.id.btn_6);
-        press(R.id.btn_equals);
+        press(R.id.btn_save);
         checkResult("2,214");
         longPress(R.id.result);
         press(R.id.btn_del);
@@ -201,7 +201,7 @@ public class MainActivityTest {
         press(R.id.btn_0);
         press(R.id.btn_0);
         press(R.id.btn_right_bracket);
-        press(R.id.btn_equals);
+        press(R.id.btn_save);
         checkResult("4");
     }
 
@@ -210,7 +210,7 @@ public class MainActivityTest {
         press(R.id.btn_ln_floor);
         press(R.id.btn_1);
         press(R.id.btn_right_bracket);
-        press(R.id.btn_equals);
+        press(R.id.btn_save);
         checkResult("0");
     }
 
@@ -219,7 +219,7 @@ public class MainActivityTest {
         press(R.id.btn_ln_floor);
         press(R.id.btn_e_neg);
         press(R.id.btn_right_bracket);
-        press(R.id.btn_equals);
+        press(R.id.btn_save);
         checkResult("1");
     }
 
@@ -249,7 +249,7 @@ public class MainActivityTest {
         checkResult("");
         press(R.id.btn_1);
         press(R.id.btn_0);
-        press(R.id.btn_equals);
+        press(R.id.btn_save);
         press(R.id.btn_reciprocal_round);
         checkResult("0.1");
         press(R.id.btn_reciprocal_round);
@@ -259,7 +259,7 @@ public class MainActivityTest {
     @Test
     public void randomTest(){
         press(R.id.btn_0);
-        press(R.id.btn_equals);
+        press(R.id.btn_save);
         press(R.id.btn_shift);
         press(R.id.btn_pi_rand);
         checkResult("0.0");
@@ -279,7 +279,7 @@ public class MainActivityTest {
         press(R.id.btn_tan_atan);
         press(R.id.btn_0);
         press(R.id.btn_right_bracket);
-        press(R.id.btn_equals);
+        press(R.id.btn_save);
         checkResult("0");
     }
 
@@ -290,7 +290,7 @@ public class MainActivityTest {
         press(R.id.btn_shift);
         press(R.id.btn_e_neg);
         press(R.id.btn_right_bracket);
-        press(R.id.btn_equals);
+        press(R.id.btn_save);
         checkResult("3");
     }
 
@@ -301,7 +301,7 @@ public class MainActivityTest {
         press(R.id.btn_shift);
         press(R.id.btn_e_neg);
         press(R.id.btn_right_bracket);
-        press(R.id.btn_equals);
+        press(R.id.btn_save);
         checkResult("3");
     }
 
@@ -310,7 +310,7 @@ public class MainActivityTest {
         press(R.id.btn_2);
         press(R.id.btn_shift);
         press(R.id.btn_root_square);
-        press(R.id.btn_equals);
+        press(R.id.btn_save);
         checkResult("4");
     }
 
@@ -319,7 +319,7 @@ public class MainActivityTest {
         press(R.id.btn_2);
         press(R.id.btn_shift);
         press(R.id.btn_mod_cube);
-        press(R.id.btn_equals);
+        press(R.id.btn_save);
         checkResult("8");
     }
 
@@ -331,7 +331,7 @@ public class MainActivityTest {
         press(R.id.btn_minus);
         press(R.id.btn_5);
         press(R.id.btn_right_bracket);
-        press(R.id.btn_equals);
+        press(R.id.btn_save);
         checkResult("3");
     }
 
@@ -340,7 +340,7 @@ public class MainActivityTest {
         press(R.id.btn_2);
         press(R.id.btn_minus);
         press(R.id.btn_3);
-        press(R.id.btn_equals);
+        press(R.id.btn_save);
         press(R.id.btn_shift);
         press(R.id.btn_e_neg);
         checkResult("1");
@@ -354,7 +354,7 @@ public class MainActivityTest {
         press(R.id.btn_divide);
         press(R.id.btn_5);
         press(R.id.btn_right_bracket);
-        press(R.id.btn_equals);
+        press(R.id.btn_save);
         checkResult("1");
     }
 

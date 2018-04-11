@@ -2,8 +2,10 @@ package com.simplemobiletools.calculator
 
 import android.content.Context
 import com.simplemobiletools.calculator.activities.MainActivity
+import com.simplemobiletools.calculator.helpers.CONSTANT.CEILING
 import com.simplemobiletools.calculator.helpers.CONSTANT.FILE
 import com.simplemobiletools.calculator.helpers.CONSTANT.MEMORY_ONE
+import com.simplemobiletools.calculator.helpers.CONSTANT.ROUNDING
 import com.simplemobiletools.calculator.helpers.Calculator
 import com.simplemobiletools.calculator.helpers.CalculatorImpl
 import com.simplemobiletools.calculator.javaluator.ExtendedDoubleEvaluator
@@ -15,6 +17,8 @@ import org.mockito.Mockito.mock
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
+import java.math.BigDecimal
+import java.math.RoundingMode
 
 @RunWith(RobolectricTestRunner::class)
 @Config(constants = BuildConfig::class, sdk = [21])
@@ -147,5 +151,35 @@ class MainActivityTest {
         val results = calc.getResults()
         assert(history.contains("2+2"))
         assert(results.contains("4"))
+    }
+
+    @Test
+    fun arcTrigTest() {
+        val result = evaluator.evaluate("asin(0) + acos(0) + atan(0)")
+        assertEquals(1.5707963, BigDecimal.valueOf(result).setScale(7, RoundingMode.HALF_UP).toDouble())
+    }
+
+    @Test
+    fun absTest() {
+        val result = evaluator.evaluate("abs(-1)")
+        assertEquals(1.0, result)
+    }
+
+    @Test
+    fun roundTest() {
+        val result = evaluator.evaluate("round(3/2)")
+        assertEquals(2.0, result)
+    }
+
+    @Test
+    fun ceilTest() {
+        val result = evaluator.evaluate("ceil(3/2)")
+        assertEquals(2.0, result)
+    }
+
+    @Test
+    fun floorTest() {
+        val result = evaluator.evaluate("floor(3/2)")
+        assertEquals(1.0, result)
     }
 }

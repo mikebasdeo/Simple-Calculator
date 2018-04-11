@@ -3,7 +3,6 @@ package com.simplemobiletools.calculator.activities
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
-import android.widget.EditText
 import android.widget.TextView
 import com.simplemobiletools.calculator.R
 import com.simplemobiletools.calculator.helpers.Calculator
@@ -13,7 +12,6 @@ import com.simplemobiletools.calculator.helpers.CalculatorImpl
  * Created by Marc-Andre Dragon on 2018-03-01.
  */
 class HistoryActivity : SimpleActivity(), Calculator {
-
 
     private lateinit var calc: CalculatorImpl
     private lateinit var equations: ArrayList<String>
@@ -57,6 +55,10 @@ class HistoryActivity : SimpleActivity(), Calculator {
     }
 
     override fun setFormula(value: String, context: Context) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun getFormula(): String {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }
