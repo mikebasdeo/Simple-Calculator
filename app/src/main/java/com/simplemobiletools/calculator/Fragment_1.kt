@@ -25,6 +25,7 @@ import com.simplemobiletools.calculator.extensions.config
 import com.simplemobiletools.calculator.extensions.updateViewColors
 import com.simplemobiletools.calculator.helpers.*
 import kotlinx.android.synthetic.main.fragment_1.*
+import kotlinx.android.synthetic.main.fragment_2.*
 
 
 /**
@@ -137,10 +138,10 @@ class Fragment_1 : Fragment(), Calculator {
                 btn_e_neg to "e",
                 btn_ln_floor to "LN")
         val mapOfButtonsOnSecondScreen = mapOf<Button, String>(
-                btn_pi_rand to "RANDOM",
-                btn_sin_asin to "ARCSIN",
-                btn_cos_acos to "ARCCOS",
-                btn_tan_atan to "ARCTAN",
+                btn_pi_rand to "RAND",
+                btn_sin_asin to "ASIN",
+                btn_cos_acos to "ACOS",
+                btn_tan_atan to "ATAN",
                 btn_reciprocal_round to "ROUND",
                 btn_log_ceil to "CEIL",
                 btn_root_square to "x²",
@@ -247,6 +248,8 @@ class Fragment_1 : Fragment(), Calculator {
     private fun getDigitIds() = listOf(btn_decimal, btn_0, btn_1, btn_2, btn_3, btn_4, btn_5,
             btn_6, btn_7, btn_8, btn_9)
 
+
+    //TODO: Fix this, doesn't import from com.simplemobiletools.calculator.extensions.updateViewColors
     fun Context.updateViewColors(viewGroup: ViewGroup, textColor: Int) {
         val cnt = viewGroup.childCount
         (0 until cnt).map { viewGroup.getChildAt(it) }
