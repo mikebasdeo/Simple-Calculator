@@ -41,7 +41,7 @@ addons:
 jobs:
   include:
     - stage: analysis
-      script: sonar-scanner
+      script: ./gradlew sonarqube
     - stage: unit test + emulator setup
       script: ./gradlew test
       script:
