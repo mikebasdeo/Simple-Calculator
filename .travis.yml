@@ -42,14 +42,13 @@ jobs:
   include:
     - stage: analysis
       script: sonar-scanner
-    - stage: setup
+    - stage: unit test + emulator setup
+      script: ./gradlew test
       script:
         - android list targets
         - echo no | android create avd --force -n test -t android-22 --abi armeabi-v7a
         - emulator -avd test -no-skin -no-audio -no-window &
         - android-wait-for-emulator
         - adb shell input keyevent 82 &
-    - stage: test
-      script:
-        - ./gradlew test
-        - ./gradlew connectedAndroidTest
+    - stage: ui test
+      script: ./gradlew connectedAndroidTest
