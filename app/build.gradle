@@ -88,5 +88,5 @@ if (propFile.canRead()) {
 }
 
 sonarqube {
-    androidVariant 'fullDebug'
+    androidVariant 'debug'
 }
