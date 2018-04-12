@@ -30,3 +30,10 @@ before_install:
 script: 
   - ./gradlew test
   - ./gradlew connectedAndroidTest
+  - sonar-scanner
+
+addons:
+  sonarcloud:
+    organization: "modestosv-github"
+    token:
+      secure: 4bf73a9c15841d9e2bc9a680c83fbd7e74c91426
