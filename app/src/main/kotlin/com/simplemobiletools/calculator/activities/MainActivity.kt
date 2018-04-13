@@ -2,61 +2,20 @@ package com.simplemobiletools.calculator.activities
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.content.ClipboardManager
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.TabLayout
-import android.support.v4.content.ContextCompat
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
-import android.widget.Button
-import android.widget.Toast
 import android.support.v7.widget.Toolbar
 import com.simplemobiletools.calculator.*
 import com.simplemobiletools.calculator.extensions.config
 import com.simplemobiletools.calculator.extensions.updateViewColors
-import com.simplemobiletools.calculator.helpers.CONSTANT.ABSOLUTE_VALUE
-import com.simplemobiletools.calculator.helpers.CONSTANT.ARCCOS
-import com.simplemobiletools.calculator.helpers.CONSTANT.ARCSINE
-import com.simplemobiletools.calculator.helpers.CONSTANT.ARCTANGENT
-import com.simplemobiletools.calculator.helpers.CONSTANT.CEILING
-import com.simplemobiletools.calculator.helpers.CONSTANT.COSINE
-import com.simplemobiletools.calculator.helpers.CONSTANT.CUBE
-import com.simplemobiletools.calculator.helpers.CONSTANT.DIVIDE
-import com.simplemobiletools.calculator.helpers.CONSTANT.E
-import com.simplemobiletools.calculator.helpers.CONSTANT.FLOOR
-import com.simplemobiletools.calculator.helpers.CONSTANT.LEFT_BRACKET
-import com.simplemobiletools.calculator.helpers.CONSTANT.LOGARITHM
-import com.simplemobiletools.calculator.helpers.CONSTANT.MEMORY_ONE
-import com.simplemobiletools.calculator.helpers.CONSTANT.MEMORY_THREE
-import com.simplemobiletools.calculator.helpers.CONSTANT.MEMORY_TWO
-import com.simplemobiletools.calculator.helpers.CONSTANT.MINUS
-import com.simplemobiletools.calculator.helpers.CONSTANT.MODULO
-import com.simplemobiletools.calculator.helpers.CONSTANT.MULTIPLY
-import com.simplemobiletools.calculator.helpers.CONSTANT.NATURAL_LOGARITHM
-import com.simplemobiletools.calculator.helpers.CONSTANT.NEGATION
-import com.simplemobiletools.calculator.helpers.CONSTANT.PI
-import com.simplemobiletools.calculator.helpers.CONSTANT.PLUS
-import com.simplemobiletools.calculator.helpers.CONSTANT.POWER
-import com.simplemobiletools.calculator.helpers.CONSTANT.RANDOM
-import com.simplemobiletools.calculator.helpers.CONSTANT.RECIPROCAL
-import com.simplemobiletools.calculator.helpers.CONSTANT.RIGHT_BRACKET
-import com.simplemobiletools.calculator.helpers.CONSTANT.ROOT
-import com.simplemobiletools.calculator.helpers.CONSTANT.ROUNDING
-import com.simplemobiletools.calculator.helpers.CONSTANT.SINE
-import com.simplemobiletools.calculator.helpers.CONSTANT.SQUARE
-import com.simplemobiletools.calculator.helpers.CONSTANT.TANGENT
-import com.simplemobiletools.calculator.helpers.Calculator
-import com.simplemobiletools.calculator.helpers.CalculatorImpl
-import com.simplemobiletools.calculator.helpers.Formatter
 import com.simplemobiletools.commons.extensions.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.toolbar_layout.*
-import me.grantland.widget.AutofitHelper
 
 class MainActivity : AppCompatActivity() {
 
@@ -91,9 +50,9 @@ class MainActivity : AppCompatActivity() {
         tablayout = tabLayout
         viewpager = viewPager
         viewpageradapter =  ViewPagerAdapter(supportFragmentManager)
-        viewpageradapter.addFragments( Fragment_1(), "Calculator")
-        viewpageradapter.addFragments( Fragment_2(), "Unit Conversion")
-        viewpageradapter.addFragments( Fragment_3(), "Binary Conversion")
+        viewpageradapter.addFragments(MainFragment(), "Calculator")
+        viewpageradapter.addFragments(UnitConversionFragment(), "Unit Conversion")
+        viewpageradapter.addFragments(BinaryCalculatorFragment(), "Binary Conversion")
         viewpager.adapter = viewpageradapter
         tablayout.setupWithViewPager(viewpager)
 

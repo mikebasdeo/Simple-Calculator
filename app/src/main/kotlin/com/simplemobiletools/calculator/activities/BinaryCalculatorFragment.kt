@@ -1,4 +1,4 @@
-package com.simplemobiletools.calculator
+package com.simplemobiletools.calculator.activities
 
 
 import android.annotation.SuppressLint
@@ -16,6 +16,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import com.simplemobiletools.calculator.R
 import com.simplemobiletools.calculator.helpers.BinaryCalculator
 import kotlinx.android.synthetic.main.activity_binary_calculator.*
 
@@ -23,7 +24,7 @@ import kotlinx.android.synthetic.main.activity_binary_calculator.*
 /**
  * A simple [Fragment] subclass.
  */
-class Fragment_3 : Fragment() {
+class BinaryCalculatorFragment : Fragment() {
 
 
     private lateinit var binaryCalculator: BinaryCalculator
