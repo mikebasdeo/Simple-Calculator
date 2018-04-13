@@ -37,20 +37,28 @@ class HistoryActivity : SimpleActivity(), Calculator {
     private lateinit var results: ArrayList<String>
     private lateinit var export: ExportManager
     private lateinit var  exportFile: File
+    var index = 0
 
 
     override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
-        menu?.add(R.string.export)
+        if (index == 0) {
+            menu?.add(R.string.about)
+            menu?.add(R.string.binary_calculator)
+            menu?.add(R.string.export)
+            menu?.add(R.string.settings)
+            menu?.add(R.string.unit_conversion)
+            index++
+        }
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.string.export -> ExportData()
-            R.id.settings -> launchSettings()
-            R.id.about -> launchAbout()
-            R.id.unit_conversion -> launchUnitConversion()
-            R.id.binary_calculator -> launchBinaryCalculator()
+            R.string.settings -> launchSettings()
+            R.string.about -> launchAbout()
+            R.string.unit_conversion -> launchUnitConversion()
+            R.string.binary_calculator -> launchBinaryCalculator()
             else -> return super.onOptionsItemSelected(item)
         }
         return true
