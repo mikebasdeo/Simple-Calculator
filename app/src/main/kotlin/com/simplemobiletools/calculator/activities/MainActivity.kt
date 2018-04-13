@@ -131,11 +131,11 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
+            R.id.History -> launchHistory()
             R.id.settings -> launchSettings()
             R.id.about -> launchAbout()
-            R.id.History -> launchHistory()
-            R.id.unit_conversion -> launchUnitConversion()
-            R.id.binary_calculator -> launchBinaryCalculator()
+           // R.id.unit_conversion -> launchUnitConversion()
+            //R.id.binary_calculator -> launchBinaryCalculator()
             else -> return super.onOptionsItemSelected(item)
         }
         return true
