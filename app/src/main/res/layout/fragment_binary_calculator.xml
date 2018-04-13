@@ -6,12 +6,38 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/noah_6"
-    android:theme="@style/ColoredHandleTheme"
-    tools:context=".activities.MainActivity"
+    tools:context=".activities.BinaryCalculatorFragment"
     tools:ignore="HardcodedText"
     tools:layout_editor_absoluteY="81dp">
     <!--android:background="@color/dark_grey_pressed_mask" -->
 
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/noah_4">
+
+        <include
+            layout="@layout/toolbar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:tabGravity="fill"
+            app:tabMode="fixed"
+
+            ></android.support.design.widget.TabLayout>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></android.support.v4.view.ViewPager>
 
     <Button
         android:id="@+id/btn_0"
@@ -56,6 +82,7 @@
         android:layout_height="wrap_content"
         android:background="@color/noah_1"
         android:fontFamily="sans-serif"
+        android:textColor="@color/white"
         android:minHeight="55sp"
         android:minWidth="77dp"
         android:text="DEL"
@@ -87,6 +114,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@color/noah_3"
+        android:textColor="@color/white"
         android:fontFamily="sans-serif"
         android:minHeight="55sp"
         android:minWidth="77dp"
@@ -100,6 +128,7 @@
         android:id="@+id/btn_plus"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:textColor="@color/white"
         android:background="@color/noah_3"
         android:fontFamily="sans-serif"
         android:minHeight="55sp"
@@ -114,6 +143,7 @@
         android:id="@+id/btn_divide"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:textColor="@color/white"
         android:background="@color/noah_3"
         android:fontFamily="sans-serif"
         android:minHeight="55sp"
@@ -129,6 +159,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@color/noah_3"
+        android:textColor="@color/white"
         android:fontFamily="sans-serif"
         android:minHeight="55sp"
         android:minWidth="77dp"
@@ -157,6 +188,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/label_number_1"
         tools:ignore="RtlCompat" />
 
     <TextView
@@ -209,7 +241,7 @@
         android:textColor="@color/noah_5"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/binary_number_1" />
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
 
     <TextView
         android:id="@+id/label_number_2"
@@ -236,6 +268,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@color/noah_4"
+        android:textColor="@color/white"
         android:fontFamily="sans-serif"
         android:minHeight="55sp"
         android:minWidth="77dp"
@@ -252,6 +285,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@color/noah_4"
+        android:textColor="@color/white"
         android:fontFamily="sans-serif"
         android:minHeight="55sp"
         android:minWidth="77dp"
@@ -268,6 +302,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@color/noah_4"
+        android:textColor="@color/white"
         android:fontFamily="sans-serif"
         android:minHeight="55sp"
         android:minWidth="77dp"
@@ -278,6 +313,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/btn_or" />
+
+
 
 
 </android.support.constraint.ConstraintLayout>
