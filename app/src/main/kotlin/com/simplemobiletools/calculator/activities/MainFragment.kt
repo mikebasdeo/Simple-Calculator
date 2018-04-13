@@ -1,11 +1,10 @@
-package com.simplemobiletools.calculator
+package com.simplemobiletools.calculator.activities
 
 
 import android.content.ClipboardManager
 import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
 import android.support.v4.content.ContextCompat
 import android.view.LayoutInflater
 import android.view.View
@@ -13,16 +12,10 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
-import com.simplemobiletools.calculator.R.layout.fragment_1
-import com.simplemobiletools.calculator.extensions.config
-import com.simplemobiletools.calculator.extensions.updateViewColors
-import com.simplemobiletools.commons.extensions.copyToClipboard
+import com.simplemobiletools.calculator.R
 import com.simplemobiletools.commons.extensions.performHapticFeedback
 import com.simplemobiletools.commons.extensions.value
-import kotlinx.android.synthetic.main.activity_main.*
 import me.grantland.widget.AutofitHelper
-import com.simplemobiletools.calculator.extensions.config
-import com.simplemobiletools.calculator.extensions.updateViewColors
 import com.simplemobiletools.calculator.helpers.*
 import kotlinx.android.synthetic.main.fragment_1.*
 
@@ -30,7 +23,7 @@ import kotlinx.android.synthetic.main.fragment_1.*
 /**
  * A simple [Fragment] subclass.
  */
-class Fragment_1 : Fragment(), Calculator {
+class MainFragment : Fragment(), Calculator {
 
     //ATTRIBUTES
 

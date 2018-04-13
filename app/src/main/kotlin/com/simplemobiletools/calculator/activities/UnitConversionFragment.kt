@@ -1,4 +1,4 @@
-package com.simplemobiletools.calculator
+package com.simplemobiletools.calculator.activities
 
 
 import android.annotation.SuppressLint
@@ -13,13 +13,12 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.Toast
+import com.simplemobiletools.calculator.R
 import com.simplemobiletools.calculator.conversions.*
 import com.simplemobiletools.calculator.helpers.Calculator
 import com.simplemobiletools.calculator.helpers.CalculatorImpl
 import com.simplemobiletools.calculator.helpers.Formatter
-import com.simplemobiletools.commons.extensions.copyToClipboard
 import com.simplemobiletools.commons.extensions.performHapticFeedback
-import com.simplemobiletools.commons.extensions.value
 import kotlinx.android.synthetic.main.activity_unit_conversion.*
 import java.math.BigDecimal
 import java.text.DecimalFormat
@@ -28,7 +27,7 @@ import java.text.DecimalFormat
 /**
  * A simple [Fragment] subclass.
  */
-class Fragment_2 : Fragment(), Calculator {
+class UnitConversionFragment : Fragment(), Calculator {
 
     lateinit var calc: CalculatorImpl
     private lateinit var converter: Converter

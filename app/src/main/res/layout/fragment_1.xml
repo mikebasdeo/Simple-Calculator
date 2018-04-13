@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/noah_6"
-        tools:context="Fragment_1"
+        tools:context=".activities.MainFragment"
         tools:ignore="HardcodedText"
         tools:layout_editor_absoluteY="81dp">
         <!--android:background="@color/dark_grey_pressed_mask" -->
