@@ -2,24 +2,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/settings"
-        android:title="@string/settings"
+        android:id="@+id/History"
+        android:title="@string/history"
         app:showAsAction="never"/>
     <item
-        android:id="@+id/unit_conversion"
-        android:title="@string/unit_conversion"
+        android:id="@+id/settings"
+        android:title="@string/settings"
         app:showAsAction="never"/>
     <item
         android:id="@+id/about"
         android:title="@string/about"
         app:showAsAction="never"/>
-    <item
-        android:id="@+id/History"
-        android:title="@string/history"
-        app:showAsAction="never"/>
-    <item
-        android:id="@+id/binary_calculator"
-        android:title="@string/binary_calculator"
-        app:showAsAction="never"/>
-
 </menu>
