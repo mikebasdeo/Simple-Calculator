@@ -39,7 +39,7 @@
     <TableLayout
         android:id="@+id/table_results"
         android:layout_width="186dp"
-        android:layout_height="428dp"
+        android:layout_height="328dp"
         android:layout_marginEnd="6dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="76dp"
@@ -51,7 +51,7 @@
     <TableLayout
         android:id="@+id/table_equations"
         android:layout_width="186dp"
-        android:layout_height="428dp"
+        android:layout_height="328dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="76dp"
@@ -59,6 +59,14 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/export_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/export"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="445dp" />
 
 
 </android.support.constraint.ConstraintLayout>

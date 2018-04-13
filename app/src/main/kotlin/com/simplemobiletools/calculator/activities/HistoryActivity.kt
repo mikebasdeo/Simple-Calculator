@@ -2,12 +2,14 @@ package com.simplemobiletools.calculator.activities
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.TypedValue
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.*
+import com.simplemobiletools.calculator.BuildConfig
 import com.simplemobiletools.calculator.R
 import com.simplemobiletools.calculator.export.ExportManager
 import com.simplemobiletools.calculator.helpers.Calculator
@@ -19,6 +21,11 @@ import java.io.File
 import java.io.FileWriter
 import java.io.Writer
 import com.simplemobiletools.calculator.helpers.CONSTANT.FILE
+import com.simplemobiletools.commons.helpers.LICENSE_AUTOFITTEXTVIEW
+import com.simplemobiletools.commons.helpers.LICENSE_ESPRESSO
+import com.simplemobiletools.commons.helpers.LICENSE_KOTLIN
+import com.simplemobiletools.commons.helpers.LICENSE_ROBOLECTRIC
+import java.util.*
 
 /**
  * Created by Marc-Andre Dragon on 2018-03-01.
@@ -31,14 +38,19 @@ class HistoryActivity : SimpleActivity(), Calculator {
     private lateinit var export: ExportManager
     private lateinit var  exportFile: File
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu_history, menu)
+
+    override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
+        menu?.add(R.string.export)
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.export -> ExportData()
+            R.string.export -> ExportData()
+            R.id.settings -> launchSettings()
+            R.id.about -> launchAbout()
+            R.id.unit_conversion -> launchUnitConversion()
+            R.id.binary_calculator -> launchBinaryCalculator()
             else -> return super.onOptionsItemSelected(item)
         }
         return true
@@ -112,6 +124,23 @@ class HistoryActivity : SimpleActivity(), Calculator {
         val writer: Writer = BufferedWriter(FileWriter(exportFile, true))
         export.writeLine(writer, equations)
         export.writeLine(writer, results)
+        writer.flush()
+        writer.close()
+    }
+
+    private fun launchUnitConversion(){
+        startActivity(Intent(applicationContext, UnitConversionActivity::class.java))
+    }
+    private fun launchBinaryCalculator(){
+        startActivity(Intent(applicationContext, BinaryCalculatorActivity::class.java))
+    }
+
+    private fun launchSettings() {
+        startActivity(Intent(applicationContext, SettingsActivity::class.java))
+    }
+
+    private fun launchAbout() {
+        startAboutActivity(R.string.app_name, LICENSE_KOTLIN or LICENSE_AUTOFITTEXTVIEW or LICENSE_ROBOLECTRIC or LICENSE_ESPRESSO, BuildConfig.VERSION_NAME)
     }
 
     @SuppressLint("MissingSuperCall")
