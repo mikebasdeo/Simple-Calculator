@@ -172,14 +172,7 @@ class Fragment_3 : Fragment() {
                 binary_result.text = binaryCalculator.xorBinary(binary_number_1.text.toString(), binary_number_2.text.toString())
             selectOperatorButton(btn_xor)
         }
-
-
-
-
-
     }
-
-
 
     private fun Any.toast(context: Context) {
         Toast.makeText(context, this.toString(), Toast.LENGTH_LONG).show()
@@ -239,11 +232,4 @@ class Fragment_3 : Fragment() {
         hasPreviousOperator = true
     }
 
-
-
-
-
-
-
-
-}// Required empty public constructor
+}
