@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
         tablayout = tabLayout
         viewpager = viewPager
         viewpageradapter =  ViewPagerAdapter(supportFragmentManager)
-        viewpageradapter.addFragments(MainFragment(), "Calculator")
+        viewpageradapter.addFragments(CalculatorFragment(), "Calculator")
         viewpageradapter.addFragments(UnitConversionFragment(), "Unit Conversion")
         viewpageradapter.addFragments(BinaryCalculatorFragment(), "Binary Conversion")
         viewpager.adapter = viewpageradapter
@@ -93,8 +93,6 @@ class MainActivity : AppCompatActivity() {
             R.id.History -> launchHistory()
             R.id.settings -> launchSettings()
             R.id.about -> launchAbout()
-           // R.id.unit_conversion -> launchUnitConversion()
-            //R.id.binary_calculator -> launchBinaryCalculator()
             else -> return super.onOptionsItemSelected(item)
         }
         return true
@@ -113,12 +111,12 @@ class MainActivity : AppCompatActivity() {
         startActivity(Intent(applicationContext, HistoryActivity::class.java))
     }
 
-    private fun launchUnitConversion(){
-        startActivity(Intent(applicationContext, UnitConversionActivity::class.java))
-    }
-    private fun launchBinaryCalculator(){
-        startActivity(Intent(applicationContext, BinaryCalculatorActivity::class.java))
-    }
+//    private fun launchUnitConversion(){
+//        startActivity(Intent(applicationContext, UnitConversionActivity::class.java))
+//    }
+//    private fun launchBinaryCalculator(){
+//        startActivity(Intent(applicationContext, BinaryCalculatorActivity::class.java))
+//    }
 
     private fun launchSettings() {
         startActivity(Intent(applicationContext, SettingsActivity::class.java))

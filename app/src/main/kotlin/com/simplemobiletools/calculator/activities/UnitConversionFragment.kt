@@ -19,14 +19,11 @@ import com.simplemobiletools.calculator.helpers.Calculator
 import com.simplemobiletools.calculator.helpers.CalculatorImpl
 import com.simplemobiletools.calculator.helpers.Formatter
 import com.simplemobiletools.commons.extensions.performHapticFeedback
-import kotlinx.android.synthetic.main.activity_unit_conversion.*
+import kotlinx.android.synthetic.main.fragment_unit_conversion.*
 import java.math.BigDecimal
 import java.text.DecimalFormat
 
 
-/**
- * A simple [Fragment] subclass.
- */
 class UnitConversionFragment : Fragment(), Calculator {
 
     lateinit var calc: CalculatorImpl
@@ -39,20 +36,14 @@ class UnitConversionFragment : Fragment(), Calculator {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_2, container, false)
+        return inflater.inflate(R.layout.fragment_unit_conversion, container, false)
     }
 
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-
-        //calc = CalculatorImpl(this, activity!!.applicationContext)
-
         calc = CalculatorImpl(this, activity!!.applicationContext)
-
-
 
         getDigitIds().forEach {
             it.setOnClickListener { calc.numpadClicked(it.id); liveUpdate(); checkHaptic(it) }
@@ -63,7 +54,6 @@ class UnitConversionFragment : Fragment(), Calculator {
         btn_swap.setOnClickListener { swap(); checkHaptic(it) }
         btn_save.setOnClickListener { calc.storeHistory(getFormula()); calc.storeResult(after.text.toString())}
 
-        //after.setOnLongClickListener { copyToClipboard(true) }
         before.setOnLongClickListener { pasteFromClipBoard() }
 
         //Three drop down menus. The conversionChoiceSpinner changes the other two automatically.
@@ -234,6 +224,7 @@ class UnitConversionFragment : Fragment(), Calculator {
 
     private fun String.isNum() = matches(Regex("\\d|\\d{2}|\\d{3}(\\d{3},)+(.|)(\\d)+"))
 
+//TODO: This stopped working when moving to fragments for some reason?
 //    private fun copyToClipboard(copyResult: Boolean): Boolean {
 //        var value = after.value
 //        if (copyResult) {
@@ -257,4 +248,4 @@ class UnitConversionFragment : Fragment(), Calculator {
     }
 
 
-}// Required empty public constructor
+}

@@ -5,7 +5,6 @@ import android.content.ClipboardManager
 import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v4.content.ContextCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -39,44 +38,36 @@ import com.simplemobiletools.calculator.helpers.CONSTANT.ROUNDING
 import com.simplemobiletools.calculator.helpers.CONSTANT.SINE
 import com.simplemobiletools.calculator.helpers.CONSTANT.SQUARE
 import com.simplemobiletools.calculator.helpers.CONSTANT.TANGENT
-import kotlinx.android.synthetic.main.fragment_1.*
+import kotlinx.android.synthetic.main.fragment_calculator.*
 
 
 /**
  * A simple [Fragment] subclass.
  */
-class MainFragment : Fragment(), Calculator {
+class CalculatorFragment : Fragment(), Calculator {
 
     //ATTRIBUTES
 
-    var storedTextColor = 0
+
     var vibrateOnButtonPress = true
-    var storedUseEnglish = false
     var shiftClicked = false
     lateinit var  calc: CalculatorImpl
 
 
-   // var calc: CalculatorImpl = CalculatorImpl(this, activity!!.applicationContext)
-
     //CONSTRUCTORS
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_1, container, false)
+        return inflater.inflate(R.layout.fragment_calculator, container, false)
     }
 
 
     //METHODS
-
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
 
         calc = CalculatorImpl(this, activity!!.applicationContext)
-
-
-
 
 
         //Never changes
@@ -118,15 +109,6 @@ class MainFragment : Fragment(), Calculator {
         AutofitHelper.create(formula)
 
         changeButtonFunctionality(shiftClicked)
-
-
-//        storeStateVariables()
-//        updateViewColors(calculator_holder, config.textColor)
-
-
-
-
-
 
     }
 
@@ -216,12 +198,7 @@ class MainFragment : Fragment(), Calculator {
             value = result.value
         }
 
-        return if (value.isEmpty()) {
-            false
-        } else {
-            //copyToClipboard(value)
-            true
-        }
+        return !value.isEmpty()
     }
 
     private fun pasteFromClipBoard(): Boolean {
@@ -244,25 +221,20 @@ class MainFragment : Fragment(), Calculator {
             btn_6, btn_7, btn_8, btn_9)
 
 
-    //TODO: Fix this, doesn't import from com.simplemobiletools.calculator.extensions.updateViewColors
-    fun Context.updateViewColors(viewGroup: ViewGroup, textColor: Int) {
-        val cnt = viewGroup.childCount
-        (0 until cnt).map { viewGroup.getChildAt(it) }
-                .forEach {
-                    when (it) {
-                        is TextView -> it.setTextColor(textColor)
-                        is Button -> it.setTextColor(textColor)
-                        is ViewGroup -> updateViewColors(it, textColor)
-                    }
-                }
-    }
+//    //TODO: Fix this, doesn't import from com.simplemobiletools.calculator.extensions.updateViewColors
+//    fun Context.updateViewColors(viewGroup: ViewGroup, textColor: Int) {
+//        val cnt = viewGroup.childCount
+//        (0 until cnt).map { viewGroup.getChildAt(it) }
+//                .forEach {
+//                    when (it) {
+//                        is TextView -> it.setTextColor(textColor)
+//                        is Button -> it.setTextColor(textColor)
+//                        is ViewGroup -> updateViewColors(it, textColor)
+//                    }
+//                }
+//    }
 
     val Context.config: Config get() = Config.newInstance(applicationContext)
 
-//    private fun storeStateVariables() {
-//        con.apply {
-//            storedTextColor = textColor
-//            storedUseEnglish = useEnglish
-//        }
-//    }
-}// Required empty public constructor
+
+}
