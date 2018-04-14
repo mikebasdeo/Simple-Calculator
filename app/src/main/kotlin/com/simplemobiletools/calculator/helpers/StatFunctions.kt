@@ -11,10 +11,11 @@ fun getMean(results: ArrayList<String>): String{
     if(results.isEmpty())
         return ""
     var avg = 0.0
-    for(r in results){
+    for(r in results) {
         avg += r.toDouble()
     }
-    return (avg / results.size).toString()
+
+    return String.format(java.util.Locale.US,"%.2f", avg)
 }
 
 fun getMedian(results: ArrayList<String>): String{
