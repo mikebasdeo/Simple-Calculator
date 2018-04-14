@@ -331,7 +331,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/btn_decimal" />
+        app:layout_constraintStart_toStartOf="@+id/btn_swap" />
 
     <Button
         android:id="@+id/btn_swap"
