@@ -118,6 +118,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="6dp"
+        android:textColor="@color/white"
         app:layout_constraintStart_toEndOf="@+id/text_mean"
         app:layout_constraintTop_toBottomOf="@+id/text_stats" />
     <TextView
@@ -126,6 +127,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="6dp"
+        android:textColor="@color/white"
         app:layout_constraintStart_toEndOf="@+id/text_median"
         app:layout_constraintTop_toBottomOf="@+id/result_mean" />
     <TextView
@@ -134,6 +136,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="6dp"
+        android:textColor="@color/white"
         app:layout_constraintStart_toEndOf="@+id/text_mode"
         app:layout_constraintTop_toBottomOf="@+id/result_median" />
     <TextView
@@ -142,6 +145,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="6dp"
+        android:textColor="@color/white"
         app:layout_constraintStart_toEndOf="@+id/text_range"
         app:layout_constraintTop_toBottomOf="@+id/result_mode" />
     <TextView

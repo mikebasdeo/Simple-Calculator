@@ -108,13 +108,13 @@ class MainActivity : SimpleActivity(), Calculator {
         }
 
         btn_save.setOnClickListener {
-            if (result.text.toString().toDoubleOrNull() == null || result.text.toString() == "NaN"){
+            if (result.text.toString().replace(",","").toDoubleOrNull() == null || result.text.toString() == "NaN"){
                 Toast.makeText(this.applicationContext, "Invalid Save", Toast.LENGTH_SHORT).show();
             }
             else{
                 Toast.makeText(this.applicationContext, "Current State saved to History", Toast.LENGTH_SHORT).show();
                 calc.storeHistory(getFormula())
-                calc.storeResult(result.text.toString())
+                calc.storeResult(result.text.toString().replace(",",""))
             }
         }
 

@@ -5,8 +5,9 @@ import android.content.Context
 import android.os.Bundle
 import android.widget.TextView
 import com.simplemobiletools.calculator.R
-import com.simplemobiletools.calculator.helpers.Calculator
-import com.simplemobiletools.calculator.helpers.CalculatorImpl
+import com.simplemobiletools.calculator.helpers.*
+import kotlinx.android.synthetic.main.activity_history.*
+import kotlinx.android.synthetic.main.activity_main.*
 
 /**
  * Created by Marc-Andre Dragon on 2018-03-01.
@@ -39,6 +40,14 @@ class HistoryActivity : SimpleActivity(), Calculator {
             //value2++
         }
         equationsText.text = temp2
+
+
+        //my stuff
+        result_mean.text = getMean(results);
+        result_median.text = getMedian(results);
+        result_mode.text = getMode(results);
+        result_range.text = getRange(results);
+
     }
 
     @SuppressLint("MissingSuperCall")
