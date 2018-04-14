@@ -8,14 +8,9 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.TextView
 import android.widget.Toast
 import com.simplemobiletools.calculator.R
-import com.simplemobiletools.commons.extensions.performHapticFeedback
-import com.simplemobiletools.commons.extensions.value
-import me.grantland.widget.AutofitHelper
-import com.simplemobiletools.calculator.helpers.*
+import com.simplemobiletools.calculator.helpers.CONSTANT
 import com.simplemobiletools.calculator.helpers.CONSTANT.ABSOLUTE_VALUE
 import com.simplemobiletools.calculator.helpers.CONSTANT.ARCCOS
 import com.simplemobiletools.calculator.helpers.CONSTANT.ARCSINE
@@ -38,7 +33,13 @@ import com.simplemobiletools.calculator.helpers.CONSTANT.ROUNDING
 import com.simplemobiletools.calculator.helpers.CONSTANT.SINE
 import com.simplemobiletools.calculator.helpers.CONSTANT.SQUARE
 import com.simplemobiletools.calculator.helpers.CONSTANT.TANGENT
+import com.simplemobiletools.calculator.helpers.Calculator
+import com.simplemobiletools.calculator.helpers.CalculatorImpl
+import com.simplemobiletools.calculator.helpers.Formatter
+import com.simplemobiletools.commons.extensions.performHapticFeedback
+import com.simplemobiletools.commons.extensions.value
 import kotlinx.android.synthetic.main.fragment_calculator.*
+import me.grantland.widget.AutofitHelper
 
 
 /**
@@ -49,9 +50,9 @@ class CalculatorFragment : Fragment(), Calculator {
     //ATTRIBUTES
 
 
-    var vibrateOnButtonPress = true
-    var shiftClicked = false
-    lateinit var  calc: CalculatorImpl
+    private var vibrateOnButtonPress = true
+    private var shiftClicked = false
+    private lateinit var  calc: CalculatorImpl
 
 
     //CONSTRUCTORS
@@ -112,7 +113,7 @@ class CalculatorFragment : Fragment(), Calculator {
 
     }
 
-    fun checkHaptic(view: View) {
+    private fun checkHaptic(view: View) {
         if (vibrateOnButtonPress) {
             view.performHapticFeedback()
         }
@@ -233,8 +234,6 @@ class CalculatorFragment : Fragment(), Calculator {
 //                    }
 //                }
 //    }
-
-    val Context.config: Config get() = Config.newInstance(applicationContext)
 
 
 }

@@ -222,7 +222,7 @@ class UnitConversionFragment : Fragment(), Calculator {
         }
     }
 
-    private fun String.isNum() = matches(Regex("\\d|\\d{2}|\\d{3}(\\d{3},)+(.|)(\\d)+"))
+    //private fun String.isNum() = matches(Regex("\\d|\\d{2}|\\d{3}(\\d{3},)+(.|)(\\d)+"))
 
 //TODO: This stopped working when moving to fragments for some reason?
 //    private fun copyToClipboard(copyResult: Boolean): Boolean {
