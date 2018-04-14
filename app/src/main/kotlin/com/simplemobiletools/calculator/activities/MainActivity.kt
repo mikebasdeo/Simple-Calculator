@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar
 import com.simplemobiletools.calculator.*
 import com.simplemobiletools.calculator.extensions.config
 import com.simplemobiletools.calculator.extensions.updateViewColors
+import com.simplemobiletools.commons.activities.AboutActivity
 import com.simplemobiletools.commons.extensions.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.toolbar_layout.*
@@ -75,7 +76,7 @@ class MainActivity : AppCompatActivity() {
         if (storedTextColor != config.textColor) {
             updateViewColors(calculator_holder, config.textColor)
         }
-       // vibrateOnButtonPress = config.vibrateOnButtonPress
+        //vibrateOnButtonPress = config.vibrateOnButtonPress
     }
 
     override fun onPause() {
@@ -123,7 +124,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun launchAbout() {
-        //startAboutActivity(R.string.app_name, LICENSE_KOTLIN or LICENSE_AUTOFITTEXTVIEW or LICENSE_ROBOLECTRIC or LICENSE_ESPRESSO, BuildConfig.VERSION_NAME)
+        startActivity(Intent(applicationContext, AboutActivity::class.java))
     }
 
 
