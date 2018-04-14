@@ -22,6 +22,7 @@ class MainActivity : AppCompatActivity() {
 
     var storedTextColor = 0
     var storedUseEnglish = false
+    private var vibrateOnButtonPress = true
 
     lateinit var toolbar : Toolbar
     lateinit var tablayout : TabLayout
@@ -40,12 +41,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         appLaunched()
 
-
-
-
-
-
-        //toolbar crap
+        //Tabs toolbar crap
         toolbar = toolBar
         setSupportActionBar(toolbar)
         tablayout = tabLayout
@@ -56,12 +52,6 @@ class MainActivity : AppCompatActivity() {
         viewpageradapter.addFragments(BinaryCalculatorFragment(), "Binary Conversion")
         viewpager.adapter = viewpageradapter
         tablayout.setupWithViewPager(viewpager)
-
-
-
-
-
-
 
     }
 
@@ -76,7 +66,8 @@ class MainActivity : AppCompatActivity() {
         if (storedTextColor != config.textColor) {
             updateViewColors(calculator_holder, config.textColor)
         }
-        //vibrateOnButtonPress = config.vibrateOnButtonPress
+
+        vibrateOnButtonPress = config.vibrateOnButtonPress
     }
 
     override fun onPause() {
