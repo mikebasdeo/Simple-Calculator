@@ -5,37 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activities.HistoryActivity">
-
-    <TableLayout
-        android:id="@+id/tableLayout"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </TableLayout>
-
     <TextView
         android:id="@+id/Equations"
         android:layout_width="0dp"
@@ -53,7 +22,6 @@
         app:layout_constraintEnd_toStartOf="@+id/ResultsText"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
         android:id="@+id/Results"
         android:layout_width="0dp"
@@ -69,12 +37,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/Equations"
         app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
         android:id="@+id/EquationsText"
         android:layout_width="0dp"
-        android:layout_height="427dp"
-        android:layout_marginLeft="10dp"
+        android:layout_height="352dp"
         android:layout_marginStart="10dp"
         android:gravity="center|top"
         android:maxLines="100"
@@ -85,42 +51,107 @@
         app:layout_constraintBaseline_toBaselineOf="@+id/ResultsText"
         app:layout_constraintEnd_toStartOf="@+id/ResultsText"
         app:layout_constraintStart_toStartOf="parent" />
-
     <TextView
         android:id="@+id/ResultsText"
         android:layout_width="0dp"
-        android:layout_height="427dp"
-        android:layout_marginBottom="1dp"
+        android:layout_height="349dp"
         android:layout_marginEnd="9dp"
-        android:layout_marginRight="9dp"
+        android:layout_marginTop="12dp"
         android:gravity="center|top"
         android:maxLines="100"
         android:text=""
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/tableLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/EquationsText" />
-
+        app:layout_constraintStart_toEndOf="@+id/EquationsText"
+        app:layout_constraintTop_toBottomOf="@+id/Results" />
     <TextView
-        android:id="@+id/StatsText"
-        android:layout_width="344dp"
-        android:layout_height="126dp"
-        android:text=""
-        app:layout_constraintBottom_toBottomOf="@+id/tableLayout"
-        tools:layout_editor_absoluteY="377dp" />
-
-    <TextView
-        android:id="@+id/Stats"
+        android:id="@+id/text_stats"
         android:layout_width="162dp"
         android:layout_height="39dp"
+        android:layout_marginBottom="116dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         android:gravity="center"
-        android:text="Stats"
+        android:text="@string/stats"
         android:textAlignment="center"
-        android:layout_marginLeft="8dp"
         android:textColor="@color/white"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/StatsText"
-        tools:layout_editor_absoluteY="337dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.832"
+        app:layout_constraintStart_toStartOf="parent" />
+    <TextView
+        android:id="@+id/text_mode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="200dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/mode"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_median" />
+    <TextView
+        android:id="@+id/text_mean"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="200dp"
+        android:layout_marginTop="12dp"
+        android:text="@string/mean"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_stats" />
+    <TextView
+        android:id="@+id/text_range"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="200dp"
+        android:layout_marginTop="6dp"
+        android:text="@string/range"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_mode" />
+    <TextView
+        android:id="@+id/result_mean"
+        android:layout_width="116dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="6dp"
+        app:layout_constraintStart_toEndOf="@+id/text_mean"
+        app:layout_constraintTop_toBottomOf="@+id/text_stats" />
+    <TextView
+        android:id="@+id/result_median"
+        android:layout_width="103dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="6dp"
+        app:layout_constraintStart_toEndOf="@+id/text_median"
+        app:layout_constraintTop_toBottomOf="@+id/result_mean" />
+    <TextView
+        android:id="@+id/result_mode"
+        android:layout_width="114dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="6dp"
+        app:layout_constraintStart_toEndOf="@+id/text_mode"
+        app:layout_constraintTop_toBottomOf="@+id/result_median" />
+    <TextView
+        android:id="@+id/result_range"
+        android:layout_width="110dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="6dp"
+        app:layout_constraintStart_toEndOf="@+id/text_range"
+        app:layout_constraintTop_toBottomOf="@+id/result_mode" />
+    <TextView
+        android:id="@+id/text_median"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="200dp"
+        android:layout_marginTop="4dp"
+        android:text="@string/median"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_mean" />
 </android.support.constraint.ConstraintLayout>
