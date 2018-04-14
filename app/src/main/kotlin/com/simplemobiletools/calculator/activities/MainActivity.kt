@@ -29,12 +29,6 @@ class MainActivity : AppCompatActivity() {
     lateinit var viewpager : ViewPager
     lateinit var viewpageradapter : ViewPagerAdapter
 
-//    private val modifierIds: List<Button> = listOf(btn_pi_rand, btn_sin_asin, btn_cos_acos, btn_tan_atan,
-//            btn_reciprocal_round, btn_log_ceil, btn_root_square, btn_mod_cube,
-//            btn_power_abs, btn_e_neg, btn_ln_floor, btn_decimal, btn_0, btn_1,
-//            btn_2, btn_3, btn_4, btn_5, btn_6, btn_7, btn_8, btn_9, btn_del, btn_all_clear, btn_multiply,
-//            btn_plus, btn_divide, btn_minus, btn_left_bracket)
-
     @SuppressLint("MissingSuperCall")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -97,18 +91,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
-
     private fun launchHistory() {
         startActivity(Intent(applicationContext, HistoryActivity::class.java))
     }
-
-//    private fun launchUnitConversion(){
-//        startActivity(Intent(applicationContext, UnitConversionActivity::class.java))
-//    }
-//    private fun launchBinaryCalculator(){
-//        startActivity(Intent(applicationContext, BinaryCalculatorActivity::class.java))
-//    }
 
     private fun launchSettings() {
         startActivity(Intent(applicationContext, SettingsActivity::class.java))
@@ -117,8 +102,6 @@ class MainActivity : AppCompatActivity() {
     private fun launchAbout() {
         startActivity(Intent(applicationContext, AboutActivity::class.java))
     }
-
-
 
     @Override
     private fun Activity.appLaunched() {
