@@ -90,6 +90,7 @@
         android:layout_marginTop="8dp"
         android:text="@string/mode"
         android:textColor="@color/white"
+        android:layout_marginLeft="220dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_median" />
     <TextView
@@ -98,6 +99,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="200dp"
         android:layout_marginTop="12dp"
+        android:layout_marginLeft="220dp"
         android:text="@string/mean"
         android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="parent"
@@ -108,8 +110,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="200dp"
         android:layout_marginTop="6dp"
+        android:layout_marginLeft="220dp"
         android:text="@string/range"
         android:textColor="@color/white"
+        app:layout_constraintLeft_toRightOf="@id/Equations"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_mode" />
     <TextView
@@ -119,6 +123,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="6dp"
         android:textColor="@color/white"
+        app:layout_constraintLeft_toRightOf="@id/Equations"
         app:layout_constraintStart_toEndOf="@+id/text_mean"
         app:layout_constraintTop_toBottomOf="@+id/text_stats" />
     <TextView
@@ -128,6 +133,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="6dp"
         android:textColor="@color/white"
+        app:layout_constraintLeft_toRightOf="@id/Equations"
         app:layout_constraintStart_toEndOf="@+id/text_median"
         app:layout_constraintTop_toBottomOf="@+id/result_mean" />
     <TextView
@@ -138,6 +144,7 @@
         android:layout_marginTop="6dp"
         android:textColor="@color/white"
         app:layout_constraintStart_toEndOf="@+id/text_mode"
+        app:layout_constraintLeft_toRightOf="@id/Equations"
         app:layout_constraintTop_toBottomOf="@+id/result_median" />
     <TextView
         android:id="@+id/result_range"
@@ -147,6 +154,7 @@
         android:layout_marginTop="6dp"
         android:textColor="@color/white"
         app:layout_constraintStart_toEndOf="@+id/text_range"
+        app:layout_constraintLeft_toRightOf="@id/Equations"
         app:layout_constraintTop_toBottomOf="@+id/result_mode" />
     <TextView
         android:id="@+id/text_median"
@@ -154,18 +162,19 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="200dp"
         android:layout_marginTop="4dp"
+        android:layout_marginLeft="220dp"
         android:text="@string/median"
         android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_mean" />
     <View
-        android:layout_width="375dp"
+        android:layout_width="500dp"
         android:layout_height="1dp"
         android:layout_gravity="center"
         android:layout_marginTop="50sp"
         android:background="@color/white" />
     <View
-        android:layout_width="375dp"
+        android:layout_width="500dp"
         android:layout_height="1dp"
         android:layout_gravity="center"
         app:layout_constraintBottom_toTopOf="@+id/text_stats"
