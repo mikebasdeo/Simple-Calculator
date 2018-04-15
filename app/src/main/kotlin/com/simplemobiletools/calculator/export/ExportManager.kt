@@ -1,31 +1,11 @@
 package com.simplemobiletools.calculator.export
 
-import java.io.Writer
-import java.io.IOException
-
+import com.opencsv.CSVWriter
 
 class ExportManager {
 
-    private val DEFAULTSEPARATOR = ", "
-
-    @Throws(IOException::class)
-    fun writeLine(w: Writer, values: List<String>) {
-
-        val separators = DEFAULTSEPARATOR
-        var first = true
-
-        val sb = StringBuilder()
-        for (value in values) {
-
-            if (!first) {
-                sb.append(separators)
-                sb.append(value)
-            } else {
-                sb.append(value)
-            }
-
-            first = false
-        }
-        w.appendln(sb.toString())
+    fun writeLine(w: CSVWriter, values: List<String>) {
+        val sb = values.toTypedArray()
+        w.writeNext(sb)
     }
 }
