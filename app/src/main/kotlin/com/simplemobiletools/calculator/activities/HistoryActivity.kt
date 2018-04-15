@@ -9,26 +9,24 @@ import android.util.TypedValue
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.widget.*
+import com.opencsv.CSVWriter
 import com.simplemobiletools.calculator.BuildConfig
 import com.simplemobiletools.calculator.R
 import com.simplemobiletools.calculator.export.ExportManager
+import com.simplemobiletools.calculator.helpers.CONSTANT.HISTORY_FILE
 import com.simplemobiletools.calculator.helpers.Calculator
 import com.simplemobiletools.calculator.helpers.CalculatorImpl
 import com.simplemobiletools.calculator.helpers.FileHandler
-import kotlinx.android.synthetic.main.activity_history.*
-import java.io.BufferedWriter
-import java.io.File
-import java.io.FileWriter
-import java.io.Writer
-import com.simplemobiletools.calculator.helpers.CONSTANT.HISTORY_FILE
-import com.simplemobiletools.commons.extensions.getSDCardPath
 import com.simplemobiletools.commons.helpers.LICENSE_AUTOFITTEXTVIEW
 import com.simplemobiletools.commons.helpers.LICENSE_ESPRESSO
 import com.simplemobiletools.commons.helpers.LICENSE_KOTLIN
 import com.simplemobiletools.commons.helpers.LICENSE_ROBOLECTRIC
+import kotlinx.android.synthetic.main.activity_history.*
+import java.io.File
+import java.io.FileWriter
 import java.util.*
-import com.opencsv.CSVWriter
 
 /**
  * Created by Marc-Andre Dragon on 2018-03-01.
@@ -56,8 +54,8 @@ class HistoryActivity : SimpleActivity(), Calculator {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.title.toString()) {
-            getString(R.string.export) -> exportData()
+        when (item.title?.toString()) {
+            getString(R.string.export) -> try { exportData() } catch (e : Exception) { System.err.print(e.localizedMessage) }
             getString(R.string.settings) -> launchSettings()
             getString(R.string.about) -> launchAbout()
             getString(R.string.unit_conversion) -> launchUnitConversion()
@@ -76,7 +74,13 @@ class HistoryActivity : SimpleActivity(), Calculator {
         equations = calc.getHistoryEntries()
         val fileManager = FileHandler(this)
         if (isExternalStorageWritable()) {
-            exportFile = fileManager.chooseFileType(HISTORY_FILE, applicationContext.getSDCardPath()+"/Export")
+            //Gets the SD cards absolute Path
+            val dir = getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS).absolutePath
+            val fileName = "Export.csv"
+            //Creates the path name
+            val path = dir + File.separator + fileName
+            //Creates the file with the fileManager Object
+            exportFile = fileManager.chooseFileType(HISTORY_FILE, path)
         }
         val equationsText = findViewById<TableLayout>(R.id.table_equations)
         val resultsText = findViewById<TableLayout>(R.id.table_results)
@@ -106,7 +110,6 @@ class HistoryActivity : SimpleActivity(), Calculator {
             textViewRes.text = it
             textViewRes.gravity = R.id.center
             textViewRes.textAlignment = View.TEXT_ALIGNMENT_CENTER
-            textViewRes.autoSizeMaxTextSize
             textViewRes.setTextColor(getColor(R.color.white))
             //textViewRes.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18.toFloat())
             //Table row
@@ -114,42 +117,30 @@ class HistoryActivity : SimpleActivity(), Calculator {
             tbrow.addView(delbtn)
             tbrow.addView(textViewRes)
             resultsText.addView(tbrow)
-            //temp1 = temp1 +  /*value1.toString()". " +*/ it + "\n"
-            //value1++
         }
 
         equations.forEach {
             val textViewEq = TextView(this)
+            val tbrow = TableRow(this)
             textViewEq.text = it
             textViewEq.gravity = R.id.center
             textViewEq.textAlignment = View.TEXT_ALIGNMENT_CENTER
             textViewEq.setTextColor(getColor(R.color.white))
             textViewEq.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18.toFloat())
-            table_equations.addView(textViewEq)
-            //temp2 = temp2 + /*value2.toString() ". " +*/ it + "\n"
-            //value2++
+            tbrow.addView(textViewEq)
+            table_equations.addView(tbrow)
         }
 
     }
 
     private fun exportData() {
-        //Gets the SD cards absolute Path
-        val dir = android.os.Environment.getExternalStorageDirectory().absolutePath
-        val fileName = "Export.csv"
-        //Creates the path name
-        val path = dir + File.separator + fileName
-        //Creates the file with the fileManager Object
-        val fileManager = FileHandler(this)
-        val f = fileManager.chooseFileType(HISTORY_FILE, path)
         //Create CSV Writer
-        val writerCSV: CSVWriter
-        val fileWriter: FileWriter
+        val writerCSV : CSVWriter
         // File exist and it is not a directory
-        if (f.exists() && !f.isDirectory) {
-            fileWriter = FileWriter(path, false)
-            writerCSV = CSVWriter(fileWriter)
-        } else {
-            writerCSV = CSVWriter(FileWriter(path))
+        //exportFile.createNewFile()
+        when (exportFile.exists() && !exportFile.isDirectory) {
+            true -> writerCSV = CSVWriter(FileWriter(exportFile, false))
+            false -> { exportFile.createNewFile(); writerCSV = CSVWriter(FileWriter(exportFile, false)) }
         }
         export = ExportManager()
         export.writeLine(writerCSV, equations)
