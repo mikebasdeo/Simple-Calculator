@@ -400,7 +400,7 @@
         android:id="@+id/btn_save"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/equalsbtn"
+        android:background="@drawable/savebtn"
         android:fontFamily="sans-serif"
         android:minHeight="25sp"
         android:minWidth="50dp"
