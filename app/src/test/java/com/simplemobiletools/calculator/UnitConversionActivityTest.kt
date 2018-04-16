@@ -1,6 +1,6 @@
 package com.simplemobiletools.calculator
 
-import com.simplemobiletools.calculator.activities.UnitConversionActivity
+import com.simplemobiletools.calculator.activities.UnitConversionFragment
 import com.simplemobiletools.calculator.conversions.TemperatureConversion
 import junit.framework.Assert.assertEquals
 import org.junit.Before
