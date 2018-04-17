@@ -4,17 +4,18 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.Environment
+import android.util.TypedValue
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.ScrollView
-import android.widget.TableLayout
-import android.widget.TableRow
-import android.widget.TextView
+import android.view.ViewGroup.LayoutParams.MATCH_PARENT
+import android.widget.*
+import com.opencsv.CSVWriter
 import com.simplemobiletools.calculator.BuildConfig
 import com.simplemobiletools.calculator.R
 import com.simplemobiletools.calculator.export.ExportManager
-import com.simplemobiletools.calculator.helpers.CONSTANT.FILE
+import com.simplemobiletools.calculator.helpers.CONSTANT.HISTORY_FILE
 import com.simplemobiletools.calculator.helpers.Calculator
 import com.simplemobiletools.calculator.helpers.CalculatorImpl
 import com.simplemobiletools.calculator.helpers.FileHandler
@@ -23,10 +24,8 @@ import com.simplemobiletools.commons.helpers.LICENSE_ESPRESSO
 import com.simplemobiletools.commons.helpers.LICENSE_KOTLIN
 import com.simplemobiletools.commons.helpers.LICENSE_ROBOLECTRIC
 import kotlinx.android.synthetic.main.activity_history.*
-import java.io.BufferedWriter
 import java.io.File
 import java.io.FileWriter
-import java.io.Writer
 import java.util.*
 
 /**
@@ -55,12 +54,12 @@ class HistoryActivity : SimpleActivity(), Calculator {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.string.export -> exportData()
-            R.string.settings -> launchSettings()
-            R.string.about -> launchAbout()
-            R.string.unit_conversion -> launchUnitConversion()
-            R.string.binary_calculator -> launchBinaryCalculator()
+        when (item.title?.toString()) {
+            getString(R.string.export) -> try { exportData() } catch (e : Exception) { System.err.print(e.localizedMessage) }
+            getString(R.string.settings) -> launchSettings()
+            getString(R.string.about) -> launchAbout()
+            getString(R.string.unit_conversion) -> launchUnitConversion()
+            getString(R.string.binary_calculator) -> launchBinaryCalculator()
             else -> return super.onOptionsItemSelected(item)
         }
         return true
@@ -74,8 +73,15 @@ class HistoryActivity : SimpleActivity(), Calculator {
         results = calc.getResults()
         equations = calc.getHistoryEntries()
         val fileManager = FileHandler(this)
-        exportFile = fileManager.chooseFileType(FILE, "Export")
-
+        if (isExternalStorageWritable()) {
+            //Gets the SD cards absolute Path
+            val dir = getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS).absolutePath
+            val fileName = "Export.csv"
+            //Creates the path name
+            val path = dir + File.separator + fileName
+            //Creates the file with the fileManager Object
+            exportFile = fileManager.chooseFileType(HISTORY_FILE, path)
+        }
         val equationsText = findViewById<TableLayout>(R.id.table_equations)
         val resultsText = findViewById<TableLayout>(R.id.table_results)
 
@@ -89,41 +95,58 @@ class HistoryActivity : SimpleActivity(), Calculator {
         results.forEach {
             val tbrow = TableRow(this)
             val textViewRes = TextView(this)
+            val delbtn = Button(this)
+
+            //Delete button
+            delbtn.text = getText(R.string.delete)
+            delbtn.setTextColor(getColor(R.color.white))
+            //delbtn.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14.toFloat())
+            delbtn.setOnClickListener {
+                calc.deleteResult(textViewRes.text.toString())
+                finish()
+                startActivity(intent)
+            }
             //Text View
             textViewRes.text = it
-            textViewRes.gravity = R.id.center or R.id.top
+            textViewRes.gravity = R.id.center
             textViewRes.textAlignment = View.TEXT_ALIGNMENT_CENTER
             textViewRes.setTextColor(getColor(R.color.white))
             //textViewRes.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18.toFloat())
             //Table row
 
+            tbrow.addView(delbtn)
             tbrow.addView(textViewRes)
             resultsText.addView(tbrow)
-            //temp1 = temp1 +  /*value1.toString()". " +*/ it + "\n"
-            //value1++
         }
 
         equations.forEach {
             val textViewEq = TextView(this)
+            val tbrow = TableRow(this)
             textViewEq.text = it
-            textViewEq.gravity = R.id.center or R.id.top
+            textViewEq.gravity = R.id.center
             textViewEq.textAlignment = View.TEXT_ALIGNMENT_CENTER
             textViewEq.setTextColor(getColor(R.color.white))
-            //textViewEq.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18.toFloat())
-            table_equations.addView(textViewEq)
-            //temp2 = temp2 + /*value2.toString() ". " +*/ it + "\n"
-            //value2++
+            textViewEq.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18.toFloat())
+            tbrow.addView(textViewEq)
+            table_equations.addView(tbrow)
         }
 
     }
 
     private fun exportData() {
+        //Create CSV Writer
+        val writerCSV : CSVWriter
+        // File exist and it is not a directory
+        //exportFile.createNewFile()
+        when (exportFile.exists() && !exportFile.isDirectory) {
+            true -> writerCSV = CSVWriter(FileWriter(exportFile, false))
+            false -> { exportFile.createNewFile(); writerCSV = CSVWriter(FileWriter(exportFile, false)) }
+        }
         export = ExportManager()
-        val writer: Writer = BufferedWriter(FileWriter(exportFile, true))
-        export.writeLine(writer, equations)
-        export.writeLine(writer, results)
-        writer.flush()
-        writer.close()
+        export.writeLine(writerCSV, equations)
+        export.writeLine(writerCSV, results)
+        writerCSV.flush()
+        writerCSV.close()
     }
 
     private fun launchUnitConversion(){
@@ -160,5 +183,10 @@ class HistoryActivity : SimpleActivity(), Calculator {
 
     override fun getFormula(): String {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    /* Checks if external storage is available for read and write */
+    private fun isExternalStorageWritable(): Boolean {
+        return Environment.getExternalStorageState() == Environment.MEDIA_MOUNTED
     }
 }
