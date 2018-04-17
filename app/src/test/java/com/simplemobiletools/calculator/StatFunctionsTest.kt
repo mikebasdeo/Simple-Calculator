@@ -13,7 +13,7 @@ class StatFunctionsTest {
 
     @Test
     fun getMeanTest() {
-        assertEquals("53.2624", getMean(values))
+        assertEquals("53.26", getMean(values))
     }
 
     @Test

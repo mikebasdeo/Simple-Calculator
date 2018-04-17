@@ -17,6 +17,8 @@ fun getMean(results: ArrayList<String>): String{
         avg += r.replace(",","").toDouble()
     }
 
+    avg /= results.size
+
     return String.format(java.util.Locale.US,"%.2f", avg)
 }
 
