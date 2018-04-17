@@ -51,7 +51,6 @@ android {
 dependencies {
     implementation 'com.simplemobiletools:commons:3.3.12'
     implementation 'me.grantland:autofittextview:0.2.1'
-    testImplementation 'junit:junit:4.12'
     testImplementation 'org.robolectric:robolectric:3.6.1'
     androidTestImplementation 'com.android.support:support-annotations:27.1.1'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
@@ -61,7 +60,7 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.mockito:mockito-core:2.15.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation files('Jars/opencsv-4.1.jar')
+    implementation "com.opencsv:opencsv:4.0"
 }
 
 Properties props = new Properties()
@@ -81,7 +80,4 @@ if (propFile.canRead()) {
 } else {
     println 'signing.properties not found'
     android.buildTypes.release.signingConfig = null
-}
-repositories {
-    mavenCentral()
 }

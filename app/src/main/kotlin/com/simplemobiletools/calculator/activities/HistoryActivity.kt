@@ -9,8 +9,10 @@ import android.util.TypedValue
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.view.ViewGroup.LayoutParams.MATCH_PARENT
-import android.widget.*
+import android.widget.ScrollView
+import android.widget.TableLayout
+import android.widget.TableRow
+import android.widget.TextView
 import com.opencsv.CSVWriter
 import com.simplemobiletools.calculator.BuildConfig
 import com.simplemobiletools.calculator.R
