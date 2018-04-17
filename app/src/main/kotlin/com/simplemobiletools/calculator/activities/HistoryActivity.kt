@@ -28,6 +28,7 @@ import java.io.File
 import java.io.FileWriter
 import java.util.*
 
+
 /**
  * Created by Marc-Andre Dragon on 2018-03-01.
  */
@@ -91,7 +92,6 @@ class HistoryActivity : SimpleActivity(), Calculator {
         resultsText.addView(scrollResults)
         equationsText.addView(scrollEquations)
 
-        //var value1 = 1; var value2 = 1
         results.forEach {
             val tbrow = TableRow(this)
             val textViewRes = TextView(this)
