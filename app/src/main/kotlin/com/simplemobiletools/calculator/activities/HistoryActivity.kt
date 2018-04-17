@@ -60,8 +60,6 @@ class HistoryActivity : SimpleActivity(), Calculator {
             getString(R.string.export) -> try { exportData() } catch (e : Exception) { System.err.print(e.localizedMessage) }
             getString(R.string.settings) -> launchSettings()
             getString(R.string.about) -> launchAbout()
-            getString(R.string.unit_conversion) -> launchUnitConversion()
-            getString(R.string.binary_calculator) -> launchBinaryCalculator()
             else -> return super.onOptionsItemSelected(item)
         }
         return true
@@ -145,13 +143,6 @@ class HistoryActivity : SimpleActivity(), Calculator {
         export.writeLine(writerCSV, results)
         writerCSV.flush()
         writerCSV.close()
-    }
-
-    private fun launchUnitConversion(){
-        startActivity(Intent(applicationContext, UnitConversionActivity::class.java))
-    }
-    private fun launchBinaryCalculator(){
-        startActivity(Intent(applicationContext, BinaryCalculatorActivity::class.java))
     }
 
     private fun launchSettings() {

@@ -2,19 +2,13 @@ package com.simplemobiletools.calculator
 
 import android.content.Context
 import com.simplemobiletools.calculator.activities.MainActivity
-import com.simplemobiletools.calculator.helpers.CONSTANT.CEILING
-import com.simplemobiletools.calculator.helpers.CONSTANT.FILE
-import com.simplemobiletools.calculator.helpers.CONSTANT.MEMORY_ONE
-import com.simplemobiletools.calculator.helpers.CONSTANT.ROUNDING
 import com.simplemobiletools.calculator.helpers.Calculator
-import com.simplemobiletools.calculator.helpers.CalculatorImpl
 import com.simplemobiletools.calculator.javaluator.ExtendedDoubleEvaluator
 import junit.framework.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mockito.mock
-import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import java.math.BigDecimal

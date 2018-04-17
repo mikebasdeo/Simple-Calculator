@@ -1,6 +1,5 @@
 package com.simplemobiletools.calculator.helpers
 import android.content.Context
-import android.support.v4.content.ContextCompat.startActivity
 import android.widget.Toast
 import com.simplemobiletools.calculator.R
 import com.simplemobiletools.calculator.helpers.CONSTANT.ABSOLUTE_VALUE
@@ -208,11 +207,10 @@ class CalculatorImpl(calculator: Calculator, private val context: Context) {
         setFormula("")
     }
 
-    fun handleEquals(str: String) {
+    private fun handleEquals(str: String) {
         calculateResult(str)
     }
 
-    //TODO: Finish history method that stores the information with the fie explorer
     fun storeHistory(equation: String) {
         val write: Writer = BufferedWriter(FileWriter(mEquationHistory, true))
         write.write(equation)
@@ -221,7 +219,6 @@ class CalculatorImpl(calculator: Calculator, private val context: Context) {
         write.close()
     }
 
-    //TODO: Finish the results history section
     fun storeResult(result: String) {
         val writer: Writer = BufferedWriter(FileWriter(mResultHistory, true))
         writer.write(result)
@@ -230,53 +227,53 @@ class CalculatorImpl(calculator: Calculator, private val context: Context) {
         writer.close()
     }
 
-    fun deleteResult(value: String) {
-        //Readers
-        val readerEq: Reader = BufferedReader(FileReader(mEquationHistory.absolutePath))
-        val readerRes: Reader = BufferedReader(FileReader(mResultHistory.absolutePath))
-        //ArrayLists of values
-        val arrayListRes = ArrayList<String>(readerRes.readLines())
-        val arrayListEq = ArrayList<String>(readerEq.readLines())
-
-
-        //Get index of value to determine the equation to be removed
-        val index = arrayListRes.indexOf(value)
-        val equa = arrayListEq[index]
-
-        //Double check equation returns the result
-        val evaluator = ExtendedDoubleEvaluator()
-        val result = evaluator.evaluate(equa)
-
-        if(result.toDouble()==value.toDouble() || result.toString().contains(value) || result.compareTo(value.toDouble()) <= 0 )
-        {
-            arrayListRes.removeAt(index)
-            arrayListEq.removeAt(index)
-        }
-        else {
-            throw Exception("The Equation Array is not aligned to the results array.")
-        }
-        //Writers
-        val writerRes: Writer = BufferedWriter(FileWriter(mResultHistory, false))
-        val writerEq: Writer = BufferedWriter(FileWriter(mEquationHistory, false))
-
-        //Clears the file
-        writerEq.write("")
-        writerRes.write("")
-        writerRes.append()
-        writerRes.flush()
-        writerRes.close()
-        writerEq.append()
-        writerEq.flush()
-        writerEq.close()
-
-        arrayListEq.forEach {
-            storeHistory(it)
-        }
-
-        arrayListRes.forEach {
-            storeResult(it)
-        }
-    }
+//    fun deleteResult(value: String) {
+//        //Readers
+//        val readerEq: Reader = BufferedReader(FileReader(mEquationHistory.absolutePath))
+//        val readerRes: Reader = BufferedReader(FileReader(mResultHistory.absolutePath))
+//        //ArrayLists of values
+//        val arrayListRes = ArrayList<String>(readerRes.readLines())
+//        val arrayListEq = ArrayList<String>(readerEq.readLines())
+//
+//
+//        //Get index of value to determine the equation to be removed
+//        val index = arrayListRes.indexOf(value)
+//        val equa = arrayListEq[index]
+//
+//        //Double check equation returns the result
+//        val evaluator = ExtendedDoubleEvaluator()
+//        val result = evaluator.evaluate(equa)
+//
+//        if(result.toDouble()==value.toDouble() || result.toString().contains(value) || result.compareTo(value.toDouble()) <= 0 )
+//        {
+//            arrayListRes.removeAt(index)
+//            arrayListEq.removeAt(index)
+//        }
+//        else {
+//            throw Exception("The Equation Array is not aligned to the results array.")
+//        }
+//        //Writers
+//        val writerRes: Writer = BufferedWriter(FileWriter(mResultHistory, false))
+//        val writerEq: Writer = BufferedWriter(FileWriter(mEquationHistory, false))
+//
+//        //Clears the file
+//        writerEq.write("")
+//        writerRes.write("")
+//        writerRes.append()
+//        writerRes.flush()
+//        writerRes.close()
+//        writerEq.append()
+//        writerEq.flush()
+//        writerEq.close()
+//
+//        arrayListEq.forEach {
+//            storeHistory(it)
+//        }
+//
+//        arrayListRes.forEach {
+//            storeResult(it)
+//        }
+//    }
 
     fun getHistoryEntries(): ArrayList<String> {
         val list: ArrayList<String> = ArrayList()
@@ -389,18 +386,6 @@ class CalculatorImpl(calculator: Calculator, private val context: Context) {
         return mResultHistory
     }
 
-    fun setHistoryFile(file : File) {
-        mEquationHistory = file
-    }
-
-    fun setResultFile(file : File) {
-        mResultHistory = file
-    }
-
-    fun getFileManager() : FileHandler {
-        return fileManager
-    }
-
     private fun reciprocalOfResult(){
         val resultWithoutCommas = displayedNumber.replace(",", "")
         calculateResult("1/$resultWithoutCommas")
@@ -441,6 +426,17 @@ class CalculatorImpl(calculator: Calculator, private val context: Context) {
         }
         catch (e: IllegalAccessException){
             setValue("NaN")
+        }
+    }
+
+    fun saveToHistory() : Boolean {
+        return if (displayedNumber.replace(",","").toDoubleOrNull() == null || displayedNumber == "NaN"){
+            Toast.makeText(context, "Invalid Save", Toast.LENGTH_SHORT).show()
+            false
+        }
+        else{
+            Toast.makeText(context, "Current State saved to History", Toast.LENGTH_SHORT).show()
+            true
         }
     }
 }

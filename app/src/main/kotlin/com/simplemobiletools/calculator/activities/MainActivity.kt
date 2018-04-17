@@ -7,14 +7,16 @@ import android.os.Bundle
 import android.support.design.widget.TabLayout
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
-import android.support.v7.widget.Toolbar
-import com.simplemobiletools.calculator.*
+import com.simplemobiletools.calculator.R
 import com.simplemobiletools.calculator.extensions.config
 import com.simplemobiletools.calculator.extensions.updateViewColors
 import com.simplemobiletools.commons.activities.AboutActivity
-import com.simplemobiletools.commons.extensions.*
+import com.simplemobiletools.commons.extensions.baseConfig
+import com.simplemobiletools.commons.extensions.getInternalStoragePath
+import com.simplemobiletools.commons.extensions.updateSDCardPath
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.toolbar_layout.*
 

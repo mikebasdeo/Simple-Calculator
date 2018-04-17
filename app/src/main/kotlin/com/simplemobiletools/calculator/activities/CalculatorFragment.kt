@@ -98,8 +98,10 @@ class CalculatorFragment : Fragment(), Calculator {
         }
 
         btn_save.setOnClickListener {
-            calc.storeHistory(getFormula())
-            calc.storeResult(result.text.toString())
+            if(calc.saveToHistory()) {
+                calc.storeHistory(getFormula())
+                calc.storeResult(result.text.toString())
+            }
         }
 
         formula.setOnLongClickListener { copyToClipboard(false) }
