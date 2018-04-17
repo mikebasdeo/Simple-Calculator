@@ -44,6 +44,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="76dp"
+        android:layout_marginRight="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -55,11 +56,13 @@
         android:layout_width="186dp"
         android:layout_height="425dp"
         android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="76dp"
+        android:layout_marginLeft="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.489"
+        app:layout_constraintLeft_toLeftOf="@+id/Equations"
+        tools:layout_editor_absoluteX="33dp" />
     <TextView
         android:id="@+id/EquationsText"
         android:layout_width="0dp"
@@ -74,12 +77,13 @@
         app:layout_constraintBaseline_toBaselineOf="@+id/ResultsText"
         app:layout_constraintEnd_toStartOf="@+id/ResultsText"
         app:layout_constraintStart_toStartOf="parent" />
+
     <TextView
         android:id="@+id/ResultsText"
         android:layout_width="0dp"
         android:layout_height="349dp"
         android:layout_marginEnd="9dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="16dp"
         android:gravity="center|top"
         android:maxLines="100"
         android:text=""
