@@ -1,6 +1,7 @@
 package com.simplemobiletools.calculator.activities
 
 
+import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 import android.os.Bundle
@@ -200,7 +201,12 @@ class CalculatorFragment : Fragment(), Calculator {
         if (copyResult) {
             value = result.value
         }
-
+        if (!value.isEmpty()){
+            val clipboard = activity!!.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+            val clip = ClipData.newPlainText("copied value", value.toString().replace(",",""))
+            clipboard.primaryClip = clip
+            Toast.makeText(activity!!.applicationContext,"Copied to clipboard", Toast.LENGTH_LONG).show()
+        }
         return !value.isEmpty()
     }
 
