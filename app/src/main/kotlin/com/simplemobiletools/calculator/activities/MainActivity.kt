@@ -6,11 +6,9 @@ import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.support.v4.content.ContextCompat
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.Button
 import android.widget.Toast
 import com.simplemobiletools.calculator.BuildConfig
 import com.simplemobiletools.calculator.R
@@ -109,10 +107,10 @@ class MainActivity : SimpleActivity(), Calculator {
 
         btn_save.setOnClickListener {
             if (result.text.toString().replace(",","").toDoubleOrNull() == null || result.text.toString() == "NaN"){
-                Toast.makeText(this.applicationContext, "Invalid Save", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this.applicationContext, "Invalid Save", Toast.LENGTH_SHORT).show()
             }
             else{
-                Toast.makeText(this.applicationContext, "Current State saved to History", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this.applicationContext, "Current State saved to History", Toast.LENGTH_SHORT).show()
                 calc.storeHistory(getFormula())
                 calc.storeResult(result.text.toString().replace(",",""))
             }

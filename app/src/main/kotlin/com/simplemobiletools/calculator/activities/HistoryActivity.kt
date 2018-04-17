@@ -17,10 +17,8 @@ import com.opencsv.CSVWriter
 import com.simplemobiletools.calculator.BuildConfig
 import com.simplemobiletools.calculator.R
 import com.simplemobiletools.calculator.export.ExportManager
+import com.simplemobiletools.calculator.helpers.*
 import com.simplemobiletools.calculator.helpers.CONSTANT.HISTORY_FILE
-import com.simplemobiletools.calculator.helpers.Calculator
-import com.simplemobiletools.calculator.helpers.CalculatorImpl
-import com.simplemobiletools.calculator.helpers.FileHandler
 import com.simplemobiletools.commons.helpers.LICENSE_AUTOFITTEXTVIEW
 import com.simplemobiletools.commons.helpers.LICENSE_ESPRESSO
 import com.simplemobiletools.commons.helpers.LICENSE_KOTLIN
@@ -29,9 +27,6 @@ import kotlinx.android.synthetic.main.activity_history.*
 import java.io.File
 import java.io.FileWriter
 import java.util.*
-import com.simplemobiletools.calculator.helpers.*
-import kotlinx.android.synthetic.main.activity_history.*
-import kotlinx.android.synthetic.main.activity_main.*
 
 /**
  * Created by Marc-Andre Dragon on 2018-03-01.
@@ -124,15 +119,10 @@ class HistoryActivity : SimpleActivity(), Calculator {
             table_equations.addView(tbrow)
         }
 
-        equationsText.text = temp2
-
-
-        //my stuff
-        result_mean.text = getMean(results);
-        result_median.text = getMedian(results);
-        result_mode.text = getMode(results);
-        result_range.text = getRange(results);
-
+        result_mean.text = getMean(results)
+        result_median.text = getMedian(results)
+        result_mode.text = getMode(results)
+        result_range.text = getRange(results)
     }
 
     private fun exportData() {

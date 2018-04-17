@@ -4,9 +4,8 @@ import com.simplemobiletools.calculator.helpers.getMean
 import com.simplemobiletools.calculator.helpers.getMedian
 import com.simplemobiletools.calculator.helpers.getMode
 import com.simplemobiletools.calculator.helpers.getRange
+import org.junit.Assert.assertEquals
 import org.junit.Test
-
-import org.junit.Assert.*
 
 class StatFunctionsTest {
 
