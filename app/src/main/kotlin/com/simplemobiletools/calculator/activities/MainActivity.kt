@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity() {
         tablayout = tabLayout
         viewpager = viewPager
         viewpageradapter =  ViewPagerAdapter(supportFragmentManager)
-        viewpageradapter.addFragments(CalculatorFragment(), "Calculator")
+        viewpageradapter.addFragments(MainCalculatorFragment(), "Calculator")
         viewpageradapter.addFragments(UnitConversionFragment(), "Unit Conversion")
         viewpageradapter.addFragments(BinaryCalculatorFragment(), "Binary Conversion")
         viewpager.adapter = viewpageradapter

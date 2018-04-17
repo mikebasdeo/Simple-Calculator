@@ -16,7 +16,7 @@ import java.math.RoundingMode
 
 @RunWith(RobolectricTestRunner::class)
 @Config(constants = BuildConfig::class, sdk = [21])
-class MainActivityTest {
+class MainCalculatorFragmentTest {
     private lateinit var activity: MainActivity
 
     private val evaluator = ExtendedDoubleEvaluator()

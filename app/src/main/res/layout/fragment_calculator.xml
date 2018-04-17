@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/bg"
-        tools:context=".activities.CalculatorFragment"
+        tools:context=".activities.MainCalculatorFragment"
         tools:ignore="HardcodedText"
         tools:layout_editor_absoluteY="81dp">
         <!--android:background="@color/dark_grey_pressed_mask" -->

@@ -46,7 +46,7 @@ import me.grantland.widget.AutofitHelper
 /**
  * A simple [Fragment] subclass.
  */
-class CalculatorFragment : Fragment(), Calculator {
+class MainCalculatorFragment : Fragment(), Calculator {
 
     //ATTRIBUTES
 
