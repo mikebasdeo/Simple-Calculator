@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.Environment
+import android.text.method.ScrollingMovementMethod
 import android.util.TypedValue
 import android.view.Menu
 import android.view.MenuItem
@@ -123,6 +124,11 @@ class HistoryActivity : SimpleActivity(), Calculator {
         result_median.text = getMedian(results)
         result_mode.text = getMode(results)
         result_range.text = getRange(results)
+
+        result_mean.movementMethod = ScrollingMovementMethod()
+        result_median.movementMethod = ScrollingMovementMethod()
+        result_mode.movementMethod = ScrollingMovementMethod()
+        result_range.movementMethod = ScrollingMovementMethod()
     }
 
     private fun exportData() {

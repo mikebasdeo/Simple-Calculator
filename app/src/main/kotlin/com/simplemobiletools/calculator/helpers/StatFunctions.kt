@@ -25,11 +25,9 @@ fun getMedian(results: ArrayList<String>): String{
         return ""
     val listOfSortedResults = sortListOfStringsOfDoubles(results)
     return if(listOfSortedResults.size % 2 == 0) {
-        val answer = ((listOfSortedResults[listOfSortedResults.size / 2] + listOfSortedResults[listOfSortedResults.size / 2 - 1]) / 2)
-        String.format(java.util.Locale.US,"%.2f", answer)
+        ((listOfSortedResults[listOfSortedResults.size / 2] + listOfSortedResults[listOfSortedResults.size / 2 - 1]) / 2).toString()
     } else {
-        val answer = (listOfSortedResults[listOfSortedResults.size / 2])
-        String.format(java.util.Locale.US, "%.2f", answer)
+        (listOfSortedResults[listOfSortedResults.size / 2]).toString()
     }
 
 }
