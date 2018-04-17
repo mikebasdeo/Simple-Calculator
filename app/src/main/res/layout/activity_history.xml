@@ -2,9 +2,14 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".activities.HistoryActivity"
+    android:id="@+id/calculator_holder"
     android:layout_width="match_parent"
+    app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
     android:layout_height="match_parent"
-    tools:context=".activities.HistoryActivity">
+    android:background="@color/noah_6"
+    tools:ignore="HardcodedText"
+    tools:layout_editor_absoluteY="81dp">
 
     <TextView
         android:id="@+id/Equations"

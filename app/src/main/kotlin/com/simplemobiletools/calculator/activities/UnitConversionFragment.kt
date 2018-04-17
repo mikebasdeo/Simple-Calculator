@@ -1,12 +1,15 @@
 package com.simplemobiletools.calculator.activities
 
+
 import android.annotation.SuppressLint
 import android.content.ClipboardManager
 import android.content.Context
 import android.os.Bundle
+import android.support.v4.app.Fragment
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.AdapterView
-import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.Toast
@@ -15,28 +18,32 @@ import com.simplemobiletools.calculator.conversions.*
 import com.simplemobiletools.calculator.helpers.Calculator
 import com.simplemobiletools.calculator.helpers.CalculatorImpl
 import com.simplemobiletools.calculator.helpers.Formatter
-import com.simplemobiletools.commons.extensions.copyToClipboard
 import com.simplemobiletools.commons.extensions.performHapticFeedback
-import com.simplemobiletools.commons.extensions.value
-import kotlinx.android.synthetic.main.activity_unit_conversion.*
+import kotlinx.android.synthetic.main.fragment_unit_conversion.*
 import java.math.BigDecimal
 import java.text.DecimalFormat
 
 
-class UnitConversionActivity : SimpleActivity(), Calculator {
+class UnitConversionFragment : Fragment(), Calculator {
 
-    private lateinit var calc: CalculatorImpl
+    lateinit var calc: CalculatorImpl
     private lateinit var converter: Converter
 
     private var vibrateOnButtonPress = true
     private fun getDigitIds() = listOf(btn_0, btn_1, btn_2, btn_3, btn_4, btn_5, btn_6, btn_7, btn_8, btn_9)
 
-    @SuppressLint("MissingSuperCall")
-    override fun onCreate(savedInstanceState: Bundle?) {
 
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_unit_conversion)
-        calc = CalculatorImpl(this, applicationContext)
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
+        return inflater.inflate(R.layout.fragment_unit_conversion, container, false)
+    }
+
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        calc = CalculatorImpl(this, activity!!.applicationContext)
 
         getDigitIds().forEach {
             it.setOnClickListener { calc.numpadClicked(it.id); liveUpdate(); checkHaptic(it) }
@@ -47,13 +54,14 @@ class UnitConversionActivity : SimpleActivity(), Calculator {
         btn_swap.setOnClickListener { swap(); checkHaptic(it) }
         btn_save.setOnClickListener { calc.storeHistory(getFormula()); calc.storeResult(after.text.toString())}
 
-        after.setOnLongClickListener { copyToClipboard(true) }
         before.setOnLongClickListener { pasteFromClipBoard() }
 
         //Three drop down menus. The conversionChoiceSpinner changes the other two automatically.
-        val conversionChoiceSpinner: Spinner = findViewById(R.id.conversion_type_spinner)
-        val unitsBeforeSpinner: Spinner = findViewById(R.id.units_before_spinner)
-        val unitsAfterSpinner: Spinner = findViewById(R.id.units_after_spinner)
+        val conversionChoiceSpinner: Spinner = conversion_type_spinner
+        val unitsBeforeSpinner: Spinner = units_before_spinner
+        val unitsAfterSpinner: Spinner = units_after_spinner
+
+
 
         //Main List for conversion choices from helper.
         val conversionChoiceList = listOf("Distance", "Speed", "Time", "Volume", "Weight", "Temperature")
@@ -66,16 +74,16 @@ class UnitConversionActivity : SimpleActivity(), Calculator {
         val afterAdapter: ArrayAdapter<String>
 
         //Create adapters for each of the three spinners.
-        choiceAdapter = ArrayAdapter(this, R.layout.spinner_item, conversionChoiceList)
-        beforeAdapter = ArrayAdapter(this, R.layout.spinner_item_units, unitList)
-        afterAdapter = ArrayAdapter(this, R.layout.spinner_item_units, unitList)
+        choiceAdapter = ArrayAdapter(activity!!.applicationContext, R.layout.spinner_item, conversionChoiceList)
+        beforeAdapter = ArrayAdapter(activity!!.applicationContext, R.layout.spinner_item_units, unitList)
+        afterAdapter = ArrayAdapter(activity!!.applicationContext, R.layout.spinner_item_units, unitList)
 
         //Connect each spinner to its respective adapter.
         conversionChoiceSpinner.adapter = choiceAdapter
         unitsBeforeSpinner.adapter = beforeAdapter
         unitsAfterSpinner.adapter = afterAdapter
 
-        conversionChoiceSpinner.onItemSelectedListener = object : OnItemSelectedListener {
+        conversionChoiceSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(arg0: AdapterView<*>, arg1: View, arg2: Int, arg3: Long) {
                 val s = conversionChoiceSpinner.getItemAtPosition(arg2).toString()
                 when (s){
@@ -98,7 +106,7 @@ class UnitConversionActivity : SimpleActivity(), Calculator {
             }
         }
 
-        unitsBeforeSpinner.onItemSelectedListener  = object : OnItemSelectedListener {
+        unitsBeforeSpinner.onItemSelectedListener  = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 liveUpdate()
             }
@@ -107,7 +115,7 @@ class UnitConversionActivity : SimpleActivity(), Calculator {
             }
         }
 
-        unitsAfterSpinner.onItemSelectedListener  = object : OnItemSelectedListener {
+        unitsAfterSpinner.onItemSelectedListener  = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 liveUpdate()
             }
@@ -116,7 +124,6 @@ class UnitConversionActivity : SimpleActivity(), Calculator {
             }
         }
     }
-
     override fun setValue(value: String, context: Context) {
         before.text = value
     }
@@ -159,10 +166,10 @@ class UnitConversionActivity : SimpleActivity(), Calculator {
             input = 0.0
 
         val result = converter.calculate(
-                    input,
-                    units_before_spinner.selectedItem.toString(),
-                    units_after_spinner.selectedItem.toString()
-                    )
+                input,
+                units_before_spinner.selectedItem.toString(),
+                units_after_spinner.selectedItem.toString()
+        )
         before_abbr.text = converter.getMap().getValue(units_before_spinner.selectedItem.toString()).second
         after_abbr.text = converter.getMap().getValue(units_after_spinner.selectedItem.toString()).second
         after.text = trimResult(result)
@@ -175,7 +182,7 @@ class UnitConversionActivity : SimpleActivity(), Calculator {
             before.text = "0."
         else
             if(!before.text.contains("."))
-                setFormula(".", this)
+                setFormula(".", activity!!.applicationContext)
     }
 
     private fun trimResult(input: Double): String{
@@ -202,10 +209,10 @@ class UnitConversionActivity : SimpleActivity(), Calculator {
 
     private fun pasteFromClipBoard(): Boolean {
         //check clipboard
-        val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-        if (!clipboard.primaryClip.getItemAt(0).coerceToText(this).toString().isEmpty()) {
+        val clipboard = activity!!.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        if (!clipboard.primaryClip.getItemAt(0).coerceToText(activity!!.applicationContext).toString().isEmpty()) {
             before.text = clipboard.primaryClip.getItemAt(0).text.toString()
-            Toast.makeText(applicationContext,"Pasted from clipboard", Toast.LENGTH_LONG).show()
+            Toast.makeText(activity!!.applicationContext,"Pasted from clipboard", Toast.LENGTH_LONG).show()
             return true
         }
         else {
@@ -217,19 +224,20 @@ class UnitConversionActivity : SimpleActivity(), Calculator {
 
     //private fun String.isNum() = matches(Regex("\\d|\\d{2}|\\d{3}(\\d{3},)+(.|)(\\d)+"))
 
-    private fun copyToClipboard(copyResult: Boolean): Boolean {
-        var value = after.value
-        if (copyResult) {
-            value = after.value
-        }
-
-        return if (value.isEmpty()) {
-            false
-        } else {
-            copyToClipboard(value)
-            true
-        }
-    }
+//TODO: This stopped working when moving to fragments for some reason?
+//    private fun copyToClipboard(copyResult: Boolean): Boolean {
+//        var value = after.value
+//        if (copyResult) {
+//            value = after.value
+//        }
+//
+//        return if (value.isEmpty()) {
+//            false
+//        } else {
+//            copyToClipboard(value)
+//            true
+//        }
+//    }
 
     private fun swap() {
         val oldBefore = units_before_spinner.selectedItemPosition
@@ -238,4 +246,6 @@ class UnitConversionActivity : SimpleActivity(), Calculator {
         units_before_spinner.setSelection(oldAfter)
         units_after_spinner.setSelection(oldBefore)
     }
+
+
 }

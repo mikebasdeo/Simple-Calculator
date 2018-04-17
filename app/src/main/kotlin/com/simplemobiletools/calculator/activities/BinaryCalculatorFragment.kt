@@ -1,21 +1,31 @@
 package com.simplemobiletools.calculator.activities
+
+
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Paint
 import android.os.Bundle
+import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import com.simplemobiletools.calculator.R
 import com.simplemobiletools.calculator.helpers.BinaryCalculator
-import kotlinx.android.synthetic.main.activity_binary_calculator.*
+import kotlinx.android.synthetic.main.fragment_binary_calculator.*
 
 
-class BinaryCalculatorActivity : SimpleActivity() {
+/**
+ * A simple [Fragment] subclass.
+ */
+class BinaryCalculatorFragment : Fragment() {
+
 
     private lateinit var binaryCalculator: BinaryCalculator
     private lateinit var lastTouched: TextView
@@ -23,11 +33,19 @@ class BinaryCalculatorActivity : SimpleActivity() {
     private  var isTextOne : Boolean = true
     private var hasPreviousOperator = false
 
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_binary_calculator, container, false)
+    }
+
     @SuppressLint("MissingSuperCall", "SetTextI18n")
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
 
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_binary_calculator)
+
         binaryCalculator = BinaryCalculator()
         lastTouched = binary_number_1
 
@@ -115,27 +133,27 @@ class BinaryCalculatorActivity : SimpleActivity() {
 
         btn_plus.setOnClickListener{
 
-                if(!missingNumber())
-                    binary_result.text = binaryCalculator.addBinary(binary_number_1.text.toString(), binary_number_2.text.toString())
-                selectOperatorButton(btn_plus)
+            if(!missingNumber())
+                binary_result.text = binaryCalculator.addBinary(binary_number_1.text.toString(), binary_number_2.text.toString())
+            selectOperatorButton(btn_plus)
         }
 
         btn_minus.setOnClickListener{
             if(!missingNumber())
                 binary_result.text = binaryCalculator.subtractBinary(binary_number_1.text.toString(), binary_number_2.text.toString())
-                selectOperatorButton(btn_minus)
+            selectOperatorButton(btn_minus)
         }
 
         btn_multiply.setOnClickListener{
             if(!missingNumber())
                 binary_result.text = binaryCalculator.multiplyBinary(binary_number_1.text.toString(), binary_number_2.text.toString())
-                selectOperatorButton(btn_multiply)
+            selectOperatorButton(btn_multiply)
         }
 
         btn_divide.setOnClickListener{
             if(!missingNumber())
                 binary_result.text = binaryCalculator.divideBinary(binary_number_1.text.toString(), binary_number_2.text.toString())
-                selectOperatorButton(btn_divide)
+            selectOperatorButton(btn_divide)
         }
 
         btn_and.setOnClickListener{
@@ -172,13 +190,13 @@ class BinaryCalculatorActivity : SimpleActivity() {
     private fun missingNumber(): Boolean {
         return when {
             binary_number_1.text.isNullOrBlank() -> {
-                "Please enter a valid binary number".toast(this)
+                "Please enter a valid binary number".toast(activity!!.applicationContext)
                 lastTouched = binary_number_1
                 binary_number_1.requestFocus()
                 true
             }
             binary_number_2.text.isNullOrBlank() -> {
-                "Please enter a valid binary number".toast(this)
+                "Please enter a valid binary number".toast(activity!!.applicationContext)
                 lastTouched = binary_number_2
                 binary_number_2.requestFocus()
                 true
@@ -188,31 +206,31 @@ class BinaryCalculatorActivity : SimpleActivity() {
     }
 
 
-
     private fun resetOperatorColours(){
-        btn_plus.setTextColor(ContextCompat.getColor(this, R.color.white))
-        btn_plus.setBackgroundColor(ContextCompat.getColor(this, R.color.noah_3))
-        btn_minus.setTextColor(ContextCompat.getColor(this, R.color.white))
-        btn_minus.setBackgroundColor(ContextCompat.getColor(this, R.color.noah_3))
-        btn_multiply.setTextColor(ContextCompat.getColor(this, R.color.white))
-        btn_multiply.setBackgroundColor(ContextCompat.getColor(this, R.color.noah_3))
-        btn_divide.setTextColor(ContextCompat.getColor(this, R.color.white))
-        btn_divide.setBackgroundColor(ContextCompat.getColor(this, R.color.noah_3))
+        btn_plus.setTextColor(ContextCompat.getColor(activity!!.applicationContext, R.color.white))
+        btn_plus.setBackgroundColor(ContextCompat.getColor(activity!!.applicationContext, R.color.noah_3))
+        btn_minus.setTextColor(ContextCompat.getColor(activity!!.applicationContext, R.color.white))
+        btn_minus.setBackgroundColor(ContextCompat.getColor(activity!!.applicationContext, R.color.noah_3))
+        btn_multiply.setTextColor(ContextCompat.getColor(activity!!.applicationContext, R.color.white))
+        btn_multiply.setBackgroundColor(ContextCompat.getColor(activity!!.applicationContext, R.color.noah_3))
+        btn_divide.setTextColor(ContextCompat.getColor(activity!!.applicationContext, R.color.white))
+        btn_divide.setBackgroundColor(ContextCompat.getColor(activity!!.applicationContext, R.color.noah_3))
 
-        btn_and.setTextColor(ContextCompat.getColor(this, R.color.white))
-        btn_and.setBackgroundColor(ContextCompat.getColor(this, R.color.noah_4))
-        btn_or.setTextColor(ContextCompat.getColor(this, R.color.white))
-        btn_or.setBackgroundColor(ContextCompat.getColor(this, R.color.noah_4))
-        btn_xor.setTextColor(ContextCompat.getColor(this, R.color.white))
-        btn_xor.setBackgroundColor(ContextCompat.getColor(this, R.color.noah_4))
+        btn_and.setTextColor(ContextCompat.getColor(activity!!.applicationContext, R.color.white))
+        btn_and.setBackgroundColor(ContextCompat.getColor(activity!!.applicationContext, R.color.noah_4))
+        btn_or.setTextColor(ContextCompat.getColor(activity!!.applicationContext, R.color.white))
+        btn_or.setBackgroundColor(ContextCompat.getColor(activity!!.applicationContext, R.color.noah_4))
+        btn_xor.setTextColor(ContextCompat.getColor(activity!!.applicationContext, R.color.white))
+        btn_xor.setBackgroundColor(ContextCompat.getColor(activity!!.applicationContext, R.color.noah_4))
     }
 
     private fun selectOperatorButton(button: Button){
 
-            resetOperatorColours()
-            button.setTextColor(ContextCompat.getColor(this, R.color.noah_4))
-            button.setBackgroundColor(ContextCompat.getColor(this, R.color.noah_5))
-            lastOperatorTouched = button
-            hasPreviousOperator = true
+        resetOperatorColours()
+        button.setTextColor(ContextCompat.getColor(activity!!.applicationContext, R.color.noah_4))
+        button.setBackgroundColor(ContextCompat.getColor(activity!!.applicationContext, R.color.noah_5))
+        lastOperatorTouched = button
+        hasPreviousOperator = true
     }
+
 }
