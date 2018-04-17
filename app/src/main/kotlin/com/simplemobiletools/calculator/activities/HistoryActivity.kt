@@ -46,10 +46,8 @@ class HistoryActivity : SimpleActivity(), Calculator {
     override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
         if (index == 0) {
             menu?.add(R.string.about)
-            menu?.add(R.string.binary_calculator)
             menu?.add(R.string.export)
             menu?.add(R.string.settings)
-            menu?.add(R.string.unit_conversion)
             index++
         }
         return true
