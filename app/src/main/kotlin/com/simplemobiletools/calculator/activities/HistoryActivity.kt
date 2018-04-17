@@ -95,26 +95,14 @@ class HistoryActivity : SimpleActivity(), Calculator {
         results.forEach {
             val tbrow = TableRow(this)
             val textViewRes = TextView(this)
-            val delbtn = Button(this)
 
-            //Delete button
-            delbtn.text = getText(R.string.delete)
-            delbtn.setTextColor(getColor(R.color.white))
-            //delbtn.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14.toFloat())
-            delbtn.setOnClickListener {
-                calc.deleteResult(textViewRes.text.toString())
-                finish()
-                startActivity(intent)
-            }
             //Text View
             textViewRes.text = it
             textViewRes.gravity = R.id.center
             textViewRes.textAlignment = View.TEXT_ALIGNMENT_CENTER
             textViewRes.setTextColor(getColor(R.color.white))
-            //textViewRes.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18.toFloat())
+            textViewRes.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18.toFloat())
             //Table row
-
-            tbrow.addView(delbtn)
             tbrow.addView(textViewRes)
             resultsText.addView(tbrow)
         }
