@@ -206,15 +206,18 @@ class CalculatorFragment : Fragment(), Calculator {
 
     private fun pasteFromClipBoard(): Boolean {
         val clipboard = activity!!.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-        if (clipboard.primaryClip.getItemAt(0).coerceToText(activity!!.applicationContext).toString().toDoubleOrNull() != null) {
-            if (!clipboard.primaryClip.getItemAt(0).coerceToText(activity!!.applicationContext).toString().toDouble().isNaN()) {
-                setFormula(clipboard.primaryClip.getItemAt(0).coerceToText(activity!!.applicationContext).toString(), activity!!.applicationContext)
+
+        val clipboardValue = clipboard.primaryClip.getItemAt(0).coerceToText(activity!!.applicationContext).toString()
+
+        if (clipboardValue.toDoubleOrNull() != null) {
+            if (!clipboardValue.toDouble().isNaN()) {
+                setFormula(clipboardValue, activity!!.applicationContext)
                 Toast.makeText(activity!!.applicationContext, "Pasted from clipboard", Toast.LENGTH_LONG).show()
                 calc.calculateResult(getFormula())
-                calc.listOfInputLengths.add(clipboard.primaryClip.getItemAt(0).coerceToText(activity!!.applicationContext).toString().length)
+                calc.listOfInputLengths.add(clipboardValue.length)
                 return true
             }
-        }
+    }
         return false
     }
 
