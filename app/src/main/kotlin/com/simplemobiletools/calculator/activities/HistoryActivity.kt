@@ -4,27 +4,29 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.TypedValue
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.*
+import android.widget.ScrollView
+import android.widget.TableLayout
+import android.widget.TableRow
+import android.widget.TextView
 import com.simplemobiletools.calculator.BuildConfig
 import com.simplemobiletools.calculator.R
 import com.simplemobiletools.calculator.export.ExportManager
+import com.simplemobiletools.calculator.helpers.CONSTANT.FILE
 import com.simplemobiletools.calculator.helpers.Calculator
 import com.simplemobiletools.calculator.helpers.CalculatorImpl
 import com.simplemobiletools.calculator.helpers.FileHandler
+import com.simplemobiletools.commons.helpers.LICENSE_AUTOFITTEXTVIEW
+import com.simplemobiletools.commons.helpers.LICENSE_ESPRESSO
+import com.simplemobiletools.commons.helpers.LICENSE_KOTLIN
+import com.simplemobiletools.commons.helpers.LICENSE_ROBOLECTRIC
 import kotlinx.android.synthetic.main.activity_history.*
 import java.io.BufferedWriter
 import java.io.File
 import java.io.FileWriter
 import java.io.Writer
-import com.simplemobiletools.calculator.helpers.CONSTANT.FILE
-import com.simplemobiletools.commons.helpers.LICENSE_AUTOFITTEXTVIEW
-import com.simplemobiletools.commons.helpers.LICENSE_ESPRESSO
-import com.simplemobiletools.commons.helpers.LICENSE_KOTLIN
-import com.simplemobiletools.commons.helpers.LICENSE_ROBOLECTRIC
 import java.util.*
 
 /**
@@ -37,7 +39,7 @@ class HistoryActivity : SimpleActivity(), Calculator {
     private lateinit var results: ArrayList<String>
     private lateinit var export: ExportManager
     private lateinit var  exportFile: File
-    var index = 0
+    private var index = 0
 
 
     override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
@@ -54,7 +56,7 @@ class HistoryActivity : SimpleActivity(), Calculator {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.string.export -> ExportData()
+            R.string.export -> exportData()
             R.string.settings -> launchSettings()
             R.string.about -> launchAbout()
             R.string.unit_conversion -> launchUnitConversion()
@@ -71,8 +73,8 @@ class HistoryActivity : SimpleActivity(), Calculator {
         calc = CalculatorImpl(this, applicationContext)
         results = calc.getResults()
         equations = calc.getHistoryEntries()
-        val FileManager = FileHandler(this)
-        exportFile = FileManager.chooseFileType(FILE, "Export")
+        val fileManager = FileHandler(this)
+        exportFile = fileManager.chooseFileType(FILE, "Export")
 
         val equationsText = findViewById<TableLayout>(R.id.table_equations)
         val resultsText = findViewById<TableLayout>(R.id.table_results)
@@ -87,17 +89,6 @@ class HistoryActivity : SimpleActivity(), Calculator {
         results.forEach {
             val tbrow = TableRow(this)
             val textViewRes = TextView(this)
-            val delbtn = Button(this)
-
-            //Delete button
-            delbtn.text = getText(R.string.delete)
-            delbtn.setTextColor(getColor(R.color.white))
-            //delbtn.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14.toFloat())
-            delbtn.setOnClickListener {
-                calc.deleteResult(textViewRes.text.toString())
-                finish()
-                startActivity(intent)
-            }
             //Text View
             textViewRes.text = it
             textViewRes.gravity = R.id.center or R.id.top
@@ -106,7 +97,6 @@ class HistoryActivity : SimpleActivity(), Calculator {
             //textViewRes.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18.toFloat())
             //Table row
 
-            tbrow.addView(delbtn)
             tbrow.addView(textViewRes)
             resultsText.addView(tbrow)
             //temp1 = temp1 +  /*value1.toString()". " +*/ it + "\n"
@@ -119,7 +109,7 @@ class HistoryActivity : SimpleActivity(), Calculator {
             textViewEq.gravity = R.id.center or R.id.top
             textViewEq.textAlignment = View.TEXT_ALIGNMENT_CENTER
             textViewEq.setTextColor(getColor(R.color.white))
-            textViewEq.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18.toFloat())
+            //textViewEq.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18.toFloat())
             table_equations.addView(textViewEq)
             //temp2 = temp2 + /*value2.toString() ". " +*/ it + "\n"
             //value2++
@@ -127,7 +117,7 @@ class HistoryActivity : SimpleActivity(), Calculator {
 
     }
 
-    fun ExportData() {
+    private fun exportData() {
         export = ExportManager()
         val writer: Writer = BufferedWriter(FileWriter(exportFile, true))
         export.writeLine(writer, equations)
