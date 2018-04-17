@@ -205,20 +205,18 @@ class CalculatorFragment : Fragment(), Calculator {
     }
 
     private fun pasteFromClipBoard(): Boolean {
-        //check clipboard
         val clipboard = activity!!.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-        return if (clipboard.primaryClip.getItemAt(0).coerceToText(activity!!.applicationContext).toString().isNum()){
-            setFormula(clipboard.primaryClip.getItemAt(0).coerceToText(activity!!.applicationContext).toString(), activity!!.applicationContext)
-            Toast.makeText(activity!!.applicationContext,"Pasted from clipboard", Toast.LENGTH_LONG).show()
-            true
+        if (clipboard.primaryClip.getItemAt(0).coerceToText(activity!!.applicationContext).toString().toDoubleOrNull() != null) {
+            if (!clipboard.primaryClip.getItemAt(0).coerceToText(activity!!.applicationContext).toString().toDouble().isNaN()) {
+                setFormula(clipboard.primaryClip.getItemAt(0).coerceToText(activity!!.applicationContext).toString(), activity!!.applicationContext)
+                Toast.makeText(activity!!.applicationContext, "Pasted from clipboard", Toast.LENGTH_LONG).show()
+                calc.calculateResult(getFormula())
+                calc.listOfInputLengths.add(clipboard.primaryClip.getItemAt(0).coerceToText(activity!!.applicationContext).toString().length)
+                return true
+            }
         }
-        else {
-            //do nothing
-            false
-        }
+        return false
     }
-
-    private fun String.isNum() = matches(Regex("\\d|\\d{2}|\\d{3}(\\d{3},)+(.|)(\\d)+"))
 
     private fun getDigitIds() = listOf(btn_decimal, btn_0, btn_1, btn_2, btn_3, btn_4, btn_5,
             btn_6, btn_7, btn_8, btn_9)

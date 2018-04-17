@@ -68,7 +68,8 @@ class CalculatorImpl(calculator: Calculator, private val context: Context) {
     //delete digits or operations, our program will automatically delete the appropriate amount of
     //characters in the formula string. Example: sin(90) would delete in the following order: ) ->
     //0 -> 9 -> sin( ... This prevents user's from deleting an operation one letter at a time.
-    private val listOfInputLengths = mutableListOf<Int>()
+
+    val listOfInputLengths = mutableListOf<Int>()
 
     private val listOfLastKeys = mutableListOf<String>()
 
@@ -102,7 +103,7 @@ class CalculatorImpl(calculator: Calculator, private val context: Context) {
         setValue(Formatter.doubleToString(value))
     }
 
-    private fun calculateResult(str: String) {
+    fun calculateResult(str: String) {
         val evaluator = ExtendedDoubleEvaluator()
         try {
             val result = evaluator.evaluate(str)
@@ -420,7 +421,7 @@ class CalculatorImpl(calculator: Calculator, private val context: Context) {
         return listOfLastKeys[listOfLastKeys.size - 1]
     }
 
-    private fun liveUpdate() {
+    fun liveUpdate() {
         try{
             handleEquals(mCallback!!.getFormula())
         }
