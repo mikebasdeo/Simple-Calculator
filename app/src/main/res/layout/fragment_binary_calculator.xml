@@ -29,6 +29,7 @@
             android:layout_height="wrap_content"
             app:tabGravity="fill"
             app:tabMode="fixed"
+
             ></android.support.design.widget.TabLayout>
 
     </android.support.design.widget.AppBarLayout>
@@ -39,7 +40,7 @@
         android:layout_height="match_parent"></android.support.v4.view.ViewPager>
 
     <Button
-        android:id="@+id/btn_1"
+        android:id="@+id/btn_0"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="236dp"
@@ -52,14 +53,14 @@
         android:textSize="120sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btn_0"
+        app:layout_constraintEnd_toStartOf="@+id/btn_1"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/btn_0"
+        app:layout_constraintTop_toTopOf="@+id/btn_1"
         app:layout_constraintVertical_bias="0.0" />
 
     <Button
-        android:id="@+id/btn_0"
+        android:id="@+id/btn_1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="1dp"
@@ -74,7 +75,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btn_del"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/btn_1"/>
+        app:layout_constraintStart_toEndOf="@+id/btn_0"/>
 
     <Button
         android:id="@+id/btn_del"
@@ -87,7 +88,7 @@
         android:minWidth="77dp"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/btn_plus"
+        app:layout_constraintBottom_toTopOf="@+id/btn_multiply"
         app:layout_constraintEnd_toStartOf="@+id/btn_all_clear" />
 
     <Button
@@ -111,27 +112,29 @@
         android:id="@+id/btn_minus"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/minusbtn"
+        android:background="@color/noah_3"
         android:textColor="@color/white"
         android:fontFamily="sans-serif"
         android:minHeight="55sp"
         android:minWidth="77dp"
-        android:textSize="20sp"
+        android:textSize="30sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/btn_all_clear"
-        app:layout_constraintTop_toBottomOf="@+id/btn_all_clear" />
+        android:text="−"
+        app:layout_constraintEnd_toEndOf="@+id/btn_divide"
+        app:layout_constraintTop_toBottomOf="@+id/btn_divide" />
 
     <Button
         android:id="@+id/btn_plus"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textColor="@color/white"
-        android:background="@drawable/plusbtn"
+        android:background="@color/noah_3"
         android:fontFamily="sans-serif"
         android:minHeight="55sp"
         android:minWidth="77dp"
-        android:textSize="20sp"
+        android:textSize="30sp"
         android:textStyle="bold"
+        android:text="+"
         app:layout_constraintBaseline_toBaselineOf="@+id/btn_minus"
         app:layout_constraintEnd_toStartOf="@+id/btn_minus" />
 
@@ -140,26 +143,28 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textColor="@color/white"
-        android:background="@drawable/divbtn"
+        android:background="@color/noah_3"
         android:fontFamily="sans-serif"
         android:minHeight="55sp"
         android:minWidth="77dp"
-        android:textSize="20sp"
+        android:textSize="30sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/btn_minus"
-        app:layout_constraintTop_toBottomOf="@+id/btn_minus" />
+        android:text="÷"
+        app:layout_constraintEnd_toEndOf="@+id/btn_all_clear"
+        app:layout_constraintTop_toBottomOf="@+id/btn_all_clear"/>
 
     <Button
         android:id="@+id/btn_multiply"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/multbtn"
+        android:background="@color/noah_3"
         android:textColor="@color/white"
         android:fontFamily="sans-serif"
         android:minHeight="55sp"
         android:minWidth="77dp"
-        android:textSize="20sp"
+        android:textSize="30sp"
         android:textStyle="bold"
+        android:text="×"
         app:layout_constraintBaseline_toBaselineOf="@+id/btn_divide"
         app:layout_constraintEnd_toStartOf="@+id/btn_divide" />
 

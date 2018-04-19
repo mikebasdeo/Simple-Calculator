@@ -215,7 +215,6 @@ class BinaryCalculatorFragment : Fragment() {
         btn_multiply.setBackgroundColor(ContextCompat.getColor(activity!!.applicationContext, R.color.noah_3))
         btn_divide.setTextColor(ContextCompat.getColor(activity!!.applicationContext, R.color.white))
         btn_divide.setBackgroundColor(ContextCompat.getColor(activity!!.applicationContext, R.color.noah_3))
-
         btn_and.setTextColor(ContextCompat.getColor(activity!!.applicationContext, R.color.white))
         btn_and.setBackgroundColor(ContextCompat.getColor(activity!!.applicationContext, R.color.noah_4))
         btn_or.setTextColor(ContextCompat.getColor(activity!!.applicationContext, R.color.white))
