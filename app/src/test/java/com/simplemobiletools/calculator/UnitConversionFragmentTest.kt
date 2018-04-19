@@ -1,18 +1,15 @@
 package com.simplemobiletools.calculator
 
-import com.simplemobiletools.calculator.activities.UnitConversionActivity
 import com.simplemobiletools.calculator.conversions.TemperatureConversion
 import junit.framework.Assert.assertEquals
-import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
 @Config(constants = BuildConfig::class, sdk = [21])
-class UnitConversionActivityTest {
+class UnitConversionFragmentTest {
 
     @Test
     fun temperatureTest(){

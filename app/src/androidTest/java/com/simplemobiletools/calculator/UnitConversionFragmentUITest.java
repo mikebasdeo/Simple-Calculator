@@ -21,7 +21,7 @@ import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.instanceOf;
 
 @RunWith(AndroidJUnit4.class)
-public class UnitConversionTest {
+public class UnitConversionFragmentUITest {
     @Rule public final ActivityTestRule<UnitConversionActivity> activity = new ActivityTestRule<>(UnitConversionActivity.class);
 
     @Test

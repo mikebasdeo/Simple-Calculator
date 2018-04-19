@@ -3,7 +3,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/settings_scrollview"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".activities.HistoryActivity"
+    android:background="@color/noah_6"
+    tools:ignore="HardcodedText"
+    tools:layout_editor_absoluteY="81dp">
 
     <LinearLayout
         android:id="@+id/settings_holder"

@@ -7,13 +7,17 @@ fun updateStats(results: ArrayList<String>){
     getRange(results)
 }
 
+//TODO: Fix all these methods
+
 fun getMean(results: ArrayList<String>): String{
     if(results.isEmpty())
         return ""
     var avg = 0.0
     for(r in results) {
-        avg += r.toDouble()
+        avg += r.replace(",","").toDouble()
     }
+
+    avg /= results.size
 
     return String.format(java.util.Locale.US,"%.2f", avg)
 }
@@ -22,23 +26,24 @@ fun getMedian(results: ArrayList<String>): String{
     if(results.isEmpty())
         return ""
     val listOfSortedResults = sortListOfStringsOfDoubles(results)
-    return if(listOfSortedResults.size % 2 == 0)
-        ((listOfSortedResults[listOfSortedResults.size/2] + listOfSortedResults[listOfSortedResults.size/2 - 1])/2).toString()
-    else
-        (listOfSortedResults[listOfSortedResults.size/2]).toString()
+    return if(listOfSortedResults.size % 2 == 0) {
+        ((listOfSortedResults[listOfSortedResults.size / 2] + listOfSortedResults[listOfSortedResults.size / 2 - 1]) / 2).toString()
+    } else {
+        (listOfSortedResults[listOfSortedResults.size / 2]).toString()
+    }
+
 }
 
 fun getMode(results: ArrayList<String>): String{
-    if(results.isEmpty())
-        return ""
+        if(results.isEmpty())
+            return ""
+        val storeValues = hashMapOf<String, Int>()
+        val listOfModes = arrayListOf<String>()
+        var highestCount = 0
 
-    val storeValues = hashMapOf<String, Int>()
-    val listOfModes = arrayListOf<String>()
-    var highestCount = 0
-
-    //Get count of each occurrence
-    for(r in results){
-        if(storeValues[r] == null)
+        //Get count of each occurrence
+        for(r in results){
+            if(storeValues[r] == null)
             storeValues[r] = 1
         else{
             val count = storeValues[r]
@@ -69,7 +74,7 @@ fun getRange(results: ArrayList<String>): String {
 private fun sortListOfStringsOfDoubles(listOfStringOfDoubles: ArrayList<String>): ArrayList<Double> {
     val listOfDoubles = ArrayList<Double>()
     for(l in listOfStringOfDoubles){
-        listOfDoubles.add(l.toDouble())
+        listOfDoubles.add(l.replace(",","").toDouble())
     }
     listOfDoubles.sort()
     return listOfDoubles

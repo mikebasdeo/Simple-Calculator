@@ -19,7 +19,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 
 @RunWith(AndroidJUnit4.class)
-public class BinaryCalculatorTest extends TestCase {
+public class BinaryCalculatorFragmentUITest extends TestCase {
     @Rule public final ActivityTestRule<BinaryCalculatorActivity> activity = new ActivityTestRule<>(BinaryCalculatorActivity.class);
 
 @Test

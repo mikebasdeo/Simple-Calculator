@@ -4,9 +4,8 @@ import com.simplemobiletools.calculator.helpers.getMean
 import com.simplemobiletools.calculator.helpers.getMedian
 import com.simplemobiletools.calculator.helpers.getMode
 import com.simplemobiletools.calculator.helpers.getRange
+import org.junit.Assert.assertEquals
 import org.junit.Test
-
-import org.junit.Assert.*
 
 class StatFunctionsTest {
 
@@ -14,7 +13,7 @@ class StatFunctionsTest {
 
     @Test
     fun getMeanTest() {
-        assertEquals("53.2624", getMean(values))
+        assertEquals("53.26", getMean(values))
     }
 
     @Test
