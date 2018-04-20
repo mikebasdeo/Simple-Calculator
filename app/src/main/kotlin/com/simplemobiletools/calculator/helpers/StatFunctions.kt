@@ -7,13 +7,11 @@ fun updateStats(results: ArrayList<String>){
     getRange(results)
 }
 
-//TODO: Fix all these methods
-
 fun getMean(results: ArrayList<String>): String{
-    if(results.isEmpty())
-        return ""
     var avg = 0.0
     for(r in results) {
+        if(r.isEmpty())
+            return ""
         avg += r.replace(",","").toDouble()
     }
 
@@ -23,8 +21,10 @@ fun getMean(results: ArrayList<String>): String{
 }
 
 fun getMedian(results: ArrayList<String>): String{
-    if(results.isEmpty())
-        return ""
+    for(r in results) {
+        if (r.isEmpty())
+            return ""
+    }
     val listOfSortedResults = sortListOfStringsOfDoubles(results)
     return if(listOfSortedResults.size % 2 == 0) {
         ((listOfSortedResults[listOfSortedResults.size / 2] + listOfSortedResults[listOfSortedResults.size / 2 - 1]) / 2).toString()
@@ -35,15 +35,17 @@ fun getMedian(results: ArrayList<String>): String{
 }
 
 fun getMode(results: ArrayList<String>): String{
-        if(results.isEmpty())
+    for(r in results) {
+        if (r.isEmpty())
             return ""
-        val storeValues = hashMapOf<String, Int>()
-        val listOfModes = arrayListOf<String>()
-        var highestCount = 0
+    }
+    val storeValues = hashMapOf<String, Int>()
+    val listOfModes = arrayListOf<String>()
+    var highestCount = 0
 
-        //Get count of each occurrence
-        for(r in results){
-            if(storeValues[r] == null)
+    //Get count of each occurrence
+    for(r in results){
+        if(storeValues[r] == null)
             storeValues[r] = 1
         else{
             val count = storeValues[r]
@@ -65,8 +67,10 @@ fun getMode(results: ArrayList<String>): String{
 }
 
 fun getRange(results: ArrayList<String>): String {
-    if(results.isEmpty())
-        return ""
+    for(r in results) {
+        if (r.isEmpty())
+            return ""
+    }
     val listOfSortedModes = sortListOfStringsOfDoubles(results)
     return (listOfSortedModes.last() - listOfSortedModes.first()).toString()
 }
