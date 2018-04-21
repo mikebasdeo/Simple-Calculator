@@ -740,6 +740,7 @@
     <string name="espresso_title">Espresso (testing helper)</string>
     <string name="espresso_url">https://developer.android.com/training/testing/espresso/index.html</string>
     <string name="exif">EXIF</string>
+    <string name="export">Export</string>
     <string name="exposure_time">Exposure time</string>
     <string name="extension">Extension</string>
     <string name="extension_cannot_be_empty">Extension cannot be empty</string>

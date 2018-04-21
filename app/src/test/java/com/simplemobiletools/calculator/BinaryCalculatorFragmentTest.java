@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class BinaryCalculatorTest {
+public class BinaryCalculatorFragmentTest {
 
     private BinaryCalculator bc = new BinaryCalculator();
 
