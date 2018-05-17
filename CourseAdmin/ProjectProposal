@@ -1,7 +1,8 @@
 i. This will contain your Iteration and release documents that we will grade
-ii. Put your project proposal, etc in here
+ii. Put your project proposal, etc.
 
 Original Project: https://github.com/SimpleMobileTools/Simple-Calculator
 Team Wiki: http://dreamteamsoen390.wikia.com/wiki/DreamTeamSOEN390_Wiki
 Jenkins Server: http://138.197.130.216:8080/
-
+Travis CI: https://travis-ci.org/ModestosV/Simple-Calculator-DreamTeam/
+SonarCloud Static Analysis: https://sonarcloud.io/organizations/modestosv-github/projects

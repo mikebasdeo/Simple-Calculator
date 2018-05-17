@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.simplemobiletools.calculator"
     android:installLocation="auto">
 
     <uses-permission
         android:name="android.permission.USE_FINGERPRINT"
-        tools:node="remove"/>
+        tools:node="remove" />
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:name=".App"
@@ -16,69 +17,56 @@
         android:label="@string/app_launcher_name"
         android:roundIcon="@mipmap/ic_launcher"
         android:theme="@style/AppTheme">
-
         <activity
             android:name=".activities.SplashActivity"
-            android:theme="@style/SplashTheme"
-            android:configChanges="orientation|screenSize">
+            android:configChanges="orientation|screenSize"
+            android:theme="@style/SplashTheme">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-
-        <!--android:screenOrientation="portrait"-->
+        <!-- android:screenOrientation="portrait" -->
         <activity
             android:name=".activities.MainActivity"
-            android:configChanges="orientation|screenSize"
-            />
-
-        <activity
-            android:name=".activities.WidgetConfigureActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/MyWidgetConfigTheme"
-            android:configChanges="orientation|screenSize">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE"/>
-            </intent-filter>
-        </activity>
-
+            android:configChanges="orientation|screenSize" />
         <activity
             android:name=".activities.SettingsActivity"
+            android:configChanges="orientation|screenSize"
             android:label="@string/settings"
-            android:parentActivityName=".activities.MainActivity"
-            android:configChanges="orientation|screenSize"/>
-
+            android:parentActivityName=".activities.MainActivity" />
+        <activity
+            android:name=".activities.UnitConversionActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="@string/unit_conversion"
+            android:parentActivityName=".activities.MainActivity" />
+        <activity
+            android:name=".activities.BinaryCalculatorActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="@string/binary_calculator"
+            android:parentActivityName=".activities.MainActivity" />
         <activity
             android:name="com.simplemobiletools.commons.activities.AboutActivity"
+            android:configChanges="orientation|screenSize"
             android:label="@string/about"
+            android:parentActivityName=".activities.MainActivity" />
+        <activity
+            android:name="com.simplemobiletools.calculator.activities.HistoryActivity"
+            android:label="@string/history"
             android:parentActivityName=".activities.MainActivity"
             android:configChanges="orientation|screenSize"/>
 
         <activity
             android:name="com.simplemobiletools.commons.activities.LicenseActivity"
+            android:configChanges="orientation|screenSize"
             android:label="@string/third_party_licences"
-            android:parentActivityName="com.simplemobiletools.commons.activities.AboutActivity"
-            android:configChanges="orientation|screenSize"/>
-
+            android:parentActivityName="com.simplemobiletools.commons.activities.AboutActivity" />
         <activity
             android:name="com.simplemobiletools.commons.activities.CustomizationActivity"
+            android:configChanges="orientation|screenSize"
             android:label="@string/customize_colors"
-            android:parentActivityName=".activities.SettingsActivity"
-            android:configChanges="orientation|screenSize"/>
-
-        <receiver
-            android:name=".helpers.MyWidgetProvider"
-            android:icon="@drawable/img_widget_preview">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
-            </intent-filter>
-
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/widget_info"/>
-        </receiver>
+            android:parentActivityName=".activities.SettingsActivity" />
     </application>
 </manifest>
